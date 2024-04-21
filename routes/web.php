@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\AddClientController;
 use App\Http\Controllers\AdminAgentController;
 use App\Http\Controllers\AdminChartController;
 use App\Http\Controllers\AdminClientController;
@@ -46,6 +47,9 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
         Route::get("/$routeName", [$controllerClass, 'index'])->name("admin.$routeName");
     }
     Route::post('/agent', [AdminAgentController::class, 'store'])->name('admin.agent.store');
+
+    Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
+    Route::post('/ajouter-client', [AddClientController::class, 'store'])->name('clients.store');
    
 });
 

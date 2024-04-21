@@ -258,7 +258,7 @@
                     <p class="text-sm text-white">Ajouter un client</p>
                 </div>
             </a>
-            <a href="#" class="w-full p-5 bg-white border flex items-center rounded-2xl hover:bg-gray-50 mb-4">
+            <a href="{{ route('admin.agent') }}" class="w-full p-5 bg-white border flex items-center rounded-2xl hover:bg-gray-50 mb-4">
                 <div class="rounded-full w-8 h-8 bg-gray-200 flex items-center justify-center mr-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
