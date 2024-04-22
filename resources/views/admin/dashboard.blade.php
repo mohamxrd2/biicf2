@@ -246,7 +246,7 @@
         <div class="lg:space-y-4 lg:pb-8 sm:grid-cols-2 max-lg:gap-6 sm:mt-10 lg:mt-0"
             uk-sticky="media: 1024; end: #js-oversized; offset: 80">
 
-            <a href="#" class="w-full p-5 bg-black border flex items-center rounded-2xl hover:bg-gray-900 mb-4">
+            <a href="{{ route('clients.create') }}" class="w-full p-5 bg-black border flex items-center rounded-2xl hover:bg-gray-900 mb-4">
                 <div class="rounded-full w-8 h-8 bg-gray-200 flex items-center justify-center mr-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">

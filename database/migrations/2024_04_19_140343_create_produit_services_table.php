@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('qalifServ', 255)->nullable();
             $table->string('sepServ', 255)->nullable();
             $table->integer('qteServ')->nullable();
-            $table->integer('PrixServ')->nullable();
             $table->string('zonecoServ', 255)->nullable();
             $table->string('villeServ', 255)->nullable();
             $table->string('comnServ', 255)->nullable();

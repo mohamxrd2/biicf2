@@ -23,7 +23,6 @@ class ProduitService extends Model
         'qalifServ',
         'sepServ',
         'qteServ',
-        'PrixServ',
         'zonecoServ',
         'villeServ',
         'comnServ',

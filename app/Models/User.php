@@ -20,7 +20,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'prenom_user',
         'username',
         'actor_type',
         'gender',
