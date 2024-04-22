@@ -65,10 +65,10 @@
                         speticialité
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        quantite du service
+                        quantite traité
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Prix du service
+                        Prix
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Zone economique
@@ -97,7 +97,7 @@
 
                         <th scope="row"
                             class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="{{ $produit->photo }}" alt="Jese image">
+                            <img class="w-10 h-10 rounded-md" src="{{  $produit->photo ? $produit->photo : asset('img/noimg.jpeg')  }}" alt="Jese image">
                             <div class="ps-3">
                                 <div class="text-base font-semibold">{{ $produit->name }}</div>
                                 <div class="font-normal text-gray-500">{{ $produit->username }}</div>
