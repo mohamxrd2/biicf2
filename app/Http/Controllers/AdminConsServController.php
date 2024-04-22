@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AdminConsommationController extends Controller
+class AdminConsServController extends Controller
 {
     //
     public function index(){
-        return view('admin.conso');
+        return view('admin.conso-service');
     }
 }

@@ -9,7 +9,10 @@ use App\Http\Controllers\AdminChartController;
 use App\Http\Controllers\AdminClientController;
 use App\Http\Controllers\AdminWalletController;
 use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminSettingController;
+use App\Http\Controllers\AdminConsprodController;
+use App\Http\Controllers\AdminConsServController;
 use App\Http\Controllers\AdminProductsController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminAuthController;
@@ -38,8 +41,10 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
         'agent' => AdminAgentController::class,
         'client' => AdminClientController::class,
         'produits' => AdminProductsController::class,
-        'consommation' => AdminConsommationController::class,
-        'profile' => AdminProfileController::class,
+        'services' => AdminServiceController::class,
+        'conso-produit' => AdminConsprodController::class,
+        'conso-service' => AdminConsServController::class,
+        'profile' => AdminProfileController::class, 
         'reglage' => AdminSettingController::class,
     ];
 
@@ -50,6 +55,8 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AddClientController::class, 'store'])->name('clients.store');
+
+    
    
 });
 
