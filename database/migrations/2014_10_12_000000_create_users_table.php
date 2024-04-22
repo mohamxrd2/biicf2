@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('local_area');
             $table->string('address');
             $table->string('active_zone')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('photo')->default('https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-photo-700-205577532.jpg');
             $table->rememberToken();
             $table->timestamps();
         });

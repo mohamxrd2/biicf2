@@ -6,6 +6,20 @@
 
 
     <div class="p-4 bg-white  ">
+
+        @if ($errors->any())
+            <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- Stepper -->
         <div data-hs-stepper="">
             <!-- Stepper Nav -->
@@ -109,7 +123,8 @@
                 <!-- End Item -->
             </ul>
             <!-- End Stepper Nav -->
-            <form action="">
+            <form action="{{ route('clients.store') }}" method="POST">
+                @csrf
                 <!-- Stepper Content -->
                 <div class="mt-5 sm:mt-8">
                     <!-- First Contnet -->
@@ -406,7 +421,9 @@
         }' style="display: none;">
                         <div
                             class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl">
-
+                            <h3>
+                                Enregistrement terminé !
+                            </h3>
                         </div>
                     </div>
                     <!-- End Final Contnet -->
@@ -417,8 +434,8 @@
                             class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                             data-hs-stepper-back-btn="">
                             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m15 18-6-6 6-6"></path>
                             </svg>
                             Retour
@@ -433,7 +450,7 @@
                                 <path d="m9 18 6-6-6-6"></path>
                             </svg>
                         </button>
-                        <button type="button"
+                        <button type="submit"
                             class=" py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                             data-hs-stepper-finish-btn="" style="display: none;">
                             Terminé
