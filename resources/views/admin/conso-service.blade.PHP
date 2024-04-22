@@ -62,9 +62,6 @@
                     Nom
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Quantité
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Prix habituel
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -105,10 +102,10 @@
                             </div>
                         </th>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->prix_cons }}</p>
+                            <p class="mb-0">{{ $consommation->prix }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->frqce_conse }}</p>
+                            <p class="mb-0">{{ $consommation->frqce_cons }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->jourAch_cons }}</p>
@@ -117,10 +114,7 @@
                             <p class="mb-0">{{ $consommation->qualif_serv }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->specialite }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->description }}</p>
+                            <p class="mb-0">{{ $consommation->specialité }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->zoneAct }}</p>

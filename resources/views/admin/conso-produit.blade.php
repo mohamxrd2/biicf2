@@ -62,10 +62,7 @@
                     Nom
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Type de fournisseur
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    conditionnement de consommation
+                    conditionnement
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Format
@@ -74,7 +71,7 @@
                     Quantité
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Prix de consommation
+                    Prix
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Fréquence de consommation
@@ -108,25 +105,22 @@
                             </div>
                         </th>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->cond_cons }}</p>
+                            <p class="mb-0">{{ $consommation->conditionnement }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->format_cons }}</p>
+                            <p class="mb-0">{{ $consommation->format }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->qte }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->prix_cons }}</p>
+                            <p class="mb-0">{{ $consommation->prix }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->frqce_conse }}</p>
+                            <p class="mb-0">{{ $consommation->frqce_cons }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->jourAch_cons }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->description }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->zoneAct }}</p>
@@ -136,7 +130,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex">
-                                
+
 
                                 <button data-hs-overlay="#hs-delete"
                                     class="agent-link last-of-type:font-medium text-red-600 dark:text-blue-500 hover:underline mr-2 delete-agent-link">

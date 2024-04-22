@@ -55,14 +55,9 @@
                     <th scope="col" class="px-6 py-3">
                         nom & photo
                     </th>
+
                     <th scope="col" class="px-6 py-3">
-                        Prix
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        description
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        speticialité
+                        conditionnement
                     </th>
                     <th scope="col" class="px-6 py-3">
                         quantite traité
@@ -71,15 +66,9 @@
                         Prix
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Zone economique
+                        format
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        ville
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        commune
-                    </th>
-                    <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3">
                         utilisateur
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -104,28 +93,16 @@
                             </div>
                         </th>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->formatProd }}</p>
+                            <p class="mb-0">{{ $produit->condProd }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->qteProd_min }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->qteProd_max }}</p>
+                            <p class="mb-0"> [{{ $produit->qteProd_min }} - {{ $produit->qteProd_max }}]</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $produit->prix }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->qalifServ }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->qteServ }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->zonecoServ }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->villeServ }}</p>
+                            <p class="mb-0">{{ $produit->formatProd }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $produit->user_id }}</p>

@@ -64,22 +64,13 @@
                         Prix
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        qualification du service
+                        qualification (nb d'année)
                     </th>
                     <th scope="col" class="px-6 py-3">
                         specialité
                     </th>
                     <th scope="col" class="px-6 py-3">
                         quantite du service
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Zone economique
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        ville
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        commune
                     </th>
                     <th scope="col" class="px-6 py-3">
                         utilisateur
@@ -110,7 +101,7 @@
                             <p class="mb-0">{{ $service->prix }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->qalifServ }}</p>
+                            <p class="mb-0">{{ $service->qalifServ }} ans</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $service->sepServ }}</p>
@@ -118,14 +109,6 @@
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $service->qteServ }}</p>
                         </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->zonecoServ }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->villeServ }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->comnServ }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $service->user_id }}</p>
