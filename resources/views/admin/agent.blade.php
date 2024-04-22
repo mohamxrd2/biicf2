@@ -177,9 +177,7 @@
                     <th scope="col" class="px-6 py-3">
                         Telephone
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        ID
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3">
                         Client
                     </th>
@@ -208,9 +206,7 @@
                         <td class="px-6 py-4">
                             {{ $agent->phonenumber }}
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $agent->id }}
-                        </td>
+                       
                         <td class="px-6 py-4">
                             {{ $agent->userCount }}
                         </td>
