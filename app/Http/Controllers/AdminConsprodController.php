@@ -10,9 +10,9 @@ class AdminConsprodController extends Controller
     //
     public function index()
     {
-        $consprod = Consommation::where('type_prov', 'produits')->get();
+        $consommations = Consommation::where('type_prov', 'produits')->get();
 
-        return view('admin.conso-produit', ['consprod' => $consprod]);
+        return view('admin.conso-produit', ['consommations' => $consommations]);
 
     }
 }
