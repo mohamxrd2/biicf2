@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function Admin()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class, 'admin_id');
     }
     /**
      * The attributes that should be hidden for serialization.
