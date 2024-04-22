@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consommation;
 use Illuminate\Http\Request;
 
 class AdminConsServController extends Controller
 {
     //
     public function index(){
-        return view('admin.conso-service');
+        $consommations = Consommation::where('type_prov', 'services')->get();
+
+        return view('admin.conso-service', ['consommations' => $consommations]);
     }
 }

@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
-class AdminAgentController extends Controller
+class AdminsController extends Controller
 {
-    //
-
-
-    // Contrôleur
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $agents = Admin::where('admin_type', 'agent')->get();
@@ -23,6 +22,17 @@ class AdminAgentController extends Controller
         return view('admin.agent', ['agents' => $agents]);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -53,12 +63,42 @@ class AdminAgentController extends Controller
         }
     }
 
-    public function destroy($admin)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $admin)
+    {
+        // Trouvez l'agent à supprimer par son ID
         $admin = Admin::findOrFail($admin);
+
+        // Supprimez l'agent
         $admin->delete();
 
-        // Rediriger après la suppression
-        return redirect()->route('admin.agent')->with('success', 'Agent supprimé avec succès.');
+        // Redirigez vers la liste des agents avec un message de succès
+        return to_route('admin.index')->with('success', 'L\'agent a été supprimé avec succès.');
     }
 }

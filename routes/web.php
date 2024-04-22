@@ -44,7 +44,7 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
         'services' => AdminServiceController::class,
         'conso-produit' => AdminConsprodController::class,
         'conso-service' => AdminConsServController::class,
-        'profile' => AdminProfileController::class, 
+        'profile' => AdminProfileController::class,
         'reglage' => AdminSettingController::class,
     ];
 
@@ -52,12 +52,13 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
         Route::get("/$routeName", [$controllerClass, 'index'])->name("admin.$routeName");
     }
     Route::post('/agent', [AdminAgentController::class, 'store'])->name('admin.agent.store');
+    Route::delete('/agent/{admin}', [AdminAgentController::class, 'destroy'])->name('admin.agent.destroy');
 
     Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AddClientController::class, 'store'])->name('clients.store');
 
-    
-   
+
+
 });
 
 

@@ -45,8 +45,10 @@
 
                 </button>
 
-                <div id="hs-static-backdrop-modal" class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] @if ($errors->any()) open opened @else hidden @endif bg-black bg-opacity-50" data-hs-overlay-keyboard="false" aria-overlay="true" tabindex="-1">
-  
+                <div id="hs-static-backdrop-modal"
+                    class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] @if ($errors->any()) open opened @else hidden @endif bg-black bg-opacity-50"
+                    data-hs-overlay-keyboard="false" aria-overlay="true" tabindex="-1">
+
                     <div
                         class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
 
@@ -54,7 +56,7 @@
                             @csrf
                             <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto">
 
-                                
+
 
                                 <div class="flex justify-between items-center py-3 px-4 border-b">
                                     <h3 class="font-bold text-gray-800">
@@ -76,12 +78,12 @@
                                 <div class="p-4 overflow-y-auto">
 
                                     @if ($errors->any())
-                                    <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
-                                        @foreach ($errors->all() as $error)
-                                            <p>{{ $error }}</p>
-                                        @endforeach
-                                    </div>
-                                @endif
+                                        <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
+                                            @foreach ($errors->all() as $error)
+                                                <p>{{ $error }}</p>
+                                            @endforeach
+                                        </div>
+                                    @endif
 
 
                                     <div class="max-w-md mx-auto">
@@ -176,6 +178,9 @@
                         Telephone
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Client
                     </th>
 
@@ -188,62 +193,75 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($agents as $agent)
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                @foreach ($agents as $agent)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                    <th scope="row"
-                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <img class="w-10 h-10 rounded-full"
-                            src="{{ $agent->photo }}"
-                            alt="Jese image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">{{ $agent->name }}</div>
-                            <div class="font-normal text-gray-500">{{ $agent->username }}</div>
-                        </div>
-                    </th>
-                    <td class="px-6 py-4">
-                        {{ $agent->phonenumber }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $agent->userCount }}
-                    </td>
+                        <th scope="row"
+                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                            <img class="w-10 h-10 rounded-full" src="{{ $agent->photo }}" alt="Jese image">
+                            <div class="ps-3">
+                                <div class="text-base font-semibold">{{ $agent->name }}</div>
+                                <div class="font-normal text-gray-500">{{ $agent->username }}</div>
+                            </div>
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $agent->phonenumber }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $agent->id }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $agent->userCount }}
+                        </td>
 
-                    <td class="px-6 py-4">
-                        
-                        <div class="flex items-center">
-                            <div class="h-2.5 w-2.5 rounded-full {{ $admin->status === 'online' ? 'bg-green-500' : 'bg-red-500' }} me-2"></div> {{ $admin->status === 'online' ? 'Online' : 'Offline' }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                </svg>
+                        <td class="px-6 py-4">
 
-                            </a>
+                            <div class="flex items-center">
+                                <div
+                                    class="h-2.5 w-2.5 rounded-full {{ $admin->status === 'online' ? 'bg-green-500' : 'bg-red-500' }} me-2">
+                                </div> {{ $admin->status === 'online' ? 'Online' : 'Offline' }}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex">
+                                {{-- <a href="#"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>
 
-                            <a href="#" data-hs-overlay="#hs-delete"
-                                class="font-medium text-red-600 dark:text-blue-500 hover:underline mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                </svg>
-                            </a>
+                                </a> --}}
 
-                        </div>
-                    </td>
-                </tr>
-            @endforeach   
+                                <a href="#" data-hs-overlay="#hs-delete"
+                                    class="font-medium text-red-600 dark:text-blue-500 hover:underline mr-2">
+                                    <form action="{{ route('admin.agent.destroy', $agent->id) }}" method="POST"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800"
+                                            type="submit" id="confirmDeleteBtn"><svg xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                            </svg></button>
+
+                                    </form>
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
 
-        <div id="hs-delete"
+        {{-- <div id="hs-delete"
             class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
             <div
                 class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
@@ -295,12 +313,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
     </div>
 
-    
+
 
 
 
