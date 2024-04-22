@@ -30,7 +30,6 @@ class ProduitServiceFactory extends Factory
             'qalifServ' => $this->faker->randomNumber(),
             'sepServ' => $this->faker->words(5, true), // Limite de 5 mots
             'qteServ' => $this->faker->randomNumber(),
-            'PrixServ' => $this->faker->randomFloat(2, 0, 1000),
             'zonecoServ' => $this->faker->word,
             'villeServ' => $this->faker->city,
             'comnServ' => $this->faker->words(5, true), // Limite de 5 mots
