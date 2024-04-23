@@ -54,21 +54,20 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     Route::post('/agent', [AdminAgentController::class, 'store'])->name('admin.agent.store');
     Route::delete('/agent/{admin}', [AdminAgentController::class, 'destroy'])->name('admin.agent.destroy');
 
+    Route::delete('/users/{user}', [AdminClientController::class, 'destroyUser'])->name('admin.user.destroy');
+
+
     Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AddClientController::class, 'store'])->name('clients.store');
 
-
-
-});
-
-
-
-
-Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login']);
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-    // Autres routes pour l'administration...
+
+
 });
+
+
+
 
