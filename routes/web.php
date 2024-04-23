@@ -68,15 +68,8 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AddClientController::class, 'store'])->name('clients.store');
-
-    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/login', [AdminAuthController::class, 'login']);
-    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
-
-
 });
 
-
-
-
+Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('admin/login', [AdminAuthController::class, 'login']);
+Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
