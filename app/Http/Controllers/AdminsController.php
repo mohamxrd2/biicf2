@@ -27,7 +27,6 @@ class AdminsController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -101,4 +100,11 @@ class AdminsController extends Controller
         // Redirigez vers la liste des agents avec un message de succès
         return to_route('admin.index')->with('success', 'L\'agent a été supprimé avec succès.');
     }
+
+    public function updateProfilePhoto(Request $request)
+{
+    // Récupère l'administrateur actuellement connecté
+    
+}
+
 }
