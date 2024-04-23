@@ -47,6 +47,12 @@
 
         </div>
 
+        @if (session('success'))
+        <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
 
         <table class="w-full mt-5 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -167,15 +173,14 @@
                                                 </p>
 
                                                 <div class="mt-6 flex justify-center gap-x-4">
-                                                    <form action="" method="POST">
+                                                    <form action="{{ route('admin.products.destroy', $produit->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-
-                                                    <button type="submit"
-                                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800"
-                                                        >
-                                                        Supprimé
-                                                    </button>
+                                                
+                                                        <button type="submit"
+                                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
+                                                            Supprimer
+                                                        </button>
                                                     </form>
                                                     <button type="button"
                                                         class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
@@ -183,6 +188,7 @@
                                                         Annuler
                                                     </button>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>

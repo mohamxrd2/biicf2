@@ -13,4 +13,17 @@ class AdminServiceController extends Controller
 
         return view('admin.services', ['services' => $services]);
     }
+
+    public function destroyService($id){
+
+        $services = ProduitService::find($id);
+
+        if(!$services){
+            return redirect()->back()->with('error', 'Service non trouvé.');
+        }
+
+        $services->delete();
+
+        return redirect()->route('admin.services')->with('success', 'Le service a été supprimé avec succès');
+    }
 }

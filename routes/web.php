@@ -56,6 +56,15 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::delete('/users/{user}', [AdminClientController::class, 'destroyUser'])->name('admin.user.destroy');
 
+    Route::delete('/produit/{produit}', [AdminProductsController::class, 'destroyProduct'])->name('admin.products.destroy');
+
+    Route::delete('/services/{services}', [AdminServiceController::class, 'destroyService'])->name('admin.services.destroy');
+
+    Route::delete('/conso-produit/{id}', [AdminConsprodController::class, 'destroyConsprod'])->name('admin.consprod.destroy');
+
+    Route::delete('/conso-service/{id}', [AdminConsServController::class, 'destroyConsserv'])->name('admin.consserv.destroy');
+
+
 
     Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AddClientController::class, 'store'])->name('clients.store');

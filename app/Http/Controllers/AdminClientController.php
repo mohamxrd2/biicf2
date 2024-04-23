@@ -18,6 +18,7 @@ class AdminClientController extends Controller
     public function destroyUser(User $user)
     {
         $user->delete();
+        
         return redirect()->back()->with('success', 'Utilisateur supprimé avec succès.');
     }
 }
