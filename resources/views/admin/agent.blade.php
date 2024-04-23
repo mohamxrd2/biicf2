@@ -294,6 +294,7 @@
                         </td>
                     </tr>
                 @endforeach
+                {{ $agents->links() }}
             </tbody>
         </table>
 
@@ -302,9 +303,5 @@
 
 
     </div>
-
-
-
-    <script src="{{ asset('js/delete.js') }}"></script>
 
 @endsection
