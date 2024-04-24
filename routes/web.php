@@ -65,6 +65,10 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::delete('/conso-service/{id}', [AdminConsServController::class, 'destroyConsserv'])->name('admin.consserv.destroy');
 
+    Route::put('/profile/update/{admin}', [AdminsController::class, 'updateProfile'])->name('admin.updateProfile');
+    Route::put('/profile/password/{admin}', [AdminsController::class, 'updatePassword'])->name('admin.updatePassword');
+
+
 
 
     Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
