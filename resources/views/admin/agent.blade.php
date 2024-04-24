@@ -294,14 +294,11 @@
                         </td>
                     </tr>
                 @endforeach
-                {{ $agents->links() }}
             </tbody>
         </table>
-
-
-
-
-
+    </div>
+    <div class="mt-5 flex justify-end">
+        {{ $agents->links() }}
     </div>
 
 @endsection

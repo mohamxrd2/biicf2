@@ -182,7 +182,6 @@
                         </td>
                     </tr>
                 @endforeach
-                {{ $users->links() }}
 
             </tbody>
         </table>
@@ -191,6 +190,9 @@
 
 
 
+    </div>
+    <div class="mt-5 flex justify-end">
+        {{ $users->links() }}
     </div>
 
 
