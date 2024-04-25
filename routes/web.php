@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AddClientController;
 use App\Http\Controllers\AdminAgentController;
 use App\Http\Controllers\AdminChartController;
@@ -64,6 +65,10 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::delete('/conso-service/{id}', [AdminConsServController::class, 'destroyConsserv'])->name('admin.consserv.destroy');
 
+    Route::put('/profile/update/{admin}', [AdminsController::class, 'updateProfile'])->name('admin.updateProfile');
+    Route::put('/profile/password/{admin}', [AdminsController::class, 'updatePassword'])->name('admin.updatePassword');
+
+
 
 
     Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
@@ -73,3 +78,5 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+Route::put('/admin/profile/photo', [AdminsController::class, 'updateProfilePhoto'])->name('admin.updateProfilePhoto');
