@@ -200,7 +200,7 @@
 
     </div>
     </div>
-    <div class="mt-5 flex justify-end">
+    <div class="my-5 flex justify-end">
         {{ $consommations->links() }}
     </div>
     <script src="{{ asset('js/search.js') }}"></script>

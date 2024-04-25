@@ -9,7 +9,7 @@ class AdminProductsController extends Controller
 {
     //
     public function index(){
-        $produits = ProduitService::where('type', 'produits')->paginate(3);
+        $produits = ProduitService::where('type', 'produits')->paginate(10);
 
         return view('admin.products', ['produits' => $produits]);
     }

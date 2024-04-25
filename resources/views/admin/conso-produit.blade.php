@@ -203,7 +203,7 @@
         <div id="noResultMessage" class="h-20 flex justify-center items-center" style="display: none;">Aucun résultat trouvé.</div>
 
     </div>
-    <div class="mt-5 flex justify-end">
+    <div class="my-5 flex justify-end">
         {{ $consommations->links() }}
     </div>
 

@@ -9,7 +9,7 @@ class AdminConsServController extends Controller
 {
     //
     public function index(){
-        $consommations = Consommation::where('type', 'services')->paginate(4);
+        $consommations = Consommation::where('type', 'services')->paginate(10);
 
         return view('admin.conso-service', ['consommations' => $consommations]);
     }

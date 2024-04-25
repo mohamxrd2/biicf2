@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class AdminAgentController extends Controller
     // Contrôleur
     public function index()
     {
-        $agents = Admin::where('admin_type', 'agent')->paginate(2);
+        $agents = Admin::where('admin_type', 'agent')->paginate(10);
         foreach ($agents as $agent) {
             // Récupérer le nombre d'utilisateurs associés à cet agent
             $userCount = $agent->users()->count();
@@ -60,5 +61,19 @@ class AdminAgentController extends Controller
 
         // Rediriger après la suppression
         return redirect()->route('admin.agent')->with('success', 'Agent supprimé avec succès.');
+    }
+
+    public function show($username)
+    {
+        // Récupérer les détails de l'agent en fonction de son username
+        $agent = Admin::where('username', $username)->firstOrFail();
+        
+        $users = User::where('admin_id', $agent->id)->get();
+
+        // Récupérer le nombre d'utilisateurs ayant le même admin_id que l'agent
+        $userCount = User::where('admin_id', $agent->id)->count();
+    
+        // Passer les détails de l'agent et les utilisateurs à la vue
+        return view('admin.agentShow', compact('agent', 'users', 'userCount'));
     }
 }

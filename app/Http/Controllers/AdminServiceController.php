@@ -9,7 +9,7 @@ class AdminServiceController extends Controller
 {
     //
     public function index(){
-        $services = ProduitService::where('type', 'services')->paginate(2);
+        $services = ProduitService::where('type', 'services')->paginate(10);
 
         return view('admin.services', ['services' => $services]);
     }

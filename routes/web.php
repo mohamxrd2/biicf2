@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AddClientController;
 use App\Http\Controllers\AdminAgentController;
@@ -70,10 +71,12 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     
     Route::put('/profile/profile-photo/{admin}', [AdminsController::class, 'updateProfilePhoto'])->name('admin.updateProfilePhoto');
 
+    Route::get('/agent/{username}', [AdminAgentController::class, 'show'])->name('agent.show');
 
 
-    Route::get('/ajouter-client', [AddClientController::class, 'create'])->name('clients.create');
-    Route::post('/ajouter-client', [AddClientController::class, 'store'])->name('clients.store');
+
+    Route::get('/ajouter-client', [AdminClientController::class, 'create'])->name('clients.create');
+    Route::post('/ajouter-client', [AdminClientController::class, 'store'])->name('clients.store');
 });
 
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');

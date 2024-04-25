@@ -70,7 +70,7 @@
                                 <div class="p-4 overflow-y-auto">
 
                                     @if ($errors->any())
-                                        <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
+                                        <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4 ">
                                             @foreach ($errors->all() as $error)
                                                 <p>{{ $error }}</p>
                                             @endforeach
@@ -189,11 +189,15 @@
 
                         <th scope="row"
                             class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="{{ $agent->photo }}" alt="Jese image">
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">{{ $agent->name }}</div>
-                                <div class="font-normal text-gray-500">{{ $agent->username }}</div>
-                            </div>
+                            <a href="{{ route('agent.show', ['username' => $agent->username]) }}" class="flex items-center">
+
+                                <img class="w-10 h-10 rounded-full" src="{{ $agent->photo }}" alt="Jese image">
+                                <div class="ps-3">
+                                    <div class="text-base font-semibold">{{ $agent->name }}</div>
+                                    <div class="font-normal text-gray-500">{{ $agent->username }}</div>
+                                </div>
+
+                            </a>
                         </th>
                         <td class="px-6 py-4">
                             {{ $agent->phonenumber }}
@@ -300,7 +304,7 @@
         <div id="noResultMessage" class="h-20 flex justify-center items-center" style="display: none;">Aucun résultat
             trouvé.</div>
     </div>
-    <div class="mt-5 flex justify-end">
+    <div class="my-5 flex justify-end">
         {{ $agents->links() }}
     </div>
     <script src="{{ asset('js/search.js') }}"></script>
