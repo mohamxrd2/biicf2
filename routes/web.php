@@ -67,7 +67,8 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::put('/profile/update/{admin}', [AdminsController::class, 'updateProfile'])->name('admin.updateProfile');
     Route::put('/profile/password/{admin}', [AdminsController::class, 'updatePassword'])->name('admin.updatePassword');
-
+    
+    Route::put('/profile/profile-photo/{admin}', [AdminsController::class, 'updateProfilePhoto'])->name('admin.updateProfilePhoto');
 
 
 
@@ -79,4 +80,3 @@ Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-Route::put('/admin/profile/photo', [AdminsController::class, 'updateProfilePhoto'])->name('admin.updateProfilePhoto');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminsController extends Controller
 {
@@ -127,28 +128,57 @@ class AdminsController extends Controller
     }
 
     public function updatePassword(Request $request, Admin $admin)
-{
-    // Valider les données du formulaire avec les messages d'erreur personnalisés
-    $validatedData = $request->validate([
-        'current_password' => 'required|string',
-        'new_password' => 'required|string|min:8',
-        'new_password_confirmation' => 'required|string|same:new_password',
-    ], [
-        'new_password.min' => 'Le mot de passe doit contenir au moins :min caractères.',
-        'new_password_confirmation.same' => 'La confirmation du nouveau mot de passe ne correspond pas.',
-    ]);
+    {
+        // Valider les données du formulaire avec les messages d'erreur personnalisés
+        $validatedData = $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8',
+            'new_password_confirmation' => 'required|string|same:new_password',
+        ], [
+            'new_password.min' => 'Le mot de passe doit contenir au moins :min caractères.',
+            'new_password_confirmation.same' => 'La confirmation du nouveau mot de passe ne correspond pas.',
+        ]);
 
-    // Vérifier si le mot de passe actuel est correct
-    if (!Hash::check($validatedData['current_password'], $admin->password)) {
-        return redirect()->back()->with('error', 'Mot de passe actuel incorrect.');
+        // Vérifier si le mot de passe actuel est correct
+        if (!Hash::check($validatedData['current_password'], $admin->password)) {
+            return redirect()->back()->with('error', 'Mot de passe actuel incorrect.');
+        }
+
+        // Mettre à jour le mot de passe de l'administrateur
+        $admin->password = Hash::make($validatedData['new_password']);
+        $admin->save();
+
+        // Rediriger avec un message de succès
+        return redirect()->back()->with('success', 'Mot de passe mis à jour avec succès.');
     }
 
-    // Mettre à jour le mot de passe de l'administrateur
-    $admin->password = Hash::make($validatedData['new_password']);
-    $admin->save();
-
-    // Rediriger avec un message de succès
-    return redirect()->back()->with('success', 'Mot de passe mis à jour avec succès.');
-}
-
+    public function updateProfilePhoto(Request $request, Admin $admin)
+    {
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+    
+            // Afficher les informations sur le fichier pour le débogage
+            dd($photo);
+    
+            // Définir le chemin de destination dans le répertoire public/img avec un nom unique
+            $path = $photo->storeAs('public/img', $photo->hashName());
+    
+            // Afficher le chemin du fichier pour le débogage
+            dd($path);
+    
+            // Mettre à jour le champ 'photo' dans la base de données avec le chemin relatif
+            $admin->photo = 'storage/' . str_replace('public/', '', $path);
+            $admin->save();
+    
+            return redirect()->back()->with('success', 'Photo de profil mise à jour avec succès.');
+        }
+    
+        return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour de la photo de profil.');
+    }
+    
 }
