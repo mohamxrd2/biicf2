@@ -13,7 +13,7 @@ class AdminClientController extends Controller
     public function index()
     {
 
-        $users = User::with('admin')->paginate(10);
+        $users = User::with('admin')->orderBy('created_at', 'desc')->paginate(10);
 
         $userCount = User::count();
 
@@ -39,12 +39,13 @@ class AdminClientController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8',
             'repeat-password' => 'required|string|same:password',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users',
             'phone' => 'required',
             'local' => 'required',
             'adress_geo' => 'required',
             'proximity' => 'required',
         ], [
+            'email.unique' => 'Email deja utlisé',
             'name.required' => 'Le champ nom est requis.',
             'username.required' => 'Le champ nom d\'utilisateur est requis.',
             'username.unique' => 'Ce nom d\'utilisateur est déjà utilisé.',

@@ -27,13 +27,13 @@
                     'amount' => $totalClients,
                     'chart' => '1.5',
                     'svgPath' => '<svg class="flex-shrink-0 size-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                                                                                                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                                                                                                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                                                                                                                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                                                                                                                                                            <circle cx="9" cy="7" r="4" />
-                                                                                                                                                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                                                                                                                                                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                                                                                                                                                        </svg>',
+                                                                                                                                                                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                                                                                                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                                                                                                                                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                                                                                                                                                                            <circle cx="9" cy="7" r="4" />
+                                                                                                                                                                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                                                                                                                                                                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                                                                                                                                                                        </svg>',
                 ])
                 <!-- End Card -->
 
@@ -44,19 +44,19 @@
                     'amount' => $totalProducts,
                     'chart' => '11.5',
                     'svgPath' => '<svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400"
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"                     
-                                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"                            
-                                                                    stroke-linejoin="round">
-                                
-                                                                    <path d="M5 22h14" />
-                                                                                                                                                                            
-                                                                    <path d="M5 2h14" />
-                                                                                                                                                                            
-                                                                    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
-                                                                                                                                                                            
-                                                                    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
-                                                                                                                                                                        
-                                                                    <</svg>',
+                                                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"                     
+                                                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"                            
+                                                                                    stroke-linejoin="round">
+                                                
+                                                                                    <path d="M5 22h14" />
+                                                                                                                                                                                            
+                                                                                    <path d="M5 2h14" />
+                                                                                                                                                                                            
+                                                                                    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+                                                                                                                                                                                            
+                                                                                    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+                                                                                                                                                                                        
+                                                                                    <</svg>',
                 ])
 
                 @include('admin.components.chartcard', [
@@ -66,8 +66,8 @@
                     'amount' => $totalServices,
                     'chart' => '11.5',
                     'svgPath' => '<svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                                                                              </svg>',
+                                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                                                                              </svg>',
                 ])
 
             </div>
@@ -79,7 +79,7 @@
                     <p class="text-xl font-bold">Client recent</p>
 
                     <a href="{{ route('admin.client') }}" class="font-bold text-blue-500">Voir plus
-                        
+
                     </a>
                 </div>
 
@@ -143,42 +143,64 @@
                                             </a>
                                         </div>
                                         <div id="hs-delete"
-                                            class="hs-overlay hidden fixed top-0 start-0 z-[80] overflow-hidden">
-                                            <div class="absolute inset-0 bg-gray-800 bg-opacity-75" aria-hidden="true">
-                                            </div>
-                                            <div class="relative mx-auto mt-10 max-w-lg bg-white rounded-xl shadow-xl">
-                                                <!-- Contenu du modal de suppression -->
-                                                <div class="p-4">
-                                                    <div class="text-center">
+                                            class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
+                                            <div
+                                                class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                                <div class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
+                                                    <div class="absolute top-2 end-2">
+                                                        <button type="button"
+                                                            class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
+                                                            data-hs-overlay="#hs-delete">
+                                                            <span class="sr-only">Close</span>
+                                                            <svg class="flex-shrink-0 size-4"
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M18 6 6 18" />
+                                                                <path d="m6 6 12 12" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                                                        <!-- Icon -->
                                                         <span
-                                                            class="inline-flex justify-center w-12 h-12 bg-red-100 rounded-full">
-                                                            <svg class="w-6 h-6 text-red-500" fill="none"
-                                                                stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M20 12L4 12M14 5l6 6m0 0l-6 6m6-6L8 5m6 6V3m0 12v6">
-                                                                </path>
+                                                            class="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-yellow-700 dark:border-yellow-600 dark:text-yellow-100">
+                                                            <svg class="flex-shrink-0 size-5"
+                                                                xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                                             </svg>
                                                         </span>
+                                                        <!-- End Icon -->
+
                                                         <h3
-                                                            class="mt-4 text-lg font-semibold text-gray-900 dark:text-white">
-                                                            Supprimer</h3>
-                                                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">Êtes-vous
-                                                            sûr de vouloir supprimer cet utilisateur ? Cette action est
-                                                            irréversible.</p>
-                                                    </div>
-                                                    <div class="mt-5 flex justify-center space-x-4">
-                                                        <form action="{{ route('admin.user.destroy', $user->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:bg-red-700">Supprimer</button>
-                                                        </form>
-                                                        <button type="button"
-                                                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
-                                                            data-hs-overlay="#hs-delete">Annuler</button>
+                                                            class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
+                                                            Supprimé
+                                                        </h3>
+                                                        <p class="text-gray-500 dark:text-neutral-500">
+                                                            Vous etes sur de supprimé le compte de l'utilisateur ?
+                                                        </p>
+
+                                                        <div class="mt-6 flex justify-center gap-x-4">
+                                                            <form action="{{ route('admin.user.destroy', $user->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                <button type="submit"
+                                                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
+                                                                    Supprimé
+                                                                </button>
+                                                            </form>
+                                                            <button type="button"
+                                                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                                                                data-hs-overlay="#hs-delete">
+                                                                Annuler
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
