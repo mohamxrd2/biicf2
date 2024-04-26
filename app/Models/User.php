@@ -74,5 +74,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function produitService()
+    {
+        return $this->hasMany(ProduitService::class, 'user_id');
+    }
+    public function consommation()
+    {
+        return $this->hasMany(Consommation::class, 'id_user');
+    }
 }
 

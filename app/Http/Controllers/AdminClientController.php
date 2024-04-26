@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Consommation;
 use Illuminate\Http\Request;
+use App\Models\ProduitService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,7 +30,7 @@ class AdminClientController extends Controller
 
     public function create()
     {
-        
+
         return view('admin.addclient');
     }
 
@@ -102,7 +104,27 @@ class AdminClientController extends Controller
                 return back()->withErrors(['error' => 'L\'administrateur n\'est pas authentifié.']);
             }
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }
+    }
+
+    public function show($username)
+    {
+        // Récupérer les détails du client en fonction de son nom d'utilisateur
+        $user = User::where('username', $username)->firstOrFail();
+
+        // Récupérer tous les produits de service associés à cet utilisateur
+        $produitsServices = ProduitService::where('user_id', $user->id)->get();
+
+        $produitCount = $produitsServices->count();
+
+
+        $consommation = Consommation::where('id_user', $user->id)->get();
+
+        $consCount = $consommation->count();
+
+        // Passer les détails du client à la vue
+        return view('admin.clientShow', compact('user', 'produitsServices', 'produitCount'));
     }
 }

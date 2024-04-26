@@ -380,7 +380,7 @@
 
 
     <!-- Content -->
-    <div class="w-full pt-10  sm:px-6 md:px-8 lg:ps-72">
+    <div class="w-full pt-10  px-6 md:px-8  lg:ps-72">
         <!-- Page Heading -->
 
         @yield('content')
@@ -407,6 +407,9 @@
 
 
 </body>
+
+
+<script src="{{ asset('js/search.js') }}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 

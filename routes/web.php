@@ -73,7 +73,7 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/agent/{username}', [AdminAgentController::class, 'show'])->name('agent.show');
 
-
+    Route::get('/client/{username}', [AdminClientController::class,'show'])->name('client.show');
 
     Route::get('/ajouter-client', [AdminClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AdminClientController::class, 'store'])->name('clients.store');
