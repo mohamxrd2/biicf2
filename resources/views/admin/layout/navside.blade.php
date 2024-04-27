@@ -197,16 +197,7 @@
                                         </svg>',
                     'title' => 'Clients',
                 ])
-                {{-- @include('admin.components.nav', [
-                    'routeSelf' => 'admin.produits',
-                    'route' => route('admin.produits'),
-                    'iconSvg' => ' <svg class="flex-shrink-0 mt-0.5 size-4" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
-                                        </svg>',
-                    'title' => 'Produits',
-                ]) --}}
+            
                 <li class="hs-accordion @if(request()->route()->getName() == 'admin.produits' || request()->route()->getName() == 'admin.services' ) active @endif" id="account-accordion">
                     <button type="button"
                         class="hs-accordion-toggle hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white">
@@ -396,6 +387,9 @@
 
 
         <!-- ========== END FOOTER ========== -->
+        <footer class="text-center text-sm text-gray-600 pt-8 pb-11 ">
+            &copy; 2024 BIICF. Tous droits réservés.
+        </footer>
 
         <!-- End Page Heading -->
     </div>

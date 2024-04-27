@@ -25,7 +25,7 @@ class AdminClientController extends Controller
     {
         $user->delete();
 
-        return redirect()->back()->with('success', 'Utilisateur supprimé avec succès.');
+        return redirect()->route('admin.client')->with('success', 'Utilisateur supprimé avec succès.');
     }
 
     public function create()
@@ -112,7 +112,7 @@ class AdminClientController extends Controller
     public function show($username)
     {
         // Récupérer les détails du client en fonction de son nom d'utilisateur
-        $user = User::where('username', $username)->firstOrFail();
+        $user = User::with('admin')->where('username', $username)->firstOrFail();
 
         // Récupérer tous les produits de service associés à cet utilisateur
         $produitsServices = ProduitService::where('user_id', $user->id)->get();
@@ -120,11 +120,11 @@ class AdminClientController extends Controller
         $produitCount = $produitsServices->count();
 
 
-        $consommation = Consommation::where('id_user', $user->id)->get();
+        $consommations = Consommation::where('id_user', $user->id)->get();
 
-        $consCount = $consommation->count();
+        $consCount = $consommations->count();
 
         // Passer les détails du client à la vue
-        return view('admin.clientShow', compact('user', 'produitsServices', 'produitCount'));
+        return view('admin.clientShow', compact('user', 'produitsServices', 'produitCount', 'consommations', 'consCount'));
     }
 }

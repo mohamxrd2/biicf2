@@ -27,13 +27,13 @@
                     'amount' => $totalClients,
                     'chart' => '1.5',
                     'svgPath' => '<svg class="flex-shrink-0 size-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                                                                                                                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                                                                                                                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                                                                                                                                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                                                                                                                                                                            <circle cx="9" cy="7" r="4" />
-                                                                                                                                                                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                                                                                                                                                                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                                                                                                                                                                        </svg>',
+                                                                                                                                                                                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                                                                                                                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                                                                                                                                                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                                                                                                                                                                                            <circle cx="9" cy="7" r="4" />
+                                                                                                                                                                                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                                                                                                                                                                                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                                                                                                                                                                                        </svg>',
                 ])
                 <!-- End Card -->
 
@@ -44,19 +44,19 @@
                     'amount' => $totalProducts,
                     'chart' => '11.5',
                     'svgPath' => '<svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400"
-                                                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"                     
-                                                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"                            
-                                                                                    stroke-linejoin="round">
-                                                
-                                                                                    <path d="M5 22h14" />
-                                                                                                                                                                                            
-                                                                                    <path d="M5 2h14" />
-                                                                                                                                                                                            
-                                                                                    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
-                                                                                                                                                                                            
-                                                                                    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
-                                                                                                                                                                                        
-                                                                                    <</svg>',
+                                                                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"                     
+                                                                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"                            
+                                                                                                    stroke-linejoin="round">
+                                                                
+                                                                                                    <path d="M5 22h14" />
+                                                                                                                                                                                                            
+                                                                                                    <path d="M5 2h14" />
+                                                                                                                                                                                                            
+                                                                                                    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+                                                                                                                                                                                                            
+                                                                                                    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+                                                                                                                                                                                                        
+                                                                                                    <</svg>',
                 ])
 
                 @include('admin.components.chartcard', [
@@ -66,8 +66,8 @@
                     'amount' => $totalServices,
                     'chart' => '11.5',
                     'svgPath' => '<svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                                                                                              </svg>',
+                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                                                                                              </svg>',
                 ])
 
             </div>
@@ -114,14 +114,23 @@
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                        <img class="w-10 h-10 rounded-full" src="{{ $user->photo }}" alt="">
-                                        <div class="ml-3">
-                                            <div class="text-base font-semibold">{{ $user->name }}</div>
-                                            <div class="text-sm text-gray-500">{{ $user->username }}</div>
-                                        </div>
+                                        <a href="{{ route('client.show', ['username' => $user->username]) }}"
+                                            class="flex items-center">
+                                            <img class="w-10 h-10 rounded-full" src="{{ $user->photo }}" alt="">
+                                            <div class="ml-3">
+                                                <div class="text-base font-semibold">{{ $user->name }}</div>
+                                                <div class="text-sm text-gray-500">{{ $user->username }}</div>
+                                            </div>
+                                        </a>
                                     </td>
                                     <td class="px-6 py-4">{{ $user->phone }}</td>
-                                    <td class="px-6 py-4">{{ $user->admin->name ?? 'N/A' }}</td>
+
+                                    <td class="px-6 py-4">
+                                        <a href="{{ route('agent.show', ['username' => $user->admin->username]) }}"
+                                            class="flex items-center">
+                                            {{ $user->admin->name ?? 'N/A' }}
+                                        </a>
+                                    </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
                                             <div class="w-2.5 h-2.5 rounded-full bg-green-500 me-2"></div>
@@ -146,7 +155,8 @@
                                             class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
                                             <div
                                                 class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-                                                <div class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
+                                                <div
+                                                    class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
                                                     <div class="absolute top-2 end-2">
                                                         <button type="button"
                                                             class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
