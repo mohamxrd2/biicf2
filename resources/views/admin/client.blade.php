@@ -84,7 +84,13 @@
                                 </a>
                             </td>
                             <td class="px-6 py-4">{{ $user->phone }}</td>
-                            <td class="px-6 py-4">{{ $user->admin->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">
+                                <a href="{{ route('agent.show', ['username' => $user->admin->username]) }}"
+                                    class="flex items-center">
+                                    {{ $user->admin->name ?? 'N/A' }}
+                                </a>
+                            </td>
+                            
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
                                     <div class="w-2.5 h-2.5 rounded-full bg-green-500 me-2"></div>

@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="w-full p-6 bg-gray-50 border border-gray-200 rounded-lg  dark:bg-neutral-800">
+    <div class="w-full p-6 flex justify-between items-center bg-gray-50 border border-gray-200 rounded-lg  dark:bg-neutral-800">
 
 
         <div class="flex md:gap-8 gap-4 items-center md:p-8 p-6 md:pb-4">
@@ -24,6 +24,14 @@
                 <p class="text-sm text-blue-600 mt-1 font-normal">{{ '@' . $user->username }}</p>
             </div>
 
+
+        </div>
+        <div> 
+            <div  class=" p-3 border border-gray-200 bg-white rounded-md">
+                <p class="text-sm">Solde</p>
+                <p class="text-2xl font-bold">20,000 FCFA</p>
+
+            </div>
 
         </div>
     </div>

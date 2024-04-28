@@ -160,7 +160,7 @@
                                                 Supprimé
                                             </h3>
                                             <p class="text-gray-500 dark:text-neutral-500">
-                                                Vous etes sur de supprimé le compte de l'agent ?
+                                                Vous etes sur de supprimé la consommation ?
                                             </p>
 
                                             <div class="mt-6 flex justify-center gap-x-4">

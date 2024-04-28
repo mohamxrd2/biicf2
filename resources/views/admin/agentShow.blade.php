@@ -5,7 +5,7 @@
 @section('content')
 
 
-    <div class="w-full p-6 bg-gray-50 border border-gray-200 rounded-lg  dark:bg-neutral-800">
+    <div class="w-full flex justify-between items-center p-6 bg-gray-50 border border-gray-200 rounded-lg  dark:bg-neutral-800">
 
 
         <div class="flex md:gap-8 gap-4 items-center md:p-8 p-6 md:pb-4">
@@ -19,7 +19,6 @@
             </div>
 
 
-
             <div class="flex-1">
                 <h3 class="md:text-xl text-base font-semibold text-black dark:text-white">{{ $agent->name }}</h3>
                 <p class="text-sm text-blue-600 mt-1 font-normal">{{ '@' . $agent->username }}</p>
@@ -27,10 +26,18 @@
 
 
         </div>
+        <div> 
+            <div  class=" p-3 border border-gray-200 bg-white rounded-md">
+                <p class="text-sm">Solde</p>
+                <p class="text-2xl font-bold">20,000 FCFA</p>
+
+            </div>
+
+        </div>
     </div>
 
     <div class="grid grid-cols-3 gap-4 my-4">
-        <div class="col-span-2 ">
+        <div class="lg:col-span-2 col-span-3 ">
             <div class="p-4 bg-white border border-gray-200 rounded-md">
 
                 <div class="relative overflow-x-auto sm:rounded-lg">
@@ -315,7 +322,7 @@
 
 
         </div>
-        <div class="col-span-1 ">
+        <div class="lg:col-span-1 col-span-3  ">
             <div class="flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md">
                 <div class="mb-3">
                     <h1 class="font-bold text-md">Information personnel</h1>

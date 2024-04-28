@@ -265,7 +265,7 @@
                     <div class="flex items-center justify-between w-full mb-2">
                         <h3 class="text-md font-bold">Transactions</h3>
 
-                        <a href="#" class=" font-bold text-blue-500 ">voir plus</a>
+                        <a href="{{ route('admin.porte-feuille') }}" class=" font-bold text-blue-500 ">voir plus</a>
 
                     </div>
 
