@@ -28,7 +28,7 @@
         </div>
         <div> 
             <div  class=" p-3 border border-gray-200 bg-white rounded-md">
-                <p class="text-sm">Solde</p>
+                <p class="text-sm text-gray-600">Solde</p>
                 <p class="text-2xl font-bold">20,000 FCFA</p>
 
             </div>
