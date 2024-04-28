@@ -175,6 +175,10 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
+                        Last Seen
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Status
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -208,13 +212,23 @@
                         </td>
 
                         <td class="px-6 py-4">
+                            {{ Carbon\Carbon::parse($agent->last_seen)->diffForHumans() }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="bg-{{ $agent->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3">
+                                {{ $agent->last_seen >= now()->subMinutes(2) ? 'Online' : 'Offline' }}
+                            </span>
+                        </td>
+
+                        {{-- <td class="px-6 py-4">
 
                             <div class="flex items-center">
                                 <div
                                     class="h-2.5 w-2.5 rounded-full {{ $admin->status === 'online' ? 'bg-green-500' : 'bg-red-500' }} me-2">
                                 </div> {{ $admin->status === 'online' ? 'Online' : 'Offline' }}
                             </div>
-                        </td>
+                        </td> --}}
+                        
                         <td class="px-6 py-4">
                             <div class="flex  ">
 

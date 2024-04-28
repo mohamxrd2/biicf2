@@ -43,7 +43,8 @@ class User extends Authenticatable
         'address',
         'active_zone',
         'photo',
-        'admin_id',
+        'last_seen',
+        'admin_id'
     ];
 
    

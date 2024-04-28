@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminProductsController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\AdminConsommationController;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,12 +69,21 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::put('/profile/update/{admin}', [AdminsController::class, 'updateProfile'])->name('admin.updateProfile');
     Route::put('/profile/password/{admin}', [AdminsController::class, 'updatePassword'])->name('admin.updatePassword');
-    
+
     Route::put('/profile/profile-photo/{admin}', [AdminsController::class, 'updateProfilePhoto'])->name('admin.updateProfilePhoto');
 
     Route::get('/agent/{username}', [AdminAgentController::class, 'show'])->name('agent.show');
 
     Route::get('/client/{username}', [AdminClientController::class,'show'])->name('client.show');
+
+    //email
+    Route::get('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
+    //success
+    Route::get('/confirmation/success', function () {
+        return view('admin.success');
+    })->name('confirmation.success');
+
+
 
     Route::get('/ajouter-client', [AdminClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AdminClientController::class, 'store'])->name('clients.store');

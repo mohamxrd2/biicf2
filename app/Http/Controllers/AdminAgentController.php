@@ -14,7 +14,10 @@ class AdminAgentController extends Controller
     // Contrôleur
     public function index()
     {
-        $agents = Admin::where('admin_type', 'agent')->paginate(10);
+        $agents = Admin::where('admin_type', 'agent')
+               ->orderBy('last_seen', 'DESC')
+               ->paginate(10);
+
         foreach ($agents as $agent) {
             // Récupérer le nombre d'utilisateurs associés à cet agent
             $userCount = $agent->users()->count();

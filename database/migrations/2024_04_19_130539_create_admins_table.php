@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phonenumber');
             $table->string('admin_type')->default('admin');
             $table->string('photo')->default('https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-photo-700-205577532.jpg');
+            $table->timestamp('last_seen')->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable(); // Supprimer la valeur par défaut de 'updated_at'

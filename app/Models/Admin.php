@@ -16,7 +16,8 @@ class Admin extends Authenticatable
         'phonenumber',
         'photo',
         'admin_type',
-        'status'
+        'status',
+        'last_seen'
     ];
 
     public function users()

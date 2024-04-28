@@ -15,7 +15,9 @@ class AdminClientController extends Controller
     public function index()
     {
 
-        $users = User::with('admin')->orderBy('created_at', 'desc')->paginate(10);
+        $users = User::with('admin')
+            ->orderBy('last_seen', 'DESC')
+            ->paginate(10);
 
         $userCount = User::count();
 
@@ -95,8 +97,13 @@ class AdminClientController extends Controller
 
             // Vérification si l'admin est authentifié
             if ($adminId) {
+                //generer et garder le token de verification
+                // $user->email_verified_at = now(); //marquer l'email comme verifier
                 $user->admin_id = $adminId;
                 $user->save();
+
+                //envoi du couriel au nouveau client
+                $user->sendEmailVerificationNotification();
 
                 return redirect()->route('clients.create')->with('success', 'Client ajouté avec succès!');
             } else {

@@ -49,7 +49,13 @@
                     <th scope="col" class="px-6 py-3">Nom</th>
                     <th scope="col" class="px-6 py-3">Téléphone</th>
                     <th scope="col" class="px-6 py-3">Agent</th>
-                    <th scope="col" class="px-6 py-3">Statut</th>
+                    <th scope="col" class="px-6 py-3">
+                        Last Seen
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        Status
+                    </th>
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
@@ -90,12 +96,14 @@
                                     {{ $user->admin->name ?? 'N/A' }}
                                 </a>
                             </td>
-                            
+
                             <td class="px-6 py-4">
-                                <div class="flex items-center">
-                                    <div class="w-2.5 h-2.5 rounded-full bg-green-500 me-2"></div>
-                                    <span class="text-sm text-gray-500">En ligne</span>
-                                </div>
+                                {{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="bg-{{ $user->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3">
+                                    {{ $user->last_seen >= now()->subMinutes(2) ? 'Online' : 'Offline' }}
+                                </span>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex">
