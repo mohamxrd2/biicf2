@@ -29,7 +29,7 @@
         <div> 
             <div  class=" p-3 border border-gray-200 bg-white rounded-md">
                 <p class="text-sm">Solde</p>
-                <p class="text-2xl font-bold">20,000 FCFA</p>
+                <p class="text-2xl font-bold">{{ $wallet->balance }} FCFA</p>
 
             </div>
 
@@ -109,10 +109,9 @@
                                         </td>
                                         <td class="px-6 py-4">{{ $user->phone }}</td>
                                         <td class="px-6 py-4">
-                                            <div class="flex items-center">
-                                                <div class="w-2.5 h-2.5 rounded-full bg-green-500 me-2"></div>
-                                                <span class="text-sm text-gray-500">En ligne</span>
-                                            </div>
+                                            <span class="bg-{{ $user->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3 rounded-md">
+                                                {{ $user->last_seen >= now()->subMinutes(2) ? 'Online' : 'Offline' }}
+                                            </span>
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex">

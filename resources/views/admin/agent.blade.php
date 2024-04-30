@@ -174,9 +174,7 @@
                         Client
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
-                        Last Seen
-                    </th>
+                    
 
                     <th scope="col" class="px-6 py-3">
                         Status
@@ -187,6 +185,22 @@
                 </tr>
             </thead>
             <tbody>
+
+                @if ($totalAgents == 0)
+                <tr>
+                    <td colspan="5" class="px-6 py-4 text-center">
+                        <div class="flex flex-col justify-center items-center h-40 w-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-12 h-12 text-gray-500 dark:text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                            </svg>
+                            <h1 class="text-xl text-gray-500 dark:text-gray-400">Aucun Agent</h1>
+                        </div>
+                    </td>
+                </tr>
+                @else
+
                 @foreach ($agents as $agent)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -211,23 +225,14 @@
                             {{ $agent->userCount }}
                         </td>
 
+                      
                         <td class="px-6 py-4">
-                            {{ Carbon\Carbon::parse($agent->last_seen)->diffForHumans() }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="bg-{{ $agent->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3">
+                            <span class="bg-{{ $agent->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3 rounded-md">
                                 {{ $agent->last_seen >= now()->subMinutes(2) ? 'Online' : 'Offline' }}
                             </span>
                         </td>
 
-                        {{-- <td class="px-6 py-4">
-
-                            <div class="flex items-center">
-                                <div
-                                    class="h-2.5 w-2.5 rounded-full {{ $admin->status === 'online' ? 'bg-green-500' : 'bg-red-500' }} me-2">
-                                </div> {{ $admin->status === 'online' ? 'Online' : 'Offline' }}
-                            </div>
-                        </td> --}}
+                       
                         
                         <td class="px-6 py-4">
                             <div class="flex  ">
@@ -309,6 +314,11 @@
                         </td>
                     </tr>
                 @endforeach
+
+                    
+                @endif
+
+                
             </tbody>
         </table>
         <!-- Message d'aucun résultat trouvé -->

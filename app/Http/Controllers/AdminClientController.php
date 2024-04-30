@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Wallet;
 use App\Models\Consommation;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
@@ -102,6 +103,11 @@ class AdminClientController extends Controller
                 $user->admin_id = $adminId;
                 $user->save();
 
+                $wallet = new Wallet();
+                $wallet->user_id = $user->id;
+                $wallet->balance = 0; // Solde initial
+                $wallet->save();
+
                 //envoi du couriel au nouveau client
                 $user->sendEmailVerificationNotification();
 
@@ -121,6 +127,10 @@ class AdminClientController extends Controller
         // Récupérer les détails du client en fonction de son nom d'utilisateur
         $user = User::with('admin')->where('username', $username)->firstOrFail();
 
+        
+
+        $wallet = Wallet::where('user_id', $user->id)->first();
+
         // Récupérer tous les produits de service associés à cet utilisateur
         $produitsServices = ProduitService::where('user_id', $user->id)->get();
 
@@ -131,7 +141,9 @@ class AdminClientController extends Controller
 
         $consCount = $consommations->count();
 
+        
+
         // Passer les détails du client à la vue
-        return view('admin.clientShow', compact('user', 'produitsServices', 'produitCount', 'consommations', 'consCount'));
+        return view('admin.clientShow', compact('user', 'wallet', 'produitsServices', 'produitCount', 'consommations', 'consCount'));
     }
 }

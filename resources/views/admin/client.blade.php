@@ -49,9 +49,7 @@
                     <th scope="col" class="px-6 py-3">Nom</th>
                     <th scope="col" class="px-6 py-3">Téléphone</th>
                     <th scope="col" class="px-6 py-3">Agent</th>
-                    <th scope="col" class="px-6 py-3">
-                        Last Seen
-                    </th>
+                  
 
                     <th scope="col" class="px-6 py-3">
                         Status
@@ -97,11 +95,9 @@
                                 </a>
                             </td>
 
+                           
                             <td class="px-6 py-4">
-                                {{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="bg-{{ $user->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3">
+                                <span class="bg-{{ $user->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3 rounded-md">
                                     {{ $user->last_seen >= now()->subMinutes(2) ? 'Online' : 'Offline' }}
                                 </span>
                             </td>

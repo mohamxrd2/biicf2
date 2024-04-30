@@ -20,6 +20,7 @@ class AdminFactory extends Factory
             'username' => $this->faker->userName,
             'password' => Hash::make('admin'), // Hashage du mot de passe
             'phonenumber' => $this->faker->phoneNumber,
+            'admin_type' => 'agent',
             // Autres champs si nécessaire
         ];
     }

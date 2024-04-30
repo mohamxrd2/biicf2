@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 
 class AdminAgentController extends Controller
@@ -14,9 +15,13 @@ class AdminAgentController extends Controller
     // Contrôleur
     public function index()
     {
+        // Récupérer tous les agents
         $agents = Admin::where('admin_type', 'agent')
-               ->orderBy('last_seen', 'DESC')
-               ->paginate(10);
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+
+        // Récupérer le nombre total d'agents
+        $totalAgents = $agents->count();
 
         foreach ($agents as $agent) {
             // Récupérer le nombre d'utilisateurs associés à cet agent
@@ -24,8 +29,10 @@ class AdminAgentController extends Controller
             // Ajouter le nombre d'utilisateurs à l'agent
             $agent->userCount = $userCount;
         }
-        return view('admin.agent', ['agents' => $agents]);
+
+        return view('admin.agent', compact('agents', 'totalAgents'));
     }
+
 
     public function store(Request $request)
     {
@@ -51,8 +58,15 @@ class AdminAgentController extends Controller
             $admin->admin_type = 'agent';
             $admin->save();
 
+            // Créer un portefeuille pour l'agent
+            $wallet = new Wallet();
+            $wallet->admin_id = $admin->id;
+            $wallet->balance = 0; // Solde initial
+            $wallet->save();
+
             return redirect()->route('admin.agent')->with('success', 'Agent ajouté avec succès!');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }
     }
@@ -70,13 +84,15 @@ class AdminAgentController extends Controller
     {
         // Récupérer les détails de l'agent en fonction de son username
         $agent = Admin::where('username', $username)->firstOrFail();
-        
+
+        $wallet = Wallet::where('admin_id', $agent->id)->first();
+
         $users = User::where('admin_id', $agent->id)->get();
 
         // Récupérer le nombre d'utilisateurs ayant le même admin_id que l'agent
         $userCount = User::where('admin_id', $agent->id)->count();
-    
+
         // Passer les détails de l'agent et les utilisateurs à la vue
-        return view('admin.agentShow', compact('agent', 'users', 'userCount'));
+        return view('admin.agentShow', compact('agent', 'wallet', 'users', 'userCount'));
     }
 }
