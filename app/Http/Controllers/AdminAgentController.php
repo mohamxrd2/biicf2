@@ -95,4 +95,18 @@ class AdminAgentController extends Controller
         // Passer les détails de l'agent et les utilisateurs à la vue
         return view('admin.agentShow', compact('agent', 'wallet', 'users', 'userCount'));
     }
+    public function isban(Admin $admin)
+    {
+        if ($admin->isban) {
+            $admin->isban = false; // Débloquer l'agent
+            $message = "l'agent a été débloqué avec success";
+        } else {
+            $admin->isban = true; // Bloquer l'agent
+            $message = "l'agent a été bloqué avec success";
+        }
+
+        $admin->save();
+
+        return redirect()->back()->with('success', $message);
+    }
 }

@@ -17,7 +17,8 @@ class Admin extends Authenticatable
         'photo',
         'admin_type',
         'status',
-        'last_seen'
+        'last_seen',
+        'isban'
     ];
 
     public function users()

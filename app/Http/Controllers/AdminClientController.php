@@ -127,7 +127,7 @@ class AdminClientController extends Controller
         // Récupérer les détails du client en fonction de son nom d'utilisateur
         $user = User::with('admin')->where('username', $username)->firstOrFail();
 
-        
+
 
         $wallet = Wallet::where('user_id', $user->id)->first();
 
@@ -141,9 +141,84 @@ class AdminClientController extends Controller
 
         $consCount = $consommations->count();
 
-        
+
 
         // Passer les détails du client à la vue
         return view('admin.clientShow', compact('user', 'wallet', 'produitsServices', 'produitCount', 'consommations', 'consCount'));
+    }
+    public function storePub(Request $request )
+    {
+        $userId = $request->input('user_id');
+
+
+        $validatedData = $request->validate([
+            'type' => 'required|string|in:product,service', // Type doit être soit 'product' soit 'service'
+            'name' =>  'required|string|max:255',
+            'conditionnement' => $request->type == 'product' ? 'required|string|max:255' : 'nullable|string|max:255',
+            'format' => $request->type == 'product' ? 'required|string' : 'nullable|string',
+            'qteProd_min' => $request->type == 'product' ? 'required|string' : 'nullable|string',
+            'qteProd_max' => $request->type == 'product' ? 'required|string' : 'nullable|string',
+            'prix' => $request->type == 'product' ? 'required' : 'nullable', // Prix requis uniquement pour les produits
+            // 'livraison' =>  $request->type == 'product' ? 'required|string|in:oui,non' : 'nullable|string|in:oui,non',
+            'qualification'  => $request->type == 'service' ? 'required|string' : 'nullable|string',
+            'specialite' => $request->type == 'service' ? 'required|string' : 'nullable|string',
+            'qte_service' => $request->type == 'service' ? 'required|string' : 'nullable|string', // Quantité de service requise uniquement pour les services
+            'zoneco' => 'required|string',
+            'ville' => 'required|string',
+            'commune' => 'required|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
+            'description' => 'required|string'
+        ], [
+            // Messages d'erreur personnalisés
+            'type.required' => 'Le type est requis.',
+            'type.in' => 'Le type doit être soit "product" soit "service".',
+            'name.required' => 'Le nom est requis.',
+            'name.max' => 'Le nom ne doit pas dépasser 255 caractères.',
+            'conditionnement.required' => 'Le conditionnement est requis pour les produits.',
+            'conditionnement.max' => 'Le conditionnement ne doit pas dépasser 255 caractères.',
+            'format.required' => 'Le format est requis pour les produits.',
+            'qteProd_min.required' => 'La quantité minimale est requise pour les produits.',
+            'qteProd_max.required' => 'La quantité maximale est requise pour les produits.',
+            'prix.required' => 'Le prix est requis pour les produits.',
+            // 'livraison.required' => 'La livraison est requise pour les produits.',
+            'qualification.required' => 'La qualification est requise pour les services.',
+            'specialite.required' => 'La spécialité est requise pour les services.',
+            'qte_service.required' => 'La quantité de service est requise pour les services.',
+            'zoneco.required' => 'La zone économique est requise.',
+            'ville.required' => 'La ville est requise.',
+            'commune.required' => 'La commune est requise.',
+            'photo.required' => 'La photo est requise.',
+            'photo.image' => 'Le fichier doit être une image.',
+            'photo.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+            'photo.max' => 'La taille de l\'image ne doit pas dépasser 2 Mo.',
+            'description.required' => 'La description est requise.'
+        ]);
+
+        try {
+            $produitsServices = new ProduitService();
+            $produitsServices->type = $validatedData['type'];
+            $produitsServices->name = $validatedData['name'];
+            $produitsServices->condProd = $validatedData['conditionnement'];
+            $produitsServices->formatProd = $validatedData['format'];
+            $produitsServices->qteProd_min = $validatedData['qteProd_min'];
+            $produitsServices->qteProd_max = $validatedData['qteProd_max'];
+            $produitsServices->prix = $validatedData['prix'];
+            // $produitsServices->livraison = $validatedData['livraison'];
+            $produitsServices->qalifServ = $validatedData['qualification'];
+            $produitsServices->sepServ = $validatedData['specialite'];
+            $produitsServices->qteServ = $validatedData['qte_service'];
+            $produitsServices->zonecoServ = $validatedData['zoneco'];
+            $produitsServices->villeServ = $validatedData['ville'];
+            $produitsServices->comnServ = $validatedData['commune'];
+            // $produitsServices->photo = $request->file('photo')->store('photos');
+            $produitsServices->desrip = $validatedData['description'];
+            $produitsServices->user_id = $userId ; // Ajout de l'ID de l'utilisateur
+            $produitsServices->save();
+
+            return redirect()->route('admin.show')->with('success', 'Produit ou service ajouté avec succès!');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
+        }
     }
 }

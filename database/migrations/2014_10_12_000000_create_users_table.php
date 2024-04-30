@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('actor_type');
             $table->string('gender')->nullable();
-            $table->stringtring('age')->nullable();
+            $table->string('age')->nullable();
             $table->string('social_status')->nullable();
             $table->string('company_size')->nullable();
             $table->string('service_type')->nullable();

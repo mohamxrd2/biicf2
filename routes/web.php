@@ -55,7 +55,11 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
         Route::get("/$routeName", [$controllerClass, 'index'])->name("admin.$routeName");
     }
     Route::post('/agent', [AdminAgentController::class, 'store'])->name('admin.agent.store');
+    Route::post('/client/{username}', [AdminClientController::class, 'storePub'])->name('admin.client.storePub');
+
     Route::delete('/agent/{admin}', [AdminAgentController::class, 'destroy'])->name('admin.agent.destroy');
+    Route::post('/agent/{admin}', [AdminAgentController::class, 'isban'])->name('admin.agent.isban');
+
 
     Route::delete('/users/{user}', [AdminClientController::class, 'destroyUser'])->name('admin.user.destroy');
 

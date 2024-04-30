@@ -27,6 +27,11 @@
                         <span class="block sm:inline">{{ $errors->first('username') }}</span>
                     </div>
                 @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                 <form class="space-y-6" action="{{ route('admin.login') }}" method="POST">
                     @csrf

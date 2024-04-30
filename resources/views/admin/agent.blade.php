@@ -174,7 +174,7 @@
                         Client
                     </th>
 
-                    
+
 
                     <th scope="col" class="px-6 py-3">
                         Status
@@ -225,17 +225,31 @@
                             {{ $agent->userCount }}
                         </td>
 
-                      
+
                         <td class="px-6 py-4">
                             <span class="bg-{{ $agent->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3 rounded-md">
                                 {{ $agent->last_seen >= now()->subMinutes(2) ? 'Online' : 'Offline' }}
                             </span>
                         </td>
 
-                       
-                        
+
+
                         <td class="px-6 py-4">
                             <div class="flex  ">
+                                <div>
+                                    <p>{{ $agent->name }}</p>
+                                    <form action="{{ route('admin.agent.isban', $agent->id) }}" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit">
+                                            @if($agent->isban)
+                                                Débloquer
+                                            @else
+                                                Bloquer
+                                            @endif
+                                        </button>
+                                    </form>
+                                </div>
 
                                 <a href="#" data-hs-overlay="#hs-delete"
                                     class="font-medium text-red-600 dark:text-blue-500  mr-2">
@@ -315,10 +329,10 @@
                     </tr>
                 @endforeach
 
-                    
+
                 @endif
 
-                
+
             </tbody>
         </table>
         <!-- Message d'aucun résultat trouvé -->

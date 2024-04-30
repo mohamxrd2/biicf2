@@ -4,7 +4,8 @@
 
 @section('content')
 
-    <div class="w-full p-6 flex justify-between items-center bg-gray-50 border border-gray-200 rounded-lg  dark:bg-neutral-800">
+    <div
+        class="w-full p-6 flex justify-between items-center bg-gray-50 border border-gray-200 rounded-lg  dark:bg-neutral-800">
 
 
         <div class="flex md:gap-8 gap-4 items-center md:p-8 p-6 md:pb-4">
@@ -26,8 +27,8 @@
 
 
         </div>
-        <div> 
-            <div  class=" p-3 border border-gray-200 bg-white rounded-md">
+        <div>
+            <div class=" p-3 border border-gray-200 bg-white rounded-md">
                 <p class="text-sm text-gray-600">Solde</p>
                 <p class="text-2xl font-bold">{{ $wallet->balance }} FCFA</p>
 
@@ -59,6 +60,215 @@
                                 <input type="text" id="searchInput" onkeyup="searchTable()"
                                     class="block w-80 p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Rechercher...">
+                            </div>
+                            {{-- bouton des publication --}}
+                            <button type="button"
+                                class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                                data-hs-overlay="#hs-static-backdrop-modal">
+                                Ajouter
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+
+                            </button>
+                            <div id="hs-static-backdrop-modal"
+                                class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] @if ($errors->any()) open opened @else hidden @endif bg-black bg-opacity-50"
+                                data-hs-overlay-keyboard="false" aria-overlay="true" tabindex="-1">
+
+                                <div
+                                    class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                    {{-- form des publication --}}
+
+                                    <form action="{{ route('admin.client.storePub', ['username' => $user->username]) }}"
+                                        method="POST">
+                                        @csrf
+                                        <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto">
+
+                                            <div class="flex justify-between items-center py-3 px-4 border-b">
+                                                <h3 class="font-bold text-gray-800">
+                                                    Ajouter des publications
+                                                </h3>
+
+                                                <button type="button"
+                                                    class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+                                                    data-hs-overlay="#hs-static-backdrop-modal">
+                                                    <span class="sr-only">Close</span>
+                                                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path d="M18 6 6 18"></path>
+                                                        <path d="m6 6 12 12"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+
+                                            {{-- publication --}}
+                                            <div class="p-4 overflow-y-auto">
+
+                                                @if ($errors->any())
+                                                    <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4 ">
+                                                        @foreach ($errors->all() as $error)
+                                                            <p>{{ $error }}</p>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+
+
+                                                <div class="max-w-md mx-auto">
+                                                    <div class="grid md:grid-cols-2 md:gap-6">
+                                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <select name="type" id="choose"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                                                <option value="" disabled selected hidden>Choisir le
+                                                                    type</option>
+                                                                <option value="product">Produit</option>
+                                                                <option value="service">Service</option>
+                                                            </select>
+                                                            <label for="choose"
+                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Type
+                                                                de produit ou service</label>
+                                                        </div>
+                                                        {{-- les inputs suivants sont pour les produits --}}
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="name" id="floating_first_name"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder=" Nom du produit ou service " />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="conditionnement"
+                                                                id="floating_cond"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="conditionnement" />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="format" id="floating_format"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="format du produit " />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="tel" name="qteProd_min" id="floating_qtemin"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder=" Quantité Minimale " />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="tel" name="qteProd_max" id="floating_qtemax"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder=" Quantité Maxiamle" />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="tel" name="prix" id="floating_prix"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="Prix" />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <select name="livraison" id="floating_livraison"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                                                <option value="" disabled selected hidden>Capacité à
+                                                                    livrer
+                                                                </option>
+                                                                <option value="oui">Oui</option>
+                                                                <option value="non">Non</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="qualification"
+                                                                id="floating_qualification"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="Qualification du service  " />
+                                                            <label for="floating_phone"
+                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                                            </label>
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="specialite"
+                                                                id="floating_specialite"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="Spécialite " />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="qte_service"
+                                                                id="floating_qte_service"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="Quantité du service " />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="zoneco" id="floating_zoneco"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder=" Zone économique" />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="ville" id="floating_ville"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="Ville " />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" name="commune" id="floating_commune"
+                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                placeholder="Commune " />
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <div class="flex items-center justify-center w-full">
+                                                                <label for="dropzone-file" id="floating_photo"
+                                                                    name="photo"
+                                                                    class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                    <div
+                                                                        class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                            aria-hidden="true"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 20 16">
+                                                                            <path stroke="currentColor"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                                        </svg>
+                                                                        <p
+                                                                            class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                            <span class="font-semibold">Click to
+                                                                                upload</span> or drag and drop
+                                                                        </p>
+                                                                        <p
+                                                                            class="text-xs text-gray-500 dark:text-gray-400">
+                                                                            SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                                                    </div>
+                                                                    <input id="dropzone-file" type="file"
+                                                                        class="hidden" />
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <textarea id="floating_description" name="description"
+                                                                class="py-3 px-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                                rows="3" placeholder="This is a textarea placeholder"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
+                                                <button type="button"
+                                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                                    data-hs-overlay="#hs-static-backdrop-modal">
+                                                    Fermer
+                                                </button>
+                                                <button type="submit"
+                                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                    Ajouter
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
 
                         </div>
@@ -271,10 +481,13 @@
 
                     </div>
 
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        href="#">
                         <!-- Icon -->
-                        <div class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <div
+                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
+                            <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 7h10v10" />
                                 <path d="M7 17 17 7" />
                             </svg>
@@ -291,13 +504,14 @@
                                         <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
                                             Envoyé
                                         </li>
-                                        <li class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
+                                        <li
+                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
                                             07:41 PM
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div >
+                                <div>
                                     <p class="text-md text-red-600 font-bold dark:text-white">
                                         -100 USD
                                     </p>
@@ -307,10 +521,14 @@
                         <!-- End Col -->
                     </a>
 
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        href="#">
                         <!-- Icon -->
-                        <div class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <div
+                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
+                            <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 7 7 17" />
                                 <path d="M17 17H7V7" />
                             </svg>
@@ -327,7 +545,8 @@
                                         <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
                                             Reçu
                                         </li>
-                                        <li class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
+                                        <li
+                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
                                             07:41 PM
                                         </li>
                                     </ul>
@@ -342,10 +561,13 @@
                         </div>
                         <!-- End Col -->
                     </a>
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        href="#">
                         <!-- Icon -->
-                        <div class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <div
+                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
+                            <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 7h10v10" />
                                 <path d="M7 17 17 7" />
                             </svg>
@@ -362,13 +584,14 @@
                                         <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
                                             Envoyé
                                         </li>
-                                        <li class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
+                                        <li
+                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
                                             07:41 PM
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div >
+                                <div>
                                     <p class="text-md text-red-600 font-bold dark:text-white">
                                         -100 USD
                                     </p>
@@ -378,10 +601,14 @@
                         <!-- End Col -->
                     </a>
 
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        href="#">
                         <!-- Icon -->
-                        <div class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <div
+                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
+                            <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 7 7 17" />
                                 <path d="M17 17H7V7" />
                             </svg>
@@ -398,7 +625,8 @@
                                         <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
                                             Reçu
                                         </li>
-                                        <li class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
+                                        <li
+                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
                                             07:41 PM
                                         </li>
                                     </ul>
@@ -640,4 +868,5 @@
 
 
     <script src="{{ asset('js/search2.js') }}"></script>
+    <script src="{{ asset('js/affichage_champs.js') }}"></script>
 @endsection
