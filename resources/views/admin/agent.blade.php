@@ -230,6 +230,7 @@
                             <span class="bg-{{ $agent->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3 rounded-md">
                                 {{ $agent->last_seen >= now()->subMinutes(2) ? 'Online' : 'Offline' }}
                             </span>
+                            
                         </td>
 
 

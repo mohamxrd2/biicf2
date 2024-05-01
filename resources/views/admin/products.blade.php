@@ -48,25 +48,23 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        conditionnement
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         quantite traité
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Prix
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        format
+                        Statuts
                     </th>
                     <th scope="col" class="px-6 py-3">
                         utilisateur
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        date de creation
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3">
                         Action
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        date de creation
                     </th>
                 </tr>
             </thead>
@@ -84,9 +82,7 @@
                                 <div class="font-normal text-gray-500">{{ $produit->username }}</div>
                             </div>
                         </th>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->condProd }}</p>
-                        </td>
+                      
                         <td class="px-6 py-4">
                             <p class="mb-0"> [{{ $produit->qteProd_min }} - {{ $produit->qteProd_max }}]</p>
                         </td>
@@ -94,14 +90,26 @@
                             <p class="mb-0">{{ $produit->prix }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->formatProd }}</p>
+
+                            @if ($produit->statuts == 'En attente')
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-yellow-800 bg-yellow-100 dark:text-red-400 dark:bg-red-200">{{ $produit->statuts }}</span>
+
+                            @elseif ($produit->statuts == 'Accepté')
+
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-green-800 bg-green-100 dark:text-red-400 dark:bg-red-200">{{ $produit->statuts }}</span>
+
+                            @elseif ($produit->statuts == 'Refusé')
+
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-red-800 bg-red-100 dark:text-red-400 dark:bg-red-200">{{ $produit->statuts }}</span>
+                                
+                            @endif
+                            
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $produit->user_id }}</p>
                         </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->created_at }}</p>
-                        </td>
+                        
+                        
 
 
                         <td class="px-6 py-4">
@@ -185,6 +193,9 @@
 
 
 
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="mb-0">{{ \Carbon\Carbon::parse($produit->created_at)->diffForHumans() }}</p>
                         </td>
                     </tr>
                 @endforeach
