@@ -21,7 +21,7 @@ class AdminAuthMiddleware
             // Vérifier si l'administrateur est banni
             if (Auth::guard('admin')->user()->isban) {
                 Auth::guard('admin')->logout(); // Déconnexion de l'administrateur
-                return redirect()->route('admin.login')->with('error', 'Votre compte est banni.'); // Redirection avec un message d'erreur
+                return redirect()->route('admin.login')->with('error', 'Votre compte à été bloqué !'); // Redirection avec un message d'erreur
             }
         } else {
             // Utilisateur non authentifié en tant qu'administrateur, rediriger vers la page de connexion

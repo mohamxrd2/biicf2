@@ -27,16 +27,22 @@
                         <span class="block sm:inline">{{ $errors->first('username') }}</span>
                     </div>
                 @endif
+
                 @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                        role="alert">
+                        <strong class="font-bold">Oops!</strong>
+                        <span class="block sm:inline">{{ session('error') }}</span>
                     </div>
                 @endif
+
+
 
                 <form class="space-y-6" action="{{ route('admin.login') }}" method="POST">
                     @csrf
                     <div>
-                        <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Nom d'utilisateur</label>
+                        <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Nom
+                            d'utilisateur</label>
                         <div class="mt-2">
                             <input id="username" name="username" type="text" autocomplete="username" required
                                 class="form-input block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -44,7 +50,8 @@
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Mot de passe</label>
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Mot de
+                            passe</label>
                         <div class="mt-2">
                             <input id="password" name="password" type="password" autocomplete="current-password"
                                 required
@@ -54,8 +61,9 @@
 
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
-                            <input id="remember_me" name="remember_me" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                                   {{ old('remember_me') ? 'checked' : '' }}>
+                            <input id="remember_me" name="remember_me" type="checkbox"
+                                class="form-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                {{ old('remember_me') ? 'checked' : '' }}>
                             <label for="remember_me" class="ml-2 block text-sm text-gray-900">Resté conncté</label>
                         </div>
                     </div>
