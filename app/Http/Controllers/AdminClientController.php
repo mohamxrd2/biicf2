@@ -146,7 +146,7 @@ class AdminClientController extends Controller
         // Passer les détails du client à la vue
         return view('admin.clientShow', compact('user', 'wallet', 'produitsServices', 'produitCount', 'consommations', 'consCount'));
     }
-    public function storePub(Request $request )
+    public function storePub(Request $request)
     {
         $userId = $request->input('user_id');
 
@@ -212,12 +212,64 @@ class AdminClientController extends Controller
             $produitsServices->comnServ = $validatedData['commune'];
             // $produitsServices->photo = $request->file('photo')->store('photos');
             $produitsServices->desrip = $validatedData['description'];
-            $produitsServices->user_id = $userId ; // Ajout de l'ID de l'utilisateur
+            $produitsServices->user_id = $userId; // Ajout de l'ID de l'utilisateur
             $produitsServices->save();
 
-            return redirect()->route('admin.show')->with('success', 'Produit ou service ajouté avec succès!');
+            return redirect()->route('admin.client')->with('success', 'Produit ou service ajouté avec succès!');
         } catch (\Exception $e) {
             dd($e->getMessage());
+            return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
+        }
+    }
+    public function storeCons(Request $request)
+    {
+        $userId = $request->input('user_id');
+
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'nameC' => 'required|string|max:255',
+            'type' => 'required|string|in:product,service',
+            'conditionnementC' => $request->type == 'product' ? 'required|string|max:255' : 'nullable|string|max:255',
+            'formatC' => $request->type == 'product' ? 'required|string' : 'nullable|string',
+            'qteC' => $request->type == 'product' ? 'required|string' : 'nullable|string',
+            'prixC' => $request->type == 'product' ? 'required' : 'nullable',
+            'frequenceC' => 'required|string', // Attention à l'espace dans le nom du champ
+            'jour_achat' => 'required|string',
+            'qualificationC' => $request->type == 'service' ? 'required|string' : 'nullable|string',
+            'specialité' => $request->type == 'service' ? 'required|string' : 'nullable|string',
+            'desriptionC' => 'required|string',
+            'zone_activité' => 'required|string',
+            'villeC' => 'required|string',
+        ]);
+
+        try {
+            // Créer une nouvelle instance de Consommation avec les données validées
+            $consommation = new Consommation();
+            $consommation->name = $validatedData['nameC'];
+            $consommation->type = $validatedData['type'];
+            $consommation->conditionnement = $validatedData['conditionnementC'];
+            $consommation->format = $validatedData['formatC'];
+            $consommation->qte = $validatedData['qteC'];
+            $consommation->prix = $validatedData['prixC'];
+            $consommation->frqce_cons = $validatedData['frequenceC']; // Attention à l'espace dans le nom du champ
+            $consommation->jourAch_cons = $validatedData['jour_achat'];
+            $consommation->qualif_serv = $validatedData['qualificationC'];
+            $consommation->specialité = $validatedData['specialité'];
+            $consommation->description = $validatedData['desriptionC'];
+            $consommation->zoneAct = $validatedData['zone_activité'];
+            $consommation->villeCons = $validatedData['villeC'];
+            $consommation->id_user = $userId; // Ajout de l'ID de l'utilisateur
+
+
+            // Enregistrer la nouvelle consommation dans la base de données
+            $consommation->save();
+
+            // Rediriger avec un message de succès
+            return redirect()->route('admin.client')->with('success', 'Consommation ajoutée avec succès!');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+
+            // En cas d'erreur, afficher un message d'erreur et rediriger vers la page précédente
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }
     }

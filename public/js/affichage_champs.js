@@ -116,6 +116,8 @@ champchooseC.addEventListener("change", function () {
         champZoneActivite.style.display = "block";
         champVilleC.style.display = "block";
         champQualificationServiceC.style.display = "block";
+        champPrixC.style.display = "block";
+
 
         // Masquer les autres champs
         champConditionnementC.style.display = "none";
@@ -130,15 +132,17 @@ champchooseC.addEventListener("change", function () {
         champFreqConsommation.style.display = "block";
         champJourAchat.style.display = "block";
         champQualificationServiceC.style.display = "block";
+        champQteC.style.display = "block";
+        champFreqConsommation.style.display = "block";
+        champDescriptionC.style.display = "block";
+        champZoneActivite.style.display = "block";
+        champVilleC.style.display = "block";
+        champPrixC.style.display = "block";
+
 
         // Masquer les autres champs
         champNomProduit.style.display = "none";
-        champDescriptionC.style.display = "none";
         champSpecialiteC.style.display = "none";
-        champFreqConsommation.style.display = "none";
-        champQteC.style.display = "none";
-        champZoneActivite.style.display = "none";
-        champVilleC.style.display = "none";
         champQualificationServiceC.style.display = "none";
     }
 });
