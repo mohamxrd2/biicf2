@@ -98,6 +98,7 @@ const champZoneActivite = document.getElementById("floating_zone_activite");
 const champVilleC = document.getElementById("floating_villeC");
 
 // Masquer tous les champs au chargement de la page
+champNameC.style.display = "none";
 champConditionnementC.style.display = "none";
 champFormatC.style.display = "none";
 champQteC.style.display = "none";
@@ -112,9 +113,9 @@ champVilleC.style.display = "none";
 
 // Écouter les changements sur la sélection du type
 champchooseC.addEventListener("change", function () {
-    if (champchooseC.value === "service") {
+    if (champchooseC.value === "services") {
         // Si "Service" est sélectionné, afficher les champs
-        champNomProduit.style.display = "block";
+        champNameC.style.display = "block";
         champDescriptionC.style.display = "block";
         champSpecialiteC.style.display = "block";
         champFreqConsommation.style.display = "block";
@@ -123,16 +124,18 @@ champchooseC.addEventListener("change", function () {
         champVilleC.style.display = "block";
         champQualificationServiceC.style.display = "block";
         champPrixC.style.display = "block";
+        champQualificationServiceC.style.display = "block";
+        champJourAchat.style.display = "block";
 
 
         // Masquer les autres champs
-        champConditionnementC.style.display = "none";
-        champFormatC.style.display = "none";
-        champFreqConsommation.style.display = "none";
-        champJourAchat.style.display = "none";
-        champQualificationServiceC.style.display = "none";
+       
+        champFreqConsommation.style.display = "block";
+   
+        champQualificationServiceC.style.display = "block";
     } else {
         // Sinon, afficher tous les champs
+        champNameC.style.display = "block";
         champConditionnementC.style.display = "block";
         champFormatC.style.display = "block";
         champFreqConsommation.style.display = "block";
@@ -147,9 +150,7 @@ champchooseC.addEventListener("change", function () {
 
 
         // Masquer les autres champs
-        champNomProduit.style.display = "none";
-        champSpecialiteC.style.display = "none";
-        champQualificationServiceC.style.display = "none";
+        
     }
 });
 
