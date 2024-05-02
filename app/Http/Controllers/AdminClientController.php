@@ -292,4 +292,12 @@ class AdminClientController extends Controller
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }
     }
+
+    public function editAgent($username){
+        $user = User::with('admin')->where('username', $username)->firstOrFail();
+
+        return view('admin.editagent');
+
+
+    }
 }

@@ -988,6 +988,12 @@
                     </div>
                 @endif
 
+                <a href="{{ route('client.editad', ['username' => $user->username]) }}" 
+                    class="w-full  text-blue-800 bg-blue-100 rounded-md text-center p-1 mb-3">
+                    Modifier agent
+
+                </a>
+
                 <a href="#" data-hs-overlay="#hs-delete1"
                     class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
                     Supprimé client

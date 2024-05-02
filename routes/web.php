@@ -82,6 +82,8 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/client/{username}', [AdminClientController::class,'show'])->name('client.show');
 
+    Route::get('/edit-agent/{username}', [AdminClientController::class, 'editAgent'])->name(('client.editad'));
+
     //email
     Route::get('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
     //success
