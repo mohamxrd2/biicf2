@@ -35,7 +35,7 @@ champCommune.style.display = "none";
 
 // Écouter les changements sur la sélection du type
 selectType.addEventListener("change", function () {
-    if (selectType.value === "service") {
+    if (selectType.value === "services") {
         // Si "Service" est sélectionné, afficher les champs Nom du produit
         champNomProduit.style.display = "block";
         champPhoto.style.display = "block";
@@ -46,13 +46,17 @@ selectType.addEventListener("change", function () {
         champZoneEco.style.display = "block";
         champVille.style.display = "block";
         champCommune.style.display = "block";
+        champPrix.style.display = "block";
 
         // Masquer les autres champs
         champConditionnement.style.display = "none";
         champFormat.style.display = "none";
         champQteMin.style.display = "none";
         champQteMax.style.display = "none";
-        champPrix.style.display = "none";
+        champFormat.style.display = "none";
+        champQteMin.style.display = "none";
+        champQteMax.style.display = "none";
+        
         champLivraison.style.display = "none";
     } else {
         // Sinon, afficher tous les champs
@@ -65,12 +69,14 @@ selectType.addEventListener("change", function () {
         champLivraison.style.display = "block";
         champPhoto.style.display = "block";
         champDescription.style.display = "block";
+        champZoneEco.style.display = "block";
+        champVille.style.display = "block";
+        champCommune.style.display = "block";
         // Masquer les autres champs
         champSpecialite.style.display = "none";
         champQteService.style.display = "none";
-        champZoneEco.style.display = "none";
-        champVille.style.display = "none";
-        champCommune.style.display = "none";
+        champQualification.style.display = "none";
+        
     }
 });
 

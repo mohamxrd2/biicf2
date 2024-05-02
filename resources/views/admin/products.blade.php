@@ -106,8 +106,16 @@
                             
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $produit->user_id }}</p>
+                            @if ($produit->user)
+                                <a href="{{ route('client.show', ['username' => $produit->user->username]) }}">
+                                    <p class="mb-0">{{ $produit->user->username }}</p>
+                                </a>
+                            @else
+                                <p class="mb-0">Utilisateur inconnu</p>
+                            @endif
                         </td>
+                        
+                        
                         
                         
 

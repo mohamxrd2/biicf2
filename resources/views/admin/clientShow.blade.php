@@ -37,8 +37,14 @@
         </div>
     </div>
 
+
     <div class="grid grid-cols-3 gap-4 my-4">
         <div class="lg:col-span-2 col-span-3 gap-y-4">
+            @if (session('success'))
+                <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="p-4 bg-white border border-gray-200 rounded-md">
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <div
@@ -85,7 +91,8 @@
                                     <form action="{{ route('admin.client.storePub', ['username' => $user->username]) }}"
                                         method="POST">
                                         @csrf
-                                        <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto form1">
+                                        <div
+                                            class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto form1">
 
                                             <div class="flex justify-between items-center py-3 px-4 border-b">
                                                 <h3 class="font-bold text-gray-800">
@@ -108,110 +115,136 @@
 
                                             {{-- publication --}}
                                             <div class="p-4 overflow-y-auto">
-
+                                                @if ($errors->has('pub_error'))
+                                                    <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
+                                                        <p>{{ $errors->first('pub_error') }}</p>
+                                                    </div>
+                                                @endif
                                                 @if ($errors->any())
-                                                    <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4 ">
-                                                        @foreach ($errors->all() as $error)
-                                                            <p>{{ $error }}</p>
-                                                        @endforeach
+                                                    <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
                                                     </div>
                                                 @endif
 
 
+
                                                 <div class="max-w-md mx-auto">
-                                                    <div class="grid md:grid-cols-2 md:gap-6">
+                                                    <div class="gap-y-6">
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
 
                                                         <div class="relative z-0 w-full mb-5 group">
                                                             <select name="type" id="choose"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                                                                <option value="" disabled selected hidden>Choisir le
+                                                                class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                                <option value="" disabled selected>Choisir le
                                                                     type</option>
-                                                                <option value="product">Produit</option>
-                                                                <option value="service">Service</option>
+                                                                <option value="produits">Produit</option>
+                                                                <option value="services">Service</option>
                                                             </select>
-                                                            <label for="choose"
-                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Type
-                                                                de produit ou service</label>
+
                                                         </div>
                                                         {{-- les inputs suivants sont pour les produits --}}
-                                                        <div class="relative z-0 w-full mb-5 group">
+                                                        <div class="space-y-3 w-full mb-3">
                                                             <input type="text" name="name" id="floating_first_name"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder=" Nom du produit ou service " />
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
+                                                        <div class="space-y-3 w-full mb-3">
                                                             <input type="text" name="conditionnement"
                                                                 id="floating_cond"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder="conditionnement" />
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
+                                                        <div class="space-y-3 w-full mb-3">
                                                             <input type="text" name="format" id="floating_format"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder="format du produit " />
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="tel" name="qteProd_min" id="floating_qtemin"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                        <div class="space-y-3 w-full mb-3">
+                                                            <input type="number" name="qteProd_min" id="floating_qtemin"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder=" Quantité Minimale " />
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="tel" name="qteProd_max" id="floating_qtemax"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+
+                                                        <div class="space-y-3 w-full mb-3">
+                                                            <input type="number" name="qteProd_max" id="floating_qtemax"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder=" Quantité Maxiamle" />
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="tel" name="prix" id="floating_prix"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                        <div class="space-y-3 w-full mb-3">
+                                                            <input type="number" name="prix" id="floating_prix"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder="Prix" />
                                                         </div>
                                                         <div class="relative z-0 w-full mb-5 group">
                                                             <select name="livraison" id="floating_livraison"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                                                                <option value="" disabled selected hidden>Capacité à
-                                                                    livrer
-                                                                </option>
+                                                                class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                                <option value="" disabled selected>Capacité à
+                                                                    livrer</option>
                                                                 <option value="oui">Oui</option>
                                                                 <option value="non">Non</option>
                                                             </select>
+
                                                         </div>
 
+
+
+                                                        {{-- les inputs suivants sont pour les services --}}
+
+
+
                                                         <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="text" name="qualification"
-                                                                id="floating_qualification"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                                placeholder="Qualification du service  " />
-                                                            <label for="floating_phone"
-                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                                            </label>
+                                                            <select name="qualification" id="floating_qualification"
+                                                                class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                                <option value="" disabled selected>Experiance dans le
+                                                                    domaine</option>
+                                                                <option value="Moins de 1 an">Moins de 1 an</option>
+                                                                <option value="De 1 à 5 ans">De 1 à 5 ans</option>
+                                                                <option value="De 5 à 10 ans">De 5 à 10 ans</option>
+                                                                <option value="Plus de 10 ans">Plus de 10 ans</option>
+                                                            </select>
+
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
+
+                                                        <div class="space-y-3 w-full mb-3">
                                                             <input type="text" name="specialite"
                                                                 id="floating_specialite"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder="Spécialite " />
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="text" name="qte_service"
+                                                        <div class="space-y-3 w-full mb-3">
+                                                            <input type="number" name="qte_service"
                                                                 id="floating_qte_service"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                                placeholder="Quantité du service " />
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                                placeholder="Nombre de personnel " />
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
+
+
+
+
+
+                                                        <div class="space-y-3 w-full mb-3">
+                                                            <input type="text" name="ville" id="floating_ville"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                                placeholder="Ville " />
+                                                        </div>
+                                                        <div class="space-y-3 w-full mb-3">
+                                                            <input type="text" name="commune" id="floating_commune"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                                placeholder="Commune " />
+                                                        </div>
+                                                        <div class="space-y-3 w-full mb-3">
                                                             <input type="text" name="zoneco" id="floating_zoneco"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder=" Zone économique" />
                                                         </div>
                                                         <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="text" name="ville" id="floating_ville"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                                placeholder="Ville " />
-                                                        </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="text" name="commune" id="floating_commune"
-                                                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                                placeholder="Commune " />
+                                                            <textarea id="floating_description" name="description"
+                                                                class="py-3 px-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                                rows="3" placeholder="Description de la publication"></textarea>
                                                         </div>
                                                         <div class="relative z-0 w-full mb-5 group">
                                                             <div class="flex items-center justify-center w-full">
@@ -245,11 +278,10 @@
                                                         </div>
 
 
-                                                        <div class="relative z-0 w-full mb-5 group">
-                                                            <textarea id="floating_description" name="description"
-                                                                class="py-3 px-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                                rows="3" placeholder="This is a textarea placeholder"></textarea>
-                                                        </div>
+
+
+
+
 
                                                     </div>
                                                 </div>
@@ -274,11 +306,7 @@
                         </div>
                     </div>
 
-                    @if (session('success'))
-                        <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+
 
                     <table class="w-full mt-5 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -385,13 +413,13 @@
                         </button>
 
                         {{-- consommation --}}
-                        <div id="hs-static-backdrop-model" class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] @if ($errors->any()) open opened @else hidden @endif bg-black bg-opacity-50" data-hs-overlay-keyboard="false"
+                        {{-- <div id="hs-static-backdrop-model" class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] @if ($errors->any()) open opened @else hidden @endif bg-black bg-opacity-50" data-hs-overlay-keyboard="false"
                             aria-overlay="true" tabindex="-1">
 
                             <div
-                                class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-                                {{-- consommation --}}
-                                <form action="{{ route('admin.client.storeCons', ['username' => $user->username]) }}" method="POST">
+                                class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto"> --}}
+                        {{-- consommation --}}
+                        {{-- <form action="{{ route('admin.client.storeCons', ['username' => $user->username]) }}" method="POST">
                                     @csrf
                                     <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto">
 
@@ -438,13 +466,13 @@
                                                             placeholder=" Nom de la consommation" />
                                                     </div>
                                                     <div class="relative z-0 w-full mb-5 group">
-                                                        <select name="type" id="chooseC"
-                                                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                                                            <option value="" disabled selected hidden>Choisir le
+                                                        <select name="type" id="chooseC" class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                            <option value="" disabled selected >Choisir le
                                                                 type</option>
                                                             <option value="product">Produit</option>
                                                             <option value="service">Service</option>
-                                                        </select>
+                                                          </select>
+                                                        
                                                         <label for="chooseC"
                                                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Type
                                                             de produit ou service</label>
@@ -523,17 +551,12 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
+                                </form> --}}
+                        {{-- </div>
+                        </div> --}}
 
                     </div>
 
-                    @if (session('success'))
-                        <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
-                            {{ session('success') }}
-                        </div>
-                    @endif
 
                     <table class="w-full mt-5 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -952,7 +975,7 @@
                 @endif
 
                 <a href="#" data-hs-overlay="#hs-delete1"
-                    class="w-full border border-red-600 bg-red-200 rounded-md text-center p-1 text-red-600">
+                    class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
                     Supprimé client
 
                 </a>

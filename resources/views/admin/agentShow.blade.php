@@ -341,7 +341,7 @@
                 </div>
 
                 <a href="#" data-hs-overlay="#hs-delete1"
-                    class="w-full border border-red-600 bg-red-200 rounded-md text-center p-1 text-red-600">
+                    class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
                     Supprimé l'agent
 
                 </a>

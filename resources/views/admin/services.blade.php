@@ -48,22 +48,21 @@
                         Prix
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        qualification (nb d'année)
+                        Experiance
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        specialité
+                        Status
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        quantite du service
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3">
                         utilisateur
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        date de creation
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3">
                         Action
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        date de creation
                     </th>
                 </tr>
             </thead>
@@ -89,18 +88,32 @@
                             <p class="mb-0">{{ $service->qalifServ }} ans</p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->sepServ }}</p>
+
+                            @if ($service->statuts == 'En attente')
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-yellow-800 bg-yellow-100 dark:text-red-400 dark:bg-red-200">{{ $service->statuts }}</span>
+
+                            @elseif ($service->statuts == 'Accepté')
+
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-green-800 bg-green-100 dark:text-red-400 dark:bg-red-200">{{ $service->statuts }}</span>
+
+                            @elseif ($service->statuts == 'Refusé')
+
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-red-800 bg-red-100 dark:text-red-400 dark:bg-red-200">{{ $service->statuts }}</span>
+                                
+                            @endif
+                            
                         </td>
+                        
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->qteServ }}</p>
+                            @if ($service->user)
+                                <a href="{{ route('client.show', ['username' => $service->user->username]) }}">
+                                    <p class="mb-0">{{ $service->user->username }}</p>
+                                </a>
+                            @else
+                                <p class="mb-0">Utilisateur inconnu</p>
+                            @endif
                         </td>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->user_id }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $service->created_at }}</p>
-                        </td>
+                        
 
 
                         <td class="px-6 py-4">
@@ -177,6 +190,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="mb-0">{{ \Carbon\Carbon::parse($service->created_at)->diffForHumans() }}</p>
                         </td>
                     </tr>
                 @endforeach

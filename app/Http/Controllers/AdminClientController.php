@@ -152,17 +152,17 @@ class AdminClientController extends Controller
 
 
         $validatedData = $request->validate([
-            'type' => 'required|string|in:product,service', // Type doit être soit 'product' soit 'service'
+            'type' => 'required|string|in:produits,services', // Type doit être soit 'product' soit 'service'
             'name' =>  'required|string|max:255',
-            'conditionnement' => $request->type == 'product' ? 'required|string|max:255' : 'nullable|string|max:255',
-            'format' => $request->type == 'product' ? 'required|string' : 'nullable|string',
-            'qteProd_min' => $request->type == 'product' ? 'required|string' : 'nullable|string',
-            'qteProd_max' => $request->type == 'product' ? 'required|string' : 'nullable|string',
-            'prix' => $request->type == 'product' ? 'required' : 'nullable', // Prix requis uniquement pour les produits
+            'conditionnement' => $request->type == 'produits' ? 'required|string|max:255' : 'nullable|string|max:255',
+            'format' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
+            'qteProd_min' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
+            'qteProd_max' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
+            'prix' => $request->type == 'produits' ? 'required' : 'nullable', // Prix requis uniquement pour les produits
             // 'livraison' =>  $request->type == 'product' ? 'required|string|in:oui,non' : 'nullable|string|in:oui,non',
-            'qualification'  => $request->type == 'service' ? 'required|string' : 'nullable|string',
-            'specialite' => $request->type == 'service' ? 'required|string' : 'nullable|string',
-            'qte_service' => $request->type == 'service' ? 'required|string' : 'nullable|string', // Quantité de service requise uniquement pour les services
+            'qualification'  => $request->type == 'services' ? 'required|string' : 'nullable|string',
+            'specialite' => $request->type == 'services' ? 'required|string' : 'nullable|string',
+            'qte_service' => $request->type == 'services' ? 'required|string' : 'nullable|string', // Quantité de service requise uniquement pour les services
             'zoneco' => 'required|string',
             'ville' => 'required|string',
             'commune' => 'required|string',
@@ -215,10 +215,13 @@ class AdminClientController extends Controller
             $produitsServices->user_id = $userId; // Ajout de l'ID de l'utilisateur
             $produitsServices->save();
 
-            return redirect()->route('admin.client')->with('success', 'Produit ou service ajouté avec succès!');
+            return back()->with('success', 'Produit ou service ajouté avec succès!');
+
         } catch (\Exception $e) {
             dd($e->getMessage());
-            return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
+            return back()->withErrors(['pub_error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
+
+
         }
     }
     public function storeCons(Request $request)
