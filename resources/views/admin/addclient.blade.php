@@ -374,6 +374,7 @@
                                 'name' => 'country',
                                 'title' => 'Choisissez un pays',
                                 'options' => [],
+
                             ])
                             @include('admin.components.input', [
                                 'name' => 'phone',
