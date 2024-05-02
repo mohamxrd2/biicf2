@@ -56,7 +56,7 @@ selectType.addEventListener("change", function () {
         champFormat.style.display = "none";
         champQteMin.style.display = "none";
         champQteMax.style.display = "none";
-        
+
         champLivraison.style.display = "none";
     } else {
         // Sinon, afficher tous les champs
@@ -76,7 +76,7 @@ selectType.addEventListener("change", function () {
         champSpecialite.style.display = "none";
         champQteService.style.display = "none";
         champQualification.style.display = "none";
-        
+
     }
 });
 
@@ -129,10 +129,13 @@ champchooseC.addEventListener("change", function () {
 
 
         // Masquer les autres champs
-       
+
         champFreqConsommation.style.display = "block";
-   
+
         champQualificationServiceC.style.display = "block";
+
+        champConditionnementC.style.display = "none";
+        champFormatC.style.display = "none";
     } else {
         // Sinon, afficher tous les champs
         champNameC.style.display = "block";
@@ -140,7 +143,7 @@ champchooseC.addEventListener("change", function () {
         champFormatC.style.display = "block";
         champFreqConsommation.style.display = "block";
         champJourAchat.style.display = "block";
-        champQualificationServiceC.style.display = "block";
+
         champQteC.style.display = "block";
         champFreqConsommation.style.display = "block";
         champDescriptionC.style.display = "block";
@@ -150,7 +153,9 @@ champchooseC.addEventListener("change", function () {
 
 
         // Masquer les autres champs
-        
+        champQualificationServiceC.style.display = "none";
+        champSpecialiteC.style.display = "none";
+
     }
 });
 
