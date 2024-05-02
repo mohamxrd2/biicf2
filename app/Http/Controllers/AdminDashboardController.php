@@ -13,6 +13,8 @@ class AdminDashboardController extends Controller
     //
     public function index()
     {
+        //Admin//////
+
         // Nombre total de clients
         $totalClients = User::count();
 
@@ -23,12 +25,18 @@ class AdminDashboardController extends Controller
         // Liste des 5 derniers utilisateurs
         $users = User::orderBy('created_at', 'desc')->take(5)->get();
 
-        // Portefeuille de l'administrateur
-        $adminId = Auth::guard('admin')->id();
-        $adminWallet = Wallet::where('admin_id', $adminId)->first();
+        //Agent//////
 
+        //  l'agent connecté
+        $adminId = Auth::guard('admin')->id();
+        // Portefeuille de l'agent
+        $adminWallet = Wallet::where('admin_id', $adminId)->first();
+        // Récupérer les utilisateurs ayant le même admin_id que l'agent
+        $usersWithSameAdminId = User::where('admin_id', $adminId)->get();
         // Nombre total d'utilisateurs ayant le même admin_id que l'agent
         $userCount = User::where('admin_id', $adminId)->count();
+        // Nombre total d'utilisateurs ayant le même admin_id que l'agent
+        // $ServicesUserCount = ProduitService::where('admin_id', $adminId)->count();
 
         return view('admin.dashboard', [
             'totalClients' => $totalClients,
@@ -37,6 +45,8 @@ class AdminDashboardController extends Controller
             'users' => $users,
             'adminWallet' => $adminWallet,
             'userCount' => $userCount,
+            'usersWithSameAdminId' => $usersWithSameAdminId,
+            // 'ServicesUserCount' => $ServicesUserCount,
         ]);
     }
 }
