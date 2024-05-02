@@ -22,7 +22,7 @@ fetch("https://restcountries.com/v3.1/all")
     );
 
 function populateCountryDropdown() {
-    const countryDropdown = document.getElementById("country_code");
+    const countryDropdown = document.getElementById("country");
     fetch("https://restcountries.com/v2/all")
         .then((response) => response.json())
         .then((data) => {

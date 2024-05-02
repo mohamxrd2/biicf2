@@ -45,6 +45,16 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if ($errors->any())
+                <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="p-4 bg-white border border-gray-200 rounded-md">
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <div
@@ -81,7 +91,7 @@
 
                             </button>
                             <div id="hs-static-backdrop-modal"
-                                class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] @if ($errors->any()) open opened @else hidden @endif bg-black bg-opacity-50"
+                                class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]   hidden  bg-black bg-opacity-50"
                                 data-hs-overlay-keyboard="false" aria-overlay="true" tabindex="-1">
 
                                 <div
@@ -115,23 +125,8 @@
 
                                             {{-- publication --}}
                                             <div class="p-4 overflow-y-auto">
-                                                @if ($errors->has('pub_error'))
-                                                    <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
-                                                        <p>{{ $errors->first('pub_error') }}</p>
-                                                    </div>
-                                                @endif
-                                                @if ($errors->any())
-                                                    <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4">
-                                                        <ul>
-                                                            @foreach ($errors->all() as $error)
-                                                                <li>{{ $error }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                @endif
-
-
-
+                                              
+                                                
                                                 <div class="max-w-md mx-auto">
                                                     <div class="gap-y-6">
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -413,13 +408,17 @@
                         </button>
 
                         {{-- consommation --}}
-                        {{-- <div id="hs-static-backdrop-model" class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] @if ($errors->any()) open opened @else hidden @endif bg-black bg-opacity-50" data-hs-overlay-keyboard="false"
-                            aria-overlay="true" tabindex="-1">
+                        <div id="hs-static-backdrop-model"
+                            class="hs-overlay size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]  hidden  bg-black bg-opacity-50"
+                            data-hs-overlay-keyboard="false" aria-overlay="true" tabindex="-1">
 
                             <div
-                                class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto"> --}}
-                        {{-- consommation --}}
-                        {{-- <form action="{{ route('admin.client.storeCons', ['username' => $user->username]) }}" method="POST">
+                                class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+
+
+                                {{-- consommation --}}
+                                <form action="{{ route('admin.client.storeCons', ['username' => $user->username]) }}"
+                                    method="POST">
                                     @csrf
                                     <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto">
 
@@ -445,97 +444,112 @@
                                         </div>
                                         <div class="p-4 overflow-y-auto">
 
-                                            @if ($errors->any())
-                                                <div class="bg-red-200 text-red-800 px-4 py-2 rounded-md mb-4 ">
-                                                    @foreach ($errors->all() as $error)
-                                                        <p>{{ $error }}</p>
-                                                    @endforeach
-                                                </div>
-                                            @endif
+
 
 
                                             <div class="max-w-md mx-auto">
-                                                <div class="grid md:grid-cols-2 md:gap-6">
+                                             
 
-                                                    <input type="text" name="user_id" value="{{ $user->id }}">
-
+                                                    <input type="text" name="user_id" hidden value="{{ $user->id }}">
 
                                                     <div class="relative z-0 w-full mb-5 group">
+                                                        <select name="type" id="chooseC"
+                                                            class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                            <option value="" disabled selected>Choisir le
+                                                                type</option>
+                                                            <option value="produits">Produit</option>
+                                                            <option value="services">Service</option>
+                                                        </select>
+
+                                                    </div>
+                                                    {{-- les inputs suivants sont pour les produits --}}
+                                                    <div class="space-y-3 w-full mb-3">
                                                         <input type="text" name="nameC" id="floating_nameC"
-                                                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                             placeholder=" Nom de la consommation" />
                                                     </div>
-                                                    <div class="relative z-0 w-full mb-5 group">
-                                                        <select name="type" id="chooseC" class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                                                            <option value="" disabled selected >Choisir le
-                                                                type</option>
-                                                            <option value="product">Produit</option>
-                                                            <option value="service">Service</option>
-                                                          </select>
-                                                        
-                                                        <label for="chooseC"
-                                                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Type
-                                                            de produit ou service</label>
-                                                    </div>
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="text" name="conditionnementC"
+                                                    <div class="space-y-3 w-full mb-3">
+                                                        <input type="text" name="conditionnementC"
                                                         id="floating_conditionnementC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="Conditionnement" />
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            placeholder="Conditionnement" />
+                                                    </div>
+                                                    <div class="space-y-3 w-full mb-3">
+                                                        <input type="text" name="formatC" id="floating_formatC"
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            placeholder="Format de consommations " />
+                                                    </div>
+                                                    <div class="space-y-3 w-full mb-3">
+                                                        <input type="number" name="qteC" id="floating_quantiteC"
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            placeholder="quantité de consommations "  />
+                                                    </div>
+                                                    <div class="space-y-3 w-full mb-3">
+                                                        <input type="number" name="prixC" id="floating_prixC"
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            placeholder="prix"  />
+                                                    </div>
+                                                    <div class="space-y-3 w-full mb-3">
+                                                        <input type="number" name="frequenceC" id="floating_cons"
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            placeholder="frequence de consommation [0-10]" />
+                                                    </div>
+
+                                                    <div class="relative z-0 w-full mb-5 group">
+                                                        <select name="jour_achat" id="floating_jour_achat"
+                                                            class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                            <option value="" disabled selected>Jour d'achat</option>
+                                                            <option value="Lundi">Lundi</option>
+                                                            <option value="Mardi">Mardi</option>
+                                                            <option value="Mercredi">Mercredi</option>
+                                                            <option value="Jeudi">Jeudi</option>
+                                                            <option value="Vendredi">Vendredi</option>
+                                                            <option value="Samedi">Samedi</option>
+                                                            <option value="Dimanche">Dimanche</option>
+                                                            <option value="Plusieur jour de la semaine">Plusieur jour de la semaine</option>
+                                                        </select>
+
+                                                    </div>
+
+                                                   
+                                                   
+                                              
+                                               
+                                               
+                                                
+                                               
+                                               
+                                                    <div class="space-y-3 w-full mb-3">
+                                                        <input type="text" name="qualificationC" id="floating_qualifC"
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            placeholder="qualification service"   />
+                                                    </div>
+                                                    <div class="space-y-3 w-full mb-3">
+                                                        <input type="text" name="specialité" id="floating_specialiteC"
+                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            placeholder="specialité "  />
+                                                    </div>
+                                                
+                                               
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="text" name="desriptionC" id="floating_descriptionC"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder=" Desription"   />
                                                 </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="text" name="formatC" id="floating_formatC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="Format de consommations " />
+                                                
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="text" name="zone_activité"
+                                                    id="floating_zone_activite"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="Zone d'activité "   />
                                                 </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="text" name="qteC" id="floating_quantiteC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="quantité de consommations " />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="number" name="prixC" id="floating_prixC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="prix" />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="number" name="frequenceC"
-                                                        id="floating_cons"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="frequence de consommation [0-10]" />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="tel" name="jour_achat" id="floating_jour_achat"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="jour d'achat " />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="text" name="qualificationC" id="floating_qualifC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="qualification service" />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="text" name="specialité" id="floating_specialiteC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="specialité " />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="tel" name="desriptionC" id="floating_descriptionC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder=" Desription" />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
-                                                    <input type="tel" name="zone_activité"
-                                                        id="floating_zone_activite"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="Zone d'activité " />
-                                                </div>
-                                                <div class="relative z-0 w-full mb-5 group">
+                                                <div class="space-y-3 w-full mb-3">
                                                     <input type="text" name="villeC" id="floating_villeC"
-                                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                        placeholder="ville " />
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="ville "  />
                                                 </div>
+                                                
+                                               
                                             </div>
 
                                         </div>
@@ -551,9 +565,9 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form> --}}
-                        {{-- </div>
-                        </div> --}}
+                                </form>
+                            </div>
+                        </div>
 
                     </div>
 

@@ -219,7 +219,7 @@ class AdminClientController extends Controller
 
         } catch (\Exception $e) {
             dd($e->getMessage());
-            return back()->withErrors(['pub_error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
+            return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
 
 
         }
@@ -231,19 +231,35 @@ class AdminClientController extends Controller
         // Valider les données du formulaire
         $validatedData = $request->validate([
             'nameC' => 'required|string|max:255',
-            'type' => 'required|string|in:product,service',
-            'conditionnementC' => $request->type == 'product' ? 'required|string|max:255' : 'nullable|string|max:255',
-            'formatC' => $request->type == 'product' ? 'required|string' : 'nullable|string',
-            'qteC' => $request->type == 'product' ? 'required|string' : 'nullable|string',
-            'prixC' => $request->type == 'product' ? 'required' : 'nullable',
+            'type' => 'required|string|in:produits,services',
+            'conditionnementC' => $request->type == 'produits' ? 'required|string|max:255' : 'nullable|string|max:255',
+            'formatC' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
+            'qteC' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
+            'prixC' => $request->type == 'produits' ? 'required' : 'nullable',
             'frequenceC' => 'required|string', // Attention à l'espace dans le nom du champ
             'jour_achat' => 'required|string',
-            'qualificationC' => $request->type == 'service' ? 'required|string' : 'nullable|string',
-            'specialité' => $request->type == 'service' ? 'required|string' : 'nullable|string',
+            'qualificationC' => $request->type == 'services' ? 'required|string' : 'nullable|string',
+            'specialité' => $request->type == 'services' ? 'required|string' : 'nullable|string',
             'desriptionC' => 'required|string',
             'zone_activité' => 'required|string',
             'villeC' => 'required|string',
-        ]);
+        ], [
+            'nameC.required' => 'Le nom de la consommation est obligatoire.',
+            'type.required' => 'Le type est requis.',
+            'type.in' => 'Le type doit être soit "product" soit "service".',
+            'conditionnementC.required' => 'Le conditionnement est requis pour les produits.',
+            'formatC.required' => 'Le format est requis pour les produits.',
+            'qteC.required' => 'La quantité est requise pour les produits.',
+            'prixC.required' => 'Le prix est requis pour les produits.',
+            'frequenceC.required' => 'La fréquence d\'achat est requise.',
+            'jour_achat.required' => 'Le jour d\'achat est requis.',
+            'qualificationC.required' => 'La qualification est requise pour les services.',
+           'specialité.required' => 'La spécialité est requise pour les services.',
+            'desriptionC.required' => 'La description est requise.',
+            'zone_activité.required' => 'La zone d\'activité est requise.',
+            'villeC.required' => 'La ville est requise.',
+        ]
+    );
 
         try {
             // Créer une nouvelle instance de Consommation avec les données validées
@@ -268,7 +284,7 @@ class AdminClientController extends Controller
             $consommation->save();
 
             // Rediriger avec un message de succès
-            return redirect()->route('admin.client')->with('success', 'Consommation ajoutée avec succès!');
+            return back()->with('success', 'Consommation ajoutée avec succès!');
         } catch (\Exception $e) {
             dd($e->getMessage());
 
