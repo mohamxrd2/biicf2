@@ -38,6 +38,11 @@
 
     <div class="grid grid-cols-3 gap-4 my-4">
         <div class="lg:col-span-2 col-span-3 ">
+            @if (session('success'))
+            <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
             <div class="p-4 bg-white border border-gray-200 rounded-md">
 
                 <div class="relative overflow-x-auto sm:rounded-lg">
@@ -65,11 +70,7 @@
                         </div>
                     </div>
 
-                    @if (session('success'))
-                        <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                   
 
                     <table class="w-full mt-5 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -339,6 +340,28 @@
                     <p class="font-semibold text-sm">Nombre de client enregistré</p>
                     <p class="text-sm text-gray-400">{{ $userCount }}</p>
                 </div>
+
+                <form action="{{ route('admin.agent.isban', $agent->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="w-full mb-3">
+                        @if($agent->isban)
+
+
+
+                        <div class="text-gray-800 bg-gray-200 rounded-md text-center p-1" title="Debloquer">
+                            Debloquer
+
+                        </div>
+                        @else
+                        <div class="text-yellow-800 bg-yellow-100 rounded-md text-center p-1 " title="bloquer">
+                            Bloquer
+                        </div>
+                        
+                          
+                        @endif
+                    </button>
+                </form>
 
                 <a href="#" data-hs-overlay="#hs-delete1"
                     class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">

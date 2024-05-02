@@ -143,7 +143,6 @@ champchooseC.addEventListener("change", function () {
         champFormatC.style.display = "block";
         champFreqConsommation.style.display = "block";
         champJourAchat.style.display = "block";
-
         champQteC.style.display = "block";
         champFreqConsommation.style.display = "block";
         champDescriptionC.style.display = "block";
