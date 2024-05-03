@@ -226,7 +226,7 @@ class AdminClientController extends Controller
     {
         $userId = $request->input('user_id');
 
-        // Valider les données du formulaire
+       
         $validatedData = $request->validate(
             [
                 'nameC' => 'required|string|max:255',
