@@ -18,7 +18,6 @@
             <!-- Autres éléments spécifiques à l'administrateur général -->
 
             @include('admin.dashboard.dashbord_admin')
-
         @endif
     @endauth
 

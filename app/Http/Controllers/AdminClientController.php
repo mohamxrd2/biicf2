@@ -16,15 +16,24 @@ class AdminClientController extends Controller
     //
     public function index()
     {
-
         $users = User::with('admin')
             ->orderBy('last_seen', 'DESC')
             ->paginate(10);
 
         $userCount = User::count();
 
-        return view('admin.client', compact('users', 'userCount'));
+        //Agent//////
+
+        //  l'agent connecté
+        $adminId = Auth::guard('admin')->id();
+        // utilisateurs ayant le même admin_id que l'agent
+        $userAgent = User::where('admin_id', $adminId)->get();
+        // Nombre total d'utilisateurs ayant le même admin_id que l'agent
+        $userAgentcount = User::where('admin_id', $adminId)->count();
+
+        return view('admin.client', compact('users', 'userCount', 'userAgent', 'userAgentcount'));
     }
+
     public function destroyUser(User $user)
     {
         $user->delete();
@@ -204,7 +213,7 @@ class AdminClientController extends Controller
             $produitsServices->qteProd_min = $validatedData['qteProd_min'];
             $produitsServices->qteProd_max = $validatedData['qteProd_max'];
             $produitsServices->prix = $validatedData['prix'];
-            $produitsServices->LivreCapProd = $validatedData['livraison'];
+            $produitsServices->LivreCapProd = $validatedData['livraison'] ?? null;
             $produitsServices->qalifServ = $validatedData['qualification'] ?? null;
             $produitsServices->sepServ = $validatedData['specialite'];
             $produitsServices->qteServ = $validatedData['qte_service'];
@@ -226,7 +235,7 @@ class AdminClientController extends Controller
     {
         $userId = $request->input('user_id');
 
-       
+
         $validatedData = $request->validate(
             [
                 'nameC' => 'required|string|max:255',
