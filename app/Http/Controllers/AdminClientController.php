@@ -181,7 +181,7 @@ class AdminClientController extends Controller
             'qteProd_min.required' => 'La quantité minimale est requise pour les produits.',
             'qteProd_max.required' => 'La quantité maximale est requise pour les produits.',
             'prix.required' => 'Le prix est requis pour les produits.',
-            // 'livraison.required' => 'La livraison est requise pour les produits.',
+            'livraison.required' => 'La livraison est requise pour les produits.',
             'qualification.required' => 'La qualification est requise pour les services.',
             'specialite.required' => 'La spécialité est requise pour les services.',
             'qte_service.required' => 'La quantité de service est requise pour les services.',
@@ -204,8 +204,8 @@ class AdminClientController extends Controller
             $produitsServices->qteProd_min = $validatedData['qteProd_min'];
             $produitsServices->qteProd_max = $validatedData['qteProd_max'];
             $produitsServices->prix = $validatedData['prix'];
-            // $produitsServices->livraison = $validatedData['livraison'];
-            $produitsServices->qalifServ = $validatedData['qualification'];
+            $produitsServices->LivreCapProd = $validatedData['livraison'];
+            $produitsServices->qalifServ = $validatedData['qualification'] ?? null;
             $produitsServices->sepServ = $validatedData['specialite'];
             $produitsServices->qteServ = $validatedData['qte_service'];
             $produitsServices->zonecoServ = $validatedData['zoneco'];
