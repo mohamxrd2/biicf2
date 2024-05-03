@@ -10,7 +10,7 @@ class AdminConsprodController extends Controller
     //
     public function index()
     {
-        $consommations = Consommation::where('type', 'produits')->paginate(10);
+        $consommations = Consommation::where('type', 'produits')->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('admin.conso-produit', ['consommations' => $consommations]);
 
