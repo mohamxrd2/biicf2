@@ -217,12 +217,9 @@ class AdminClientController extends Controller
             $produitsServices->save();
 
             return back()->with('success', 'Produit ou service ajouté avec succès!');
-
         } catch (\Exception $e) {
             dd($e->getMessage());
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
-
-
         }
     }
     public function storeCons(Request $request)
@@ -230,37 +227,39 @@ class AdminClientController extends Controller
         $userId = $request->input('user_id');
 
         // Valider les données du formulaire
-        $validatedData = $request->validate([
-            'nameC' => 'required|string|max:255',
-            'type' => 'required|string|in:produits,services',
-            'conditionnementC' => $request->type == 'produits' ? 'required|string|max:255' : 'nullable|string|max:255',
-            'formatC' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
-            'qteC' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
-            'prixC' => $request->type == 'produits' ? 'required' : 'nullable',
-            'frequenceC' => 'required|string', // Attention à l'espace dans le nom du champ
-            'jour_achat' => 'required|string',
-            'qualificationC' => $request->type == 'services' ? 'required|string' : 'nullable|string',
-            'specialité' => $request->type == 'services' ? 'required|string' : 'nullable|string',
-            'desriptionC' => 'required|string',
-            'zone_activité' => 'required|string',
-            'villeC' => 'required|string',
-        ], [
-            'nameC.required' => 'Le nom de la consommation est obligatoire.',
-            'type.required' => 'Le type est requis.',
-            'type.in' => 'Le type doit être soit "product" soit "service".',
-            'conditionnementC.required' => 'Le conditionnement est requis pour les produits.',
-            'formatC.required' => 'Le format est requis pour les produits.',
-            'qteC.required' => 'La quantité est requise pour les produits.',
-            'prixC.required' => 'Le prix est requis pour les produits.',
-            'frequenceC.required' => 'La fréquence d\'achat est requise.',
-            'jour_achat.required' => 'Le jour d\'achat est requis.',
-            'qualificationC.required' => 'La qualification est requise pour les services.',
-           'specialité.required' => 'La spécialité est requise pour les services.',
-            'desriptionC.required' => 'La description est requise.',
-            'zone_activité.required' => 'La zone d\'activité est requise.',
-            'villeC.required' => 'La ville est requise.',
-        ]
-    );
+        $validatedData = $request->validate(
+            [
+                'nameC' => 'required|string|max:255',
+                'type' => 'required|string|in:produits,services',
+                'conditionnementC' => $request->type == 'produits' ? 'required|string|max:255' : 'nullable|string|max:255',
+                'formatC' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
+                'qteC' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
+                'prixC' => $request->type == 'produits' ? 'required' : 'nullable',
+                'frequenceC' => 'required|string', // Attention à l'espace dans le nom du champ
+                'jour_achat' => 'required|string',
+                'qualificationC' => $request->type == 'services' ? 'required|string' : 'nullable|string',
+                'specialité' => $request->type == 'services' ? 'required|string' : 'nullable|string',
+                'desriptionC' => 'required|string',
+                'zone_activité' => 'required|string',
+                'villeC' => 'required|string',
+            ],
+            [
+                'nameC.required' => 'Le nom de la consommation est obligatoire.',
+                'type.required' => 'Le type est requis.',
+                'type.in' => 'Le type doit être soit "product" soit "service".',
+                'conditionnementC.required' => 'Le conditionnement est requis pour les produits.',
+                'formatC.required' => 'Le format est requis pour les produits.',
+                'qteC.required' => 'La quantité est requise pour les produits.',
+                'prixC.required' => 'Le prix est requis pour les produits.',
+                'frequenceC.required' => 'La fréquence d\'achat est requise.',
+                'jour_achat.required' => 'Le jour d\'achat est requis.',
+                'qualificationC.required' => 'La qualification est requise pour les services.',
+                'specialité.required' => 'La spécialité est requise pour les services.',
+                'desriptionC.required' => 'La description est requise.',
+                'zone_activité.required' => 'La zone d\'activité est requise.',
+                'villeC.required' => 'La ville est requise.',
+            ]
+        );
 
         try {
             // Créer une nouvelle instance de Consommation avec les données validées
@@ -294,7 +293,8 @@ class AdminClientController extends Controller
         }
     }
 
-    public function editAgent($username){
+    public function editAgent($username)
+    {
         $user = User::with('admin')->where('username', $username)->firstOrFail();
 
         $agents = Admin::where('admin_type', 'agent')
@@ -312,7 +312,17 @@ class AdminClientController extends Controller
         }
 
         return view('admin.editagent', compact('user', 'agents', 'totalAgents', 'userCount'));
+    }
+    public function updateAdmin(Request $request, $username)
+    {
+        // Récupérer l'utilisateur
+        $user = User::where('username', $username)->firstOrFail();
 
+        // Mettre à jour l'administrateur associé à l'utilisateur
+        $user->admin_id = $request->admin_id;
+        $user->save();
 
+        // Rediriger avec un message de succès
+        return redirect()->back()->with('success', 'Administrateur mis à jour avec succès.');
     }
 }

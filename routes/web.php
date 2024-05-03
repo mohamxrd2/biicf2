@@ -80,9 +80,11 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/agent/{username}', [AdminAgentController::class, 'show'])->name('agent.show');
 
-    Route::get('/client/{username}', [AdminClientController::class,'show'])->name('client.show');
+    Route::get('/client/{username}', [AdminClientController::class, 'show'])->name('client.show');
 
-    Route::get('/edit-agent/{username}', [AdminClientController::class, 'editAgent'])->name(('client.editad'));
+    Route::get('/edit-agent/{username}', [AdminClientController::class, 'editAgent'])->name('client.editad');
+    Route::post('/edit-agent/{username}', [AdminClientController::class, 'updateAdmin'])->name('update.admin');
+
 
     //email
     Route::get('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
@@ -100,4 +102,3 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
