@@ -323,6 +323,6 @@ class AdminClientController extends Controller
         $user->save();
 
         // Rediriger avec un message de succès
-        return redirect()->back()->with('success', 'Administrateur mis à jour avec succès.');
+        return back()->with('success', 'Administrateur mis à jour avec succès.');
     }
 }
