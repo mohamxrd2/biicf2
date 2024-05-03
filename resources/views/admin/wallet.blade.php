@@ -13,7 +13,8 @@
                     <p class="text-3xl text-white font-bold"> {{ $adminWallet->balance }} FCFA</p>
 
                     <div>
-                        <a href="" class="bg-white bordertext-sm py-2 px-3 rounded-2xl flex items-center">
+                        <button class="bg-white bordertext-sm py-2 px-3 rounded-2xl flex items-center"
+                            data-hs-overlay="#hs-basic-modal">
 
                             <svg class="flex-shrink-0 size-5 text-gray-600 mr-2" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -22,8 +23,60 @@
                             </svg>
 
                             Déposer
-                        </a>
+                        </button>
+                        <div id="hs-basic-modal"
+                            class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 hidden size-full fixed top-0 start-0 z-[80] opacity-0 overflow-x-hidden transition-all overflow-y-auto pointer-events-none">
+                            <div class="sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                <form action="{{ route('wallet.deposit') }}" method="POST">
+                                    @csrf
+
+                                    <div
+                                        class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                                        <div
+                                            class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                                            <h3 class="font-bold text-gray-800 dark:text-white">
+                                                Recharger le compte
+                                            </h3>
+                                            <button type="button"
+                                                class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700"
+                                                data-hs-overlay="#hs-basic-modal">
+                                                <span class="sr-only">Close</span>
+                                                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M18 6 6 18"></path>
+                                                    <path d="m6 6 12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="p-4 overflow-y-auto">
+                                            <div class="space-y-3 w-full mb-3">
+                                                <input type="number" name="amount" id="floating_prix"
+                                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                    placeholder="Entrez la somme" />
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                                            <button type="reset"
+                                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                                                data-hs-overlay="#hs-basic-modal">
+                                                Annuler
+                                            </button>
+                                            <button type="submit"
+                                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                Déposer
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
@@ -79,333 +132,96 @@
 
             </div>
             <div>
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M7 7h10v10" />
-                            <path d="M7 17 17 7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
+                <hr>
+                @if ($transacCount == 0)
+                    <hr>
+                    <div class="w-full h-32 flex justify-center items-center">
 
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Envoyé
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <p class="text-md text-red-600 font-bold dark:text-white">
-                                    -100 USD
-                                </p>
-                            </div>
+                        <div class="flex flex-col justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                class="w-12 h-12 text-gray-500 dark:text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                            </svg>
+                            <h1 class="text-xl text-gray-500 dark:text-gray-400">Aucune transaction</h1>
                         </div>
                     </div>
-                    <!-- End Col -->
-                </a>
+                @else
+                    @foreach ($transactions as $transaction)
+                        <div
+                            class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+                            <div
+                                class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
+                                @if ($transaction->type == 'Depot')
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m-6 3.75 3 3m0 0 3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75" />
+                                    </svg>
+                                @elseif ($transaction->type == 'Reception')
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 7h10v10" />
+                                        <path d="M7 17l10-10" />
+                                    </svg>
+                                @elseif ($transaction->type == 'Envoie')
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 7h10v10" />
+                                        <path d="M7 17l10-10" />
+                                    </svg>
+                                @endif
 
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="M17 7 7 17" />
-                            <path d="M17 17H7V7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
-
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Reçu
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
                             </div>
+                            <div class="w-full">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        @if ($transaction->type == 'Depot')
+                                            <h4 class="font-medium dark:text-white">Rechargement</h4>
+                                        @elseif ($transaction->type == 'Envoie')
+                                            <h4 class="font-medium dark:text-white">Envoyé à</h4>
+                                        @elseif ($transaction->type == 'Reception')
+                                            <h4 class="font-medium dark:text-white">Reçu de</h4>
+                                        @endif
 
-                            <div class="flex flex-col flex-end">
-                                <p class="text-md text-green-400 font-bold dark:text-white">
-                                    +470 USD
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Col -->
-                </a>
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M7 7h10v10" />
-                            <path d="M7 17 17 7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
+                                        <ul class="flex">
 
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Envoyé
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
-                            </div>
+                                            <li class="mr-2 dark:text-neutral-500">Reçu le</li>
+                                            <li class="dark:text-neutral-500">
+                                                {{ $transaction->created_at->translatedFormat('j F Y \à H\hi') }}</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        @if ($transaction->type == 'Depot' || $transaction->type == 'Reception')
+                                            <p class="text-md text-green-400 font-bold dark:text-white">+
+                                                {{ $transaction->amount }} FCFA</p>
+                                        @else
+                                            <p class="text-md text-red-600  font-bold dark:text-white">-
+                                                {{ $transaction->amount }} FCFA</p>
+                                        @endif
 
-                            <div>
-                                <p class="text-md text-red-600 font-bold dark:text-white">
-                                    -100 USD
-                                </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- End Col -->
-                </a>
+                    @endforeach
 
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 7 7 17" />
-                            <path d="M17 17H7V7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
+                @endif
 
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Reçu
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
-                            </div>
 
-                            <div class="flex flex-col flex-end">
-                                <p class="text-md text-green-400 font-bold dark:text-white">
-                                    +470 USD
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Col -->
-                </a>
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M7 7h10v10" />
-                            <path d="M7 17 17 7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
 
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Envoyé
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
-                            </div>
 
-                            <div>
-                                <p class="text-md text-red-600 font-bold dark:text-white">
-                                    -100 USD
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Col -->
-                </a>
 
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 7 7 17" />
-                            <path d="M17 17H7V7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
-
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Reçu
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="flex flex-col flex-end">
-                                <p class="text-md text-green-400 font-bold dark:text-white">
-                                    +470 USD
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Col -->
-                </a>
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M7 7h10v10" />
-                            <path d="M7 17 17 7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
-
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Envoyé
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <p class="text-md text-red-600 font-bold dark:text-white">
-                                    -100 USD
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Col -->
-                </a>
-
-                <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    href="#">
-                    <!-- Icon -->
-                    <div
-                        class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                        <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 7 7 17" />
-                            <path d="M17 17H7V7" />
-                        </svg>
-                    </div>
-                    <!-- End Icon -->
-
-                    <div class="w-full">
-                        <div class="flex  justify-between items-center">
-                            <div>
-                                <h4 class="font-medium dark:text-white">
-                                    Costa Quinn
-                                </h4>
-                                <ul class="flex">
-                                    <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        Reçu
-                                    </li>
-                                    <li
-                                        class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                        07:41 PM
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="flex flex-col flex-end">
-                                <p class="text-md text-green-400 font-bold dark:text-white">
-                                    +470 USD
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Col -->
-                </a>
             </div>
 
         </div>
         <div class="lg:col-span-1 col-span-3 ">
 
             <div>
-                <a href="" class="w-full p-5 bg-white border flex items-center rounded-2xl hover:bg-gray-50 mb-4">
+                <div class="w-full p-5 bg-white border flex items-center rounded-2xl hover:bg-gray-50 mb-4 cursor-pointer"
+                    data-hs-overlay="#monney-send1">
 
                     <div class="flex flex-col">
                         <p class="font-bold  mb-3">Envoyé a un agent</p>
@@ -418,27 +234,103 @@
                             </div>
 
                             <div class="flex -space-x-4 rtl:space-x-reverse">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-3.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-4.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-5.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-2.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-3.jpg" alt="">
+
+                                @if ($agentCount == 0)
+
+                                    <p class="text-gray-600">Aucun agent</p>
+                                @else
+                                    @foreach ($agents->take(5) as $agent)
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="{{ $agent->photo }}" alt="">
+                                    @endforeach
+
+
+                                @endif
+
+
+
                             </div>
 
                         </div>
 
                     </div>
 
-                </a>
+                </div>
+                <div id="monney-send1"
+                    class="hs-overlay h-auto hs-overlay-open:opacity-100 hs-overlay-open:duration-500 hidden size-full fixed top-0 start-0 z-[80] opacity-0 overflow-x-hidden transition-all overflow-y-auto pointer-events-none">
+                    <div class="sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+
+
+                        <div
+                            class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                            <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                                <h3 class="font-bold text-gray-800 dark:text-white">
+                                    Recharger le compte
+                                </h3>
+                                <button type="button"
+                                    class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700"
+                                    data-hs-overlay="#monney-send1">
+                                    <span class="sr-only">Close</span>
+                                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 6 6 18"></path>
+                                        <path d="m6 6 12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="p-4 overflow-y-auto h-auto">
+                                <div class="w-full inline-flex relative mb-3" data-hs-combo-box="">
+                                    <div class="relative w-full">
+                                        <input class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" type="text" value="Argentina" data-hs-combo-box-input="">
+                                        <div class="absolute top-1/2 end-3 -translate-y-1/2" data-hs-combo-box-toggle="">
+                                            <svg class="flex-shrink-0 size-3.5 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="m7 15 5 5 5-5"></path>
+                                                <path d="m7 9 5-5 5 5"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="absolute z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-neutral-900 dark:border-neutral-700" style="display: none;" data-hs-combo-box-output="">
+                                        @foreach ($agents as $agent)
+                                        <div class="cursor-pointer py-2 px-4 w-full text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800" tabindex="0" data-hs-combo-box-output-item="">
+                                            <div class="flex justify-between items-center w-full">
+                                                <span data-hs-combo-box-search-text="Argentina" data-hs-combo-box-value="">{{ $agent->username }}</span>
+                                                <span class="hidden hs-combo-box-selected:block">
+                                                    <svg class="flex-shrink-0 size-3.5 text-blue-600 dark:text-blue-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-3 w-full mb-3">
+                                    <input type="number" name="amount" id="floating_prix"
+                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        placeholder="Entrez la somme" />
+                                </div>
+                            </div>
+                            <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                                <button type="reset"
+                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                                    data-hs-overlay="#monney-send1">
+                                    Annuler
+                                </button>
+                                <button type="submit"
+                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                    Envoyé
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
                 <a href="" class="w-full p-5 bg-white border flex items-center rounded-2xl hover:bg-gray-50 mb-4">
 
                     <div class="flex flex-col">
@@ -452,20 +344,20 @@
                             </div>
 
                             <div class="flex -space-x-4 rtl:space-x-reverse">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-3.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-4.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-5.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-2.jpg" alt="">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                    src="/docs/images/people/profile-picture-3.jpg" alt="">
+
+                                @if ($userCount == 0)
+
+                                    <p class="text-gray-600">Aucun client</p>
+                                @else
+                                    @foreach ($users->take(5) as $user)
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="{{ $user->photo }}" alt="">
+                                    @endforeach
+
+                                @endif
+
+
+
                             </div>
 
                         </div>

@@ -301,27 +301,26 @@ class AdminClientController extends Controller
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }
     }
-
     public function editAgent($username)
     {
         $user = User::with('admin')->where('username', $username)->firstOrFail();
-
-        $agents = Admin::where('admin_type', 'agent')
-            ->orderBy('created_at', 'DESC')
-            ->paginate(10);
-
+    
+        // Récupérer tous les agents de type 'agent' et les ordonner par date de création
+        $agents = Admin::where('admin_type', 'agent')->orderBy('created_at', 'DESC')->get();
+    
         // Récupérer le nombre total d'agents
         $totalAgents = $agents->count();
-
+    
         foreach ($agents as $agent) {
             // Récupérer le nombre d'utilisateurs associés à cet agent
             $userCount = $agent->users()->count();
             // Ajouter le nombre d'utilisateurs à l'agent
             $agent->userCount = $userCount;
         }
-
-        return view('admin.editagent', compact('user', 'agents', 'totalAgents', 'userCount'));
+    
+        return view('admin.editagent', compact('user', 'agents', 'totalAgents'));
     }
+    
     public function updateAdmin(Request $request, $username)
     {
         // Récupérer l'utilisateur
