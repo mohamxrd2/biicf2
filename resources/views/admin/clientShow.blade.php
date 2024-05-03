@@ -125,8 +125,8 @@
 
                                             {{-- publication --}}
                                             <div class="p-4 overflow-y-auto">
-                                              
-                                                
+
+
                                                 <div class="max-w-md mx-auto">
                                                     <div class="gap-y-6">
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -448,7 +448,7 @@
 
 
                                             <div class="max-w-md mx-auto">
-                                             
+
 
                                                     <input type="text" name="user_id" hidden value="{{ $user->id }}">
 
@@ -511,14 +511,11 @@
 
                                                     </div>
 
-                                                   
-                                                   
-                                              
-                                               
-                                               
-                                                
-                                               
-                                               
+
+
+
+
+
                                                     <div class="space-y-3 w-full mb-3">
                                                         <input type="text" name="qualificationC" id="floating_qualifC"
                                                             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
@@ -529,14 +526,14 @@
                                                             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                             placeholder="specialité "  />
                                                     </div>
-                                                
-                                               
+
+
                                                 <div class="space-y-3 w-full mb-3">
                                                     <input type="text" name="desriptionC" id="floating_descriptionC"
                                                         class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                         placeholder=" Desription"   />
                                                 </div>
-                                                
+
                                                 <div class="space-y-3 w-full mb-3">
                                                     <input type="text" name="zone_activité"
                                                     id="floating_zone_activite"
@@ -548,8 +545,8 @@
                                                         class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                         placeholder="ville "  />
                                                 </div>
-                                                
-                                               
+
+
                                             </div>
 
                                         </div>
@@ -988,7 +985,7 @@
                     </div>
                 @endif
 
-                <a href="{{ route('client.editad', ['username' => $user->username]) }}" 
+                <a href="{{ route('client.editad', ['username' => $user->username]) }}"
                     class="w-full  text-blue-800 bg-blue-100 rounded-md text-center p-1 mb-3">
                     Modifier agent
 
