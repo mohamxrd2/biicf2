@@ -85,6 +85,9 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     Route::get('/edit-agent/{username}', [AdminClientController::class, 'editAgent'])->name('client.editad');
     Route::post('/edit-agent/{username}', [AdminClientController::class, 'updateAdmin'])->name('update.admin');
 
+    Route::post('/deposit', [AdminWalletController::class, 'deposit'])->name('wallet.deposit');
+
+
 
     //email
     Route::get('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
