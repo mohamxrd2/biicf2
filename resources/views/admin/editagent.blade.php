@@ -105,7 +105,10 @@
                                 @csrf
                                 @method('POST')
                                 <input type="hidden" name="admin_id" value="{{ $agent->id }}">
-                                <button type="submit" class="bg-blue-500 text-white p-1 rounded-md">Sélectionner</button>
+                                <button type="submit" class="p-1 rounded-md {{ $user->admin->id === $agent->id ? 'bg-gray-200 text-black' : 'bg-blue-500 text-white' }}">
+                                    {{ $user->admin->id === $agent->id ? 'Sélectionné' : 'Sélectionner' }}
+                                </button>
+                                
                             </form>
 
                         </td>

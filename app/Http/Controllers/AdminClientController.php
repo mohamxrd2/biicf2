@@ -160,8 +160,8 @@ class AdminClientController extends Controller
             'qteProd_min' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
             'qteProd_max' => $request->type == 'produits' ? 'required|string' : 'nullable|string',
             'prix' => $request->type == 'produits' ? 'required' : 'nullable', // Prix requis uniquement pour les produits
-            // 'livraison' =>  $request->type == 'produits' ? 'required|string|in:oui,non' : 'nullable|string|in:oui,non',
-            // 'qualification'  => $request->type == 'services' ? 'required|string' : 'nullable|string',
+            'livraison' =>  $request->type == 'produits' ? 'required|string|in:oui,non' : 'nullable|string|in:oui,non',
+            'qualification'  => $request->type == 'services' ? 'required|string' : 'nullable|string',
             'specialite' => $request->type == 'services' ? 'required|string' : 'nullable|string',
             'qte_service' => $request->type == 'services' ? 'required|string' : 'nullable|string', // Quantité de service requise uniquement pour les services
             'zoneco' => 'required|string',
@@ -172,7 +172,7 @@ class AdminClientController extends Controller
         ], [
             // Messages d'erreur personnalisés
             'type.required' => 'Le type est requis.',
-            'type.in' => 'Le type doit être soit "product" soit "service".',
+            'type.in' => 'Le type doit être soit "produit" soit "service".',
             'name.required' => 'Le nom est requis.',
             'name.max' => 'Le nom ne doit pas dépasser 255 caractères.',
             'conditionnement.required' => 'Le conditionnement est requis pour les produits.',
@@ -182,7 +182,7 @@ class AdminClientController extends Controller
             'qteProd_max.required' => 'La quantité maximale est requise pour les produits.',
             'prix.required' => 'Le prix est requis pour les produits.',
             // 'livraison.required' => 'La livraison est requise pour les produits.',
-            // 'qualification.required' => 'La qualification est requise pour les services.',
+            'qualification.required' => 'La qualification est requise pour les services.',
             'specialite.required' => 'La spécialité est requise pour les services.',
             'qte_service.required' => 'La quantité de service est requise pour les services.',
             'zoneco.required' => 'La zone économique est requise.',
@@ -205,7 +205,7 @@ class AdminClientController extends Controller
             $produitsServices->qteProd_max = $validatedData['qteProd_max'];
             $produitsServices->prix = $validatedData['prix'];
             // $produitsServices->livraison = $validatedData['livraison'];
-            // $produitsServices->qalifServ = $validatedData['qualification'];
+            $produitsServices->qalifServ = $validatedData['qualification'];
             $produitsServices->sepServ = $validatedData['specialite'];
             $produitsServices->qteServ = $validatedData['qte_service'];
             $produitsServices->zonecoServ = $validatedData['zoneco'];
