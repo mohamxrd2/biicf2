@@ -99,5 +99,8 @@
     <div id="noResultMessage" class="h-20 flex justify-center items-center" style="display: none;">
         Aucun résultat trouvé.
     </div>
+    <div class="my-5 flex justify-end">
+        {{ $users->links() }}
+    </div>
 
 </div>

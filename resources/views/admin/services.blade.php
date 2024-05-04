@@ -209,14 +209,16 @@
 
 
             </div>
+            <div class="my-5 flex justify-end">
+                {{ $services->links() }}
+            </div>
+
         @endif
     @endauth
 
 
 
-    <div class="my-5 flex justify-end">
-        {{ $services->links() }}
-    </div>
+
     <script src="{{ asset('js/search.js') }}"></script>
 
 

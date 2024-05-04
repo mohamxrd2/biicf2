@@ -37,15 +37,14 @@ class AdminDashboardController extends Controller
         $userCount = User::where('admin_id', $adminId)->count();
         // Nombre total d'éléments dans la table produits_service ayant le même admin_id pour le type de service
 
-        $servicesCount  = ProduitService::with('user')
+        $productsCount  = ProduitService::with('user')
             ->whereHas('user', function ($query) use ($adminId) {
                 $query->where('admin_id', $adminId);
             })
             ->where('type', 'produits')
             ->count();
 
-        
-        $productsCount  = ProduitService::with('user')
+        $servicesCount  = ProduitService::with('user')
             ->whereHas('user', function ($query) use ($adminId) {
                 $query->where('admin_id', $adminId);
             })

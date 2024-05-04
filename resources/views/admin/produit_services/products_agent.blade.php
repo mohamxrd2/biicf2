@@ -61,8 +61,7 @@
                     <th scope="row"
                         class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <img class="w-10 h-10 rounded-md"
-                            src="{{ $produit->photo ? $produit->photo : asset('img/noimg.jpeg') }}"
-                            alt="Jese image">
+                            src="{{ $produit->photo ? $produit->photo : asset('img/noimg.jpeg') }}" alt="Jese image">
                         <div class="ps-3">
                             <div class="text-base font-semibold">{{ $produit->name }}</div>
                             <div class="font-normal text-gray-500">{{ $produit->username }}</div>
@@ -97,9 +96,10 @@
         </tbody>
 
     </table>
-
-
-
-
-
+</div>
+<!-- Message d'aucun résultat trouvé -->
+<div id="noResultMessage" class="h-20 flex justify-center items-center" style="display: none;">Aucun résultat
+    trouvé.</div>
+<div class="my-5 flex justify-end">
+    {{ $produitAgents->links() }}
 </div>

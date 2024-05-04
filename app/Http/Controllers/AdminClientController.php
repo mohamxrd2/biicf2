@@ -27,7 +27,9 @@ class AdminClientController extends Controller
         //  l'agent connecté
         $adminId = Auth::guard('admin')->id();
         // utilisateurs ayant le même admin_id que l'agent
-        $userAgent = User::where('admin_id', $adminId)->get();
+        $userAgent = User::where('admin_id', $adminId)
+            ->orderBy('last_seen', 'DESC')
+            ->paginate(10);;
         // Nombre total d'utilisateurs ayant le même admin_id que l'agent
         $userAgentcount = User::where('admin_id', $adminId)->count();
 
@@ -304,23 +306,23 @@ class AdminClientController extends Controller
     public function editAgent($username)
     {
         $user = User::with('admin')->where('username', $username)->firstOrFail();
-    
+
         // Récupérer tous les agents de type 'agent' et les ordonner par date de création
         $agents = Admin::where('admin_type', 'agent')->orderBy('created_at', 'DESC')->get();
-    
+
         // Récupérer le nombre total d'agents
         $totalAgents = $agents->count();
-    
+
         foreach ($agents as $agent) {
             // Récupérer le nombre d'utilisateurs associés à cet agent
             $userCount = $agent->users()->count();
             // Ajouter le nombre d'utilisateurs à l'agent
             $agent->userCount = $userCount;
         }
-    
+
         return view('admin.editagent', compact('user', 'agents', 'totalAgents'));
     }
-    
+
     public function updateAdmin(Request $request, $username)
     {
         // Récupérer l'utilisateur

@@ -13,9 +13,7 @@
     @endauth
 
 
-    <div class="my-5 flex justify-end">
-        {{ $users->links() }}
-    </div>
+    
 
     <script src="{{ asset('js/search.js') }}"></script>
 

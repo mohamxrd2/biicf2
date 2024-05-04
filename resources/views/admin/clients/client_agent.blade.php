@@ -42,8 +42,6 @@
             <tr>
                 <th scope="col" class="px-6 py-3">Nom</th>
                 <th scope="col" class="px-6 py-3">Téléphone</th>
-                <th scope="col" class="px-6 py-3">Agent</th>
-
 
                 <th scope="col" class="px-6 py-3">
                     Status
@@ -80,13 +78,6 @@
                             </a>
                         </td>
                         <td class="px-6 py-4">{{ $user->phone }}</td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('agent.show', ['username' => $user->admin->username]) }}"
-                                class="flex items-center">
-                                {{ $user->admin->name ?? 'N/A' }}
-                            </a>
-                        </td>
-
 
                         <td class="px-6 py-4">
                             <span
@@ -105,6 +96,9 @@
     <!-- Message d'aucun résultat trouvé -->
     <div id="noResultMessage" class="h-20 flex justify-center items-center" style="display: none;">
         Aucun résultat trouvé.
+    </div>
+    <div class="my-5 flex justify-end">
+        {{ $userAgent->links() }}
     </div>
 
 </div>
