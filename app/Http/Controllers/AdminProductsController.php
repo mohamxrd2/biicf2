@@ -28,6 +28,13 @@ class AdminProductsController extends Controller
             ->where('type', 'produits')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+        // Compter le nombre de produits qui correspondent aux critères spécifiés
+        $produitAgentsCount = ProduitService::with('user')
+            ->whereHas('user', function ($query) use ($adminId) {
+                $query->where('admin_id', $adminId);
+            })
+            ->where('type', 'produits')
+            ->count();
 
 
 
@@ -36,6 +43,7 @@ class AdminProductsController extends Controller
             'produits' => $produits,
             'adminId' => $adminId,
             'produitAgents' => $produitAgents,
+            'produitAgentsCount' => $produitAgentsCount,
 
         ]);
     }

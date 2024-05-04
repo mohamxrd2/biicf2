@@ -29,11 +29,18 @@ class AdminServiceController extends Controller
             ->where('type', 'services')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+        $serviceAgentsCount = ProduitService::with('user')
+            ->whereHas('user', function ($query) use ($adminId) {
+                $query->where('admin_id', $adminId);
+            })
+            ->where('type', 'services')
+            ->count();
 
         return view('admin.services', [
             'services' => $services,
             'adminId' => $adminId,
             'serviceAgents' => $serviceAgents,
+            'serviceAgentsCount' => $serviceAgentsCount,
         ]);
     }
 
