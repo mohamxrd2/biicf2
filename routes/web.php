@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminProductsController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\AdminConsommationController;
+use App\Http\Controllers\auth\BicfAuthController;
 use App\Http\Controllers\VerificationController;
 
 /*
@@ -109,3 +110,9 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+//////////// PLATEFORME
+Route::get('bicf/login', [BicfAuthController::class, 'showLoginForm'])->name('bicf.login');
+Route::post('bicf/login', [BicfAuthController::class, 'login']);
+
+

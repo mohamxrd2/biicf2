@@ -25,7 +25,7 @@
         </a>
       </div>
       <!-- End Announcement Banner -->
-  
+
       <!-- Title -->
       <div class="mt-5 max-w-2xl text-center mx-auto">
         <h1 class="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-gray-200">
@@ -34,16 +34,21 @@
         </h1>
       </div>
       <!-- End Title -->
-  
+
       <div class="mt-5 max-w-3xl text-center mx-auto">
         <p class="text-lg text-gray-600 dark:text-gray-400">Lien provisoire pour acceder au dashboard</p>
       </div>
-  
+
       <!-- Buttons -->
       <div class="mt-8 gap-3 flex justify-center">
         <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-gray-600 py-3 px-4 dark:focus:ring-offset-gray-800"
          href="{{ route('admin.dashboard') }}">
           Dashboard
+          <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-gray-600 py-3 px-4 dark:focus:ring-offset-gray-800"
+         href="{{ route('bicf.login') }}">
+          Bicf
           <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </a>
         <button type="button" class="relative group p-2 ps-3 inline-flex items-center gap-x-2 text-sm font-mono rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800">
@@ -54,11 +59,11 @@
         </button>
       </div>
       <!-- End Buttons -->
-  
-      
+
+
     </div>
   </div>
   <!-- End Hero -->
-    
+
 </body>
 </html>
