@@ -345,18 +345,86 @@
                                         <td class="px-6 py-4">
                                             <div class="flex">
                                                 <a href="#" data-hs-overlay="#hs-delete"
-                                                    class="mr-2 font-medium text-red-600 dark:text-blue-500">
-                                                    <button type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    class="font-medium text-red-600 dark:text-blue-500  mr-2">
+                                                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="w-6 h-6">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                        </svg>
-                                                    </button>
+                                                        </svg></button>
                                                 </a>
                                             </div>
-
+        
+                                            <div id="hs-delete"
+                                                class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
+                                                <div
+                                                    class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                                    <div
+                                                        class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
+                                                        <div class="absolute top-2 end-2">
+                                                            <button type="button"
+                                                                class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
+                                                                data-hs-overlay="#hs-delete">
+                                                                <span class="sr-only">Close</span>
+                                                                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                                    stroke-linejoin="round">
+                                                                    <path d="M18 6 6 18" />
+                                                                    <path d="m6 6 12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+        
+                                                        <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                                                            <!-- Icon -->
+                                                            <span
+                                                                class="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-yellow-700 dark:border-yellow-600 dark:text-yellow-100">
+                                                                <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16" height="16" fill="currentColor"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- End Icon -->
+        
+                                                            <h3 class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
+                                                                Supprimé
+                                                            </h3>
+                                                            <p class="text-gray-500 dark:text-neutral-500">
+                                                                Vous etes sur de supprimé le produit ?
+                                                            </p>
+        
+                                                            <div class="mt-6 flex justify-center gap-x-4">
+                                                                <form action="{{ route('admin.products.destroy', $produitsService->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+        
+                                                                    <button type="submit"
+                                                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
+                                                                        Supprimer
+                                                                    </button>
+                                                                </form>
+                                                                <button type="button"
+                                                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                                                                    data-hs-overlay="#hs-delete">
+                                                                    Annuler
+                                                                </button>
+                                                            </div>
+        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Message d'aucun résultat trouvé -->
+                                            <div id="noResultMessage" class="h-20 flex justify-center items-center"
+                                                style="display: none;">Aucun résultat
+                                                trouvé.</div>
+        
+        
+        
                                         </td>
                                     </tr>
                                 @endforeach
@@ -671,166 +739,127 @@
 
                     </div>
 
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                        href="#">
-                        <!-- Icon -->
-                        <div
-                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 7h10v10" />
-                                <path d="M7 17 17 7" />
-                            </svg>
-                        </div>
-                        <!-- End Icon -->
+                    <hr>
+                    @if ($transaCount == 0)
+                        <hr>
+                        <div class="w-full h-32 flex justify-center items-center">
 
-                        <div class="w-full">
-                            <div class="flex  justify-between items-center">
-                                <div>
-                                    <h4 class="font-medium dark:text-white">
-                                        Costa Quinn
-                                    </h4>
-                                    <ul class="flex">
-                                        <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            Envoyé
-                                        </li>
-                                        <li
-                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            07:41 PM
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <p class="text-md text-red-600 font-bold dark:text-white">
-                                        -100 USD
-                                    </p>
-                                </div>
+                            <div class="flex flex-col justify-center items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" class="w-12 h-12 text-gray-500 dark:text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                </svg>
+                                <h1 class="text-xl text-gray-500 dark:text-gray-400">Aucune transaction</h1>
                             </div>
                         </div>
-                        <!-- End Col -->
-                    </a>
+                    @else
+                        @foreach ($transactions as $transaction)
+                            @if (
+                                $transaction->type == 'Depot' ||
+                                    ($transaction->type == 'Reception' && $transaction->receiver_user_id == $user->id) ||
+                                    ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id))
+                                <div class="w-full flex items-center hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                                    href="#">
+                                    <!-- Icon -->
+                                    @if ($transaction->type == 'Depot')
+                                        <div
+                                            class="flex items-center justify-center p-1 rounded-md w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
 
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                        href="#">
-                        <!-- Icon -->
-                        <div
-                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 7 7 17" />
-                                <path d="M17 17H7V7" />
-                            </svg>
-                        </div>
-                        <!-- End Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+                                            </svg>
 
-                        <div class="w-full">
-                            <div class="flex  justify-between items-center">
-                                <div>
-                                    <h4 class="font-medium dark:text-white">
-                                        Costa Quinn
-                                    </h4>
-                                    <ul class="flex">
-                                        <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            Reçu
-                                        </li>
-                                        <li
-                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            07:41 PM
-                                        </li>
-                                    </ul>
+                                        </div>
+                                    @elseif ($transaction->type == 'Reception' && $transaction->receiver_user_id == $user->id)
+                                        <div
+                                            class="flex items-center justify-center p-1 rounded-md w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m19.5 4.5-15 15m0 0h11.25m-11.25 0V8.25" />
+                                            </svg>
+
+                                        </div>
+                                    @elseif ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
+                                        <div
+                                            class="flex items-center justify-center p-1 rounded-md w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                                            </svg>
+
+                                        </div>
+                                    @endif
+
+                                    <!-- End Icon -->
+
+                                    <div class="w-full">
+                                        <div class="flex  justify-between items-center">
+                                            <div>
+                                                @if ($transaction->type == 'Depot')
+                                                    <h4 class="font-medium dark:text-white">Rechargement</h4>
+                                                @elseif ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
+                                                    <h4 class="font-medium dark:text-white">Envoyé à
+                                                        
+                                                        @if ($transaction->receiverUser)
+                                                            {{ $transaction->receiverUser->name }}
+                                                        @elseif ($transaction->receiverAdmin)
+                                                        {{ $transaction->receiverAdmin->name }}
+                                                           
+                                                        @endif
+
+
+                                                    </h4>
+                                                @elseif ($transaction->type == 'Reception' && $transaction->receiver_user_id == $user->id)
+                                                    <h4 class="font-medium dark:text-white">Reçu de
+
+                                                        @if($transaction->senderAdmin)
+                                                        {{ $transaction->senderAdmin->name }}</h4>
+                                                        @elseif($transaction->receiverUser)
+                                                        {{ $transaction->receiverUser->name }}
+                                                        @endif
+                                                @endif
+                                                <ul class="flex">
+                                                    @if ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
+                                                        <li class="mr-2 dark:text-neutral-500">Envoyé le</li>
+                                                        <li class="dark:text-neutral-500">
+                                                            {{ $transaction->created_at->translatedFormat('j F Y \à H\hi') }}
+                                                        </li>
+                                                    @elseif (($transaction->type == 'Reception' && $transaction->receiver_user_id == $user->id) || $transaction->type == 'Depot')
+                                                        <li class="mr-2 dark:text-neutral-500">Reçu le</li>
+                                                        <li class="dark:text-neutral-500">
+                                                            {{ $transaction->created_at->translatedFormat('j F Y \à H\hi') }}
+                                                        </li>
+                                                    @endif
+
+                                                </ul>
+                                            </div>
+
+                                            <div>
+                                                @if (($transaction->type == 'Depot' || $transaction->type == 'Reception') && $transaction->receiver_user_id == $user->id)
+                                                <p class="text-md text-green-400 font-bold dark:text-white">+
+                                                    {{ $transaction->amount }} FCFA</p>
+                                            @elseif ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
+                                                <p class="text-md text-red-600  font-bold dark:text-white">-
+                                                    {{ $transaction->amount }} FCFA</p>
+                                            @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Col -->
                                 </div>
+                            @endif
+                        @endforeach
 
-                                <div class="flex flex-col flex-end">
-                                    <p class="text-md text-green-400 font-bold dark:text-white">
-                                        +470 USD
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Col -->
-                    </a>
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                        href="#">
-                        <!-- Icon -->
-                        <div
-                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 7h10v10" />
-                                <path d="M7 17 17 7" />
-                            </svg>
-                        </div>
-                        <!-- End Icon -->
+                    @endif
 
-                        <div class="w-full">
-                            <div class="flex  justify-between items-center">
-                                <div>
-                                    <h4 class="font-medium dark:text-white">
-                                        Costa Quinn
-                                    </h4>
-                                    <ul class="flex">
-                                        <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            Envoyé
-                                        </li>
-                                        <li
-                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            07:41 PM
-                                        </li>
-                                    </ul>
-                                </div>
 
-                                <div>
-                                    <p class="text-md text-red-600 font-bold dark:text-white">
-                                        -100 USD
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Col -->
-                    </a>
-
-                    <a class="w-full flex hover:bg-gray-100 rounded-xl p-4 focus:outline-none focus:bg-gray-100 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                        href="#">
-                        <!-- Icon -->
-                        <div
-                            class="flex items-center justify-center rounded-full w-10 h-10 mr-2 bg-gray-200 dark:bg-neutral-800 dark:text-neutral-300 dark:group-hover:bg-neutral-700 dark:group-focus:bg-neutral-700">
-                            <svg class="we63v ieehs" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 7 7 17" />
-                                <path d="M17 17H7V7" />
-                            </svg>
-                        </div>
-                        <!-- End Icon -->
-
-                        <div class="w-full">
-                            <div class="flex  justify-between items-center">
-                                <div>
-                                    <h4 class="font-medium dark:text-white">
-                                        Costa Quinn
-                                    </h4>
-                                    <ul class="flex">
-                                        <li class="mr-2 dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            Reçu
-                                        </li>
-                                        <li
-                                            class="jsblq relative tvwcs i9sl6 w5x42 ihnzr snz3x f1y89 durcc zc4gc pod66 k29qu txceg oauyv lsz3i dark:before:bg-neutral-500 dark:text-neutral-500">
-                                            07:41 PM
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="flex flex-col flex-end">
-                                    <p class="text-md text-green-400 font-bold dark:text-white">
-                                        +470 USD
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Col -->
-                    </a>
                 </div>
             </div>
 
@@ -995,19 +1024,18 @@
                         <a href="{{ route('client.editad', ['username' => $user->username]) }}"
                             class="w-full  text-blue-800 bg-blue-100 rounded-md text-center p-1 mb-3">
                             Modifier agent
-        
+
                         </a>
-        
+
                         <a href="#" data-hs-overlay="#hs-delete1"
                             class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
                             Supprimé client
-        
+
                         </a>
-                        
                     @endif
                 @endauth
 
-                
+
 
                 <div id="hs-delete1"
                     class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
