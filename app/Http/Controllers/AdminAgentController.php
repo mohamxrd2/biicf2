@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Wallet;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class AdminAgentController extends Controller
@@ -85,6 +86,8 @@ class AdminAgentController extends Controller
         // Récupérer les détails de l'agent en fonction de son username
         $agent = Admin::where('username', $username)->firstOrFail();
 
+        $adminId = $agent->id;
+
         $wallet = Wallet::where('admin_id', $agent->id)->first();
 
         $users = User::where('admin_id', $agent->id)->get();
@@ -92,8 +95,18 @@ class AdminAgentController extends Controller
         // Récupérer le nombre d'utilisateurs ayant le même admin_id que l'agent
         $userCount = User::where('admin_id', $agent->id)->count();
 
+        $transactions = Transaction::with(['senderAdmin', 'receiverAdmin', 'senderUser', 'receiverUser'])
+            ->where(function ($query) use ($adminId) {
+                $query->where('sender_admin_id', $adminId)
+                    ->orWhere('receiver_admin_id', $adminId);
+            })
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        
+        $transacCount = $transactions->count();
+
         // Passer les détails de l'agent et les utilisateurs à la vue
-        return view('admin.agentShow', compact('agent', 'wallet', 'users', 'userCount'));
+        return view('admin.agentShow', compact('agent', 'wallet', 'users', 'userCount', 'adminId', 'transactions', 'transacCount'));
     }
     public function isban(Admin $admin)
     {

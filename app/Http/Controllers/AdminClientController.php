@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Wallet;
+use App\Models\Transaction;
 use App\Models\Consommation;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
@@ -153,10 +154,19 @@ class AdminClientController extends Controller
 
         $consCount = $consommations->count();
 
+        $transactions = Transaction::with(['senderAdmin', 'receiverAdmin', 'senderUser', 'receiverUser'])
+        ->where('sender_user_id', $user->id)
+                ->orWhere('receiver_user_id', $user->id)
+        
+        ->orderBy('created_at', 'DESC')
+        ->paginate(10);
+
+        $transaCount = $transactions->count();
+
 
 
         // Passer les détails du client à la vue
-        return view('admin.clientShow', compact('user', 'wallet', 'produitsServices', 'produitCount', 'consommations', 'consCount'));
+        return view('admin.clientShow', compact('user', 'wallet', 'produitsServices', 'produitCount', 'consommations', 'consCount', 'transactions', 'transaCount'));
     }
     public function storePub(Request $request)
     {
