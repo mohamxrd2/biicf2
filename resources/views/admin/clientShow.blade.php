@@ -148,8 +148,7 @@
                                                                 placeholder=" Nom du produit ou service " />
                                                         </div>
                                                         <div class="space-y-3 w-full mb-3">
-                                                            <input type="text" name="conditionnement"
-                                                                id="floating_cond"
+                                                            <input type="text" name="conditionnement" id="floating_cond"
                                                                 class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder="conditionnement" />
                                                         </div>
@@ -450,100 +449,101 @@
                                             <div class="max-w-md mx-auto">
 
 
-                                                    <input type="text" name="user_id" hidden value="{{ $user->id }}">
+                                                <input type="text" name="user_id" hidden value="{{ $user->id }}">
 
-                                                    <div class="relative z-0 w-full mb-5 group">
-                                                        <select name="type" id="chooseC"
-                                                            class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                                                            <option value="" disabled selected>Choisir le
-                                                                type</option>
-                                                            <option value="produits">Produit</option>
-                                                            <option value="services">Service</option>
-                                                        </select>
+                                                <div class="relative z-0 w-full mb-5 group">
+                                                    <select name="type" id="chooseC"
+                                                        class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                        <option value="" disabled selected>Choisir le
+                                                            type</option>
+                                                        <option value="produits">Produit</option>
+                                                        <option value="services">Service</option>
+                                                    </select>
 
-                                                    </div>
-                                                    {{-- les inputs suivants sont pour les produits --}}
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="text" name="nameC" id="floating_nameC"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder=" Nom de la consommation" />
-                                                    </div>
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="text" name="conditionnementC"
+                                                </div>
+                                                {{-- les inputs suivants sont pour les produits --}}
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="text" name="nameC" id="floating_nameC"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder=" Nom de la consommation" />
+                                                </div>
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="text" name="conditionnementC"
                                                         id="floating_conditionnementC"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="Conditionnement" />
-                                                    </div>
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="text" name="formatC" id="floating_formatC"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="Format de consommations " />
-                                                    </div>
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="number" name="qteC" id="floating_quantiteC"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="quantité de consommations "  />
-                                                    </div>
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="number" name="prixC" id="floating_prixC"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="prix"  />
-                                                    </div>
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="number" name="frequenceC" id="floating_cons"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="frequence de consommation [0-10]" />
-                                                    </div>
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="Conditionnement" />
+                                                </div>
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="text" name="formatC" id="floating_formatC"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="Format de consommations " />
+                                                </div>
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="number" name="qteC" id="floating_quantiteC"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="quantité de consommations " />
+                                                </div>
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="number" name="prixC" id="floating_prixC"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="prix" />
+                                                </div>
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="number" name="frequenceC" id="floating_cons"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="frequence de consommation [0-10]" />
+                                                </div>
 
-                                                    <div class="relative z-0 w-full mb-5 group">
-                                                        <select name="jour_achat" id="floating_jour_achat"
-                                                            class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                                                            <option value="" disabled selected>Jour d'achat</option>
-                                                            <option value="Lundi">Lundi</option>
-                                                            <option value="Mardi">Mardi</option>
-                                                            <option value="Mercredi">Mercredi</option>
-                                                            <option value="Jeudi">Jeudi</option>
-                                                            <option value="Vendredi">Vendredi</option>
-                                                            <option value="Samedi">Samedi</option>
-                                                            <option value="Dimanche">Dimanche</option>
-                                                            <option value="Plusieur jour de la semaine">Plusieur jour de la semaine</option>
-                                                        </select>
+                                                <div class="relative z-0 w-full mb-5 group">
+                                                    <select name="jour_achat" id="floating_jour_achat"
+                                                        class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                                        <option value="" disabled selected>Jour d'achat</option>
+                                                        <option value="Lundi">Lundi</option>
+                                                        <option value="Mardi">Mardi</option>
+                                                        <option value="Mercredi">Mercredi</option>
+                                                        <option value="Jeudi">Jeudi</option>
+                                                        <option value="Vendredi">Vendredi</option>
+                                                        <option value="Samedi">Samedi</option>
+                                                        <option value="Dimanche">Dimanche</option>
+                                                        <option value="Plusieur jour de la semaine">Plusieur jour de la
+                                                            semaine</option>
+                                                    </select>
 
-                                                    </div>
-
-
-
+                                                </div>
 
 
 
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="text" name="qualificationC" id="floating_qualifC"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="qualification service"   />
-                                                    </div>
-                                                    <div class="space-y-3 w-full mb-3">
-                                                        <input type="text" name="specialité" id="floating_specialiteC"
-                                                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="specialité "  />
-                                                    </div>
+
+
+
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="text" name="qualificationC" id="floating_qualifC"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="qualification service" />
+                                                </div>
+                                                <div class="space-y-3 w-full mb-3">
+                                                    <input type="text" name="specialité" id="floating_specialiteC"
+                                                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                        placeholder="specialité " />
+                                                </div>
 
 
                                                 <div class="space-y-3 w-full mb-3">
                                                     <input type="text" name="desriptionC" id="floating_descriptionC"
                                                         class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                        placeholder=" Desription"   />
+                                                        placeholder=" Desription" />
                                                 </div>
 
                                                 <div class="space-y-3 w-full mb-3">
                                                     <input type="text" name="zone_activité"
-                                                    id="floating_zone_activite"
+                                                        id="floating_zone_activite"
                                                         class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                        placeholder="Zone d'activité "   />
+                                                        placeholder="Zone d'activité " />
                                                 </div>
                                                 <div class="space-y-3 w-full mb-3">
                                                     <input type="text" name="villeC" id="floating_villeC"
                                                         class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                        placeholder="ville "  />
+                                                        placeholder="ville " />
                                                 </div>
 
 
@@ -985,17 +985,29 @@
                     </div>
                 @endif
 
-                <a href="{{ route('client.editad', ['username' => $user->username]) }}"
-                    class="w-full  text-blue-800 bg-blue-100 rounded-md text-center p-1 mb-3">
-                    Modifier agent
 
-                </a>
+                @auth('admin')
+                    @if (Auth::guard('admin')->user()->admin_type == 'admin')
+                        <!-- Contenu spécifique à l'agent -->
 
-                <a href="#" data-hs-overlay="#hs-delete1"
-                    class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
-                    Supprimé client
+                        <!-- Autres éléments spécifiques à l'agent -->
 
-                </a>
+                        <a href="{{ route('client.editad', ['username' => $user->username]) }}"
+                            class="w-full  text-blue-800 bg-blue-100 rounded-md text-center p-1 mb-3">
+                            Modifier agent
+        
+                        </a>
+        
+                        <a href="#" data-hs-overlay="#hs-delete1"
+                            class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
+                            Supprimé client
+        
+                        </a>
+                        
+                    @endif
+                @endauth
+
+                
 
                 <div id="hs-delete1"
                     class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">

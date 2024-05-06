@@ -87,6 +87,8 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::post('/deposit', [AdminWalletController::class, 'deposit'])->name('wallet.deposit');
 
+    Route::post('/recharge-account', [AdminWalletController::class, 'rechargeAccount'])->name('recharge.account');
+
 
 
     //email
