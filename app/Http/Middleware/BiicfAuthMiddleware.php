@@ -18,7 +18,7 @@ class BiicfAuthMiddleware
     {
         // Vérifier si l'utilisateur est authentifié et si son email est vérifié
         if (!auth()->check() || auth()->user()->email_verified_at === null) {
-            return response()->json(['message' => 'Non authentifié ou email non vérifié.'], 401);
+            return redirect()->route('biicf.login')->with('error', 'email/username ou mot de passe incorrect!'); // Redirection avec un message d'erreur
         }
 
         return $next($request);

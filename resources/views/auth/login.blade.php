@@ -23,11 +23,22 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                @if (session('error'))
-                    <div class="bg-green-200 text-red-800 px-4 py-2 rounded-md mb-4">
-                        {{ session('error') }}
+                @if ($errors->any())
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                        role="alert">
+                        <strong class="font-bold">Oops!</strong>
+                        <span class="block sm:inline">{{ $errors->first('username') }}</span>
                     </div>
                 @endif
+
+                @if (session('error'))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                        role="alert">
+                        <strong class="font-bold">Oops!</strong>
+                        <span class="block sm:inline">{{ session('error') }}</span>
+                    </div>
+                @endif
+                
                 <div class="text-center">
                     <h1 class="block text-2xl font-bold text-gray-800">Se connecter</h1>
                     <p class="mt-2 text-sm text-gray-600">

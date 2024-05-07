@@ -31,7 +31,7 @@ class BiicfAuthController extends Controller
             ->first();
 
         if ($user && Auth::guard('web')->attempt(['email' => $user->email, 'password' => $credentials['password']], $remember)) {
-            return redirect()->intended('/biicf/accueil');
+            return redirect()->intended('/biicf/acceuil');
         } else {
             return back()->withErrors([
                 'login' => 'Identifiant ou mot de passe incorrect',
