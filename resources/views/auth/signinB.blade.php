@@ -26,13 +26,14 @@
                     <div class="mt-5">
 
                         <!-- Form -->
-                        <form>
+                        <form action="{{ route('bicf.login')}}" method="POST">
+                            @csrf
                             <div class="grid gap-y-4">
                                 <!-- Form Group -->
                                 <div>
-                                    <label for="username" class="block text-sm mb-2">Username OR Email address</label>
+                                    <label for="login" class="block text-sm mb-2">Username OR Email address</label>
                                     <div class="relative">
-                                        <input type="text" id="username" name="username"
+                                        <input type="text" id="login" name="login"
                                             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                             required aria-describedby="email-error">
                                         <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
@@ -92,7 +93,8 @@
                                 <div class="flex items-center">
                                     <div class="flex">
                                         <input id="remember_me" name="remember_me" type="checkbox"
-                                            class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500">
+                                            class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500"
+                                            {{ old('remember_me') ? 'checked' : '' }}>
                                     </div>
                                     <div class="ms-3">
                                         <label for="remember_me" class="text-sm">Resté conncté</label>

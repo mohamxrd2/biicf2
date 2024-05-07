@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,22 +16,23 @@ class BicfAuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required'],
+            'login' => ['required'], // Champ login pour prendre soit l'email soit le nom d'utilisateur
             'password' => ['required', 'string'],
         ]);
 
         $remember = $request->has('remember_me'); // Vérifie si "Remember Me" est coché
 
-        if (Auth::guard('admin')->attempt($credentials, $remember)) {
-            return redirect()->intended('/admin/dashboard');
+        // Ajouter une vérification pour trouver l'utilisateur par e-mail ou nom d'utilisateur
+        $user = User::where('email', $credentials['login'])
+            ->orWhere('username', $credentials['login'])
+            ->first();
+
+        if ($user && Auth::guard('web')->attempt(['email' => $user->email, 'password' => $credentials['password']], $remember)) {
+            return redirect()->intended('/bicf');
         } else {
             return back()->withErrors([
-                'username' => 'Identifiant ou mot de passe incorrect',
-            ])->withInput($request->only('username', 'remember_me'));
+                'login' => 'Identifiant ou mot de passe incorrect',
+            ])->withInput($request->only('login', 'remember_me'));
         }
     }
-
-
-
-
 }

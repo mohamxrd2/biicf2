@@ -28,7 +28,7 @@ class AdminAuthController extends Controller
         if (Auth::guard('admin')->attempt($credentials, $remember)) {
             return redirect()->intended('/admin/dashboard');
         } else {
-            return back()->withErrors([
+            return back()->withErors([
                 'username' => 'Identifiant ou mot de passe incorrect',
             ])->withInput($request->only('username', 'remember_me'));
         }
@@ -42,5 +42,5 @@ class AdminAuthController extends Controller
         return redirect('/');
     }
 
-    
+
 }

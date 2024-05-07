@@ -111,8 +111,11 @@ Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-//////////// PLATEFORME
+//////////// PLATEFORME ////////////////////
+
+Route::get('/bicf', function () {
+    return view('BICF.index');
+})->middleware('auth.custom');
+
 Route::get('bicf/login', [BicfAuthController::class, 'showLoginForm'])->name('bicf.login');
 Route::post('bicf/login', [BicfAuthController::class, 'login']);
-
-

@@ -47,7 +47,7 @@ class User extends Authenticatable
         'admin_id'
     ];
 
-   
+
 
     public function Admin()
     {
