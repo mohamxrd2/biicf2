@@ -510,12 +510,7 @@
                                             </button>
                                         </div>
                                         <div class="p-4 overflow-y-auto">
-
-
-
-
                                             <div class="max-w-md mx-auto">
-
 
                                                 <input type="text" name="user_id" hidden value="{{ $user->id }}">
 
