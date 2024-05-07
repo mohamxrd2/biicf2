@@ -19,26 +19,19 @@
         <div class="w-[430px] bg-white border border-gray-200 rounded-xl shadow-sm" style="z-index: 1;">
             <div class="p-4 sm:p-7">
                 @if (session('success'))
-                    <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
+                    <div class="bg-green-200 text-green-800 px-4 py-2 my-5 rounded-md mb-4">
                         {{ session('success') }}
                     </div>
                 @endif
                 @if ($errors->any())
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-5 rounded relative"
                         role="alert">
-                        <strong class="font-bold">Oops!</strong>
-                        <span class="block sm:inline">{{ $errors->first('username') }}</span>
+                        <span class="block sm:inline">{{ $errors->first() }}</span>
                     </div>
                 @endif
 
-                @if (session('error'))
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                        role="alert">
-                        <strong class="font-bold">Oops!</strong>
-                        <span class="block sm:inline">{{ session('error') }}</span>
-                    </div>
-                @endif
-                
+
+
                 <div class="text-center">
                     <h1 class="block text-2xl font-bold text-gray-800">Se connecter</h1>
                     <p class="mt-2 text-sm text-gray-600">
@@ -56,7 +49,7 @@
 
 
                     <!-- Form -->
-                    <form action="{{ route('biicf.login')}}" method="POST">
+                    <form action="{{ route('biicf.login') }}" method="POST">
                         @csrf
                         <div class="grid gap-y-4">
                             <div class="w-full space-y-4">
@@ -75,6 +68,7 @@
                                         </svg>
                                     </div>
                                 </div>
+                                
 
                                 <div class="relative">
                                     <input type="password" id="password" name="password"
@@ -93,6 +87,7 @@
                                     </div>
                                 </div>
                             </div>
+                           
 
                             <!-- Checkbox -->
                             <div class="flex justify-between">

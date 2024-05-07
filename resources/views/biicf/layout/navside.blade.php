@@ -258,7 +258,7 @@
 
 
                     <div class="mt-6 flex justify-center gap-x-4">
-                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                        <form id="logout-form" action="{{ route('biicf.logout') }}" method="POST"
                             style="display: none;">
                             @csrf
                         </form>

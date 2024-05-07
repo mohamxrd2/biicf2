@@ -22,10 +22,11 @@ class VerificationController extends Controller
             $user->markEmailAsVerified();
 
             // Rediriger l'utilisateur vers une page de confirmation ou afficher un message de réussite
-            return redirect()->route('confirmation.success');
+            return redirect()->route('biicf.login')->with('success', 'Votre compte à été confirmer connectez vous !');
         }
 
         // Rediriger l'utilisateur vers une page d'erreur ou afficher un message d'erreur
         return redirect()->route('confirmation.error');
     }
+    
 }

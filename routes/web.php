@@ -98,9 +98,8 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     //email
     Route::get('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
     //success
-    Route::get('/confirmation/success', function () {
-        return view('admin.success');
-    })->name('confirmation.success');
+   
+   
 
     Route::get('/ajouter-client', [AdminClientController::class, 'create'])->name('clients.create');
     Route::post('/ajouter-client', [AdminClientController::class, 'store'])->name('clients.store');
@@ -115,11 +114,13 @@ Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin
 
 
 
-Route::prefix('biicf')->group(function () {
+Route::prefix('biicf')->middleware('user.auth')->group(function () {
     Route::get('acceuil', function () {
         return view('biicf.acceuil');
-    });
-})->middleware('user.auth');
+    })->name('biicf.acceuil');
+
+   
+});
 // Route pour afficher le formulaire de connexion
 Route::get('biicf/login', [BiicfAuthController::class, 'showLoginForm'])->name('biicf.login');
 // Route pour traiter la soumission du formulaire de connexion
@@ -129,3 +130,6 @@ Route::get('biicf/signup', [UserController::class, 'index'])->name('biicf.signup
 
 // Route pour traiter la soumission du formulaire d'inscription
 Route::post('biicf/signup', [UserController::class, 'create'])->name('user.create');
+
+
+Route::post('biicf/logout', [BiicfAuthController::class, 'logout'])->name('biicf.logout');

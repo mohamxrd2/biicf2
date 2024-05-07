@@ -73,30 +73,22 @@ class UserController extends Controller
             $user->services = $request->input('transport_sector');
             $user->country = $request->input('country');
 
-            
 
-            // Vérification si l'admin est authentifié
-          
-                //generer et garder le token de verification
-                // $user->email_verified_at = now(); //marquer l'email comme verifier
-               
-                $user->save();
 
-                $wallet = new Wallet();
-                $wallet->user_id = $user->id;
-                $wallet->balance = 0; // Solde initial
-                $wallet->save();
+            $user->save();
 
-                //envoi du couriel au nouveau client
-                $user->sendEmailVerificationNotification();
+            $wallet = new Wallet();
+            $wallet->user_id = $user->id;
+            $wallet->balance = 0; // Solde initial
+            $wallet->save();
 
-                return redirect()->route('biicf.login')->with('success', 'Compte créer avec succès, verifié votre mail pour confirmer et vous connecter!');
-            
+            //envoi du couriel au nouveau client
+            $user->sendEmailVerificationNotification();
+
+            return redirect()->route('clients.create')->with('success', 'Client ajouté avec succès!');
         } catch (\Exception $e) {
             dd($e->getMessage());
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }
     }
-
-
 }
