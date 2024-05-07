@@ -23,16 +23,21 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if (session('error'))
+                    <div class="bg-green-200 text-red-800 px-4 py-2 rounded-md mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="text-center">
                     <h1 class="block text-2xl font-bold text-gray-800">Se connecter</h1>
                     <p class="mt-2 text-sm text-gray-600">
                         Vous n'avez pas de compte?
-                        <a class="text-blue-600 decoration-2  font-medium" href="{{ route('biicf.singup') }}">
+                        <a class="text-blue-600 decoration-2  font-medium" href="{{ route('biicf.signup') }}">
                             Créer un compte
                         </a>
                     </p>
                 </div>
-                
+
 
                 <div class="mt-5">
 
@@ -40,11 +45,12 @@
 
 
                     <!-- Form -->
-                    <form>
+                    <form action="{{ route('biicf.login')}}" method="POST">
+                        @csrf
                         <div class="grid gap-y-4">
                             <div class="w-full space-y-4">
                                 <div class="relative">
-                                    <input type="email"
+                                    <input type="text" id="login" name="login"
                                         class="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                         placeholder="Username ou email">
                                     <div
@@ -60,7 +66,7 @@
                                 </div>
 
                                 <div class="relative">
-                                    <input type="password"
+                                    <input type="password" id="password" name="password"
                                         class="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                         placeholder="Mot de passe">
                                     <div
@@ -82,11 +88,12 @@
                                 <div class="flex items-center">
 
                                     <div class="flex">
-                                        <input id="remember-me" name="remember-me" type="checkbox"
-                                            class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500">
+                                        <input id="remember_me" name="remember_me" type="checkbox"
+                                            class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500"
+                                            {{ old('remember_me') ? 'checked' : '' }}>
                                     </div>
                                     <div class="ms-3">
-                                        <label for="remember-me" class="text-sm text-gray-600">Resté connecté</label>
+                                        <label for="remember_me" class="text-sm text-gray-600">Resté connecté</label>
                                     </div>
                                 </div>
 
