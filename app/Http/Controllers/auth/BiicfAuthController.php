@@ -30,16 +30,19 @@ class BiicfAuthController extends Controller
             ->orWhere('username', $credentials['login'])
             ->first();
 
-        if ($user && Auth::guard('web')->attempt(['email' => $user->email, 'password' => $credentials['password']], $remember)) {
-            // Vérifier si l'email de l'utilisateur est vérifié
-            if ($user->email_verified_at) {
+        // Vérifier si l'email de l'utilisateur est vérifié
+        if ($user && $user->email_verified_at) {
+            if (Auth::guard('web')->attempt(['email' => $user->email, 'password' => $credentials['password']], $remember)) {
                 return redirect()->intended('/biicf/acceuil');
             } else {
-                // Rediriger avec un message d'erreur si l'email n'est pas vérifié
                 return back()->withErrors([
-                    'error' => 'Veuillez vérifier votre adresse e-mail !',
+                    'error' => 'Identifiant ou mot de passe incorrect',
                 ])->withInput($request->only('login', 'remember_me'));
             }
+        } elseif ($user && !$user->email_verified_at) {
+            return back()->withErrors([
+                'error' => 'Veuillez vérifier votre adresse e-mail !',
+            ])->withInput($request->only('login', 'remember_me'));
         } else {
             return back()->withErrors([
                 'error' => 'Identifiant ou mot de passe incorrect',
