@@ -72,14 +72,14 @@ class AdminAgentController extends Controller
         }
     }
 
-    public function destroy($admin)
-    {
-        $admin = Admin::findOrFail($admin);
-        $admin->delete();
+    public function destroy($agent)
+{
+    $admin = Admin::findOrFail($agent);
+    $admin->delete();
 
-        // Rediriger après la suppression
-        return redirect()->route('admin.agent')->with('success', 'Agent supprimé avec succès.');
-    }
+    // Rediriger après la suppression
+    return redirect()->route('admin.agent')->with('success', 'Agent supprimé avec succès.');
+}
 
     public function show($username)
     {

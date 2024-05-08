@@ -85,7 +85,7 @@ class UserController extends Controller
             //envoi du couriel au nouveau client
             $user->sendEmailVerificationNotification();
 
-            return redirect()->route('clients.create')->with('success', 'Client ajouté avec succès!');
+            return redirect()->route('biicf.login')->with('success', 'Client ajouté avec succès, veillez confirmer votre email!');
         } catch (\Exception $e) {
             dd($e->getMessage());
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
