@@ -82,10 +82,13 @@
                 <td class="px-6 py-4">{{ $user->phone }}</td>
 
                 <td class="px-6 py-4">
-                    <a href="{{ route('agent.show', ['username' => $user->admin->username]) }}"
-                        class="flex items-center">
-                        {{ $user->admin->name ?? 'N/A' }}
-                    </a>
+                    @if ($user->admin)
+                        <a href="{{ route('agent.show', ['username' => $user->admin->username]) }}" class="flex items-center">
+                            {{ $user->admin->name ?? 'N/A' }}
+                        </a>
+                    @else
+                        <span>N/A</span>
+                    @endif
                 </td>
                 <td class="px-6 py-4">
                     <span

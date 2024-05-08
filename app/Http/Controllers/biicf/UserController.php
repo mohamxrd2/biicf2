@@ -91,4 +91,6 @@ class UserController extends Controller
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }
     }
+
+    
 }

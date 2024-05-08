@@ -76,7 +76,7 @@
                         <button id="hs-dropdown-with-header" type="button"
                             class="p-1 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700">
                             <img class="inline-block size-[38px] rounded-full ring-2 ring-white dark:ring-gray-800"
-                                src="" alt="Image Description">
+                                src="{{ $user->phone }}" alt="Image Description">
                             Profile
 
                             <svg class="hs-accordion-active:block ms-auto hidden size-4"
@@ -99,7 +99,7 @@
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700"
                             aria-labelledby="hs-dropdown-with-header">
                             <div class="py-3 px-5 -m-2 bg-gray-100 rounded-t-lg dark:bg-gray-700">
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Connecté avec</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Connecté avec {{ $user->name }}
                                 <p class="text-sm font-medium text-gray-800 dark:text-gray-300">
                                 </p>
                             </div>
@@ -141,7 +141,7 @@
     <div id="application-sidebar"
         class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700">
         <div class="px-6">
-            <a class="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">BIICF</a>
+            <a class="flex-none text-xl font-semibold dark:text-white" href="{{ route('biicf.acceuil') }}" aria-label="Brand">BIICF</a>
         </div>
 
         <nav class="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>

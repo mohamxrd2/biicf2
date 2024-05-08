@@ -121,11 +121,15 @@
                                 <td class="px-6 py-4">{{ $user->phone }}</td>
 
                                 <td class="px-6 py-4">
-                                    <a href="{{ route('agent.show', ['username' => $user->admin->username]) }}"
-                                        class="flex items-center">
-                                        {{ $user->admin->name ?? 'N/A' }}
-                                    </a>
+                                    @if ($user->admin)
+                                        <a href="{{ route('agent.show', ['username' => $user->admin->username]) }}" class="flex items-center">
+                                            {{ $user->admin->name ?? 'N/A' }}
+                                        </a>
+                                    @else
+                                        <span>N/A</span>
+                                    @endif
                                 </td>
+                                
                                 <td class="px-6 py-4">
                                     <span
                                         class="bg-{{ $user->last_seen >= now()->subMinutes(2) ? 'green' : 'red' }}-500 text-white py-1 px-3 rounded-md">
