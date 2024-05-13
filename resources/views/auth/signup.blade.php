@@ -134,7 +134,7 @@
                     <!-- End Item -->
                 </ul>
                 <!-- End Stepper Nav -->
-                <form action="{{ route('user.create') }}" method="POST">
+                <form action="{{ route('biicf.signup') }}" method="POST">
                     @csrf
                     <!-- Stepper Content -->
                     <div class="mt-5 sm:mt-8">
@@ -478,11 +478,27 @@
                     <!-- End Stepper Content -->
     
                 </form>
+                <div class="w-full mt-8 text-center">
+                    <p class="mt-2 text-sm text-gray-600">
+                        Vous avez déjà un compte?
+                        <a class="text-blue-600 decoration-2  font-medium" href="{{ route('biicf.login') }}">
+                            Se connecter
+                        </a>
+                    </p>
+
+                </div>
+            
             </div>
             <!-- End Stepper -->
         </div>
 
+      
+
     </div>
+
+    
+
+
     
 
     

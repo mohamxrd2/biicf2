@@ -240,43 +240,151 @@
                                                                 class="py-3 px-4 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 rows="3" placeholder="Description de la publication"></textarea>
                                                         </div>
-                                                        <div class="relative z-0 w-full mb-5 group">
-                                                            <div class="flex items-center justify-center w-full">
-                                                                <label for="dropzone-file" id="floating_photo"
-                                                                    name="photo"
-                                                                    class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                    <div
-                                                                        class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                                            aria-hidden="true"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 20 16">
-                                                                            <path stroke="currentColor"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
-                                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                                        </svg>
-                                                                        <p
-                                                                            class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                            <span class="font-semibold">Click to
-                                                                                upload</span> or drag and drop
-                                                                        </p>
-                                                                        <p
-                                                                            class="text-xs text-gray-500 dark:text-gray-400">
-                                                                            SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                                                                    </div>
-                                                                    <input id="dropzone-file" type="file"
-                                                                        class="hidden" />
-                                                                </label>
+                                                        
+                                                        <div class="flex justify-between w-full " id="floating_photo">
+                                                            <div class="relative z-0 group w-20">
+                                                                <div class="flex items-center justify-center w-20">
+                                                                    <label for="dropzone-file" 
+                                                                        name="photo"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 1</span>
+                                                                            </p>
+
+                                                                        </div>
+                                                                        <input id="dropzone-file" type="file"
+                                                                            class="hidden" />
+                                                                    </label>
+                                                                </div>
                                                             </div>
+                                                            <div class="relative z-0 group w-20">
+                                                                <div class="flex items-center justify-center ">
+                                                                    <label for="dropzone-file" 
+                                                                        name="photo"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 2</span>
+                                                                            </p>
+
+                                                                        </div>
+                                                                        <input id="dropzone-file" type="file"
+                                                                            class="hidden" />
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative z-0 group w-20">
+                                                                <div class="flex items-center justify-center w-20">
+                                                                    <label for="dropzone-file"
+                                                                        name="photo"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 3</span>
+                                                                            </p>
+
+                                                                        </div>
+                                                                        <input id="dropzone-file" type="file"
+                                                                            class="hidden" />
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative z-0  group w-20">
+                                                                <div class="flex items-center justify-center w-20">
+                                                                    <label for="dropzone-file" 
+                                                                        name="photo"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+    
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 4</span>
+                                                                            </p>
+    
+                                                                        </div>
+                                                                        <input id="dropzone-file" type="file"
+                                                                            class="hidden" />
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative z-0  group w-20">
+                                                                <div class="flex items-center justify-center w-20">
+                                                                    <label for="dropzone-file" 
+                                                                        name="photo"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+    
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 5</span>
+                                                                            </p>
+    
+                                                                        </div>
+                                                                        <input id="dropzone-file" type="file"
+                                                                            class="hidden" />
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
-
-
-
-
-
-
-
+                                                        
                                                     </div>
                                                 </div>
 
@@ -333,8 +441,9 @@
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td
                                             class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{-- <img class="w-10 h-10 rounded-full" src="{{ $produitsServices->photo }}"
-                                                alt=""> --}}
+                                            <img class="w-10 h-10 rounded-md"
+                                                src="{{ $produitsService->photoProd1 ? $produitsService->photoProd1 : asset('img/noimg.jpeg') }}"
+                                                alt="Jese image">
                                             <div class="ml-3">
                                                 <div class="text-base font-semibold">{{ $produitsService->name }}</div>
 
@@ -344,18 +453,18 @@
                                         <td class="px-6 py-4">{{ $produitsService->prix }}</td>
                                         <td class="px-6 py-4">
                                             <div class="flex">
-                                                <a href="#" data-hs-overlay="#hs-delete"
+                                                <a href="#" data-hs-overlay="#hs-delete-{{ $produitsService->id }}"
                                                     class="font-medium text-red-600 dark:text-blue-500  mr-2">
-                                                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="w-6 h-6">
+                                                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                            stroke="currentColor" class="w-6 h-6">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                         </svg></button>
                                                 </a>
                                             </div>
-        
-                                            <div id="hs-delete"
+
+                                            <div id="hs-delete-{{ $produitsService->id }}"
                                                 class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
                                                 <div
                                                     class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
@@ -364,44 +473,48 @@
                                                         <div class="absolute top-2 end-2">
                                                             <button type="button"
                                                                 class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
-                                                                data-hs-overlay="#hs-delete">
+                                                                data-hs-overlay="#hs-delete-{{ $produitsService->id }}">
                                                                 <span class="sr-only">Close</span>
-                                                                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                                    stroke-linejoin="round">
+                                                                <svg class="flex-shrink-0 size-4"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
                                                                     <path d="M18 6 6 18" />
                                                                     <path d="m6 6 12 12" />
                                                                 </svg>
                                                             </button>
                                                         </div>
-        
+
                                                         <div class="p-4 sm:p-10 text-center overflow-y-auto">
                                                             <!-- Icon -->
                                                             <span
                                                                 class="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-yellow-700 dark:border-yellow-600 dark:text-yellow-100">
-                                                                <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg"
-                                                                    width="16" height="16" fill="currentColor"
+                                                                <svg class="flex-shrink-0 size-5"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
                                                                     viewBox="0 0 16 16">
                                                                     <path
                                                                         d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                                                 </svg>
                                                             </span>
                                                             <!-- End Icon -->
-        
-                                                            <h3 class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
+
+                                                            <h3
+                                                                class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
                                                                 Supprimé
                                                             </h3>
                                                             <p class="text-gray-500 dark:text-neutral-500">
                                                                 Vous etes sur de supprimé le produit ?
                                                             </p>
-        
+
                                                             <div class="mt-6 flex justify-center gap-x-4">
-                                                                <form action="{{ route('admin.products.destroy', $produitsService->id) }}"
+                                                                <form
+                                                                    action="{{ route('admin.products.destroy', $produitsService->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-        
+
                                                                     <button type="submit"
                                                                         class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
                                                                         Supprimer
@@ -409,11 +522,11 @@
                                                                 </form>
                                                                 <button type="button"
                                                                     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                                                                    data-hs-overlay="#hs-delete">
+                                                                    data-hs-overlay="#hs-delete-{{ $produitsService->id }}">
                                                                     Annuler
                                                                 </button>
                                                             </div>
-        
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -422,9 +535,9 @@
                                             <div id="noResultMessage" class="h-20 flex justify-center items-center"
                                                 style="display: none;">Aucun résultat
                                                 trouvé.</div>
-        
-        
-        
+
+
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -642,7 +755,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($produitCount == 0)
+                            @if ($consCount == 0)
 
                                 <tr>
                                     <td colspan="5" class="px-6 py-4 text-center">
@@ -672,7 +785,7 @@
                                         <td class="px-6 py-4">{{ $consommation->prix }}</td>
                                         <td class="px-6 py-4">
                                             <div class="flex">
-                                                <a href="#" data-hs-overlay="#hs-delete"
+                                                <a href="#" data-hs-overlay="#hs-delete-{{ $consommation->id }}"
                                                     class="mr-2 font-medium text-red-600 dark:text-blue-500">
                                                     <button type="submit">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -683,6 +796,74 @@
                                                         </svg>
                                                     </button>
                                                 </a>
+                                            </div>
+                                            <div id="hs-delete-{{ $consommation->id }}"
+                                                class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
+                                                <div
+                                                    class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                                    <div
+                                                        class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
+                                                        <div class="absolute top-2 end-2">
+                                                            <button type="button"
+                                                                class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
+                                                                data-hs-overlay="#hs-delete">
+                                                                <span class="sr-only">Close</span>
+                                                                <svg class="flex-shrink-0 size-4"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path d="M18 6 6 18" />
+                                                                    <path d="m6 6 12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                                                            <!-- Icon -->
+                                                            <span
+                                                                class="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-yellow-700 dark:border-yellow-600 dark:text-yellow-100">
+                                                                <svg class="flex-shrink-0 size-5"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                                </svg>
+                                                            </span>
+                                                            <!-- End Icon -->
+
+                                                            <h3
+                                                                class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
+                                                                Supprimé
+                                                            </h3>
+                                                            <p class="text-gray-500 dark:text-neutral-500">
+                                                                Vous etes sur de supprimé la consommation ?
+                                                            </p>
+
+                                                            <div class="mt-6 flex justify-center gap-x-4">
+                                                                <form
+                                                                    action="{{ route('admin.consprod.destroy', $consommation->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+
+                                                                    <button type="submit"
+                                                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
+                                                                        Supprimer
+                                                                    </button>
+                                                                </form>
+                                                                <button type="button"
+                                                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                                                                    data-hs-overlay="#hs-delete">
+                                                                    Annuler
+                                                                </button>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
 
@@ -801,12 +982,11 @@
                                                     <h4 class="font-medium dark:text-white">Rechargement</h4>
                                                 @elseif ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
                                                     <h4 class="font-medium dark:text-white">Envoyé à
-                                                        
+
                                                         @if ($transaction->receiverUser)
                                                             {{ $transaction->receiverUser->name }}
                                                         @elseif ($transaction->receiverAdmin)
-                                                        {{ $transaction->receiverAdmin->name }}
-                                                           
+                                                            {{ $transaction->receiverAdmin->name }}
                                                         @endif
 
 
@@ -814,287 +994,288 @@
                                                 @elseif ($transaction->type == 'Reception' && $transaction->receiver_user_id == $user->id)
                                                     <h4 class="font-medium dark:text-white">Reçu de
 
-                                                        @if($transaction->senderAdmin)
-                                                        {{ $transaction->senderAdmin->name }}</h4>
-                                                        @elseif($transaction->receiverUser)
-                                                        {{ $transaction->receiverUser->name }}
-                                                        @endif
+                                                        @if ($transaction->senderAdmin)
+                                                            {{ $transaction->senderAdmin->name }}
+                                                    </h4>
+                                                @elseif($transaction->receiverUser)
+                                                    {{ $transaction->receiverUser->name }}
                                                 @endif
-                                                <ul class="flex">
-                                                    @if ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
-                                                        <li class="mr-2 dark:text-neutral-500">Envoyé le</li>
-                                                        <li class="dark:text-neutral-500">
-                                                            {{ $transaction->created_at->translatedFormat('j F Y \à H\hi') }}
-                                                        </li>
-                                                    @elseif (($transaction->type == 'Reception' && $transaction->receiver_user_id == $user->id) || $transaction->type == 'Depot')
-                                                        <li class="mr-2 dark:text-neutral-500">Reçu le</li>
-                                                        <li class="dark:text-neutral-500">
-                                                            {{ $transaction->created_at->translatedFormat('j F Y \à H\hi') }}
-                                                        </li>
-                                                    @endif
-
-                                                </ul>
-                                            </div>
-
-                                            <div>
-                                                @if (($transaction->type == 'Depot' || $transaction->type == 'Reception') && $transaction->receiver_user_id == $user->id)
-                                                <p class="text-md text-green-400 font-bold dark:text-white">+
-                                                    {{ $transaction->amount }} FCFA</p>
-                                            @elseif ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
-                                                <p class="text-md text-red-600  font-bold dark:text-white">-
-                                                    {{ $transaction->amount }} FCFA</p>
-                                            @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Col -->
-                                </div>
                             @endif
-                        @endforeach
+                            <ul class="flex">
+                                @if ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
+                                    <li class="mr-2 dark:text-neutral-500">Envoyé le</li>
+                                    <li class="dark:text-neutral-500">
+                                        {{ $transaction->created_at->translatedFormat('j F Y \à H\hi') }}
+                                    </li>
+                                @elseif (($transaction->type == 'Reception' && $transaction->receiver_user_id == $user->id) || $transaction->type == 'Depot')
+                                    <li class="mr-2 dark:text-neutral-500">Reçu le</li>
+                                    <li class="dark:text-neutral-500">
+                                        {{ $transaction->created_at->translatedFormat('j F Y \à H\hi') }}
+                                    </li>
+                                @endif
 
+                            </ul>
+                </div>
+
+                <div>
+                    @if (($transaction->type == 'Depot' || $transaction->type == 'Reception') && $transaction->receiver_user_id == $user->id)
+                        <p class="text-md text-green-400 font-bold dark:text-white">+
+                            {{ $transaction->amount }} FCFA</p>
+                    @elseif ($transaction->type == 'Envoie' && $transaction->sender_user_id == $user->id)
+                        <p class="text-md text-red-600  font-bold dark:text-white">-
+                            {{ $transaction->amount }} FCFA</p>
                     @endif
-
-
                 </div>
             </div>
-
         </div>
-        <div class="lg:col-span-1 col-span-3">
-            <div class="flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md">
+        <!-- End Col -->
+    </div>
+    @endif
+    @endforeach
+
+    @endif
+
+
+    </div>
+    </div>
+
+    </div>
+    <div class="lg:col-span-1 col-span-3">
+        <div class="flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md">
+            <div class="mb-3">
+                <h1 class="font-bold text-md">Information personnel</h1>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Nom et pronom</p>
+                <p class="text-sm text-gray-400">{{ $user->name }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Username</p>
+                <p class="text-sm text-gray-400">{{ $user->username }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Agent</p>
+                <p class="text-sm text-gray-400">{{ $user->admin->name ?? 'N/A' }}</p>
+            </div>
+
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Numero de téléphone</p>
+                <p class="text-sm text-gray-400">{{ $user->phone }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Pays de residence</p>
+                <p class="text-sm text-gray-400">{{ $user->country }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Email</p>
+                <p class="text-sm text-gray-400">{{ $user->email }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Nombre de publication</p>
+                <p class="text-sm text-gray-400">{{ $produitCount }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Localité</p>
+                <p class="text-sm text-gray-400">{{ $user->local_area }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Adresse</p>
+                <p class="text-sm text-gray-400">{{ $user->address }}</p>
+            </div>
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Zone d'activité</p>
+                <p class="text-sm text-gray-400">{{ $user->active_zone }}</p>
+            </div>
+
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Type d'acteur</p>
+                <p class="text-sm text-gray-400">{{ $user->actor_type }}</p>
+            </div>
+            @if ($user->gender)
                 <div class="mb-3">
-                    <h1 class="font-bold text-md">Information personnel</h1>
+                    <p class="font-semibold text-sm">Sexe</p>
+                    <p class="text-sm text-gray-400">{{ $user->gender }}</p>
                 </div>
+            @endif
+
+            @if ($user->age)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Nom et pronom</p>
-                    <p class="text-sm text-gray-400">{{ $user->name }}</p>
+                    <p class="font-semibold text-sm">Tranche d'age</p>
+                    <p class="text-sm text-gray-400">{{ $user->age }}</p>
                 </div>
+            @endif
+
+            @if ($user->social_status)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Username</p>
-                    <p class="text-sm text-gray-400">{{ $user->username }}</p>
+                    <p class="font-semibold text-sm">Status social</p>
+                    <p class="text-sm text-gray-400">{{ $user->social_status }}</p>
                 </div>
+            @endif
+
+            @if ($user->company_size)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Agent</p>
-                    <p class="text-sm text-gray-400">{{ $user->admin->name ?? 'N/A' }}</p>
+                    <p class="font-semibold text-sm">Taille d'entreprise</p>
+                    <p class="text-sm text-gray-400">{{ $user->company_size }}</p>
                 </div>
+            @endif
 
+            @if ($user->service_type)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Numero de téléphone</p>
-                    <p class="text-sm text-gray-400">{{ $user->phone }}</p>
+                    <p class="font-semibold text-sm">Type de service</p>
+                    <p class="text-sm text-gray-400">{{ $user->service_type }}</p>
                 </div>
+            @endif
+
+            @if ($user->organization_type)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Pays de residence</p>
-                    <p class="text-sm text-gray-400">{{ $user->country }}</p>
+                    <p class="font-semibold text-sm">Type d'organisation</p>
+                    <p class="text-sm text-gray-400">{{ $user->organization_type }}</p>
                 </div>
+            @endif
+
+            @if ($user->second_organization_type)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Email</p>
-                    <p class="text-sm text-gray-400">{{ $user->email }}</p>
+                    <p class="font-semibold text-sm">Type d'organisation 2</p>
+                    <p class="text-sm text-gray-400">{{ $user->second_organization_type }}</p>
                 </div>
+            @endif
+            @if ($user->communication_type)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Nombre de publication</p>
-                    <p class="text-sm text-gray-400">{{ $produitCount }}</p>
+                    <p class="font-semibold text-sm">Type de communauté</p>
+                    <p class="text-sm text-gray-400">{{ $user->communication_type }}</p>
                 </div>
+            @endif
+
+            @if ($user->mena_type)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Localité</p>
-                    <p class="text-sm text-gray-400">{{ $user->local_area }}</p>
+                    <p class="font-semibold text-sm">Type de nenage</p>
+                    <p class="text-sm text-gray-400">{{ $user->mena_type }}</p>
                 </div>
+            @endif
+
+            @if ($user->mena_status)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Adresse</p>
-                    <p class="text-sm text-gray-400">{{ $user->address }}</p>
+                    <p class="font-semibold text-sm">Statut menage</p>
+                    <p class="text-sm text-gray-400">{{ $user->mena_type }}</p>
                 </div>
+            @endif
+
+            <div class="mb-3">
+                <p class="font-semibold text-sm">Secteur d'activité</p>
+                <p class="text-sm text-gray-400">{{ $user->sector }}</p>
+            </div>
+
+            @if ($user->industry)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Zone d'activité</p>
-                    <p class="text-sm text-gray-400">{{ $user->active_zone }}</p>
+                    <p class="font-semibold text-sm">Industrie</p>
+                    <p class="text-sm text-gray-400">{{ $user->industry }}</p>
                 </div>
-
+            @endif
+            @if ($user->construction)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Type d'acteur</p>
-                    <p class="text-sm text-gray-400">{{ $user->actor_type }}</p>
+                    <p class="font-semibold text-sm">Type de batiment</p>
+                    <p class="text-sm text-gray-400">{{ $user->construction }}</p>
                 </div>
-                @if ($user->gender)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Sexe</p>
-                        <p class="text-sm text-gray-400">{{ $user->gender }}</p>
-                    </div>
-                @endif
-
-                @if ($user->age)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Tranche d'age</p>
-                        <p class="text-sm text-gray-400">{{ $user->age }}</p>
-                    </div>
-                @endif
-
-                @if ($user->social_status)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Status social</p>
-                        <p class="text-sm text-gray-400">{{ $user->social_status }}</p>
-                    </div>
-                @endif
-
-                @if ($user->company_size)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Taille d'entreprise</p>
-                        <p class="text-sm text-gray-400">{{ $user->company_size }}</p>
-                    </div>
-                @endif
-
-                @if ($user->service_type)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Type de service</p>
-                        <p class="text-sm text-gray-400">{{ $user->service_type }}</p>
-                    </div>
-                @endif
-
-                @if ($user->organization_type)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Type d'organisation</p>
-                        <p class="text-sm text-gray-400">{{ $user->organization_type }}</p>
-                    </div>
-                @endif
-
-                @if ($user->second_organization_type)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Type d'organisation 2</p>
-                        <p class="text-sm text-gray-400">{{ $user->second_organization_type }}</p>
-                    </div>
-                @endif
-                @if ($user->communication_type)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Type de communauté</p>
-                        <p class="text-sm text-gray-400">{{ $user->communication_type }}</p>
-                    </div>
-                @endif
-
-                @if ($user->mena_type)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Type de nenage</p>
-                        <p class="text-sm text-gray-400">{{ $user->mena_type }}</p>
-                    </div>
-                @endif
-
-                @if ($user->mena_status)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Statut menage</p>
-                        <p class="text-sm text-gray-400">{{ $user->mena_type }}</p>
-                    </div>
-                @endif
-
+            @endif
+            @if ($user->commerce)
                 <div class="mb-3">
-                    <p class="font-semibold text-sm">Secteur d'activité</p>
-                    <p class="text-sm text-gray-400">{{ $user->sector }}</p>
+                    <p class="font-semibold text-sm">Commerce</p>
+                    <p class="text-sm text-gray-400">{{ $user->commerce }}</p>
                 </div>
+            @endif
+            @if ($user->services)
+                <div class="mb-3">
+                    <p class="font-semibold text-sm">Service</p>
+                    <p class="text-sm text-gray-400">{{ $user->services }}</p>
+                </div>
+            @endif
 
-                @if ($user->industry)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Industrie</p>
-                        <p class="text-sm text-gray-400">{{ $user->industry }}</p>
-                    </div>
+
+            @auth('admin')
+                @if (Auth::guard('admin')->user()->admin_type == 'admin')
+                    <!-- Contenu spécifique à l'agent -->
+
+                    <!-- Autres éléments spécifiques à l'agent -->
+
+                    <a href="{{ route('client.editad', ['username' => $user->username]) }}"
+                        class="w-full  text-blue-800 bg-blue-100 rounded-md text-center p-1 mb-3">
+                        Modifier agent
+
+                    </a>
+
+                    <a href="#" data-hs-overlay="#hs-delete1"
+                        class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
+                        Supprimé client
+
+                    </a>
                 @endif
-                @if ($user->construction)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Type de batiment</p>
-                        <p class="text-sm text-gray-400">{{ $user->construction }}</p>
-                    </div>
-                @endif
-                @if ($user->commerce)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Commerce</p>
-                        <p class="text-sm text-gray-400">{{ $user->commerce }}</p>
-                    </div>
-                @endif
-                @if ($user->services)
-                    <div class="mb-3">
-                        <p class="font-semibold text-sm">Service</p>
-                        <p class="text-sm text-gray-400">{{ $user->services }}</p>
-                    </div>
-                @endif
-
-
-                @auth('admin')
-                    @if (Auth::guard('admin')->user()->admin_type == 'admin')
-                        <!-- Contenu spécifique à l'agent -->
-
-                        <!-- Autres éléments spécifiques à l'agent -->
-
-                        <a href="{{ route('client.editad', ['username' => $user->username]) }}"
-                            class="w-full  text-blue-800 bg-blue-100 rounded-md text-center p-1 mb-3">
-                            Modifier agent
-
-                        </a>
-
-                        <a href="#" data-hs-overlay="#hs-delete1"
-                            class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
-                            Supprimé client
-
-                        </a>
-                    @endif
-                @endauth
+            @endauth
 
 
 
-                <div id="hs-delete1"
-                    class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
-                    <div
-                        class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-                        <div class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
-                            <div class="absolute top-2 end-2">
-                                <button type="button"
-                                    class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
-                                    data-hs-overlay="#hs-delete1">
-                                    <span class="sr-only">Close</span>
-                                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M18 6 6 18" />
-                                        <path d="m6 6 12 12" />
-                                    </svg>
-                                </button>
-                            </div>
+            <div id="hs-delete1"
+                class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
+                <div
+                    class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                    <div class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
+                        <div class="absolute top-2 end-2">
+                            <button type="button"
+                                class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
+                                data-hs-overlay="#hs-delete1">
+                                <span class="sr-only">Close</span>
+                                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
+                            </button>
+                        </div>
 
-                            <div class="p-4 sm:p-10 text-center overflow-y-auto">
-                                <!-- Icon -->
-                                <span
-                                    class="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-yellow-700 dark:border-yellow-600 dark:text-yellow-100">
-                                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16"
-                                        height="16" fill="currentColor" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                    </svg>
-                                </span>
-                                <!-- End Icon -->
+                        <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                            <!-- Icon -->
+                            <span
+                                class="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-yellow-700 dark:border-yellow-600 dark:text-yellow-100">
+                                <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg>
+                            </span>
+                            <!-- End Icon -->
 
-                                <h3 class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
-                                    Supprimé
-                                </h3>
-                                <p class="text-gray-500 dark:text-neutral-500">
-                                    Vous etes sur de supprimé le compte de l'utilisateur ?
-                                </p>
+                            <h3 class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
+                                Supprimé
+                            </h3>
+                            <p class="text-gray-500 dark:text-neutral-500">
+                                Vous etes sur de supprimé le compte de l'utilisateur ?
+                            </p>
 
-                                <div class="mt-6 flex justify-center gap-x-4">
-                                    <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
+                            <div class="mt-6 flex justify-center gap-x-4">
+                                <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
 
-                                        <button type="submit"
-                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
-                                            Supprimé
-                                        </button>
-                                    </form>
-                                    <button type="button"
-                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                                        data-hs-overlay="#hs-delete1">
-                                        Annuler
+                                    <button type="submit"
+                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
+                                        Supprimé
                                     </button>
-                                </div>
+                                </form>
+                                <button type="button"
+                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                                    data-hs-overlay="#hs-delete1">
+                                    Annuler
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
+
         </div>
+
+    </div>
     </div>
 
 

@@ -1,81 +1,58 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-
-use App\Http\Controllers\AgentController;
+use App\Http\Controllers\consoController;
 use App\Http\Controllers\AdminsController;
-use App\Http\Controllers\AddClientController;
 use App\Http\Controllers\AdminAgentController;
 use App\Http\Controllers\AdminChartController;
-use App\Http\Controllers\biicf\UserController;
-use App\Http\Controllers\AdminClientController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminWalletController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminSettingController;
-use App\Http\Controllers\AdminConsprodController;
-use App\Http\Controllers\AdminConsServController;
-use App\Http\Controllers\AdminProductsController;
+use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\BiicfAuthController;
-use App\Http\Controllers\AdminConsommationController;
-use App\Http\Controllers\auth\BicfAuthController;
-use App\Http\Controllers\VerificationController;
-use App\Http\Controllers\biicf\ProduitServiceController;
+use App\Http\Controllers\ProduitServiceController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
 Route::prefix('admin')->middleware('admin.auth')->group(function () {
-    $routes = [
-        'dashboard' => AdminDashboardController::class,
-        'statistique' => AdminChartController::class,
-        'porte-feuille' => AdminWalletController::class,
-        'agent' => AdminAgentController::class,
-        'client' => AdminClientController::class,
-        'produits' => AdminProductsController::class,
-        'services' => AdminServiceController::class,
-        'conso-produit' => AdminConsprodController::class,
-        'conso-service' => AdminConsServController::class,
-        'profile' => AdminProfileController::class,
-        'reglage' => AdminSettingController::class,
-    ];
 
-    foreach ($routes as $routeName => $controllerClass) {
-        Route::get("/$routeName", [$controllerClass, 'index'])->name("admin.$routeName");
-    }
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/statistique', [AdminChartController::class, 'index'])->name('admin.statistique');
+    Route::get('/porte-feuille', [AdminWalletController::class, 'index'])->name('admin.porte-feuille');
+    Route::get('/agent', [AdminAgentController::class, 'index'])->name('admin.agent');
+    Route::get('/client', [userController::class, 'listUserAdmin'])->name('admin.client');
+    Route::get('/produits', [ProduitServiceController::class, 'adminProduct'])->name('admin.produits');
+    Route::get('/services', [ProduitServiceController::class, 'adminService'])->name('admin.services');
+    Route::get('/consommation-produit', [consoController::class, 'adminConsProd'])->name('admin.conso-produit');
+
+    Route::get('/consommation-service', [consoController::class, 'adminConsServ'])->name('admin.conso-service');
+
+    Route::get('/profile', function(){return view('admin.profile');})->name('admin.profile');
+    Route::get('/reglage', [AdminSettingController::class, 'index'])->name('admin.reglage');
+
     Route::post('/agent', [AdminAgentController::class, 'store'])->name('admin.agent.store');
-    Route::post('/client/storePub', [AdminClientController::class, 'storePub'])->name('admin.client.storePub');
-    Route::post('/client/storeCons', [AdminClientController::class, 'storeCons'])->name('admin.client.storeCons');
+    Route::post('/client/storePub', [userController::class, 'storePub'])->name('admin.client.storePub');
+    Route::post('/client/storeCons', [userController::class, 'storeCons'])->name('admin.client.storeCons');
 
+    Route::delete('/supprimer-agent', [AdminAgentController::class, 'destroy'])->name('admin.agent.destroy');
 
-    Route::delete('/agent/{agent}', [AdminAgentController::class, 'destroy'])->name('admin.agent.destroy');
+    
     Route::post('/agent/{admin}', [AdminAgentController::class, 'isban'])->name('admin.agent.isban');
 
+    Route::delete('/users/{user}', [userController::class, 'destroyUser'])->name('admin.user.destroy');
 
-    Route::delete('/users/{user}', [AdminClientController::class, 'destroyUser'])->name('admin.user.destroy');
+    Route::delete('/produit/{produit}', [ProduitServiceController::class, 'destroyProduct'])->name('admin.products.destroy');
 
-    Route::delete('/produit/{produit}', [AdminProductsController::class, 'destroyProduct'])->name('admin.products.destroy');
+    Route::delete('/services/{services}', [ProduitServiceController::class, 'destroyService'])->name('admin.services.destroy');
 
-    Route::delete('/services/{services}', [AdminServiceController::class, 'destroyService'])->name('admin.services.destroy');
+    Route::delete('/consommation-produit/{id}', [consoController::class, 'destroyConsprod'])->name('admin.consprod.destroy');
 
-    Route::delete('/conso-produit/{id}', [AdminConsprodController::class, 'destroyConsprod'])->name('admin.consprod.destroy');
-
-    Route::delete('/conso-service/{id}', [AdminConsServController::class, 'destroyConsserv'])->name('admin.consserv.destroy');
+    Route::delete('/consommation-service/{id}', [consoController::class, 'destroyConsserv'])->name('admin.consserv.destroy');
 
     Route::put('/profile/update/{admin}', [AdminsController::class, 'updateProfile'])->name('admin.updateProfile');
     Route::put('/profile/password/{admin}', [AdminsController::class, 'updatePassword'])->name('admin.updatePassword');
@@ -84,10 +61,10 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/agent/{username}', [AdminAgentController::class, 'show'])->name('agent.show');
 
-    Route::get('/client/{username}', [AdminClientController::class, 'show'])->name('client.show');
+    Route::get('/client/{username}', [userController::class, 'show'])->name('client.show');
 
-    Route::get('/edit-agent/{username}', [AdminClientController::class, 'editAgent'])->name('client.editad');
-    Route::post('/edit-agent/{username}', [AdminClientController::class, 'updateAdmin'])->name('update.admin');
+    Route::get('/edit-agent/{username}', [userController::class, 'editAgent'])->name('client.editad');
+    Route::post('/edit-agent/{username}', [userController::class, 'updateAdmin'])->name('update.admin');
 
     Route::post('/deposit', [AdminWalletController::class, 'deposit'])->name('wallet.deposit');
 
@@ -98,38 +75,51 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     //email
     Route::get('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
     //success
-   
-   
-
-    Route::get('/ajouter-client', [AdminClientController::class, 'create'])->name('clients.create');
-    Route::post('/ajouter-client', [AdminClientController::class, 'store'])->name('clients.store');
+    Route::get('/ajouter-client', [userController::class, 'createPageAdmin'])->name('clients.create');
+    Route::post('/ajouter-client', [userController::class, 'createUserAdmin'])->name('clients.store');
 });
 
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
+
 //////////// PLATEFORME ////////////////////
 
 
 
 
-Route::prefix('biicf')->middleware('user.auth')->group(function () {
+Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('acceuil', function () {
         return view('biicf.acceuil');
     })->name('biicf.acceuil');
 
-   
+    Route::get('notif', function () {
+        return view('biicf.notif');
+    })->name('biicf.notif');
+
+    Route::get('publication', function () {
+        return view('biicf.post');
+    })->name('biicf.post');
+
+    Route::get('consommation', function () {
+        return view('biicf.conso');
+    })->name('biicf.conso');
+
+    Route::get('porte-feuille', function () {
+        return view('biicf.wallet');
+    })->name('biicf.wallet');
+
+    Route::get('profile', function () {
+        return view('biicf.profile');
+    })->name('biicf.profile');
 });
-// Route pour afficher le formulaire de connexion
+
 Route::get('biicf/login', [BiicfAuthController::class, 'showLoginForm'])->name('biicf.login');
-// Route pour traiter la soumission du formulaire de connexion
 Route::post('biicf/login', [BiicfAuthController::class, 'login']);
-// Route pour afficher le formulaire d'inscription
-Route::get('biicf/signup', [UserController::class, 'index'])->name('biicf.signup');
 
-// Route pour traiter la soumission du formulaire d'inscription
-Route::post('biicf/signup', [UserController::class, 'create'])->name('user.create');
-
+Route::get('biicf/signup', [UserController::class, 'createPageBiicf'])->name('biicf.signup');
+Route::post('biicf/signup', [UserController::class, 'createUserBiicf']);
 
 Route::post('biicf/logout', [BiicfAuthController::class, 'logout'])->name('biicf.logout');
+

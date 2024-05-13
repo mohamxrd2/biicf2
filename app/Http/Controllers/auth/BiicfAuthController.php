@@ -21,6 +21,9 @@ class BiicfAuthController extends Controller
         $credentials = $request->validate([
             'login' => ['required'], // Champ login pour prendre soit l'email soit le nom d'utilisateur
             'password' => ['required', 'string'],
+        ], [
+            'login.required' => 'Veuillez entrer votre identifiant ou email',
+            'password.required' => 'Veuillez entrer votre mot de passe',
         ]);
 
         $remember = $request->has('remember_me'); // Vérifie si "Remember Me" est coché

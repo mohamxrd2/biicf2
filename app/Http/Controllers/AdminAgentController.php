@@ -72,14 +72,21 @@ class AdminAgentController extends Controller
         }
     }
 
-    public function destroy($agent)
-{
-    $admin = Admin::findOrFail($agent);
-    $admin->delete();
+    public function destroy(Request $request)
+    {
+        // Récupérer l'ID de l'agent à supprimer à partir de la requête
+        $agentId = $request->input('agent_id');
 
-    // Rediriger après la suppression
-    return redirect()->route('admin.agent')->with('success', 'Agent supprimé avec succès.');
-}
+        // Rechercher l'agent dans la base de données par son ID
+        $agent = Admin::findOrFail($agentId);
+
+        // Supprimer l'agent de la base de données
+        $agent->delete();
+
+        // Rediriger l'utilisateur vers la page appropriée avec un message de succès
+        return back()->with('success', 'Agent supprimé avec succès.');
+    }
+
 
     public function show($username)
     {
@@ -102,7 +109,7 @@ class AdminAgentController extends Controller
             })
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
-        
+
         $transacCount = $transactions->count();
 
         // Passer les détails de l'agent et les utilisateurs à la vue

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('receiver_admin_id')->nullable();
             $table->enum('type', ['Envoie', 'Reception', 'Depot', 'Retrait']);
             $table->decimal('amount', 10, 2);
-
             $table->foreign('sender_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('sender_admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->foreign('receiver_user_id')->references('id')->on('users')->onDelete('cascade');

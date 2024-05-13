@@ -19,19 +19,16 @@
         <div class="w-[430px] bg-white border border-gray-200 rounded-xl shadow-sm" style="z-index: 1;">
             <div class="p-4 sm:p-7">
                 @if (session('success'))
-                    <div class="bg-green-200 text-green-800 px-4 py-2 my-5 rounded-md mb-4">
+                    <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
                         {{ session('success') }}
                     </div>
                 @endif
                 @if ($errors->any())
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-5 rounded relative"
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4 rounded relative"
                         role="alert">
                         <span class="block sm:inline">{{ $errors->first() }}</span>
                     </div>
                 @endif
-
-
-
                 <div class="text-center">
                     <h1 class="block text-2xl font-bold text-gray-800">Se connecter</h1>
                     <p class="mt-2 text-sm text-gray-600">
@@ -41,13 +38,7 @@
                         </a>
                     </p>
                 </div>
-
-
                 <div class="mt-5">
-
-
-
-
                     <!-- Form -->
                     <form action="{{ route('biicf.login') }}" method="POST">
                         @csrf
@@ -68,8 +59,6 @@
                                         </svg>
                                     </div>
                                 </div>
-                                
-
                                 <div class="relative">
                                     <input type="password" id="password" name="password"
                                         class="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"

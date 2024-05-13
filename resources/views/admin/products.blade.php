@@ -71,6 +71,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($prodCount == 0)
+                        <tr>
+                            <td colspan="7" class="px-6 py-4 text-center">
+                                <div class="flex flex-col justify-center items-center h-72 w-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="w-12 h-12 text-gray-500 dark:text-gray-400">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                    </svg>
+                                    <h1 class="text-xl text-gray-500 dark:text-gray-400">Aucun produit</h1>
+                                </div>
+                            </td>
+                        </tr>
+                        
+
+                        @else
+
+                            
+                        
                         @foreach ($produits as $produit)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -78,7 +97,7 @@
                                 <th scope="row"
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                     <img class="w-10 h-10 rounded-md"
-                                        src="{{ $produit->photo ? $produit->photo : asset('img/noimg.jpeg') }}"
+                                        src="{{ $produit->photoProd1 ? $produit->photoProd1 : asset('img/noimg.jpeg') }}"
                                         alt="Jese image">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $produit->name }}</div>
@@ -123,7 +142,7 @@
 
                                 <td class="px-6 py-4">
                                     <div class="flex">
-                                        <a href="#" data-hs-overlay="#hs-delete"
+                                        <a href="#" data-hs-overlay="#hs-delete-{{ $produit->id }}"
                                             class="font-medium text-red-600 dark:text-blue-500  mr-2">
                                             <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -134,7 +153,7 @@
                                         </a>
                                     </div>
 
-                                    <div id="hs-delete"
+                                    <div id="hs-delete-{{ $produit->id }}"
                                         class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
                                         <div
                                             class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
@@ -210,6 +229,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @endif
                     </tbody>
 
                 </table>
