@@ -171,8 +171,6 @@ class AdminClientController extends Controller
     public function storePub(Request $request)
     {
         $userId = $request->input('user_id');
-
-
         $validatedData = $request->validate([
             'type' => 'required|string|in:produits,services', // Type doit être soit 'product' soit 'service'
             'name' =>  'required|string|max:255',
@@ -188,7 +186,7 @@ class AdminClientController extends Controller
             'zoneco' => 'required|string',
             'ville' => 'required|string',
             'commune' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
+             // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
             'description' => 'required|string'
         ], [
             // Messages d'erreur personnalisés
@@ -232,8 +230,8 @@ class AdminClientController extends Controller
             $produitsServices->zonecoServ = $validatedData['zoneco'];
             $produitsServices->villeServ = $validatedData['ville'];
             $produitsServices->comnServ = $validatedData['commune'];
-            // $produitsServices->photo = $request->file('photo')->store('photos');
             $produitsServices->desrip = $validatedData['description'];
+            
             $produitsServices->user_id = $userId; // Ajout de l'ID de l'utilisateur
             $produitsServices->save();
 
