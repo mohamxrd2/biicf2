@@ -416,50 +416,7 @@
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div class="flex items-center justify-center w-20"
-                                                                id="floating_photo5">
-                                                                <div class=" overflow-hidden rounded-md relative">
-                                                                    <label for="file-upload5"
-                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                        <div
-                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="none" viewBox="0 0 24 24"
-                                                                                stroke-width="1.5" stroke="currentColor"
-                                                                                class="w-6 h-6">
-                                                                                <path stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                                                            </svg>
-
-                                                                            <p
-                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                                <span class="font-semibold">Photo 5</span>
-                                                                            </p>
-                                                                        </div>
-                                                                    </label>
-                                                                    <input id="file-upload5" class="hidden rounded-md"
-                                                                        type="file" onchange="previewImage5(this)"
-                                                                        name="image5">
-                                                                    <img id="image-preview5"
-                                                                        class="absolute inset-0 w-full h-full object-cover hidden">
-                                                                    <button type="button" onclick="removeImage5()"
-                                                                        id="remove-button5"
-                                                                        class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
-                                                                        <svg class="w-full"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24"
-                                                                            stroke-width="1.5" stroke="currentColor"
-                                                                            class="w-6 h-6">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round"
-                                                                                d="M6 18 18 6M6 6l12 12" />
-                                                                        </svg>
-
-                                                                    </button>
-                                                                </div>
-                                                            </div>
+                                                            
                                                         </div>
 
                                                     </div>

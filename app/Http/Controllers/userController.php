@@ -175,7 +175,6 @@ class userController extends Controller
         $produits = ProduitService::where('name', $slug)->first();
 
         return view('admin.pubVerif', compact('produits'));
-
     }
 
     public function etat(Request $request, $slug)
@@ -231,10 +230,9 @@ class userController extends Controller
             'ville' => 'required|string',
             'commune' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
-            // 'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            // 'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            // 'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            // 'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'description' => 'required|string'
         ], [
             // Messages d'erreur personnalisés
@@ -261,22 +259,21 @@ class userController extends Controller
             'image.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
 
 
-            // 'image2.image' => 'Le fichier doit être une image.',
-            // 'image2.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+            'image2.image' => 'Le fichier doit être une image2.',
+            'image2.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.2',
 
 
-            // 'image3.image' => 'Le fichier doit être une image.',
-            // 'image3.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+            'image3.image' => 'Le fichier doit être une image.3',
+            'image3.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.3',
 
 
-            // 'image4.image' => 'Le fichier doit être une image.',
-            // 'image4.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+            'image4.image' => 'Le fichier doit être une image.4',
+            'image4.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.4',
 
 
-            // 'image5.image' => 'Le fichier doit être une image.',
-            // 'image5.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
             'description.required' => 'La description est requise.'
         ]);
+
         // Vérifiez si une image est téléchargée avant de la sauvegarder
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -288,45 +285,35 @@ class userController extends Controller
             // Enregistrez le nom de l'image dans la base de données
         }
 
-        // if ($request->hasFile('image2')) {
-        //     $image2 = $request->file('image2');
-        //     $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
+        if ($request->hasFile('image2')) {
+            $image2 = $request->file('image2');
+            $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
 
-        //     // Stockez l'image dans le dossier 'public/post'
-        //     $path2 = 'post/';
-        //     $image2->move($path2, $imageName2);
-        //     // Enregistrez le nom de l'image dans la base de données
-        // }
+            // Stockez l'image dans le dossier 'public/post'
+            $path2 = 'post/';
+            $image2->move($path2, $imageName2);
+            // Enregistrez le nom de l'image dans la base de données
+        }
 
-        // if ($request->hasFile('image3')) {
-        //     $image3 = $request->file('image3');
-        //     $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
+        if ($request->hasFile('image3')) {
+            $image3 = $request->file('image3');
+            $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
 
-        //     // Stockez l'image dans le dossier 'public/post'
-        //     $path3 = 'post/';
-        //     $image3->move($path3, $imageName3);
-        //     // Enregistrez le nom de l'image dans la base de données
-        // }
+            // Stockez l'image dans le dossier 'public/post'
+            $path3 = 'post/';
+            $image3->move($path3, $imageName3);
+            // Enregistrez le nom de l'image dans la base de données
+        }
 
-        // if ($request->hasFile('image4')) {
-        //     $image4 = $request->file('image4');
-        //     $imageName4 = time() . '.' . $image4->getClientOriginalExtension();
+        if ($request->hasFile('image4')) {
+            $image4 = $request->file('image4');
+            $imageName4 = time() . '.' . $image4->getClientOriginalExtension();
 
-        //     // Stockez l'image dans le dossier 'public/post'
-        //     $path4 = 'post/';
-        //     $image4->move($path4, $imageName4);
-        //     // Enregistrez le nom de l'image dans la base de données
-        // }
-
-        // if ($request->hasFile('image5')) {
-        //     $image5 = $request->file('image5');
-        //     $imageName5 = time() . '.' . $image5->getClientOriginalExtension();
-
-        //     // Stockez l'image dans le dossier 'public/post'
-        //     $path5 = 'post/';
-        //     $image5->move($path5, $imageName5);
-        //     // Enregistrez le nom de l'image dans la base de données
-        // }
+            // Stockez l'image dans le dossier 'public/post'
+            $path4 = 'post/';
+            $image4->move($path4, $imageName4);
+            // Enregistrez le nom de l'image dans la base de données
+        }
 
         try {
             $produitsServices = new ProduitService();
@@ -348,16 +335,12 @@ class userController extends Controller
             $produitsServices->user_id = $userId; // Ajout de l'ID de l'utilisateur
 
             $produitsServices->photoProd1 = $path . $imageName;
-            // // Pour la deuxième image
-            // $produitsServices->photoProd2 = $path2 . $imageName2;
-            // // Pour la troisième image
-            // $produitsServices->photoProd3 = $path3 . $imageName3;
-            // // Pour la quatrième image
-            // $produitsServices->photoProd4 = $path4 . $imageName4;
-            // // Pour la cinquième image
-            // $produitsServices->photoProd5 = $path5 . $imageName5;
-
-
+            // Pour la deuxième image
+            $produitsServices->photoProd2 = $path2 . $imageName2;
+            // Pour la troisième image
+            $produitsServices->photoProd3 = $path3 . $imageName3;
+            // Pour la quatrième image
+            $produitsServices->photoProd4 = $path4 . $imageName4;
 
             $produitsServices->save();
 
