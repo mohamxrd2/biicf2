@@ -63,7 +63,7 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/client/{username}', [userController::class, 'show'])->name('client.show');
 
-    Route::get('/produit/{slug}', [userController::class, 'pubShow'])->name('produit.pubShow');
+    Route::get('/produit/{id}', [userController::class, 'pubShow'])->name('produit.pubShow');
 
     Route::post('/produit/{id}', [userController::class, 'etat'])->name('produit.etat');
 

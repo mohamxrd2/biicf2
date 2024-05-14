@@ -160,7 +160,6 @@ class userController extends Controller
         $transactions = Transaction::with(['senderAdmin', 'receiverAdmin', 'senderUser', 'receiverUser'])
             ->where('sender_user_id', $user->id)
             ->orWhere('receiver_user_id', $user->id)
-
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
 

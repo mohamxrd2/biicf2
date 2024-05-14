@@ -18,185 +18,179 @@
     </div>
 
     <div class="lg:flex 2xl:gap-16 gap-12 max-w-[1065px] mx-auto">
-        @if ($consommations)
-            <div class="mb-4 flex-1 mx-auto">
 
-                <div class="md:max-w-[650px] mx-auto flex-1 xl:space-y-6 space-y-3">
+        <div class="mb-4 flex-1 mx-auto">
 
-                    <div class="flex items-center py-3 dark:border-gray-600 my-3">
+            <div class="md:max-w-[650px] mx-auto flex-1 xl:space-y-6 space-y-3">
 
-                        <!--  TITRE DU PRODUIT  -->
-                        <div
-                            class="flex flex-col w-full bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-                            <div class="p-4 md:p-10">
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-                                    {{ $consommations->name }}
-                                </h3>
-                                <p class="mt-2 text-gray-500 dark:text-neutral-400">
-                                <h4 class="card-title font-bold"> Date de création </h4>
-                                <p class="mb-0">{{ \Carbon\Carbon::parse($consommations->created_at)->diffForHumans() }}
-                                </p>
-                                </p>
-                            </div>
+                <div class="flex items-center py-3 dark:border-gray-600 my-3">
+
+                    <!--  TITRE DU PRODUIT  -->
+                    <div
+                        class="flex flex-col w-full bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                        <div class="p-4 md:p-10">
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+                                {{ $consommations->name }}
+                            </h3>
+                            <p class="mt-2 text-gray-500 dark:text-neutral-400">
+                            <h4 class="card-title font-bold"> Date de création </h4>
+                            <p class="mb-0">{{ \Carbon\Carbon::parse($consommations->created_at)->diffForHumans() }}
+                            </p>
+                            </p>
                         </div>
-
                     </div>
+
                 </div>
-                <div class="mb-4 grid sm:grid-cols-2 gap-3">
-                    @if ($consommations->type === 'produits')
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title "> TYPE </h4>
-                                <p>{{ $consommations->type }}</p>
-                            </div>
-                        </div>
+            </div>
+            <div class="mb-4 grid sm:grid-cols-2 gap-3">
 
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title"> FORMAT </h4>
-                                <p>{{ $consommations->format }}</p>
-                            </div>
-                        </div>
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title">CONDITIONNEMENT</h4>
-                                <p>{{ $consommations->conditionnement }}</p>
-                            </div>
-                        </div>
-
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title"> QUANTITÉ </h4>
-                                <p>{{ $consommations->qte }}</p>
-                            </div>
-                        </div>
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title"> PRIX </h4>
-                                <p>{{ $consommations->prix }}</p>
-                            </div>
-                        </div>
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title"> FRÉQUENCE DE CONSOMMATION </h4>
-                                <p>{{ $consommations->qteProd_min }} </p>
-                            </div>
-                        </div>
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title"> JOUR D'ACHAT</h4>
-                                <p> {{ $consommations->jourAch_cons }}</p>
-                            </div>
-                        </div>
-
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title"> ZONE D'ACTIVITÉ </h4>
-                                <p>{{ $consommations->zonecoServ }}</p>
-                            </div>
-                        </div>
-                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                            <div class="card-body flex-1 p-0">
-                                <h4 class="card-title"> VILLE DE CONSOMMATION</h4>
-                                <p> {{ $consommations->villeCons }}</p>
-                            </div>
-                        </div>
-                </div>
-            @else
                 <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                     <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> PRIX HABITUEL</h4>
-                        <p>{{ $consommations->prix }}</p>
+                        <h4 class="card-title font-bold"> Type </h4>
+                        <p>{{ $consommations->type }}</p>
                     </div>
                 </div>
-                <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                    <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> FRÉQUENCE DE CONSOMMATION </h4>
-                        <p>{{ $consommations->qteProd_min }} </p>
+
+
+                @if ($consommations->format)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title font-bold"> Format </h4>
+                            <p>{{ $consommations->format }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                    <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> JOUR D'ACHAT</h4>
-                        <p> {{ $consommations->jourAch_cons }}</p>
+                @endif
+
+                @if ($consommations->conditionnement)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title d">Conditionnement</h4>
+                            <p>{{ $consommations->conditionnement }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                    <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> QUALIFICATION DE SERVICE</h4>
-                        <p> {{ $consommations->jourAch_cons }}</p>
+                @endif
+                @if ($consommations->qte)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title"> Quantité </h4>
+                            <p>{{ $consommations->qte }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                    <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> SPÉCIALITÉ</h4>
-                        <p> {{ $consommations->jourAch_cons }}</p>
+                @endif
+
+                @if ($consommations->prix)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title"> Prix </h4>
+                            <p>{{ $consommations->prix }}</p>
+                        </div>
                     </div>
-                </div>
+                @endif
+
+                @if ($consommations->qteProd_min)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title"> Frequence de consommation</h4>
+                            <p>{{ $consommations->qteProd_min }} </p>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($consommations->jourAch_cons)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title"> Jour d'achat</h4>
+                            <p> {{ $consommations->jourAch_cons }}</p>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($consommations->qualif_serv)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title"> Qualification </h4>
+                            <p> {{ $consommations->qualif_serv }}</p>
+                        </div>
+                    </div>
+                @endif
+                @if ($consommations->specialité)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title"> Specialité </h4>
+                            <p> {{ $consommations->specialité }}</p>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                     <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> ZONE D'ACTIVITÉ </h4>
+                        <h4 class="card-title"> Zone d'activité </h4>
                         <p>{{ $consommations->zonecoServ }}</p>
                     </div>
                 </div>
                 <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                     <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> VILLE DE CONSOMMATION</h4>
+                        <h4 class="card-title"> Ville</h4>
                         <p> {{ $consommations->villeCons }}</p>
                     </div>
                 </div>
-        @endif
-        <div class=" card border shadow-sm rounded-xl flex space-x-5 p-5">
-            <div class="card-body flex-1 p-0">
-                <h4 class="card-title"> DESCRIPTION </h4>
-                <p>{{ $consommations->description }}</p>
             </div>
+
         </div>
-    </div>
 
 
-    <div class="flex-1 items-center justify-center">
+        <div class="flex-1 items-center justify-center">
+            <!-- Boutons -->
+            <div class="flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md">
+
+                <form method="POST" action="{{ route('consommation.consoEtat', $consommations->id) }}"
+                    class="flex items-center space-x-5">
+                    @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
+                    @method('POST')
+    
+                    <!-- Champ pour l'action accepter -->
+                    <input type="hidden" name="action" value="accepter">
+    
+                    <!-- Bouton accepter -->
+                    @if ($consommations->status == 'Accepté')
+                        <div class="w-full mb-3">
+                            <div class="text-gray-800 bg-gray-200 rounded-md text-center p-1">accepté !</div>
+                        </div>
+                    @else
+                        <button type="submit" class="w-full mb-3">
+                            <div class="text-teal-800 bg-teal-100 rounded-md text-center p-1">accepter</div>
+                        </button>
+                    @endif
+                </form>
+    
+                <form method="POST" action="{{ route('consommation.consoEtat', $consommations->id) }}"
+                    class="flex items-center space-x-5 ">
+                    @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
+                    @method('POST')
+    
+                    <!-- Champ pour l'action refuser -->
+                    <input type="hidden" name="action" value="refuser">
+    
+                    <!-- Bouton refuser -->
+                    @if ($consommations->status == 'Refusé')
+                        <div class="w-full">
+                            <div class="text-gray-800 bg-gray-200 rounded-md text-center p-1">refusé !</div>
+                        </div>
+                    @else
+                        <button type="submit" class="w-full">
+                            <div class="text-red-800 bg-red-100 rounded-md text-center p-1">Refuser</div>
+                        </button>
+                    @endif
+                </form>
+
+            </div>
+
+            
 
 
 
-        <!-- Boutons -->
+        </div>
 
-        <form method="POST" action="{{ route('consommation.consoEtat', $consommations->id) }}"
-            class="flex items-center space-x-5 mt-5">
-            @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
-            @method('POST')
-
-            <!-- Champ pour l'action accepter -->
-            <input type="hidden" name="action" value="accepter">
-
-            <!-- Bouton accepter -->
-            <button type="submit"
-                class="flex items-center space-x-2 border bg-blue-400 px-5 py-2 rounded-md text-black hover:bg-white hover:border hover:border-gray-600">
-                <i class="fa-regular fa-heart text-xl"></i>
-                <span>accepter</span>
-            </button>
-        </form>
-
-        <form method="POST" action="{{ route('consommation.consoEtat', $consommations->id) }}"
-            class="flex items-center space-x-5 mt-5">
-            @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
-            @method('POST')
-
-            <!-- Champ pour l'action refuser -->
-            <input type="hidden" name="action" value="refuser">
-
-            <!-- Bouton refuser -->
-            <button type="submit"
-                class="flex items-center space-x-2 border bg-red-400 px-5 py-2 rounded-md text-black hover:bg-white hover:border hover:border-gray-600">
-                <i class="fa-solid fa-cart-shopping text-xl"></i>
-                <span>refuser</span>
-            </button>
-        </form>
-
-
-
-    </div>
-    @endif
     </div>
 
 

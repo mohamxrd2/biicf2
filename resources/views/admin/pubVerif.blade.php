@@ -49,37 +49,88 @@
                             <p>{{ $produits->type }}</p>
                         </div>
                     </div>
+                    @if ($produits->condProd )
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
                             <h4 class="card-title font-bold"> conditionnement </h4>
                             <p>{{ $produits->condProd }}</p>
                         </div>
                     </div>
+                        
+                    @endif
+                    
+                   @if ($produits->formatProd)
+                   <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                    <div class="card-body flex-1 p-0">
+                        <h4 class="card-title font-bold"> format </h4>
+                        <p>{{ $produits->formatProd }}</p>
+                    </div>
+                </div>
+                   @endif
 
-                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                        <div class="card-body flex-1 p-0">
-                            <h4 class="card-title font-bold"> format </h4>
-                            <p>{{ $produits->formatProd }}</p>
-                        </div>
+                   @if ($produits->qteProd_min || $produits->qteProd_max)
+
+                   <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                    <div class="card-body flex-1 p-0">
+                        <h4 class="card-title font-bold"> Quantité traité</h4>
+                        <p>[ {{ $produits->qteProd_min }} - {{ $produits->qteProd_max }} ]</p>
                     </div>
-                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                        <div class="card-body flex-1 p-0">
-                            <h4 class="card-title font-bold"> Quantité traité</h4>
-                            <p>[ {{ $produits->qteProd_min }} - {{ $produits->qteProd_max }} ]</p>
-                        </div>
-                    </div>
+                </div>
+                       
+                   @endif
+                   
+                   
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
                             <h4 class="card-title font-bold"> Prix par unité </h4>
                             <p>{{ $produits->prix }}</p>
                         </div>
                     </div>
+
+                    @if ($produits->LivreCapProd)
+
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
                             <h4 class="card-title font-bold">Capacité de livré</h4>
                             <p>{{ $produits->LivreCapProd }}</p>
                         </div>
                     </div>
+                        
+                    @endif
+
+                    @if ($produits->qalifServ)
+
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title font-bold"> Experiance  </h4>
+                            <p>{{ $produits->qalifServ }}</p>
+                        </div>
+                    </div>
+                        
+                    @endif
+
+                    @if ($produits->sepServ)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title font-bold"> Specialité  </h4>
+                            <p>{{ $produits->sepServ}}</p>
+                        </div>
+                    </div>
+                   
+                        
+                    @endif
+
+                    @if ($produits->qteServ)
+                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                        <div class="card-body flex-1 p-0">
+                            <h4 class="card-title font-bold"> Nombre du personnel  </h4>
+                            <p>{{ $produits->qteServ}}</p>
+                        </div>
+                    </div>
+                   
+                        
+                    @endif
+                    
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
                             <h4 class="card-title font-bold"> Zone economique </h4>
@@ -97,7 +148,7 @@
                 </div>
                 <div class=" card border shadow-sm rounded-xl flex space-x-5 p-5">
                     <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> Description</h4>
+                        <h4 class="card-title font-bold"> Description</h4>
                         <p>{{ $produits->desrip }}</p>
                     </div>
                 </div>
@@ -190,10 +241,10 @@
                     <form method="POST" action="{{ route('produit.etat', $produits->id) }}">
                         @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
                         @method('POST')
-
+                    
                         <!-- Champ pour l'action accepter -->
-                        <input type="hidden" name="action_accepter" value="accepter">
-
+                        <input type="hidden" name="action" value="accepter">
+                    
                         <!-- Bouton accepter -->
                         @if ($produits->status == 'Accepté')
                             <div class="w-full mb-3">
@@ -205,19 +256,19 @@
                             </button>
                         @endif
                     </form>
-
-
+                    
+                    
                     <form method="POST" action="{{ route('produit.etat', $produits->id) }}">
                         @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
                         @method('POST')
-
+                    
                         <!-- Champ pour l'action refuser -->
                         <input type="hidden" name="action" value="refuser">
-
+                    
                         <!-- Bouton refuser -->
                         @if ($produits->status == 'Refusé')
                             <div class="w-full">
-                                <div class="text-gay-800 bg-gray-200 rounded-md text-center p-1">refusé !</div>
+                                <div class="text-gray-800 bg-gray-200 rounded-md text-center p-1">refusé !</div>
                             </div>
                         @else
                             <button type="submit" class="w-full">
@@ -225,6 +276,7 @@
                             </button>
                         @endif
                     </form>
+                    
 
 
                 </div>
