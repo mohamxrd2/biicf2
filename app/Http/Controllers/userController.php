@@ -156,11 +156,11 @@ class userController extends Controller
         $consCount = $consommations->count();
 
         $transactions = Transaction::with(['senderAdmin', 'receiverAdmin', 'senderUser', 'receiverUser'])
-        ->where('sender_user_id', $user->id)
-                ->orWhere('receiver_user_id', $user->id)
+            ->where('sender_user_id', $user->id)
+            ->orWhere('receiver_user_id', $user->id)
 
-        ->orderBy('created_at', 'DESC')
-        ->paginate(10);
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
 
         $transaCount = $transactions->count();
 
@@ -230,7 +230,11 @@ class userController extends Controller
             'zoneco' => 'required|string',
             'ville' => 'required|string',
             'commune' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
+            // 'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            // 'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            // 'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            // 'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'description' => 'required|string'
         ], [
             // Messages d'erreur personnalisés
@@ -251,12 +255,78 @@ class userController extends Controller
             'zoneco.required' => 'La zone économique est requise.',
             'ville.required' => 'La ville est requise.',
             'commune.required' => 'La commune est requise.',
-            'photo.required' => 'La photo est requise.',
-            'photo.image' => 'Le fichier doit être une image.',
-            'photo.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
-            'photo.max' => 'La taille de l\'image ne doit pas dépasser 2 Mo.',
+
+
+            'image.image' => 'Le fichier doit être une image.',
+            'image.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+
+
+            // 'image2.image' => 'Le fichier doit être une image.',
+            // 'image2.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+
+
+            // 'image3.image' => 'Le fichier doit être une image.',
+            // 'image3.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+
+
+            // 'image4.image' => 'Le fichier doit être une image.',
+            // 'image4.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
+
+
+            // 'image5.image' => 'Le fichier doit être une image.',
+            // 'image5.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
             'description.required' => 'La description est requise.'
         ]);
+        // Vérifiez si une image est téléchargée avant de la sauvegarder
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Stockez l'image dans le dossier 'public/post'
+            $path = 'post/';
+            $image->move($path, $imageName);
+            // Enregistrez le nom de l'image dans la base de données
+        }
+
+        // if ($request->hasFile('image2')) {
+        //     $image2 = $request->file('image2');
+        //     $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
+
+        //     // Stockez l'image dans le dossier 'public/post'
+        //     $path2 = 'post/';
+        //     $image2->move($path2, $imageName2);
+        //     // Enregistrez le nom de l'image dans la base de données
+        // }
+
+        // if ($request->hasFile('image3')) {
+        //     $image3 = $request->file('image3');
+        //     $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
+
+        //     // Stockez l'image dans le dossier 'public/post'
+        //     $path3 = 'post/';
+        //     $image3->move($path3, $imageName3);
+        //     // Enregistrez le nom de l'image dans la base de données
+        // }
+
+        // if ($request->hasFile('image4')) {
+        //     $image4 = $request->file('image4');
+        //     $imageName4 = time() . '.' . $image4->getClientOriginalExtension();
+
+        //     // Stockez l'image dans le dossier 'public/post'
+        //     $path4 = 'post/';
+        //     $image4->move($path4, $imageName4);
+        //     // Enregistrez le nom de l'image dans la base de données
+        // }
+
+        // if ($request->hasFile('image5')) {
+        //     $image5 = $request->file('image5');
+        //     $imageName5 = time() . '.' . $image5->getClientOriginalExtension();
+
+        //     // Stockez l'image dans le dossier 'public/post'
+        //     $path5 = 'post/';
+        //     $image5->move($path5, $imageName5);
+        //     // Enregistrez le nom de l'image dans la base de données
+        // }
 
         try {
             $produitsServices = new ProduitService();
@@ -274,10 +344,24 @@ class userController extends Controller
             $produitsServices->zonecoServ = $validatedData['zoneco'];
             $produitsServices->villeServ = $validatedData['ville'];
             $produitsServices->comnServ = $validatedData['commune'];
-            // $produitsServices->photo = $request->file('photo')->store('photos');
             $produitsServices->desrip = $validatedData['description'];
             $produitsServices->user_id = $userId; // Ajout de l'ID de l'utilisateur
+
+            $produitsServices->photoProd1 = $path . $imageName;
+            // // Pour la deuxième image
+            // $produitsServices->photoProd2 = $path2 . $imageName2;
+            // // Pour la troisième image
+            // $produitsServices->photoProd3 = $path3 . $imageName3;
+            // // Pour la quatrième image
+            // $produitsServices->photoProd4 = $path4 . $imageName4;
+            // // Pour la cinquième image
+            // $produitsServices->photoProd5 = $path5 . $imageName5;
+
+
+
             $produitsServices->save();
+
+
 
             return back()->with('success', 'Produit ou service ajouté avec succès!');
         } catch (\Exception $e) {

@@ -89,19 +89,16 @@
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                                    <th scope="row"
-                                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                        <a href="{{ route('produit.pubShow', $produit->name) }}" class="flex items-center">
-
-                                            <img class="w-10 h-10 rounded-md"
-                                                src="{{ $produit->photoProd1 ? $produit->photoProd1 : asset('img/noimg.jpeg') }}"
-                                                alt="Jese image">
-                                            <div class="ps-3">
-                                                <div class="text-base font-semibold">{{ $produit->name }}</div>
-                                                <div class="font-normal text-gray-500">{{ $produit->username }}</div>
-                                            </div>
-                                        </a>
-                                    </th>
+                                <th scope="row"
+                                    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                    <img class="w-10 h-10 rounded-md"
+                                        src="{{ $produit->photoProd1 ? asset($produit->photoProd1) : asset('img/noimg.jpeg') }}"
+                                        alt="Jese image">
+                                    <div class="ps-3">
+                                        <div class="text-base font-semibold">{{ $produit->name }}</div>
+                                        <div class="font-normal text-gray-500">{{ $produit->username }}</div>
+                                    </div>
+                                </th>
 
                                     <td class="px-6 py-4">
                                         <p class="mb-0"> [{{ $produit->qteProd_min }} - {{ $produit->qteProd_max }}]</p>
