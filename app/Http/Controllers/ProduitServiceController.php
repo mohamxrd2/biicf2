@@ -112,6 +112,25 @@ class ProduitServiceController extends Controller
         return redirect()->route('admin.services')->with('success', 'Le service a été supprimé avec succès');
     }
 
+    public function postBiicf()
+    {
+        // Récupérer l'utilisateur connecté via le gardien web
+        $user = Auth::guard('web')->user();
     
+        // Vérifier si l'utilisateur est authentifié
+        if ($user) {
+            // Récupérer les produits associés à cet utilisateur
+            $produits = ProduitService::where('user_id', $user->id)->get();
+            
+            // Compter le nombre de produits
+            $prodCount = $produits->count();
+            
+            // Passer les produits à la vue
+            return view('biicf.post', ['produits' => $produits, 'prodCount' => $prodCount]);
+        } else {
+            // Rediriger l'utilisateur vers la page de connexion s'il n'est pas authentifié
+            return redirect()->route('login');
+        }
+    }
     
 }

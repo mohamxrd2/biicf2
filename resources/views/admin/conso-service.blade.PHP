@@ -81,7 +81,6 @@
 
                                 <div class="ps-3">
                                     <div class="text-base font-semibold">{{ $consommation->name }}</div>
-                                    <div class="font-normal text-gray-500">{{ $consommation->username }}</div>
                                 </div>
                             </a>
                         </th>

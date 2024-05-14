@@ -64,7 +64,7 @@
                 @if ($consommations->conditionnement)
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
-                            <h4 class="card-title d">Conditionnement</h4>
+                            <h4 class="card-title font-bold">Conditionnement</h4>
                             <p>{{ $consommations->conditionnement }}</p>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                 @if ($consommations->qte)
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
-                            <h4 class="card-title"> Quantité </h4>
+                            <h4 class="card-title font-bold"> Quantité </h4>
                             <p>{{ $consommations->qte }}</p>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                 @if ($consommations->prix)
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
-                            <h4 class="card-title"> Prix </h4>
+                            <h4 class="card-title font-bold"> Prix </h4>
                             <p>{{ $consommations->prix }}</p>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                 @if ($consommations->qteProd_min)
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
-                            <h4 class="card-title"> Frequence de consommation</h4>
+                            <h4 class="card-title font-bold"> Frequence de consommation</h4>
                             <p>{{ $consommations->qteProd_min }} </p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                 @if ($consommations->jourAch_cons)
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
-                            <h4 class="card-title"> Jour d'achat</h4>
+                            <h4 class="card-title font-bold"> Jour d'achat</h4>
                             <p> {{ $consommations->jourAch_cons }}</p>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                 @if ($consommations->qualif_serv)
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
-                            <h4 class="card-title"> Qualification </h4>
+                            <h4 class="card-title bold"> Qualification </h4>
                             <p> {{ $consommations->qualif_serv }}</p>
                         </div>
                     </div>
@@ -116,21 +116,22 @@
                 @if ($consommations->specialité)
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
-                            <h4 class="card-title"> Specialité </h4>
+                            <h4 class="card-title font-bold"> Specialité </h4>
                             <p> {{ $consommations->specialité }}</p>
                         </div>
                     </div>
                 @endif
 
+
                 <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                     <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> Zone d'activité </h4>
+                        <h4 class="card-title font-bold"> Zone d'activité </h4>
                         <p>{{ $consommations->zonecoServ }}</p>
                     </div>
                 </div>
                 <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                     <div class="card-body flex-1 p-0">
-                        <h4 class="card-title"> Ville</h4>
+                        <h4 class="card-title font-bold"> Ville</h4>
                         <p> {{ $consommations->villeCons }}</p>
                     </div>
                 </div>

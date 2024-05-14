@@ -131,12 +131,6 @@
                                             <p class="mb-0">Utilisateur inconnu</p>
                                         @endif
                                     </td>
-
-
-
-
-
-
                                     <td class="px-6 py-4">
                                         <div class="flex">
                                             <a href="#" data-hs-overlay="#hs-delete-{{ $produit->id }}"
