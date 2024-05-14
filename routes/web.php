@@ -41,7 +41,7 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::delete('/supprimer-agent', [AdminAgentController::class, 'destroy'])->name('admin.agent.destroy');
 
-    
+
     Route::post('/agent/{admin}', [AdminAgentController::class, 'isban'])->name('admin.agent.isban');
 
     Route::delete('/users/{user}', [userController::class, 'destroyUser'])->name('admin.user.destroy');
@@ -62,6 +62,12 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     Route::get('/agent/{username}', [AdminAgentController::class, 'show'])->name('agent.show');
 
     Route::get('/client/{username}', [userController::class, 'show'])->name('client.show');
+
+    Route::get('/produit/{slug}', [userController::class, 'pubShow'])->name('produit.pubShow');
+
+    Route::post('/produit/{slug}', [userController::class, 'etat'])->name('produit.etat');
+
+
 
     Route::get('/edit-agent/{username}', [userController::class, 'editAgent'])->name('client.editad');
     Route::post('/edit-agent/{username}', [userController::class, 'updateAdmin'])->name('update.admin');

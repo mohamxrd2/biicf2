@@ -158,7 +158,7 @@ class userController extends Controller
         $transactions = Transaction::with(['senderAdmin', 'receiverAdmin', 'senderUser', 'receiverUser'])
         ->where('sender_user_id', $user->id)
                 ->orWhere('receiver_user_id', $user->id)
-        
+
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
 
@@ -169,6 +169,47 @@ class userController extends Controller
         // Passer les détails du client à la vue
         return view('admin.clientShow', compact('user', 'wallet', 'produitsServices', 'produitCount', 'consommations', 'consCount', 'transactions', 'transaCount'));
     }
+
+    public function pubShow($slug)
+    {
+        $produits = ProduitService::where('name', $slug)->first();
+
+        return view('admin.pubVerif', compact('produits'));
+
+    }
+
+    public function etat(Request $request, $slug)
+    {
+        // Trouver le produit en fonction du slug
+        $produits = ProduitService::where('name', $slug)->first();
+
+        // Vérifier si le produit a été trouvé
+        if ($produits) {
+            // Vérifier l'action à effectuer (accepter ou refuser)
+            $action = $request->input('action');
+
+            // Modifier l'attribut "statut" en fonction de l'action
+            if ($action === 'accepter') {
+                $produits->statuts = 'Accepté';
+            } elseif ($action === 'refuser') {
+                $produits->statuts = 'Refusé';
+            } else {
+                // Gérer une action invalide si nécessaire
+                return response()->json(['message' => 'Action invalide.'], 400);
+            }
+
+            // Enregistrer les modifications dans la base de données
+            $produits->save();
+
+            // Retourner une réponse ou effectuer toute autre action nécessaire
+            return response()->json(['message' => 'L\'état du produit a été modifié avec succès.']);
+        } else {
+            // Le produit n'a pas été trouvé, retourner une réponse avec un code d'erreur
+            return response()->json(['message' => 'Le produit n\'a pas été trouvé.'], 404);
+        }
+    }
+
+
     public function storePub(Request $request)
     {
         $userId = $request->input('user_id');
