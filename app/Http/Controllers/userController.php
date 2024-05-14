@@ -204,7 +204,7 @@ class userController extends Controller
             $produits->save();
 
             // Retourner une réponse ou effectuer toute autre action nécessaire
-            return back()->with('success', 'Produit ou service ajouté avec succès!');
+            return back()->with('success', 'Status du produit modifier avec succès !');
         } else {
             // Le produit n'a pas été trouvé, retourner une réponse avec un code d'erreur
             return back()->with('error', 'Le produit n\'a pas été trouvé.');
@@ -270,7 +270,7 @@ class userController extends Controller
             'zoneco' => 'required|string',
             'ville' => 'required|string',
             'commune' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
             'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif',
@@ -297,6 +297,7 @@ class userController extends Controller
 
 
             'image.image' => 'Le fichier doit être une image.',
+            'image.required' => 'La photo 1 est obligatoire', 
             'image.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.',
 
 
