@@ -99,7 +99,7 @@
                                     {{-- form des publication --}}
 
                                     <form action="{{ route('admin.client.storePub', ['username' => $user->username]) }}"
-                                        method="POST">
+                                        method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div
                                             class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto form1">
@@ -148,7 +148,8 @@
                                                                 placeholder=" Nom du produit ou service " />
                                                         </div>
                                                         <div class="space-y-3 w-full mb-3">
-                                                            <input type="text" name="conditionnement" id="floating_cond"
+                                                            <input type="text" name="conditionnement"
+                                                                id="floating_cond"
                                                                 class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                 placeholder="conditionnement" />
                                                         </div>
@@ -241,138 +242,38 @@
                                                                 rows="3" placeholder="Description de la publication"></textarea>
                                                         </div>
 
-                                                        <div class="relative z-0 flex justify-between items-center w-full flex-row">
-                                                            <div class="flex items-center justify-center w-20" id="floating_photo1">
-                                                                <div class="  rounded-md relative">
+                                                        <div
+                                                            class="relative z-0 flex justify-between items-center w-full flex-row">
+                                                            <div class="flex items-center justify-center w-20"
+                                                                id="floating_photo1">
+                                                                <div class=" overflow-hidden rounded-md relative">
                                                                     <label for="file-upload1"
                                                                         class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
                                                                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                                stroke="currentColor" class="w-6 h-6">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
                                                                                     d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                                                             </svg>
-                                                            
-                                                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                                                                 <span class="font-semibold">Photo 1</span>
                                                                             </p>
                                                                         </div>
                                                                     </label>
-                                                                    <input id="file-upload1" class="hidden rounded-md" type="file" onchange="previewImage(this)" name="image">
-                                                                    <img id="image-preview1" class="absolute inset-0 w-full h-full object-cover hidden">
-                                                                    <button type="button" onclick="removeImage()" id="remove-button1"
-                                                                        class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
-                                                                        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                        
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div class="flex items-center justify-center w-20" id="floating_photo2">
-                                                                <div class="  rounded-md relative">
-                                                                    <label for="file-upload2"
-                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                                stroke="currentColor" class="w-6 h-6">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                                                            </svg>
-                                                            
-                                                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                                <span class="font-semibold">Photo 2</span>
-                                                                            </p>
-                                                                        </div>
-                                                                    </label>
-                                                                    <input id="file-upload2" class="hidden rounded-md" type="file" onchange="previewImage2(this)" name="image2">
-                                                                    <img id="image-preview2" class="absolute inset-0 w-full h-full object-cover hidden">
-                                                                    <button type="button" onclick="removeImage2()" id="remove-button2"
-                                                                        class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
-                                                                        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                        
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            
-
-                                                            <div class="flex items-center justify-center w-20" id="floating_photo3">
-                                                                <div class="rounded-md relative">
-                                                                    <label for="file-upload3" class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                                                            </svg>
-                                                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                                <span class="font-semibold">Photo 3</span>
-                                                                            </p>
-                                                                        </div>
-                                                                    </label>
-                                                                    <input id="file-upload3" class="hidden rounded-md" type="file" onchange="previewImage3(this)" name="image3">
-                                                                    <img id="image-preview3" class="absolute inset-0 w-full h-full object-cover hidden">
-                                                                    <button type="button" onclick="removeImage3()" id="remove-button3" class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
-                                                                        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div class="flex items-center justify-center w-20" id="floating_photo4">
-                                                                <div class="rounded-md relative">
-                                                                    <label for="file-upload4" class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                                                            </svg>
-                                                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                                <span class="font-semibold">Photo 4</span>
-                                                                            </p>
-                                                                        </div>
-                                                                    </label>
-                                                                    <input id="file-upload4" class="hidden rounded-md" type="file" onchange="previewImage4(this)" name="image4">
-                                                                    <img id="image-preview4" class="absolute inset-0 w-full h-full object-cover hidden">
-                                                                    <button type="button" onclick="removeImage4()" id="remove-button4" class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
-                                                                        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex items-center justify-center w-20" id="floating_photo5">
-                                                                <div class="  rounded-md relative">
-                                                                    <label for="file-upload5"
-                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                                        <div
-                                                                        class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24"
-                                                                            stroke-width="1.5" stroke="currentColor"
-                                                                            class="w-6 h-6">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round"
-                                                                                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                                                        </svg>
-
-                                                                        <p
-                                                                            class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                            <span class="font-semibold">Photo 5</span>
-                                                                        </p>
-                                                                    </div>
-                                                                    </label>
-                                                                    <input id="file-upload5" class="hidden rounded-md" type="file"
-                                                                        onchange="previewImage5(this)" name="image5">
-                                                                    <img id="image-preview5"
+                                                                    <input id="file-upload1" class="hidden rounded-md "
+                                                                        type="file" onchange="previewImage(this)"
+                                                                        name="image">
+                                                                    <img id="image-preview1"
                                                                         class="absolute inset-0 w-full h-full object-cover hidden">
-                                                                        <button type="button" onclick="removeImage5()" id="remove-button5"
+                                                                    <button type="button" onclick="removeImage()"
+                                                                        id="remove-button1"
                                                                         class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
                                                                         <svg class="w-full"
                                                                             xmlns="http://www.w3.org/2000/svg"
@@ -383,7 +284,179 @@
                                                                                 stroke-linejoin="round"
                                                                                 d="M6 18 18 6M6 6l12 12" />
                                                                         </svg>
-                                                                        
+
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="flex items-center justify-center w-20"
+                                                                id="floating_photo2">
+                                                                <div class=" overflow-hidden rounded-md relative">
+                                                                    <label for="file-upload2"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 2</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </label>
+                                                                    <input id="file-upload2" class="hidden rounded-md"
+                                                                        type="file" onchange="previewImage2(this)"
+                                                                        name="image2">
+                                                                    <img id="image-preview2"
+                                                                        class="absolute inset-0 w-full h-full object-cover hidden">
+                                                                    <button type="button" onclick="removeImage2()"
+                                                                        id="remove-button2"
+                                                                        class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
+                                                                        <svg class="w-full"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor"
+                                                                            class="w-6 h-6">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                d="M6 18 18 6M6 6l12 12" />
+                                                                        </svg>
+
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="flex items-center justify-center w-20"
+                                                                id="floating_photo3">
+                                                                <div class="overflow-hidden rounded-md relative">
+                                                                    <label for="file-upload3"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 3</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </label>
+                                                                    <input id="file-upload3" class="hidden rounded-md"
+                                                                        type="file" onchange="previewImage3(this)"
+                                                                        name="image3">
+                                                                    <img id="image-preview3"
+                                                                        class="absolute inset-0 w-full h-full object-cover hidden">
+                                                                    <button type="button" onclick="removeImage3()"
+                                                                        id="remove-button3"
+                                                                        class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
+                                                                        <svg class="w-full"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                d="M6 18 18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="flex items-center justify-center w-20"
+                                                                id="floating_photo4">
+                                                                <div class="overflow-hidden rounded-md relative">
+                                                                    <label for="file-upload4"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 4</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </label>
+                                                                    <input id="file-upload4" class="hidden rounded-md"
+                                                                        type="file" onchange="previewImage4(this)"
+                                                                        name="image4">
+                                                                    <img id="image-preview4"
+                                                                        class="absolute inset-0 w-full h-full object-cover hidden">
+                                                                    <button type="button" onclick="removeImage4()"
+                                                                        id="remove-button4"
+                                                                        class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
+                                                                        <svg class="w-full"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                d="M6 18 18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex items-center justify-center w-20"
+                                                                id="floating_photo5">
+                                                                <div class=" overflow-hidden rounded-md relative">
+                                                                    <label for="file-upload5"
+                                                                        class="flex flex-col items-center justify-center w-full h-30 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                        <div
+                                                                            class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke-width="1.5" stroke="currentColor"
+                                                                                class="w-6 h-6">
+                                                                                <path stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                                                            </svg>
+
+                                                                            <p
+                                                                                class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                                <span class="font-semibold">Photo 5</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </label>
+                                                                    <input id="file-upload5" class="hidden rounded-md"
+                                                                        type="file" onchange="previewImage5(this)"
+                                                                        name="image5">
+                                                                    <img id="image-preview5"
+                                                                        class="absolute inset-0 w-full h-full object-cover hidden">
+                                                                    <button type="button" onclick="removeImage5()"
+                                                                        id="remove-button5"
+                                                                        class="text-red-600 bg-white w-5 h-5 rounded-full absolute top-2 right-2 hidden">
+                                                                        <svg class="w-full"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor"
+                                                                            class="w-6 h-6">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                d="M6 18 18 6M6 6l12 12" />
+                                                                        </svg>
+
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -446,7 +519,7 @@
                                         <td
                                             class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                             <img class="w-10 h-10 rounded-md"
-                                                src="{{ $produitsService->photoProd1 ? $produitsService->photoProd1 : asset('img/noimg.jpeg') }}"
+                                                src="{{ $produitsService->photoProd1 ? asset($produitsService->photoProd1) : asset('img/noimg.jpeg') }}"
                                                 alt="Jese image">
                                             <div class="ml-3">
                                                 <div class="text-base font-semibold">{{ $produitsService->name }}</div>
@@ -1345,6 +1418,7 @@
             removeButton.classList.add('hidden');
             fileInput.value = ''; // Clear the file input
         }
+
         function previewImage3(input) {
             const preview = document.getElementById('image-preview3');
             const removeButton = document.getElementById('remove-button3');
@@ -1376,6 +1450,7 @@
             removeButton.classList.add('hidden');
             fileInput.value = ''; // Clear the file input
         }
+
         function previewImage4(input) {
             const preview = document.getElementById('image-preview4');
             const removeButton = document.getElementById('remove-button4');
@@ -1407,6 +1482,7 @@
             removeButton.classList.add('hidden');
             fileInput.value = ''; // Clear the file input
         }
+
         function previewImage5(input) {
             const preview = document.getElementById('image-preview5');
             const removeButton = document.getElementById('remove-button5');
@@ -1438,8 +1514,6 @@
             removeButton.classList.add('hidden');
             fileInput.value = ''; // Clear the file input
         }
-
-        
     </script>
 
     <script src="{{ asset('js/search2.js') }}"></script>

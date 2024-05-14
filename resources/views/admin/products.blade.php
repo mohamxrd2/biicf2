@@ -97,7 +97,7 @@
                                 <th scope="row"
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                     <img class="w-10 h-10 rounded-md"
-                                        src="{{ $produit->photoProd1 ? $produit->photoProd1 : asset('img/noimg.jpeg') }}"
+                                        src="{{ $produit->photoProd1 ? asset($produit->photoProd1) : asset('img/noimg.jpeg') }}"
                                         alt="Jese image">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $produit->name }}</div>
