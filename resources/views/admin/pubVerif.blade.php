@@ -3,6 +3,16 @@
 @section('title', 'affichage de produits')
 
 @section('content')
+    @if (session('success'))
+        <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="bg-green-200 text-red-800 px-4 py-2 rounded-md mb-4">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="mb-3">
         <h1 class=" text-center font-bold text-2xl">DETAILS DE LA PUBLICATION</h1>
     </div>
@@ -107,24 +117,30 @@
                             class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                             <div class="hs-carousel-slide">
                                 <div class="flex justify-center h-full bg-gray-100 p-6 dark:bg-neutral-900">
-                                    <span
-                                        class="self-center text-4xl text-gray-800 transition duration-700 dark:text-white"><img
-                                            class="w-full rounded-md" src="{{ asset($produits->photo) }}"
-                                            alt="{{ $produits->name }}"></span>
+                                    <img class="w-full rounded-md"
+                                        src="{{ $produits->photoProd1 ? asset($produits->photoProd1) : asset('img/noimg.jpeg') }}"
+                                        alt="Jese image">
                                 </div>
                             </div>
                             <div class="hs-carousel-slide">
                                 <div class="flex justify-center h-full bg-gray-200 p-6 dark:bg-neutral-800">
-                                    <span
-                                        class="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">Second
-                                        slide</span>
+                                    <img class="w-full rounded-md"
+                                        src="{{ $produits->photoProd2 ? asset($produits->photoProd2) : asset('img/noimg.jpeg') }}"
+                                        alt="Jese image">
                                 </div>
                             </div>
                             <div class="hs-carousel-slide">
                                 <div class="flex justify-center h-full bg-gray-300 p-6 dark:bg-neutral-700">
-                                    <span
-                                        class="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">Third
-                                        slide</span>
+                                    <img class="w-full rounded-md"
+                                        src="{{ $produits->photoProd3 ? asset($produits->photoProd3) : asset('img/noimg.jpeg') }}"
+                                        alt="Jese image">
+                                </div>
+                            </div>
+                            <div class="hs-carousel-slide">
+                                <div class="flex justify-center h-full bg-gray-300 p-6 dark:bg-neutral-700">
+                                    <img class="w-full rounded-md"
+                                        src="{{ $produits->photoProd4 ? asset($produits->photoProd4) : asset('img/noimg.jpeg') }}"
+                                        alt="Jese image">
                                 </div>
                             </div>
                         </div>
@@ -160,13 +176,16 @@
                             class="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
                         <span
                             class="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
+                        <span
+                            class="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
                     </div>
                 </div>
                 <!-- End Slider -->
 
                 <!-- Boutons -->
 
-                <form method="POST" action="{{ route('produit.etat', $produits->name)}}" class="flex items-center space-x-5 mt-5">
+                <form method="POST" action="{{ route('produit.etat', $produits->id) }}"
+                    class="flex items-center space-x-5 mt-5">
                     @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
                     @method('POST')
 
@@ -174,13 +193,15 @@
                     <input type="hidden" name="action" value="accepter">
 
                     <!-- Bouton accepter -->
-                    <button type="submit" class="flex items-center space-x-2 border bg-blue-400 px-5 py-2 rounded-md text-black hover:bg-white hover:border hover:border-gray-600">
+                    <button type="submit"
+                        class="flex items-center space-x-2 border bg-blue-400 px-5 py-2 rounded-md text-black hover:bg-white hover:border hover:border-gray-600">
                         <i class="fa-regular fa-heart text-xl"></i>
                         <span>accepter</span>
                     </button>
                 </form>
 
-                <form method="POST" action="{{ route('produit.etat', $produits->name)}}" class="flex items-center space-x-5 mt-5">
+                <form method="POST" action="{{ route('produit.etat', $produits->id) }}"
+                    class="flex items-center space-x-5 mt-5">
                     @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
                     @method('POST')
 
@@ -188,7 +209,8 @@
                     <input type="hidden" name="action" value="refuser">
 
                     <!-- Bouton refuser -->
-                    <button type="submit" class="flex items-center space-x-2 border bg-red-400 px-5 py-2 rounded-md text-black hover:bg-white hover:border hover:border-gray-600">
+                    <button type="submit"
+                        class="flex items-center space-x-2 border bg-red-400 px-5 py-2 rounded-md text-black hover:bg-white hover:border hover:border-gray-600">
                         <i class="fa-solid fa-cart-shopping text-xl"></i>
                         <span>refuser</span>
                     </button>

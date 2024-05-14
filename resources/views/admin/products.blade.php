@@ -89,17 +89,19 @@
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                                <th scope="row"
-                                    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img class="w-10 h-10 rounded-md"
-                                        src="{{ $produit->photoProd1 ? asset($produit->photoProd1) : asset('img/noimg.jpeg') }}"
-                                        alt="Jese image">
-                                    <div class="ps-3">
-                                        <div class="text-base font-semibold">{{ $produit->name }}</div>
-                                        <div class="font-normal text-gray-500">{{ $produit->username }}</div>
-                                    </div>
-                                </th>
+                                    <th scope="row"
+                                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                        <a href="{{ route('produit.pubShow', $produit->id) }}" class="flex items-center">
+                                            <img class="w-10 h-10 rounded-md"
+                                            src="{{ $produit->photoProd1 ? asset($produit->photoProd1) : asset('img/noimg.jpeg') }}"
+                                            alt="Jese image">
+                                            <div class="ps-3">
+                                                <div class="text-base font-semibold">{{ $produit->name }}</div>
+                                                <div class="font-normal text-gray-500">{{ $produit->username }}</div>
+                                            </div>
 
+                                        </a>
+                                    </th>
                                     <td class="px-6 py-4">
                                         <p class="mb-0"> [{{ $produit->qteProd_min }} - {{ $produit->qteProd_max }}]</p>
                                     </td>
@@ -159,10 +161,11 @@
                                                             class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
                                                             data-hs-overlay="#hs-delete">
                                                             <span class="sr-only">Close</span>
-                                                            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                                width="24" height="24" viewBox="0 0 24 24"
-                                                                fill="none" stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                            <svg class="flex-shrink-0 size-4"
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round">
                                                                 <path d="M18 6 6 18" />
                                                                 <path d="m6 6 12 12" />
                                                             </svg>

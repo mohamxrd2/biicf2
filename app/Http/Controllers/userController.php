@@ -172,17 +172,18 @@ class userController extends Controller
         return view('admin.clientShow', compact('user', 'wallet', 'produitsServices', 'produitCount', 'consommations', 'consCount', 'transactions', 'transaCount'));
     }
 
-    public function pubShow($slug)
+    public function pubShow($id)
     {
-        $produits = ProduitService::where('name', $slug)->first();
+        $produits = ProduitService::find($id);
+
 
         return view('admin.pubVerif', compact('produits'));
     }
 
-    public function etat(Request $request, $slug)
+    public function etat(Request $request, $id)
     {
-        // Trouver le produit en fonction du slug
-        $produits = ProduitService::where('name', $slug)->first();
+        // Trouver le produit en fonction de l'ID
+        $produits = ProduitService::find($id);
 
         // Vérifier si le produit a été trouvé
         if ($produits) {
@@ -196,17 +197,17 @@ class userController extends Controller
                 $produits->statuts = 'Refusé';
             } else {
                 // Gérer une action invalide si nécessaire
-                return response()->json(['message' => 'Action invalide.'], 400);
+            return back()->with('error', 'Action invalide.');
             }
 
             // Enregistrer les modifications dans la base de données
             $produits->save();
 
             // Retourner une réponse ou effectuer toute autre action nécessaire
-            return response()->json(['message' => 'L\'état du produit a été modifié avec succès.']);
+            return back()->with('success', 'Produit ou service ajouté avec succès!');
         } else {
             // Le produit n'a pas été trouvé, retourner une réponse avec un code d'erreur
-            return response()->json(['message' => 'Le produit n\'a pas été trouvé.'], 404);
+            return back()->with('error', 'Le produit n\'a pas été trouvé.');
         }
     }
 
