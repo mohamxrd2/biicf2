@@ -55,21 +55,11 @@
                     <th scope="col" class="px-6 py-3">
                         Fréquence de consommation
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Jour d'achat
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Qualification de service
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3">
                         Spécialité
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Zone d'activité
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Ville de consommation
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3">
                         Statuts
                     </th>
@@ -101,23 +91,23 @@
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->frqce_cons }}</p>
                         </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->jourAch_cons }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->qualif_serv }}</p>
-                        </td>
+                        
+                        
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->specialité }}</p>
                         </td>
+                        
                         <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->zoneAct }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->villeCons }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="mb-0">{{ $consommation->statuts }}</p>
+                            @if ($consommation->statuts == 'En attente')
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-yellow-800 bg-yellow-100 dark:text-red-400 dark:bg-red-200">{{ $consommation->statuts }}</span>
+                        @elseif ($consommation->statuts == 'Accepté')
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-green-800 bg-green-100 dark:text-red-400 dark:bg-red-200">{{ $consommation->statuts }}</span>
+                        @elseif ($consommation->statuts == 'Refusé')
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-none text-red-800 bg-red-100 dark:text-red-400 dark:bg-red-200">{{ $consommation->statuts }}</span>
+                        @endif
                         </td>
                         <td class="px-6 py-4">
 
