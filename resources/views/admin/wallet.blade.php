@@ -378,7 +378,7 @@
                                                             <img class="w-5 h-5 mr-2 rounded-full"
                                                                 src="{{ $agent->photo }}" alt="">
                                                             <div class="flex justify-between items-center w-full">
-                                                                <span data-hs-combo-box-search-text="{{ $agent->name }}"
+                                                                <span data-hs-combo-box-search-text="{{ $agent->username }}"
                                                                     data-hs-combo-box-value="{{ $agent->id }}">{{ $agent->username }}({{ $agent->name }})</span>
                                                                 <span class="hidden hs-combo-box-selected:block">
                                                                     <svg class="flex-shrink-0 size-3.5 text-blue-600"
@@ -527,7 +527,7 @@
                                                             <img class="w-5 h-5 mr-2 rounded-full"
                                                                 src="{{ $user->photo }}" alt="">
                                                             <div class="flex justify-between items-center w-full">
-                                                                <span data-hs-combo-box-search-text="{{ $user->name }} "
+                                                                <span data-hs-combo-box-search-text="{{ $user->username }} "
                                                                     data-hs-combo-box-value="{{ $user->id }}">{{ $user->username }}({{$user->name}})</span>
                                                                 <span class="hidden hs-combo-box-selected:block">
                                                                     <svg class="flex-shrink-0 size-3.5 text-blue-600"
