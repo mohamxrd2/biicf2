@@ -146,7 +146,9 @@ class userController extends Controller
         $wallet = Wallet::where('user_id', $user->id)->first();
 
         // Récupérer tous les produits de service associés à cet utilisateur
-        $produitsServices = ProduitService::where('user_id', $user->id)->get();
+        $produitsServices = ProduitService::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $produitCount = $produitsServices->count();
 
@@ -274,6 +276,7 @@ class userController extends Controller
             'description.required' => 'La description est requise.'
         ]);
 
+
         // Vérifiez si une image est téléchargée avant de la sauvegarder
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -334,13 +337,10 @@ class userController extends Controller
             $produitsServices->desrip = $validatedData['description'];
             $produitsServices->user_id = $userId; // Ajout de l'ID de l'utilisateur
 
-            $produitsServices->photoProd1 = $path . $imageName;
-            // Pour la deuxième image
-            $produitsServices->photoProd2 = $path2 . $imageName2;
-            // Pour la troisième image
-            $produitsServices->photoProd3 = $path3 . $imageName3;
-            // Pour la quatrième image
-            $produitsServices->photoProd4 = $path4 . $imageName4;
+            $produitsServices->photoProd1 = $request->hasFile('image') ? $path . $imageName : null;
+            $produitsServices->photoProd2 = $request->hasFile('image2') ? $path2 . $imageName2 : null;
+            $produitsServices->photoProd3 = $request->hasFile('image3') ? $path3 . $imageName3 : null;
+            $produitsServices->photoProd4 = $request->hasFile('image4') ? $path4 . $imageName4 : null;
 
             $produitsServices->save();
 
