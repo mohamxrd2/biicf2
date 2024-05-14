@@ -70,6 +70,9 @@
                     <th scope="col" class="px-6 py-3">
                         Ville de consommation
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Statuts
+                    </th>
 
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -109,6 +112,9 @@
                         </td>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->villeCons }}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="mb-0">{{ $consommation->statuts }}</p>
                         </td>
                         <td class="px-6 py-4">
 

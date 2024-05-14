@@ -24,6 +24,7 @@ class Consommation extends Model
         'zoneAct',
         'villeCons',
         'id_user',
+        'statuts'
     ];
 
     public function user()
