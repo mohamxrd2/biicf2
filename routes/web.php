@@ -68,6 +68,11 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     Route::post('/produit/{id}', [userController::class, 'etat'])->name('produit.etat');
 
 
+    Route::get('/consommation/{slug}', [userController::class, 'consoShow'])->name('consommation.consoShow');
+
+    Route::post('/consommation/{id}', [userController::class, 'consoEtat'])->name('consommation.consoEtat');
+
+
 
     Route::get('/edit-agent/{username}', [userController::class, 'editAgent'])->name('client.editad');
     Route::post('/edit-agent/{username}', [userController::class, 'updateAdmin'])->name('update.admin');

@@ -91,10 +91,13 @@
 
                         <th scope="row"
                             class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">{{ $consommation->name }}</div>
-                                <div class="font-normal text-gray-500">{{ $consommation->username }}</div>
-                            </div>
+                            <a href="{{ route('consommation.consoShow', $consommation->id) }}" class="flex items-center">
+
+                                <div class="ps-3">
+                                    <div class="text-base font-semibold">{{ $consommation->name }}</div>
+                                    <div class="font-normal text-gray-500">{{ $consommation->username }}</div>
+                                </div>
+                            </a>
                         </th>
                         <td class="px-6 py-4">
                             <p class="mb-0">{{ $consommation->conditionnement }}</p>
@@ -206,13 +209,14 @@
         </table>
 
         <!-- Message d'aucun résultat trouvé -->
-        <div id="noResultMessage" class="h-20 flex justify-center items-center" style="display: none;">Aucun résultat trouvé.</div>
+        <div id="noResultMessage" class="h-20 flex justify-center items-center" style="display: none;">Aucun résultat
+            trouvé.</div>
 
     </div>
     <div class="my-5 flex justify-end">
         {{ $consommations->links() }}
     </div>
 
-    <script src="{{asset('js/search.js')}}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 
 @endsection

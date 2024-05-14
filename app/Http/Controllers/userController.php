@@ -210,6 +210,44 @@ class userController extends Controller
             return back()->with('error', 'Le produit n\'a pas été trouvé.');
         }
     }
+    public function consoShow($id)
+    {
+        $consommations = Consommation::find($id);
+
+
+        return view('admin.consoVerif', compact('consommations'));
+    }
+
+    public function consoEtat(Request $request, $id)
+    {
+        // Trouver le produit en fonction de l'ID
+        $Consommations = Consommation::find($id);
+
+        // Vérifier si le produit a été trouvé
+        if ($Consommations) {
+            // Vérifier l'action à effectuer (accepter ou refuser)
+            $action = $request->input('action');
+
+            // Modifier l'attribut "statut" en fonction de l'action
+            if ($action === 'accepter') {
+                $Consommations->statuts = 'Accepté';
+            } elseif ($action === 'refuser') {
+                $Consommations->statuts = 'Refusé';
+            } else {
+                // Gérer une action invalide si nécessaire
+            return back()->with('error', 'Action invalide.');
+            }
+
+            // Enregistrer les modifications dans la base de données
+            $Consommations->save();
+
+            // Retourner une réponse ou effectuer toute autre action nécessaire
+            return back()->with('success', 'Produit ou service ajouté avec succès!');
+        } else {
+            // Le produit n'a pas été trouvé, retourner une réponse avec un code d'erreur
+            return back()->with('error', 'Le produit n\'a pas été trouvé.');
+        }
+    }
 
 
     public function storePub(Request $request)
