@@ -1059,6 +1059,11 @@
     @endif
     @endforeach
 
+    <div class="my-5 flex justify-end">
+        {{ $transactions->links() }}
+    </div>
+
+
     @endif
 
 

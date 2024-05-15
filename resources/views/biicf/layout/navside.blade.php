@@ -318,7 +318,7 @@
 
 
     <!-- Content -->
-    <div class="w-full pt-10  px-6 md:px-8  lg:ps-72">
+    <div class="w-full pt-10  px-6 md:px-8  lg:ps-72 ">
         <!-- Page Heading -->
 
         @yield('content')
@@ -334,9 +334,7 @@
 
 
         <!-- ========== END FOOTER ========== -->
-        <footer class="text-center text-sm text-gray-600 pt-8 pb-11 ">
-            &copy; 2024 BIICF. Tous droits réservés.
-        </footer>
+     
 
         <!-- End Page Heading -->
     </div>

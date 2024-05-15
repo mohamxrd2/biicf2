@@ -101,9 +101,7 @@ Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin
 
 
 Route::middleware('user.auth')->prefix('biicf')->group(function () {
-    Route::get('acceuil', function () {
-        return view('biicf.acceuil');
-    })->name('biicf.acceuil');
+    Route::get('acceuil', [ProduitServiceController::class,  'homeBiicf'])->name('biicf.acceuil');
 
     Route::get('notif', function () {
         return view('biicf.notif');
@@ -115,15 +113,16 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
         return view('biicf.conso');
     })->name('biicf.conso');
 
-    Route::get('porte-feuille', function () {
-        return view('biicf.wallet');
-    })->name('biicf.wallet');
+    Route::get('porte-feuille',[AdminWalletController::class, 'indexBiicf'])->name('biicf.wallet');
+
+    Route::post('envoyer-client', [AdminWalletController::class, 'sendToClientAccount'])->name('biicf.send');
 
     Route::get('profile', function () {
         return view('biicf.profile');
     })->name('biicf.profile');
 
     Route::post('publication/ajouter', [userController::class, 'storePub'])->name('biicf.pubstore');
+    Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProduct'])->name('biicf.pubdelete');
 });
 
 Route::get('biicf/login', [BiicfAuthController::class, 'showLoginForm'])->name('biicf.login');

@@ -49,6 +49,8 @@
                                 nom & photo
                             </th>
 
+                          
+
                             <th scope="col" class="px-6 py-3">
                                 quantite traité
                             </th>
@@ -102,6 +104,7 @@
 
                                         </a>
                                     </th>
+                                   
                                     <td class="px-6 py-4">
                                         <p class="mb-0"> [{{ $produit->qteProd_min }} - {{ $produit->qteProd_max }}]</p>
                                     </td>

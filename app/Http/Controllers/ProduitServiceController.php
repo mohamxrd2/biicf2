@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
 use App\Http\Controllers\Controller;
@@ -116,15 +117,17 @@ class ProduitServiceController extends Controller
     {
         // Récupérer l'utilisateur connecté via le gardien web
         $user = Auth::guard('web')->user();
-    
+
         // Vérifier si l'utilisateur est authentifié
         if ($user) {
             // Récupérer les produits associés à cet utilisateur
-            $produits = ProduitService::where('user_id', $user->id)->get();
-            
+            $produits = ProduitService::where('user_id', $user->id)->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+
             // Compter le nombre de produits
             $prodCount = $produits->count();
-            
+
             // Passer les produits à la vue
             return view('biicf.post', ['produits' => $produits, 'prodCount' => $prodCount]);
         } else {
@@ -132,5 +135,16 @@ class ProduitServiceController extends Controller
             return redirect()->route('login');
         }
     }
+
+    public function homeBiicf()
+    {
+        $produits = ProduitService::with('user')
+            ->where('type', 'produits')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        $users = User::orderBy('created_at', 'DESC')
+        ->paginate(10);
     
+        return view('biicf.acceuil', compact('users' , 'produits'));
+    }
 }
