@@ -27,26 +27,28 @@
                             class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Chercher</button>
 
                     </div>
-                    
 
 
-                        <div class="relative z-50 w-full max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300"
+
+                    <div class="absolute z-50 w-full max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300"
                         style="display: none;" data-hs-combo-box-output="">
-    
+
                         <!-- Utiliser la boucle foreach pour générer les éléments de la liste déroulante -->
                         @foreach ($produits as $produit)
                             <div class="cursor-pointer  py-2 px-4 w-full text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
                                 tabindex="{{ $loop->index }}" data-hs-combo-box-output-item="{{ $produit->id }}">
                                 <div class="flex">
-                                    <img class="w-10 h-10 mr-2 rounded-md" src="{{ $produit->photoProd1 ? asset($produit->photoProd1) : asset('img/noimg.jpeg')}}" alt="">
+                                    <img class="w-8 h-8 mr-2 rounded-md"
+                                        src="{{ $produit->photoProd1 ? asset($produit->photoProd1) : asset('img/noimg.jpeg') }}"
+                                        alt="">
                                     <div class="flex justify-between items-center w-full">
                                         <span data-hs-combo-box-search-text="{{ $produit->name }} "
                                             data-hs-combo-box-value="{{ $produit->id }}">{{ $produit->name }}</span>
                                         <span class="hidden hs-combo-box-selected:block">
-                                            <svg class="flex-shrink-0 size-3.5 text-blue-600" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
+                                            <svg class="flex-shrink-0 size-3.5 text-blue-600"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M20 6 9 17l-5-5"></path>
                                             </svg>
                                         </span>
@@ -56,8 +58,52 @@
                         @endforeach
                     </div>
                 </div>
-                
+
+                <div class="grid grid-cols-3 gap-3 mt-2">
+                    <div class="col-span-1">
+                        <select class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm   disabled:opacity-50 disabled:pointer-events-none">
+                            <option selected="">Zone economique</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                    </div>
+                    <div class="col-span-1">
+                        <select class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm disabled:opacity-50 disabled:pointer-events-none">
+                            <option selected="">Type</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                    </div>
+                    <div class="col-span-1">
+                        <input type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Quantité souhaité">
+                    </div>
+
+                </div>
+
             </form>
+
+            <div class="max-w-2xl mx-auto mt-5">
+
+                <div class="w-full flex p-4 rounded-xl bg-gray-100 border border-gray-200">
+                    <img class="h-32 w-32 mr-2 rounded-xl" src="" alt="">
+                    <div class="flex flex-col">
+                        <div class="flex flex-col">
+                            <p class="text-xl font-semibold">Titre du produits</p>
+                            <div class="flex items-center text-[12px] text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 inline-block align-middle">
+                                    <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
+                                </svg>
+                                <p class="text-[12px]  inline-block align-middle">Abidjan, attecoubé</p>
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+                </div>
+
+            </div>
 
         </div>
         <div class="lg:col-span-1 lg:block hidden">
