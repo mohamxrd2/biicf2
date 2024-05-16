@@ -104,6 +104,8 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('acceuil', [ProduitServiceController::class,  'homeBiicf'])->name('biicf.acceuil');
     Route::get('recheche', [ProduitServiceController::class, 'search'])->name('biicf.search');
 
+   
+
     Route::get('notif', function () {
         return view('biicf.notif');
     })->name('biicf.notif');
@@ -111,6 +113,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('publication', [ProduitServiceController::class, 'postBiicf'])->name('biicf.post');
     Route::post('publication/ajouter', [userController::class, 'storePub'])->name('biicf.pubstore');
     Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProduct'])->name('biicf.pubdelete');
+    Route::get('publication/{id}', [ProduitServiceController::class, 'pubDet'])->name('biicf.postdet');
 
     Route::get('consommation', function () {
         return view('biicf.conso');
@@ -123,6 +126,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('profile', function () {
         return view('biicf.profile');
     })->name('biicf.profile');
+
 
     
 });

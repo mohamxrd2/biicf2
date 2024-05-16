@@ -20,7 +20,6 @@
     <div class="lg:flex 2xl:gap-16 gap-12 max-w-[1065px] mx-auto">
         @if ($produits)
             <div class="mb-4 flex-1 mx-auto">
-
                 <div class="md:max-w-[650px] mx-auto flex-1 xl:space-y-6 space-y-3">
 
                     <div class="flex items-center py-3 dark:border-gray-600 my-3">
@@ -49,37 +48,34 @@
                             <p>{{ $produits->type }}</p>
                         </div>
                     </div>
-                    @if ($produits->condProd )
-                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                        <div class="card-body flex-1 p-0">
-                            <h4 class="card-title font-bold"> conditionnement </h4>
-                            <p>{{ $produits->condProd }}</p>
+                    @if ($produits->condProd)
+                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                            <div class="card-body flex-1 p-0">
+                                <h4 class="card-title font-bold"> conditionnement </h4>
+                                <p>{{ $produits->condProd }}</p>
+                            </div>
                         </div>
-                    </div>
-                        
                     @endif
-                    
-                   @if ($produits->formatProd)
-                   <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                    <div class="card-body flex-1 p-0">
-                        <h4 class="card-title font-bold"> format </h4>
-                        <p>{{ $produits->formatProd }}</p>
-                    </div>
-                </div>
-                   @endif
 
-                   @if ($produits->qteProd_min || $produits->qteProd_max)
+                    @if ($produits->formatProd)
+                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                            <div class="card-body flex-1 p-0">
+                                <h4 class="card-title font-bold"> format </h4>
+                                <p>{{ $produits->formatProd }}</p>
+                            </div>
+                        </div>
+                    @endif
 
-                   <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                    <div class="card-body flex-1 p-0">
-                        <h4 class="card-title font-bold"> Quantité traité</h4>
-                        <p>[ {{ $produits->qteProd_min }} - {{ $produits->qteProd_max }} ]</p>
-                    </div>
-                </div>
-                       
-                   @endif
-                   
-                   
+                    @if ($produits->qteProd_min || $produits->qteProd_max)
+                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                            <div class="card-body flex-1 p-0">
+                                <h4 class="card-title font-bold"> Quantité traité</h4>
+                                <p>[ {{ $produits->qteProd_min }} - {{ $produits->qteProd_max }} ]</p>
+                            </div>
+                        </div>
+                    @endif
+
+
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
                             <h4 class="card-title font-bold"> Prix par unité </h4>
@@ -88,49 +84,41 @@
                     </div>
 
                     @if ($produits->LivreCapProd)
-
-                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                        <div class="card-body flex-1 p-0">
-                            <h4 class="card-title font-bold">Capacité de livré</h4>
-                            <p>{{ $produits->LivreCapProd }}</p>
+                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                            <div class="card-body flex-1 p-0">
+                                <h4 class="card-title font-bold">Capacité de livré</h4>
+                                <p>{{ $produits->LivreCapProd }}</p>
+                            </div>
                         </div>
-                    </div>
-                        
                     @endif
 
                     @if ($produits->qalifServ)
-
-                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                        <div class="card-body flex-1 p-0">
-                            <h4 class="card-title font-bold"> Experiance  </h4>
-                            <p>{{ $produits->qalifServ }}</p>
+                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                            <div class="card-body flex-1 p-0">
+                                <h4 class="card-title font-bold"> Experiance </h4>
+                                <p>{{ $produits->qalifServ }}</p>
+                            </div>
                         </div>
-                    </div>
-                        
                     @endif
 
                     @if ($produits->sepServ)
-                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                        <div class="card-body flex-1 p-0">
-                            <h4 class="card-title font-bold"> Specialité  </h4>
-                            <p>{{ $produits->sepServ}}</p>
+                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                            <div class="card-body flex-1 p-0">
+                                <h4 class="card-title font-bold"> Specialité </h4>
+                                <p>{{ $produits->sepServ }}</p>
+                            </div>
                         </div>
-                    </div>
-                   
-                        
                     @endif
 
                     @if ($produits->qteServ)
-                    <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
-                        <div class="card-body flex-1 p-0">
-                            <h4 class="card-title font-bold"> Nombre du personnel  </h4>
-                            <p>{{ $produits->qteServ}}</p>
+                        <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
+                            <div class="card-body flex-1 p-0">
+                                <h4 class="card-title font-bold"> Nombre du personnel </h4>
+                                <p>{{ $produits->qteServ }}</p>
+                            </div>
                         </div>
-                    </div>
-                   
-                        
                     @endif
-                    
+
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5">
                         <div class="card-body flex-1 p-0">
                             <h4 class="card-title font-bold"> Zone economique </h4>
@@ -143,13 +131,13 @@
                             <p> {{ $produits->villeServ }}, {{ $produits->comnServ }}</p>
                         </div>
                     </div>
-
-
                 </div>
                 <div class=" card border shadow-sm rounded-xl flex space-x-5 p-5">
                     <div class="card-body flex-1 p-0">
                         <h4 class="card-title font-bold"> Description</h4>
+
                         <p>{{ $produits->desrip }}</p>
+
                     </div>
                 </div>
             </div>
@@ -178,35 +166,29 @@
                             $photoCount++;
                         }
                     @endphp
+
                     @if ($photoCount > 0)
 
-                    <div class="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
-                        <div
-                            class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-                            @foreach ([$produits->photoProd1, $produits->photoProd2, $produits->photoProd3, $produits->photoProd4] as $photo)
-                                @if ($photo)
-                                    <div class="hs-carousel-slide">
-                                        <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
-                                            <img class="w-full h-full  rounded-md" src="{{ asset($photo) }}"
-                                                alt="Image">
+                        <div class="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
+                            <div
+                                class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                                @foreach ([$produits->photoProd1, $produits->photoProd2, $produits->photoProd3, $produits->photoProd4] as $photo)
+                                    @if ($photo)
+                                        <div class="hs-carousel-slide">
+                                            <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
+                                                <img class="w-full h-full  rounded-md" src="{{ asset($photo) }}"
+                                                    alt="Image">
+                                            </div>
                                         </div>
-                                    </div>
-                                
-                                @endif
-                            @endforeach
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
                     @else
-                    <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
-                        <img class="w-full h-full  rounded-md" src="{{ asset('img/noimg.jpeg') }}"
-                            alt="Image">
-                    </div>
-
-                        
+                        <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
+                            <img class="w-full h-full  rounded-md" src="{{ asset('img/noimg.jpeg') }}" alt="Image">
+                        </div>
                     @endif
-                    
-                    
-
                     @if ($photoCount > 1)
 
                         <button type="button"
@@ -231,9 +213,6 @@
                                 </svg>
                             </span>
                         </button>
-
-
-
                         <div class="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
                             @foreach ([$produits->photoProd1, $produits->photoProd2, $produits->photoProd3, $produits->photoProd4] as $photo)
                                 @if ($photo)
@@ -242,8 +221,6 @@
                                 @endif
                             @endforeach
                         </div>
-                    
-
                     @endif
 
                 </div>
@@ -256,10 +233,10 @@
                     <form method="POST" action="{{ route('produit.etat', $produits->id) }}">
                         @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
                         @method('POST')
-                    
+
                         <!-- Champ pour l'action accepter -->
                         <input type="hidden" name="action" value="accepter">
-                    
+
                         <!-- Bouton accepter -->
                         @if ($produits->status == 'Accepté')
                             <div class="w-full mb-3">
@@ -271,15 +248,14 @@
                             </button>
                         @endif
                     </form>
-                    
-                    
+
                     <form method="POST" action="{{ route('produit.etat', $produits->id) }}">
                         @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
                         @method('POST')
-                    
+
                         <!-- Champ pour l'action refuser -->
                         <input type="hidden" name="action" value="refuser">
-                    
+
                         <!-- Bouton refuser -->
                         @if ($produits->status == 'Refusé')
                             <div class="w-full">
@@ -291,21 +267,9 @@
                             </button>
                         @endif
                     </form>
-                    
-
-
                 </div>
-
-
-
-
             </div>
         @endif
     </div>
-
-
-
-
-
-
+    
 @endsection

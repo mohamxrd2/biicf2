@@ -4,6 +4,8 @@
 
 @section('content')
 
+    
+
     <div class="grid grid-cols-3 gap-4">
 
         <div class="lg:col-span-2 col-span-3">
@@ -108,7 +110,10 @@
                             <div class="flex flex-col w-full justify-between h-full">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-xl font-semibold">{{ $produit->name }}</p>
+                                        <a href="{{ route('biicf.postdet', $produit->id) }}" class="flex items-center">
+                                            <p class="text-xl font-semibold">{{ $produit->name }}</p>
+                                        </a>
+
                                         <div class="flex items-center text-[12px] text-gray-600">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                                 class="w-4 h-4 inline-block align-middle">
@@ -130,9 +135,7 @@
                                     @endif
                                 </div>
                                 <p class="text-sm text-slate-700">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis impedit, velit totam nam
-                                    quisquam consequatur facere?..
-
+                                    {{ strlen($produit->desrip) > 100 ? substr($produit->desrip, 0, 100) . '...' : $produit->desrip }}
                                 </p>
                                 <div class="w-full bottom-0">
                                     <p class="text-sm text-gray-600 text-right ">
@@ -140,6 +143,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             @endforeach
