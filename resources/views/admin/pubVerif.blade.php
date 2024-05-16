@@ -163,21 +163,6 @@
                             "isAutoPlay": true
                         }'
                     class="relative">
-                    <div class="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
-                        <div
-                            class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-                            @foreach ([$produits->photoProd1, $produits->photoProd2, $produits->photoProd3, $produits->photoProd4] as $photo)
-                                @if ($photo)
-                                    <div class="hs-carousel-slide">
-                                        <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
-                                            <img class="w-full h-full  rounded-md" src="{{ asset($photo) }}"
-                                                alt="Image">
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
                     @php
                         $photoCount = 0;
                         if ($produits->photoProd1) {
@@ -193,6 +178,34 @@
                             $photoCount++;
                         }
                     @endphp
+                    @if ($photoCount > 0)
+
+                    <div class="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
+                        <div
+                            class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                            @foreach ([$produits->photoProd1, $produits->photoProd2, $produits->photoProd3, $produits->photoProd4] as $photo)
+                                @if ($photo)
+                                    <div class="hs-carousel-slide">
+                                        <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
+                                            <img class="w-full h-full  rounded-md" src="{{ asset($photo) }}"
+                                                alt="Image">
+                                        </div>
+                                    </div>
+                                
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    @else
+                    <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
+                        <img class="w-full h-full  rounded-md" src="{{ asset('img/noimg.jpeg') }}"
+                            alt="Image">
+                    </div>
+
+                        
+                    @endif
+                    
+                    
 
                     @if ($photoCount > 1)
 
@@ -229,6 +242,8 @@
                                 @endif
                             @endforeach
                         </div>
+                    
+
                     @endif
 
                 </div>
