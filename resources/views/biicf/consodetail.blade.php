@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="mb-3">
-        <h1 class=" text-center text-slate-600 font-bold text-xl">DETAILS DE LA PUBLICATION</h1>
+        <h1 class=" text-center text-slate-600 font-bold text-xl">DETAILS DE LA CONSOMMATION</h1>
     </div>
 
 
