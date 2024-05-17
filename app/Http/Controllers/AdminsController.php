@@ -24,12 +24,7 @@ class AdminsController extends Controller
         return view('admin.agent', ['agents' => $agents]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -64,29 +59,7 @@ class AdminsController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -152,33 +125,45 @@ class AdminsController extends Controller
         return redirect()->back()->with('success', 'Mot de passe mis à jour avec succès.');
     }
 
-    public function updateProfilePhoto(Request $request, Admin $admin)
+    public function updateProfilePhoto(Request $request, $adminId)
     {
+        // Récupérer l'instance de l'admin
+        $admin = Admin::find($adminId);
+
+        if (!$admin) {
+            return back()->withErrors(['error' => 'Administrateur non trouvé.'])->withInput();
+        }
+        
         // Valider les données du formulaire
         $validatedData = $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
+        ], [
+            'image.image' => 'Le fichier doit être une image.',
+            'image.required' => 'La photo est obligatoire.',
+            'image.mimes' => 'Le fichier doit être de type :jpeg, :png, :jpg ou :gif.'
         ]);
-    
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-    
-            // Afficher les informations sur le fichier pour le débogage
-            dd($photo);
-    
-            // Définir le chemin de destination dans le répertoire public/img avec un nom unique
-            $path = $photo->storeAs('public/img', $photo->hashName());
-    
-            // Afficher le chemin du fichier pour le débogage
-            dd($path);
-    
-            // Mettre à jour le champ 'photo' dans la base de données avec le chemin relatif
-            $admin->photo = 'storage/' . str_replace('public/', '', $path);
-            $admin->save();
-    
-            return redirect()->back()->with('success', 'Photo de profil mise à jour avec succès.');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Stockez l'image dans le dossier 'public/post'
+            $path = 'post/';
+            $image->move($path, $imageName);
+
+            // Enregistrez le nom de l'image dans la base de données
+
         }
-    
-        return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour de la photo de profil.');
+
+        try {
+            $admin->photo = $request->hasFile('image') ? $path . $imageName : null;
+            $admin->save();
+
+
+            return back()->with('success', 'Photo de profil mise à jour avec succès!');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return back()->withErrors(['error' => 'Une erreur est survenue lors de la mise à jour de la photo de profil.'])->withInput();
+        }
     }
-    
 }

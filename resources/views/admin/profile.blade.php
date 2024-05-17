@@ -20,15 +20,18 @@
 
         <div class="flex md:gap-8 gap-4 items-center md:p-8 p-6 md:pb-4">
             <form action="{{ route('admin.updateProfilePhoto', ['admin' => $admin->id]) }}" method="post"
-                enctype="multipart/form-data">
+                enctype="multipart/form-data" id="photo-upload-form">
                 @csrf
+                @method('PUT')
                 <div class="relative md:w-20 md:h-20 w-12 h-12 shrink-0">
-                    <label for="file" class="cursor-pointer">
-                        <img id="img" src="{{ $admin->photo }}" class="object-cover w-full h-full rounded-full"
-                            alt="" />
-                        <input type="file" id="file" name="photo" class="hidden" onchange="this.form.submit()" />
+                    <label for="file-upload1" class="cursor-pointer">
+                        <img id="img" src="{{ asset($admin->photo) }}"
+                            class="object-cover w-full h-full rounded-full" alt="User photo" />
+                        <input type="file" id="file-upload1" name="image" class="hidden"
+                            onchange="previewImageAndSubmit(this)" />
+                        <img id="image-preview1" class="absolute inset-0 w-full h-full object-cover rounded-full hidden">
                     </label>
-                    <label for="file"
+                    <label for="file-upload1"
                         class="md:p-1 p-0.5 rounded-full bg-slate-600 md:border-4 border-white absolute -bottom-2 -right-2 cursor-pointer dark:border-slate-700">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="md:w-4 md:h-4 w-3 h-3 fill-white">
@@ -40,6 +43,8 @@
                     </label>
                 </div>
             </form>
+
+
 
 
             <div class="flex-1">
@@ -169,6 +174,46 @@
             </div>
         </div>
     </div>
+    <script>
+        function previewImageAndSubmit(input) {
+            const preview = document.getElementById('image-preview1');
+            const file = input.files[0];
+            const reader = new FileReader();
+            const form = document.getElementById('photo-upload-form');
+
+            reader.onloadend = function() {
+                preview.src = reader.result;
+                preview.classList.remove('hidden');
+                form.submit();  // Submit the form after the image is loaded
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+                preview.classList.add('hidden');
+            }
+        }
+
+        function removeImage() {
+            const preview = document.getElementById('image-preview1');
+            const fileInput = document.getElementById('file-upload1');
+
+            preview.src = '';
+            preview.classList.add('hidden');
+            fileInput.value = ''; // Clear the file input
+        }
+
+        function validateForm() {
+            const fileInput = document.getElementById('file-upload1');
+            if (!fileInput.value) {
+                alert('Please select an image before submitting.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+
 
 
 

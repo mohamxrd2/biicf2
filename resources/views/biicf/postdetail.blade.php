@@ -172,7 +172,7 @@
                         </div>
                     @endif
 
-                    
+
                     <div class="card border shadow-sm rounded-xl flex space-x-5 p-5 mt-3">
                         <div class="card-body flex-1 p-0">
                             <h4 class="card-title font-bold"> Ville, Commune</h4>
@@ -188,7 +188,7 @@
                     <div
                             class="flex flex-col w-full bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
                             <div class="p-4 md:p-10">
-                               
+
                                 <p class="mt-2 text-gray-500 dark:text-neutral-400">
                                 <h4 class="card-title font-bold"> Date de création </h4>
                                 <p class="mb-0">{{ \Carbon\Carbon::parse($produit->created_at)->diffForHumans() }}</p>
@@ -198,8 +198,14 @@
                 </div>
                 </div>
             </div>
+            <div class="lg:col-span-1 col-span-3">
+
+                gudfkdjfl fklfkjrljgrk Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis nihil officiis eveniet placeat! Dolorem nemo ea culpa incidunt facere nihil at quas exercitationem tempora repudiandae ex, rerum laudantium esse explicabo?
+
+            </div>
 
         </div>
+
 
     </div>
 

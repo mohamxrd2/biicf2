@@ -76,7 +76,7 @@
                         <button id="hs-dropdown-with-header" type="button"
                             class="p-1 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700">
                             <img class="inline-block size-[38px] rounded-full ring-2 ring-white dark:ring-gray-800"
-                                src="{{ $admin->photo }}" alt="Image Description">
+                                src="{{ asset($admin->photo ) }}" alt="Image Description">
                             Profile
 
                             <svg class="hs-accordion-active:block ms-auto hidden size-4"
@@ -245,7 +245,7 @@
                             </div>
                         </li>
 
-                        
+
 
 
 
