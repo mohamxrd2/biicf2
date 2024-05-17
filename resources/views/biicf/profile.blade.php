@@ -88,7 +88,7 @@
                 <div class="flex my-5 gap-10">
                     <h5 class="w-40 text-right text-gray-500 text-xs dark:text-white/80">Numero de telephone</h5>
                     <div class=" text-blue-500 text-xs">
-                        {{ $user->phonenumber }}
+                        {{ $user->phone }}
                     </div>
                 </div>
             </div>

@@ -593,7 +593,7 @@ class userController extends Controller
             // Mettre à jour les données de l'administrateur
             $user->name = $validatedData['name'];
             $user->username = $validatedData['username'];
-            $user->phonenumber = $validatedData['phonenumber'];
+            $user->phone = $validatedData['phonenumber'];
             $user->save();
 
             return redirect()->back()->with('success', 'Profil mis à jour avec succès.');
