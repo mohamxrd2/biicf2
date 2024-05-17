@@ -104,7 +104,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('acceuil', [ProduitServiceController::class,  'homeBiicf'])->name('biicf.acceuil');
     Route::get('recheche', [ProduitServiceController::class, 'search'])->name('biicf.search');
 
-   
+
 
     Route::get('notif', function () {
         return view('biicf.notif');
@@ -115,9 +115,12 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProduct'])->name('biicf.pubdelete');
     Route::get('publication/{id}', [ProduitServiceController::class, 'pubDet'])->name('biicf.postdet');
 
-    Route::get('consommation', function () {
-        return view('biicf.conso');
-    })->name('biicf.conso');
+    Route::get('consommation', [consoController::class, 'consoBiicf'])->name('biicf.conso');
+    Route::post('consommation/ajouter', [userController::class, 'storeCons'])->name('biicf.storeCons');
+    Route::delete('consommation/supprimer/{conso}', [consoController::class, 'destroConsom'])->name('biicf.consodelete');
+    Route::get('consommation/{id}', [consoController::class, 'consoDet'])->name('biicf.consoDet');
+
+
 
     Route::get('porte-feuille',[AdminWalletController::class, 'indexBiicf'])->name('biicf.wallet');
 
@@ -128,7 +131,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     })->name('biicf.profile');
 
 
-    
+
 });
 
 Route::get('biicf/login', [BiicfAuthController::class, 'showLoginForm'])->name('biicf.login');
