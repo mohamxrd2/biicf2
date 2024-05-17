@@ -376,7 +376,7 @@
                                                         data-hs-combo-box-output-item="{{ $agent->id }}">
                                                         <div class="flex">
                                                             <img class="w-5 h-5 mr-2 rounded-full"
-                                                                src="{{ $agent->photo }}" alt="">
+                                                                src="{{ asset($agent->photo )}}" alt="">
                                                             <div class="flex justify-between items-center w-full">
                                                                 <span data-hs-combo-box-search-text="{{ $agent->username }}"
                                                                     data-hs-combo-box-value="{{ $agent->id }}">{{ $agent->username }}({{ $agent->name }})</span>
@@ -450,7 +450,7 @@
                                 @else
                                     @foreach ($users->take(5) as $user)
                                         <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                            src="{{ $user->photo }}" alt="">
+                                            src="{{ asset($user->photo) }}" alt="">
                                     @endforeach
 
                                 @endif
