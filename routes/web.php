@@ -126,9 +126,12 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
 
     Route::post('envoyer-client', [AdminWalletController::class, 'sendToClientAccount'])->name('biicf.send');
 
-    Route::get('profile', function () {
-        return view('biicf.profile');
-    })->name('biicf.profile');
+
+    Route::get('profile', [userController::class, 'showProfile'])->name('biicf.showProfile');
+    Route::put('/profile/profile-photo/{user}', [userController::class, 'updateProfilePhoto'])->name('biicf.updateProfilePhoto');
+    Route::put('/profile/update/{user}', [userController::class, 'updateProfile'])->name('biicf.updateProfile');
+    Route::put('/profile/password/{user}', [userController::class, 'updatePassword'])->name('biicf.updatePassword');
+
 
 
 
