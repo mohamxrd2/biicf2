@@ -206,7 +206,7 @@
                                 <a href="{{ route('agent.show', ['username' => $agent->username]) }}"
                                     class="flex items-center">
 
-                                    <img class="w-10 h-10 rounded-full" src="{{ $agent->photo }}" alt="Jese image">
+                                    <img class="w-10 h-10 rounded-full" src="{{ asset($agent->photo) }}" alt="Jese image">
                                     <div class="ps-3">
                                         <div class="text-base font-semibold">{{ $agent->name }}</div>
                                         <div class="font-normal text-gray-500">{{ $agent->username }}</div>

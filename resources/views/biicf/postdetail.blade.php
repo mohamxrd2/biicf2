@@ -186,23 +186,100 @@
                         </div>
                     </div>
                     <div
-                            class="flex flex-col w-full bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-                            <div class="p-4 md:p-10">
+                        class="flex flex-col w-full bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                        <div class="p-4 ">
 
-                                <p class="mt-2 text-gray-500 dark:text-neutral-400">
-                                <h4 class="card-title font-bold"> Date de création </h4>
-                                <p class="mb-0">{{ \Carbon\Carbon::parse($produit->created_at)->diffForHumans() }}</p>
-                                </p>
-                            </div>
+                            <p class="mt-2 text-gray-500 dark:text-neutral-400">
+                            <h4 class="card-title font-bold"> Date de création </h4>
+                            <p class="mb-0">{{ \Carbon\Carbon::parse($produit->created_at)->diffForHumans() }}</p>
+                            </p>
                         </div>
-                </div>
+                    </div>
                 </div>
             </div>
-            <div class="lg:col-span-1 col-span-3">
+        </div>
 
-                gudfkdjfl fklfkjrljgrk Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis nihil officiis eveniet placeat! Dolorem nemo ea culpa incidunt facere nihil at quas exercitationem tempora repudiandae ex, rerum laudantium esse explicabo?
+        <div class="lg:col-span-1 col-span-3">
+
+            <div class="flex flex-col max-w-xl">
+
+                <div class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md">
+                    <button type="button" class="w-full mb-3 text-green-800 bg-green-100 rounded-md text-center p-1"
+                        id="btnAchatDirect">
+                        Achat direct
+                    </button>
+                    <button type="button" class="w-full text-blue-800 bg-blue-100 rounded-md text-center p-1"
+                        id="btnAchatGroup">
+                        Achat groupé
+                    </button>
+                </div>
+
+                <form action="" class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md"
+                    id="formAchatDirect" style="display: none;">
+                    <h1 class="text-xl text-center mb-3">Achat direct</h1>
+                    <div class="max-w-sm space-y-3 mb-3">
+                        <input type="number"
+                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            placeholder="Quantité">
+                    </div>
+                    <div class="max-w-sm space-y-3 mb-3">
+                        <input type="text"
+                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            placeholder="Localité">
+                    </div>
+                    <div class="max-w-sm space-y-3">
+                        <textarea
+                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            rows="3" placeholder="Description"></textarea>
+                    </div>
+                    <div class="w-full text-center mt-3">
+                        <button type="reset"
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">
+                            Annulé
+                        </button>
+
+                        <button
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                            type="submit">
+                            Envoyé
+                        </button>
+                    </div>
+
+                </form>
+
+                <form action="" class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md"
+                    id="formAchatGroup" style="display: none;">
+                    <h1 class="text-xl text-center mb-3">Achat groupé</h1>
+                    <div class="max-w-sm space-y-3 mb-3">
+                        <input type="number"
+                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            placeholder="Quantité">
+                    </div>
+                    <div class="max-w-sm space-y-3 mb-3">
+                        <input type="text"
+                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                            placeholder="Localité">
+                    </div>
+
+                    <div class="w-full text-center mt-3">
+                        <button type="reset"
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">
+                            Annulé
+                        </button>
+
+                        <button
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                            type="submit">
+                            Envoyé
+                        </button>
+                    </div>
+
+                </form>
+
 
             </div>
+
+
 
         </div>
 
@@ -211,4 +288,30 @@
 
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnAchatDirect = document.getElementById('btnAchatDirect');
+            const btnAchatGroup = document.getElementById('btnAchatGroup');
+            const formAchatDirect = document.getElementById('formAchatDirect');
+            const formAchatGroup = document.getElementById('formAchatGroup');
+
+            btnAchatDirect.addEventListener('click', function() {
+                if (formAchatDirect.style.display === 'none' || formAchatDirect.style.display === '') {
+                    formAchatDirect.style.display = 'block';
+                    formAchatGroup.style.display = 'none';
+                } else {
+                    formAchatDirect.style.display = 'none';
+                }
+            });
+
+            btnAchatGroup.addEventListener('click', function() {
+                if (formAchatGroup.style.display === 'none' || formAchatGroup.style.display === '') {
+                    formAchatGroup.style.display = 'block';
+                    formAchatDirect.style.display = 'none';
+                } else {
+                    formAchatGroup.style.display = 'none';
+                }
+            });
+        });
+    </script>
 @endsection

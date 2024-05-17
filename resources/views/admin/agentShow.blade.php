@@ -12,7 +12,7 @@
 
             <div class="relative md:w-20 md:h-20 w-12 h-12 shrink-0">
                 <label for="file" class="cursor-pointer">
-                    <img id="img" src="{{ $agent->photo }}" class="object-cover w-full h-full rounded-full"
+                    <img id="img" src="{{ asset($agent->photo) }}" class="object-cover w-full h-full rounded-full"
                         alt="" />
                 </label>
 
