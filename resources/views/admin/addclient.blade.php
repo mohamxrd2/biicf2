@@ -374,7 +374,6 @@
                                 'name' => 'country',
                                 'title' => 'Choisissez un pays',
                                 'options' => [],
-
                             ])
                             @include('admin.components.input', [
                                 'name' => 'phone',
@@ -412,6 +411,16 @@
                                     'Internationale',
                                 ],
                             ])
+
+                            @include('admin.components.input', [
+                                'name' => 'parrain',
+                                'type' => 'nuber',
+                                'placeholder' => 'Code de parrainage (Optionnel)',
+                                // Ajoutez d'autres attributs au besoin
+                            ])
+                        
+
+
                         </div>
                     </div>
                     <!-- End First Contnet -->

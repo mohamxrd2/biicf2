@@ -136,8 +136,8 @@ class AdminWalletController extends Controller
     public function rechargeClientAccount(Request $request)
     {
         $validatedData = $request->validate([
-            'user_id' =>'required',
-            'amount' =>'required|numeric',
+            'user_id' => 'required',
+            'amount' => 'required|numeric',
         ]);
 
         $user = User::find($validatedData['user_id']);
@@ -151,7 +151,7 @@ class AdminWalletController extends Controller
         $userWallet = Wallet::where('user_id', $user->id)->first();
         $adminWallet = Wallet::where('admin_id', $adminId)->first();
 
-        if(!$userWallet || !$adminWallet){
+        if (!$userWallet || !$adminWallet) {
             return redirect()->back()->with('error', 'Erreur lors de la récupération des portefeuilles.');
         }
         if ($adminWallet->balance < $validatedData['amount']) {
@@ -181,8 +181,8 @@ class AdminWalletController extends Controller
     {
 
         $validatedData = $request->validate([
-            'user_id' =>'required',
-            'amount' =>'required|numeric',
+            'user_id' => 'required',
+            'amount' => 'required|numeric',
         ]);
 
         $user = User::find($validatedData['user_id']);
@@ -194,26 +194,26 @@ class AdminWalletController extends Controller
         $userId = Auth::guard('web')->id();
 
         $userReceiveWallet = Wallet::where('user_id', $user->id)->first();
-        $userSenderWallet = Wallet::where('user_id', $userId )->first();
+        $userSenderWallet = Wallet::where('user_id', $userId)->first();
 
-        if(!$userReceiveWallet  || !$userSenderWallet ){
+        if (!$userReceiveWallet  || !$userSenderWallet) {
             return redirect()->back()->with('error', 'Erreur lors de la récupération des portefeuilles.');
         }
-        if ($userSenderWallet ->balance < $validatedData['amount']) {
+        if ($userSenderWallet->balance < $validatedData['amount']) {
             return redirect()->back()->with('error', 'Solde insuffisant pour effectuer la recharge.');
         }
         $userReceiveWallet->increment('balance', $validatedData['amount']);
         $userSenderWallet->decrement('balance', $validatedData['amount']);
 
         $transaction1 = new Transaction();
-        $transaction1->sender_user_id = $userId ;
+        $transaction1->sender_user_id = $userId;
         $transaction1->receiver_user_id = $user->id;
         $transaction1->type = 'Reception';
         $transaction1->amount = $validatedData['amount'];
         $transaction1->save();
 
         $transaction2 = new Transaction();
-        $transaction2->sender_user_id = $userId ;
+        $transaction2->sender_user_id = $userId;
         $transaction2->receiver_user_id = $user->id;
         $transaction2->type = 'Envoie';
         $transaction2->amount = $validatedData['amount'];
@@ -228,21 +228,23 @@ class AdminWalletController extends Controller
 
         $userWallet = Wallet::where('user_id',  $userId)->first();
 
+
         $users = User::with('admin')
+            ->where('id', '!=', $userId) // Exclure l'utilisateur authentifié
             ->orderBy('created_at', 'DESC')
             ->get();
 
         $userCount = $users->count();
 
         $transactions = Transaction::with(['senderAdmin', 'receiverAdmin', 'senderUser', 'receiverUser'])
-        ->where(function ($query) use ($userId ) {
-            $query->where('sender_user_id', $userId )
-                ->orWhere('receiver_user_id', $userId );
-        })
-        ->orderBy('created_at', 'DESC')
-        ->paginate(10);
+            ->where(function ($query) use ($userId) {
+                $query->where('sender_user_id', $userId)
+                    ->orWhere('receiver_user_id', $userId);
+            })
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
 
-    $transacCount = $transactions->count();
+        $transacCount = $transactions->count();
 
         return view('biicf.wallet', compact('userWallet', 'users', 'userCount', 'transactions', 'transacCount', 'userId'));
     }

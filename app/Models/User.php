@@ -41,6 +41,7 @@ class User extends Authenticatable
         'phone',
         'local_area',
         'address',
+        'parrain',
         'active_zone',
         'photo',
         'last_seen',
@@ -83,5 +84,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Consommation::class, 'id_user');
     }
+
+     // Définition de la relation parrain
+     public function parrain()
+     {
+         return $this->belongsTo(User::class, 'parrain');
+     }
+ 
+     public function parrainees()
+     {
+         return $this->hasMany(User::class, 'parrain');
+     }
 }
 

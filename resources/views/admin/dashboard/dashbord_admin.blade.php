@@ -110,7 +110,7 @@
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                     <a href="{{ route('client.show', ['username' => $user->username]) }}"
                                         class="flex items-center">
-                                        <img class="w-10 h-10 rounded-full" src="{{ $user->photo }}"
+                                        <img class="w-10 h-10 rounded-full" src="{{ asset($user->photo)}}"
                                             alt="">
                                         <div class="ml-3">
                                             <div class="text-base font-semibold">{{ $user->name }}</div>
@@ -258,6 +258,27 @@
                     <p class="text-sm">Ajouter un agent</p>
                 </div>
             </a>
+
+            
+
+            <div class="flex flex-col  p-5 bg-white border   rounded-2xl w-full ">
+                <p class="font-bold text-left mb-3">Nombre d'agent</p>
+                <div class="flex items-center">
+                    <h1 class="font-bold text-2xl mr-4">{{ $agentCount  }}</h1>
+
+                    <div class="flex -space-x-4 rtl:space-x-reverse">
+
+                        @if ($agentCount == 0)
+                            <p class="text-gray-600">Aucun agent</p>
+                        @else
+                            @foreach ($agents->take(5) as $agent)
+                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                    src="{{ asset($agent->photo)}}" alt="">
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
 
             <div class="w-full border flex flex-col rounded-2xl p-5 ">
 

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Models\ProduitService;
+use App\Models\Admin;
 use App\Models\Wallet;
+use App\Models\ProduitService;
 use Illuminate\Support\Facades\Auth;
 
 class AdminDashboardController extends Controller
@@ -24,6 +24,12 @@ class AdminDashboardController extends Controller
 
         // Liste des 5 derniers utilisateurs
         $users = User::orderBy('created_at', 'desc')->take(5)->get();
+
+        $agents = Admin::where('admin_type', 'agent')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+
+        $agentCount = Admin::where('admin_type', 'agent')->count();
 
         //Agent//////
 
@@ -62,6 +68,8 @@ class AdminDashboardController extends Controller
             'usersWithSameAdminId' => $usersWithSameAdminId,
             'servicesCount' => $servicesCount,
             'productsCount' => $productsCount,
+            'agents' => $agents,
+            'agentCount' => $agentCount 
         ]);
     }
 }

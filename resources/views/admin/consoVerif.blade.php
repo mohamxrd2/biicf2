@@ -153,7 +153,7 @@
                     <input type="hidden" name="action" value="accepter">
     
                     <!-- Bouton accepter -->
-                    @if ($consommations->status == 'Accepté')
+                    @if ($consommations->statuts == 'Accepté')
                         <div class="w-full mb-3">
                             <div class="text-gray-800 bg-gray-200 rounded-md text-center p-1">accepté !</div>
                         </div>
@@ -173,7 +173,7 @@
                     <input type="hidden" name="action" value="refuser">
     
                     <!-- Bouton refuser -->
-                    @if ($consommations->status == 'Refusé')
+                    @if ($consommations->statuts == 'Refusé')
                         <div class="w-full">
                             <div class="text-gray-800 bg-gray-200 rounded-md text-center p-1">refusé !</div>
                         </div>

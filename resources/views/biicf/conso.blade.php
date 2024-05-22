@@ -249,9 +249,7 @@
 
                                             <a href="{{ route('biicf.consoDet', $consommation->id) }}"
                                                 class="flex items-center">
-                                                <img class="w-10 h-10 rounded-md"
-                                                    src="{{ $consommation->photoProd1 ? asset($consommation->photoProd1) : asset('img/noimg.jpeg') }}"
-                                                    alt="Jese image">
+                                             
                                                 <div class="ps-3">
                                                     <div class="text-base font-semibold">{{ $consommation->name }}</div>
                                                 </div>

@@ -248,8 +248,8 @@
         <div class="lg:col-span-1 lg:block hidden">
             <div class="flex flex-col ">
                 <div class="flex bg-gray-100 border border-gray-200 p-4 rounded-xl mb-3">
-                    <img class="h-12 w-12 border-2 border-white rounded-full dark:border-gray-800"
-                        src="{{ $user->photo }}" alt="">
+                    <img class="h-12 w-12 border-2 border-white rounded-full dark:border-gray-800 object-cover"
+                        src="{{ asset($user->photo) }}" alt="">
 
                     <div class="flex flex-col ml-3">
                         <p class="font-semibold"> {{ $user->name }}</p>

@@ -107,6 +107,7 @@ class userController extends Controller
             $user->commerce = $request->input('commerce_sector');
             $user->services = $request->input('transport_sector');
             $user->country = $request->input('country');
+            $user->parrain = $request->input('parrain');
 
             $adminId = Auth::guard('admin')->id();
 
@@ -196,7 +197,7 @@ class userController extends Controller
                 $produits->statuts = 'Refusé';
             } else {
                 // Gérer une action invalide si nécessaire
-            return back()->with('error', 'Action invalide.');
+                return back()->with('error', 'Action invalide.');
             }
 
             // Enregistrer les modifications dans la base de données
@@ -234,7 +235,7 @@ class userController extends Controller
                 $Consommations->statuts = 'Refusé';
             } else {
                 // Gérer une action invalide si nécessaire
-            return back()->with('error', 'Action invalide.');
+                return back()->with('error', 'Action invalide.');
             }
 
             // Enregistrer les modifications dans la base de données
@@ -266,7 +267,6 @@ class userController extends Controller
             'qualification'  => $request->type == 'services' ? 'required|string' : 'nullable|string',
             'specialite' => $request->type == 'services' ? 'required|string' : 'nullable|string',
             'qte_service' => $request->type == 'services' ? 'required|string' : 'nullable|string', // Quantité de service requise uniquement pour les services
-            'zoneco' => 'required|string',
             'ville' => 'required|string',
             'commune' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Modifier les types de fichiers acceptés et la taille maximale si nécessaire
@@ -290,7 +290,7 @@ class userController extends Controller
             'qualification.required' => 'La qualification est requise pour les services.',
             'specialite.required' => 'La spécialité est requise pour les services.',
             'qte_service.required' => 'La quantité de service est requise pour les services.',
-            'zoneco.required' => 'La zone économique est requise.',
+
             'ville.required' => 'La ville est requise.',
             'commune.required' => 'La commune est requise.',
 
@@ -315,48 +315,6 @@ class userController extends Controller
             'description.required' => 'La description est requise.'
         ]);
 
-
-        // Vérifiez si une image est téléchargée avant de la sauvegarder
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-
-            // Stockez l'image dans le dossier 'public/post'
-            $path = 'post/';
-            $image->move($path, $imageName);
-            // Enregistrez le nom de l'image dans la base de données
-        }
-
-        if ($request->hasFile('image2')) {
-            $image2 = $request->file('image2');
-            $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
-
-            // Stockez l'image dans le dossier 'public/post'
-            $path2 = 'post/';
-            $image2->move($path2, $imageName2);
-            // Enregistrez le nom de l'image dans la base de données
-        }
-
-        if ($request->hasFile('image3')) {
-            $image3 = $request->file('image3');
-            $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
-
-            // Stockez l'image dans le dossier 'public/post'
-            $path3 = 'post/';
-            $image3->move($path3, $imageName3);
-            // Enregistrez le nom de l'image dans la base de données
-        }
-
-        if ($request->hasFile('image4')) {
-            $image4 = $request->file('image4');
-            $imageName4 = time() . '.' . $image4->getClientOriginalExtension();
-
-            // Stockez l'image dans le dossier 'public/post'
-            $path4 = 'post/';
-            $image4->move($path4, $imageName4);
-            // Enregistrez le nom de l'image dans la base de données
-        }
-
         try {
             $produitsServices = new ProduitService();
             $produitsServices->type = $validatedData['type'];
@@ -370,16 +328,46 @@ class userController extends Controller
             $produitsServices->qalifServ = $validatedData['qualification'] ?? null;
             $produitsServices->sepServ = $validatedData['specialite'];
             $produitsServices->qteServ = $validatedData['qte_service'];
-            $produitsServices->zonecoServ = $validatedData['zoneco'];
+
             $produitsServices->villeServ = $validatedData['ville'];
             $produitsServices->comnServ = $validatedData['commune'];
             $produitsServices->desrip = $validatedData['description'];
             $produitsServices->user_id = $userId; // Ajout de l'ID de l'utilisateur
 
-            $produitsServices->photoProd1 = $request->hasFile('image') ? $path . $imageName : null;
-            $produitsServices->photoProd2 = $request->hasFile('image2') ? $path2 . $imageName2 : null;
-            $produitsServices->photoProd3 = $request->hasFile('image3') ? $path3 . $imageName3 : null;
-            $produitsServices->photoProd4 = $request->hasFile('image4') ? $path4 . $imageName4 : null;
+
+            if ($request->hasFile('image') || $request->hasFile('image2') || $request->hasFile('image3') || $request->hasFile('image4')) {
+                $path = 'post/';
+
+                // Vérifiez si la première image est téléchargée
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $imageName = time() . '_1.' . $image->getClientOriginalExtension();
+                    $image->move($path, $imageName);
+                    $produitsServices->photoProd1 = $path . $imageName;
+                }
+
+                // Vérifiez si la deuxième image est téléchargée
+                if ($request->hasFile('image2')) {
+                    $image2 = $request->file('image2');
+                    $imageName2 = time() . '_2.' . $image2->getClientOriginalExtension();
+                    $image2->move($path, $imageName2);
+                    $produitsServices->photoProd2 = $path . $imageName2;
+                }
+                // Vérifiez si la deuxième image est téléchargée
+                if ($request->hasFile('image3')) {
+                    $image3 = $request->file('image3');
+                    $imageName3 = time() . '_3.' . $image3->getClientOriginalExtension();
+                    $image3->move($path, $imageName3);
+                    $produitsServices->photoProd3 = $path . $imageName3;
+                }
+                // Vérifiez si la deuxième image est téléchargée
+                if ($request->hasFile('image4')) {
+                    $image4 = $request->file('image4');
+                    $imageName4 = time() . '_4.' . $image4->getClientOriginalExtension();
+                    $image4->move($path, $imageName4);
+                    $produitsServices->photoProd4 = $path . $imageName4;
+                }
+            }
 
             $produitsServices->save();
 
@@ -575,7 +563,13 @@ class userController extends Controller
 
     public function showProfile()
     {
-        return view('biicf.profile');
+        $userId = Auth::guard('web')->id();
+        $user = User::with('parrain')->find($userId);
+    
+        // Récupérer le parrain en tant qu'objet User
+        $parrain = User::where('id', $user->parrain)->first();
+    
+        return view('biicf.profile', compact('user', 'parrain'));
     }
 
     public function updateProfile(Request $request, User $user)
@@ -668,5 +662,4 @@ class userController extends Controller
             return back()->withErrors(['error' => 'Une erreur est survenue lors de la mise à jour de la photo de profil.'])->withInput();
         }
     }
-
 }

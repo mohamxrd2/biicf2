@@ -35,15 +35,15 @@
                     @endphp
                     @if ($photoCount > 0)
 
-                        <div class="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
+                        <div class="hs-carousel relative overflow-hidden w-full min-h-screen bg-white rounded-lg">
                             <div
                                 class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                                 @foreach ([$produit->photoProd1, $produit->photoProd2, $produit->photoProd3, $produit->photoProd4] as $photo)
                                     @if ($photo)
                                         <div class="hs-carousel-slide">
-                                            <div class="flex justify-center h-full bg-gray-100  dark:bg-neutral-900">
-                                                <img class="w-full h-full  rounded-md" src="{{ asset($photo) }}"
-                                                    alt="Image">
+                                            <div class="flex justify-center bg-gray-100  dark:bg-neutral-900">
+                                                <img class="w-full h-auto rounded-md  object-cover"
+                                                    src="{{ asset($photo) }}" alt="Image">
                                             </div>
                                         </div>
                                     @endif
@@ -203,16 +203,99 @@
 
             <div class="flex flex-col max-w-xl">
 
+
+                @if ($produit->user_id != $user->id)
+                    <div class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md">
+                        <button type="button" class="w-full mb-3 text-green-800 bg-green-100 rounded-md text-center p-1"
+                            id="btnAchatDirect">
+                            Achat direct
+                        </button>
+                        <button type="button" class="w-full text-blue-800 bg-blue-100 rounded-md text-center p-1"
+                            id="btnAchatGroup">
+                            Achat groupé
+                        </button>
+                    </div>
+                @else
                 <div class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md">
-                    <button type="button" class="w-full mb-3 text-green-800 bg-green-100 rounded-md text-center p-1"
-                        id="btnAchatDirect">
-                        Achat direct
-                    </button>
-                    <button type="button" class="w-full text-blue-800 bg-blue-100 rounded-md text-center p-1"
-                        id="btnAchatGroup">
-                        Achat groupé
-                    </button>
+
+                    <p class=" text-gray-400 mb-3 text-center">Ce produit vous appartient</p>
+
+                    <a href="#" data-hs-overlay="#hs-delete-{{ $produit->id }}"
+                        class="w-full  text-red-800 bg-red-100 rounded-md text-center p-1 ">
+                        Supprimé le produit
+
+                    </a>
+                    <div id="hs-delete-{{ $produit->id }}"
+                        class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto">
+                        <div
+                            class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                            <div
+                                class="relative flex flex-col bg-white shadow-lg rounded-xl dark:bg-neutral-900">
+                                <div class="absolute top-2 end-2">
+                                    <button type="button"
+                                        class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700"
+                                        data-hs-overlay="#hs-delete-{{ $produit->id }}">
+                                        <span class="sr-only">Close</span>
+                                        <svg class="flex-shrink-0 size-4"
+                                            xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 6 6 18" />
+                                            <path d="m6 6 12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                                    <!-- Icon -->
+                                    <span
+                                        class="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-yellow-700 dark:border-yellow-600 dark:text-yellow-100">
+                                        <svg class="flex-shrink-0 size-5"
+                                            xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                        </svg>
+                                    </span>
+                                    <!-- End Icon -->
+
+                                    <h3
+                                        class="mb-2 text-2xl font-bold text-gray-800 dark:text-neutral-200">
+                                        Supprimé
+                                    </h3>
+                                    <p class="text-gray-500 dark:text-neutral-500">
+                                        Vous etes sur de supprimé le produit ?
+                                    </p>
+
+                                    <div class="mt-6 flex justify-center gap-x-4">
+                                        <form
+                                            action="{{ route('biicf.pubdelete', $produit->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit"
+                                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                        <button type="button"
+                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                                            data-hs-overlay="#hs-delete-{{ $produit->id }}">
+                                            Annuler
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                    
+                @endif
+
 
                 <form action="" class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md"
                     id="formAchatDirect" style="display: none;">
@@ -227,11 +310,7 @@
                             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                             placeholder="Localité">
                     </div>
-                    <div class="max-w-sm space-y-3">
-                        <textarea
-                            class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                            rows="3" placeholder="Description"></textarea>
-                    </div>
+                    
                     <div class="w-full text-center mt-3">
                         <button type="reset"
                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">

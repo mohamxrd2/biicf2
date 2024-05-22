@@ -104,7 +104,7 @@
                                             class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                             <a href="{{ route('client.show', ['username' => $user->username]) }}"
                                                 class="flex items-center">
-                                            <img class="w-10 h-10 rounded-full" src="{{ $user->photo }}" alt="">
+                                            <img class="w-10 h-10 rounded-full" src="{{ asset($user->photo )}}" alt="">
                                             <div class="ml-3">
                                                 <div class="text-base font-semibold">{{ $user->name }}</div>
                                                 <div class="text-sm text-gray-500">{{ $user->username }}</div>
