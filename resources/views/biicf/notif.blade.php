@@ -6,11 +6,9 @@
 
 
     <div class="max-w-5xl mx-auto">
+        @foreach (auth()->user()->unreadNotifications as $notification)
+            <div class="w-full rounded-xl px-3 py-2 bg-white border border-gray-200 mb-3">
 
-
-        <div class="w-full rounded-xl px-3 py-2 bg-white border border-gray-200 ">
-
-            @foreach (auth()->user()->unreadNotifications as $notification)
                 <div class="flex w-full">
                     <div class=" w-14 h-auto rounded-md overflow-hidden mr-3">
                         <img src="{{ asset($notification->data['photoProd']) }}" alt="Product Image"
@@ -74,13 +72,13 @@
 
 
                 </div>
-            @endforeach
 
 
 
 
 
-        </div>
+            </div>
+        @endforeach
 
     </div>
 
