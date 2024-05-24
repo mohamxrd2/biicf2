@@ -189,10 +189,10 @@ class ProduitServiceController extends Controller
     {
         $produit = ProduitService::find($id);
 
-        $user = Auth::guard('web')->id();
+        $userId = Auth::guard('web')->id();
 
-        $userWallet = Wallet::where('user_id', $user)->first();
-        
-        return view('biicf.postdetail', compact('produit', 'userWallet'));
+        $userWallet = Wallet::where('user_id', $userId)->first();
+
+        return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id'));
     }
 }

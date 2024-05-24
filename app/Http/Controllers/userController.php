@@ -114,7 +114,7 @@ class userController extends Controller
             // Vérification si l'admin est authentifié
             if ($adminId) {
                 //generer et garder le token de verification
-                // $user->email_verified_at = now(); //marquer l'email comme verifier
+                $user->email_verified_at = now(); //marquer l'email comme verifier
                 $user->admin_id = $adminId;
                 $user->save();
 
@@ -124,7 +124,7 @@ class userController extends Controller
                 $wallet->save();
 
                 //envoi du couriel au nouveau client
-                $user->sendEmailVerificationNotification();
+                // $user->sendEmailVerificationNotification();
 
                 return redirect()->route('clients.create')->with('success', 'Client ajouté avec succès!');
             } else {
@@ -565,10 +565,10 @@ class userController extends Controller
     {
         $userId = Auth::guard('web')->id();
         $user = User::with('parrain')->find($userId);
-    
+
         // Récupérer le parrain en tant qu'objet User
         $parrain = User::where('id', $user->parrain)->first();
-    
+
         return view('biicf.profile', compact('user', 'parrain'));
     }
 

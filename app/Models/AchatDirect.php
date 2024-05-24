@@ -19,7 +19,8 @@ class AchatDirect extends Model
         'localite',
         'userTrader',
         'userSender',
-        'idProd'
+        'idProd',
+        'specificite',
     ];
 
     public function userTrader()

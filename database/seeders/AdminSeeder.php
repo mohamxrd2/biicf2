@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     {
         // Données de l'administrateur à insérer dans la table 'admins'
         $adminData = [
-            'name' => 'Mohamed',
+            'name' => 'ahondjo',
             'username' => 'admin',
             'password' => Hash::make('admin'), // Hashage du mot de passe
             'phonenumber' => '0576507639',
@@ -25,9 +25,9 @@ class AdminSeeder extends Seeder
         ];
 
         // // Création d'un nouvel administrateur dans la table 'admins'
-        // Admin::create($adminData);
+        Admin::create($adminData);
 
-        
+
 
         // Vous pouvez ajouter plus d'administrateurs si nécessaire
     }

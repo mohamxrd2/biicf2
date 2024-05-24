@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\achatDirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\consoController;
 use App\Http\Controllers\AdminsController;
@@ -32,7 +33,9 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     Route::get('/consommation-service', [consoController::class, 'adminConsServ'])->name('admin.conso-service');
 
-    Route::get('/profile', function(){return view('admin.profile');})->name('admin.profile');
+    Route::get('/profile', function () {
+        return view('admin.profile');
+    })->name('admin.profile');
     Route::get('/reglage', [AdminSettingController::class, 'index'])->name('admin.reglage');
 
     Route::post('/agent', [AdminAgentController::class, 'store'])->name('admin.agent.store');
@@ -110,10 +113,18 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
         return view('biicf.notif');
     })->name('biicf.notif');
 
+    //accepter ou refuser la cmmande
+    Route::post('notif/accepter', [achatDirectController::class, 'accepter'])->name('achatD.accepter');
+    Route::post('notif/refuser', [achatDirectController::class, 'refuser'])->name('achatD.refuser');
+
+
     Route::get('publication', [ProduitServiceController::class, 'postBiicf'])->name('biicf.post');
     Route::post('publication/ajouter', [userController::class, 'storePub'])->name('biicf.pubstore');
     Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProduct'])->name('biicf.pubdelete');
+    //la vue du formulaire
     Route::get('publication/{id}', [ProduitServiceController::class, 'pubDet'])->name('biicf.postdet');
+    //pour passer ca commande
+    Route::post('achatD/store/{id}', [achatDirectController::class, 'store'])->name('achatD.store');
 
     Route::get('consommation', [consoController::class, 'consoBiicf'])->name('biicf.conso');
     Route::post('consommation/ajouter', [userController::class, 'storeCons'])->name('biicf.storeCons');
@@ -122,7 +133,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
 
 
 
-    Route::get('porte-feuille',[AdminWalletController::class, 'indexBiicf'])->name('biicf.wallet');
+    Route::get('porte-feuille', [AdminWalletController::class, 'indexBiicf'])->name('biicf.wallet');
 
     Route::post('envoyer-client', [AdminWalletController::class, 'sendToClientAccount'])->name('biicf.send');
 
@@ -131,10 +142,6 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::put('/profile/profile-photo/{user}', [userController::class, 'updateProfilePhoto'])->name('biicf.updateProfilePhoto');
     Route::put('/profile/update/{user}', [userController::class, 'updateProfile'])->name('biicf.updateProfile');
     Route::put('/profile/password/{user}', [userController::class, 'updatePassword'])->name('biicf.updatePassword');
-
-
-
-
 });
 
 Route::get('biicf/login', [BiicfAuthController::class, 'showLoginForm'])->name('biicf.login');
@@ -144,4 +151,3 @@ Route::get('biicf/signup', [UserController::class, 'createPageBiicf'])->name('bi
 Route::post('biicf/signup', [UserController::class, 'createUserBiicf']);
 
 Route::post('biicf/logout', [BiicfAuthController::class, 'logout'])->name('biicf.logout');
-
