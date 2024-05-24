@@ -38,4 +38,8 @@ class ProduitService extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function achatsDirects()
+    {
+        return $this->hasMany(AchatDirect::class, 'idProd');
+    }
 }

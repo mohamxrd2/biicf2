@@ -176,51 +176,104 @@ class AdminWalletController extends Controller
 
         return redirect()->back()->with('success', 'Le compte de du client a été rechargé avec succès.');
     }
-
     public function sendToClientAccount(Request $request)
     {
+        // Validate request data
+        $validatedData = $request->validate(
+            [
+                'user_id' => 'required',
+                'amount' => 'required|numeric',
+            ],
+            [
+                'user_id.required' => 'Veuillez sélectionner un client.',
+                'amount.required' => 'Veuillez entrer le montant.',
+            ]
+        );
 
-        $validatedData = $request->validate([
-            'user_id' => 'required',
-            'amount' => 'required|numeric',
-        ]);
+        // Calculate commission
+        $pourcentSomme = $request->input('comAmount');
+        $senderComm = $pourcentSomme * 0.01;
 
+        // Find the user specified in the request
         $user = User::find($validatedData['user_id']);
-
         if (!$user) {
             return redirect()->back()->with('error', 'L\'utilisateur spécifié n\'existe pas.');
         }
 
+        // Get the authenticated user
         $userId = Auth::guard('web')->id();
+        $authenticatedUser = User::find($userId);
+        if (!$authenticatedUser) {
+            return redirect()->back()->with('error', 'Utilisateur authentifié non trouvé.');
+        }
 
+        // Calculate parrain commissions and find their wallets if applicable
+        $senderParranCom = 0;
+        $senderParranWallet = null;
+        if ($authenticatedUser->parrain) {
+            $senderParranCom = $pourcentSomme * 0.01;
+            $senderParranWallet = Wallet::where('user_id', $authenticatedUser->parrain)->first();
+        }
+
+        $receiveParrainCom = 0;
+        $receiveParrainWallet = null;
+        if ($user->parrain) {
+            $receiveParrainCom = $pourcentSomme * 0.01;
+            $receiveParrainWallet = Wallet::where('user_id', $user->parrain)->first();
+        }
+
+        // Find the wallets
         $userReceiveWallet = Wallet::where('user_id', $user->id)->first();
         $userSenderWallet = Wallet::where('user_id', $userId)->first();
-
-        if (!$userReceiveWallet  || !$userSenderWallet) {
+        if (!$userReceiveWallet || !$userSenderWallet) {
             return redirect()->back()->with('error', 'Erreur lors de la récupération des portefeuilles.');
         }
+
+        // Check sender's balance
         if ($userSenderWallet->balance < $validatedData['amount']) {
             return redirect()->back()->with('error', 'Solde insuffisant pour effectuer la recharge.');
         }
+
+        // Update wallet balances
         $userReceiveWallet->increment('balance', $validatedData['amount']);
         $userSenderWallet->decrement('balance', $validatedData['amount']);
+        $userSenderWallet->increment('balance', $senderComm);
 
-        $transaction1 = new Transaction();
-        $transaction1->sender_user_id = $userId;
-        $transaction1->receiver_user_id = $user->id;
-        $transaction1->type = 'Reception';
-        $transaction1->amount = $validatedData['amount'];
-        $transaction1->save();
+        if ($senderParranWallet) {
+            $senderParranWallet->increment('balance', $senderParranCom);
+        }
+        if ($receiveParrainWallet) {
+            $receiveParrainWallet->increment('balance', $receiveParrainCom);
+        }
 
-        $transaction2 = new Transaction();
-        $transaction2->sender_user_id = $userId;
-        $transaction2->receiver_user_id = $user->id;
-        $transaction2->type = 'Envoie';
-        $transaction2->amount = $validatedData['amount'];
-        $transaction2->save();
+        // Create transactions
+        $this->createTransaction($userId, $userId, 'Commission', $senderComm);
+        $this->createTransaction($userId, $user->id, 'Reception', $validatedData['amount']);
+        $this->createTransaction($userId, $user->id, 'Envoie', $validatedData['amount']);
 
-        return redirect()->back()->with('success', 'Le compte de du client a été rechargé avec succès.');
+        if ($senderParranWallet) {
+            $this->createTransaction($userId, $authenticatedUser->parrain, 'Commission', $senderParranCom);
+        }
+        if ($receiveParrainWallet) {
+            $this->createTransaction($userId, $user->parrain, 'Commission', $receiveParrainCom);
+        }
+
+        return redirect()->back()->with('success', 'Le compte du client a été rechargé avec succès.');
     }
+
+    private function createTransaction($senderUserId, $receiverUserId, $type, $amount)
+    {
+        $transaction = new Transaction();
+        $transaction->sender_user_id = $senderUserId;
+        $transaction->receiver_user_id = $receiverUserId;
+        $transaction->type = $type;
+        $transaction->amount = $amount;
+        $transaction->save();
+    }
+
+
+
+
 
     public function indexBiicf()
     {

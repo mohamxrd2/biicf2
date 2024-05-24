@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
 use App\Http\Controllers\Controller;
+use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
 
 class ProduitServiceController extends Controller
@@ -187,7 +188,11 @@ class ProduitServiceController extends Controller
     public function pubDet($id)
     {
         $produit = ProduitService::find($id);
+
+        $user = Auth::guard('web')->id();
+
+        $userWallet = Wallet::where('user_id', $user)->first();
         
-        return view('biicf.postdetail', compact('produit'));
+        return view('biicf.postdetail', compact('produit', 'userWallet'));
     }
 }

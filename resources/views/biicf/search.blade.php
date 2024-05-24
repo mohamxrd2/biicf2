@@ -22,11 +22,11 @@
                             </svg>
                         </div>
                         <input type="search" id="default-search"
-                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Recherche de produit ou service..." required data-hs-combo-box-input=""
                             name="keyword" />
                         <button type="submit"
-                            class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Chercher</button>
+                            class="text-white absolute end-2.5 bottom-2.5 bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Chercher</button>
 
                     </div>
 
@@ -247,7 +247,7 @@
         </div>
         <div class="lg:col-span-1 lg:block hidden">
             <div class="flex flex-col ">
-                <div class="flex bg-gray-100 border border-gray-200 p-4 rounded-xl mb-3">
+                <div class="flex bg-white border border-gray-200 p-4 rounded-xl mb-3">
                     <img class="h-12 w-12 border-2 border-white rounded-full dark:border-gray-800 object-cover"
                         src="{{ asset($user->photo) }}" alt="">
 
@@ -256,7 +256,7 @@
                         <p class="text-[12px] text-gray-500 "> {{ $user->username }}</p>
                     </div>
                 </div>
-                <div class="flex flex-col bg-gray-100 border border-gray-200 p-4 rounded-xl">
+                <div class="flex flex-col bg-white border border-gray-200 p-4 rounded-xl">
                     <p class="font-semibold">Thèmes les plus rechercher</p>
 
                     <div class="space-y-3.5 capitalize text-xs font-normal mt-5 mb-2 text-gray-600 dark:text-white/80">

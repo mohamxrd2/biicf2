@@ -85,15 +85,24 @@ class User extends Authenticatable
         return $this->hasMany(Consommation::class, 'id_user');
     }
 
-     // Définition de la relation parrain
-     public function parrain()
-     {
-         return $this->belongsTo(User::class, 'parrain');
-     }
- 
-     public function parrainees()
-     {
-         return $this->hasMany(User::class, 'parrain');
-     }
-}
+    // Définition de la relation parrain
+    public function parrain()
+    {
+        return $this->belongsTo(User::class, 'parrain');
+    }
 
+    public function parrainees()
+    {
+        return $this->hasMany(User::class, 'parrain');
+    }
+
+    public function achatsDirectsEnvoyes()
+    {
+        return $this->hasMany(AchatDirect::class, 'userSender');
+    }
+
+    public function achatsDirectsReçus()
+    {
+        return $this->hasMany(AchatDirect::class, 'userTrader');
+    }
+}
