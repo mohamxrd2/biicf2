@@ -217,7 +217,7 @@
                             ($transaction->type == 'Reception' && $transaction->receiver_user_id == $userId) ||
                                 ($transaction->type == 'Envoie' && $transaction->sender_user_id == $userId) ||
                                 ($transaction->type == 'Commission' && $transaction->receiver_user_id == $userId))
-                            <div class="mb-4">
+                        
                                 <div
                                     class="flex justify-between items-center hover:bg-gray-100 p-4 rounded-xl cursor-pointer">
                                     <div class="flex items-center">
@@ -302,7 +302,7 @@
                                         </div>
                                     @endif
                                 </div>
-                            </div>
+                           
                         @endif
                     @endforeach
 

@@ -95,15 +95,7 @@
                     <p class="text-sm text-gray-400">{{ $user->id }}</p>
                 </div>
 
-                @if ($parrain)
-                <div class="mb-3">
-                    <p class="font-semibold text-sm">Mon parrain</p>
-                    <p class="text-sm text-gray-400">{{ $parrain->name }}</p>
-                </div>
-                @else
-                    <p class="font-semibold text-sm">Vous n'avez pas de parrain</p>
-                @endif
-
+                
 
 
                 <div class="mb-3">
@@ -230,6 +222,16 @@
                         <p class="text-sm text-gray-400">{{ $user->services }}</p>
                     </div>
                 @endif
+
+                @if ($parrain)
+                <div class="mb-3">
+                    <p class="font-semibold text-sm">Mon parrain</p>
+                    <p class="text-sm text-gray-400">{{ $parrain->name }}</p>
+                </div>
+                @else
+                    <p class="font-semibold text-sm">Vous n'avez pas de parrain</p>
+                @endif
+
 
             </div>
             <div id="basic-tabs-2" class="hidden" role="tabpanel" aria-labelledby="basic-tabs-item-2">
