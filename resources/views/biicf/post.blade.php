@@ -19,7 +19,7 @@
         </div>
     @endif
     <div
-        class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
+        class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 dark:bg-gray-900">
 
         <div>
             <h1 class="bold" style="font-size: 24px;">Liste des publications</h1>

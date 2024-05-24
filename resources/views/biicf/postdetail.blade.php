@@ -242,11 +242,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('achatD.store', ['id' => $id]) }}" id="formAchatDirect"
-                class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md" style="display: none;"
-                method="POST">
-                @csrf
-                @method('POST')
+            <form id="formAchatDirect" class="mt-4 flex flex-col p-4 bg-white border border-gray-200 rounded-md" style="display: none;">
                 <h1 class="text-xl text-center mb-3">Achat direct</h1>
 
                 <div class="space-y-3 mb-3 w-full">
@@ -292,8 +288,7 @@
                 </div>
             </form>
 
-
-            <form action="" class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md"
+            <form action="" class="mt-4 flex flex-col p-4 bg-white border border-gray-200 rounded-md"
                 id="formAchatGroup" style="display: none;">
                 <h1 class="text-xl text-center mb-3">Achat groupé</h1>
                 <div class="max-w-sm space-y-3 mb-3">
