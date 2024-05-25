@@ -3,6 +3,19 @@
 @section('title', 'Notification')
 
 @section('content')
+    <!-- Afficher les messages de succès -->
+    @if (session('success'))
+        <div class="bg-green-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Afficher les messages d'erreur -->
+    @if (session('error'))
+        <div class="bg-red-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
+            {{ session('error') }}
+        </div>
+    @endif
 
 
     <div class="max-w-5xl mx-auto">
@@ -30,11 +43,11 @@
                             <p class="text-sm text-slate-500  font-normal">Vous avez reçu une commande en achat direct </p>
                             {{-- <h2 class="text-lg font-semibold mb-2">{{ $notification->data['nameProd'] }}</h2>
                         <p><strong>Quantité:</strong> {{ $notification->data['quantité'] }}</p>
-                        <p><strong>Prix total:</strong> {{ $notification->data['montantTotal'] ?? 'N/A' }} Fcfa</p>
                         <p><strong>Localité:</strong> {{ $notification->data['localite'] }}</p>
                         <p><strong>Spécificité:</strong> {{ $notification->data['specificite'] }}</p>
                         <p><strong>Trader ID:</strong> {{ $notification->data['userTrader'] }}</p>
                         <p><strong>Sender ID:</strong> {{ $notification->data['userSender'] }}</p> --}}
+                            <p><strong>Prix total:</strong> {{ $notification->data['montantTotal'] ?? 'N/A' }} Fcfa</p>
 
                             <div class="hidden lg:block">
                                 <div class="flex gap-2">
@@ -42,18 +55,18 @@
                                     <form id="form-accepter" action="{{ route('achatD.accepter') }}" method="POST">
                                         @csrf
                                         @method('POST')
-                                        {{-- <input type="hidden" name="montant_total"
-                                        value="{{ $notification->data['montant_total'] }}"> --}}
-                                        <input type="hidden" name="user_sender"
+                                        <input type="hidden" name="userSender"
                                             value="{{ $notification->data['userSender'] }}">
+                                        <input type="hidden" name="montantTotal"
+                                            value="{{ $notification->data['montantTotal'] }}">
                                         <button id="btn-accepter" type="submit"
                                             class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">Accepter</button>
                                     </form>
                                     <form id="form-refuser" action="{{ route('achatD.refuser') }}" method="POST">
                                         @csrf
                                         @method('POST')
-                                        {{-- <input type="hidden" name="montant_total"
-                                        value="{{ $notification->data['montant_total'] }}"> --}}
+                                        {{-- <input type="hidden" name="montantTotal"
+                                        value="{{ $notification->data['montantTotal'] }}"> --}}
                                         {{-- <input type="hidden" name="user_sender" value="{{ $notification->data['user_sender'] }}"> --}}
                                         <input type="hidden" name="message" value="refus de produit">
 
@@ -81,6 +94,24 @@
         @endforeach
 
     </div>
+
+    <script>
+        document.getElementById('form-accepter').addEventListener('submit', function() {
+            var btn = document.getElementById('btn-accepter');
+            btn.disabled = true;
+            btn.classList.remove('bg-green-500', 'hover:bg-green-700');
+            btn.classList.add('bg-gray-500');
+            btn.innerText = 'Accepté';
+        });
+
+        document.getElementById('form-refuser').addEventListener('submit', function() {
+            var btn = document.getElementById('btn-refuser');
+            btn.disabled = true;
+            btn.classList.remove('bg-red-500', 'hover:bg-red-700');
+            btn.classList.add('bg-gray-500');
+            btn.innerText = 'Refusé';
+        });
+    </script>
 
 
 

@@ -84,4 +84,44 @@ class AchatDirectController extends Controller
 
         return redirect()->back()->with('success', 'Achat passé avec succès.');
     }
+    public function accepter(Request $request)
+    {
+        // Récupérer l'utilisateur connecté
+        $userId = Auth::guard('web')->id();
+
+        // Vérifiez si l'utilisateur est authentifié
+        if (!$userId) {
+            return redirect()->back()->with('error', 'Utilisateur non authentifié.');
+        }
+
+        // Récupérer le portefeuille de l'utilisateur connecté
+        $userWallet = Wallet::where('user_id', $userId)->first();
+
+        // Vérifier si le portefeuille existe
+        if (!$userWallet) {
+            return redirect()->back()->with('error', 'Portefeuille introuvable.');
+        }
+
+        // Valider les données
+        $validated = $request->validate([
+            'montantTotal' => 'required|numeric|min:1',
+            'userSender' => 'required|integer|exists:users,id',
+        ]);
+
+        $userSender = $validated['userSender'];
+        $requiredAmount = $validated['montantTotal'];
+
+        // Incrémenter le solde du portefeuille
+        $userWallet->increment('balance', $requiredAmount);
+
+        // Enregistrer la transaction pour l'utilisateur connecté
+        $transaction = new Transaction();
+        $transaction->sender_user_id = $userSender;
+        $transaction->receiver_user_id = $userId;
+        $transaction->type = 'Reception';
+        $transaction->amount = $requiredAmount;
+        $transaction->save();
+
+        return redirect()->back()->with('success', 'Achat accepté.');
+    }
 }
