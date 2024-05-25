@@ -51,7 +51,7 @@
                         <p><strong>Spécificité:</strong> {{ $notification->data['specificite'] }}</p>
                         <p><strong>Trader ID:</strong> {{ $notification->data['userTrader'] }}</p>
                         <p><strong>Sender ID:</strong> {{ $notification->data['userSender'] }}</p> --}}
-                                <p><strong>Prix total:</strong> {{ $notification->data['montantTotal'] ?? 'N/A' }} Fcfa</p>
+                            {{-- <p><strong>Prix total:</strong> {{ $notification->data['montantTotal'] ?? 'N/A' }} Fcfa</p> --}}
 
                                 <div class="hidden lg:block">
                                     <div class="flex gap-2">
