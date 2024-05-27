@@ -3,19 +3,7 @@
 @section('title', 'Details')
 
 @section('content')
-    <!-- Afficher les messages de succès -->
-    @if (session('success'))
-        <div class="bg-green-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
-            {{ session('success') }}
-        </div>
-    @endif
 
-    <!-- Afficher les messages d'erreur -->
-    @if (session('error'))
-        <div class="bg-red-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
-            {{ session('error') }}
-        </div>
-    @endif
 
     <div class="max-w-7xl mx-auto p-4 grid lg:grid-cols-5 gap-4 ">
         <!-- Left Side: Image -->
@@ -242,6 +230,20 @@
                 </div>
             @endif
 
+            <!-- Afficher les messages de succès -->
+            @if (session('success'))
+                <div class="bg-green-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Afficher les messages d'erreur -->
+            @if (session('error'))
+                <div class="bg-red-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <form action="{{ route('achatD.store', ['id' => $id]) }}" id="formAchatDirect"
                 class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md" style="display: none;"
                 method="POST">
@@ -272,8 +274,8 @@
                 <input type="hidden" name="nameProd" value="{{ $produit->name }}">
                 <input type="hidden" name="userSender" value="{{ $userId }}">
                 <input type="hidden" name="message" value="Un utilisateur veut acheter ce produit">
-                <input type="hidden" name="photoProd" value="{{$produit->photoProd1}}">
-                <input type="hidden" name="idProd" value="{{$produit->id}}">
+                <input type="hidden" name="photoProd" value="{{ $produit->photoProd1 }}">
+                <input type="hidden" name="idProd" value="{{ $produit->id }}">
 
                 <div class="flex justify-between px-4 mb-3 w-full">
                     <p class="font-semibold text-sm text-gray-500">Prix total:</p>

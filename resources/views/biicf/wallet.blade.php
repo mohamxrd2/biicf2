@@ -153,14 +153,14 @@
                 <img src="https://via.placeholder.com/40x40" alt="US Flag" class="w-10 h-10 rounded-full mr-4">
                 <div>
                     <h2 class="text-lg font-medium">{{ number_format($userWallet->balance, 2, ',', ' ') }} </h2>
-                    <p class="text-sm text-gray-500">Compte courant</p>
+                    <p class="text-sm text-gray-500">Compte d'operation courant</p>
                 </div>
             </div>
             <div class="lg:col-span-1 col-span-3  flex items-center p-4 bg-white border rounded-xl shadow-sm">
                 <img src="https://via.placeholder.com/40x40" alt="UK Flag" class="w-10 h-10 rounded-full mr-4">
                 <div>
                     <h2 class="text-lg font-medium">0.00</h2>
-                    <p class="text-sm text-gray-500">Compte COB</p>
+                    <p class="text-sm text-gray-500">Compte d'operation boursiere</p>
                 </div>
             </div>
             <div class="lg:col-span-1 col-span-3 flex items-center p-4 bg-white border rounded-xl shadow-sm">
@@ -338,7 +338,7 @@
                 let pourcentSomme = sommeEnvoye * 0.01;
                 let sommeRecu = sommeEnvoye - pourcentSomme;
                 // Arrondir à un multiple de 10
-                let sommeRecuArrondi = Math.round(sommeRecu / 10) * 10;
+                let sommeRecuArrondi = Math.round(sommeRecu / 5) * 5;
 
                 document.getElementById('input_somme_recu').value = sommeRecuArrondi;
                 document.getElementById('hidden_somme_recu').value = sommeRecuArrondi;
