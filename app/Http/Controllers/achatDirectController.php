@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationCreate;
 use App\Models\AchatDirect;
 use App\Models\Transaction;
 use App\Models\User;
@@ -83,6 +84,8 @@ class AchatDirectController extends Controller
 
         // Envoyer la notification au propriétaire du produit
         Notification::send($owner, new AchatBiicf($achat));
+
+        event(new NotificationCreate($achat));
 
         return redirect()->back()->with('success', 'Achat passé avec succès.');
     }
