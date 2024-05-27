@@ -328,7 +328,7 @@
 
 
 
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const btnAchatDirect = document.getElementById('btnAchatDirect');
             const btnAchatGroup = document.getElementById('btnAchatGroup');
@@ -391,7 +391,7 @@
                 submitButton.disabled = false;
             }
         }
-    </script> --}}
+    </script>
 
 
 

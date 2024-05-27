@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\BiicfAuthController;
 use App\Http\Controllers\ProduitServiceController;
+use App\Http\Controllers\NotificationController;
 
 
 Route::get('/', function () {
@@ -114,8 +115,9 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     })->name('biicf.notif');
 
     //accepter ou refuser la cmmande
-    Route::post('notif/accepter', [achatDirectController::class, 'accepter'])->name('achatD.accepter');
-    Route::post('notif/refuser', [achatDirectController::class, 'refuser'])->name('achatD.refuser');
+    Route::post('notification/accepter', [achatDirectController::class, 'accepter'])->name('achatD.accepter');
+    Route::post('notification/refuser', [achatDirectController::class, 'refuser'])->name('achatD.refuser');
+    Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('notification.show');
 
 
     Route::get('publication', [ProduitServiceController::class, 'postBiicf'])->name('biicf.post');
