@@ -232,14 +232,14 @@
 
             <!-- Afficher les messages de succès -->
             @if (session('success'))
-                <div class="bg-green-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
+                <div class="bg-green-500 text-white font-bold rounded-lg border shadow-lg p-3 mt-3">
                     {{ session('success') }}
                 </div>
             @endif
 
             <!-- Afficher les messages d'erreur -->
             @if (session('error'))
-                <div class="bg-red-500 text-white font-bold rounded-lg border shadow-lg p-3 mb-3">
+                <div class="bg-red-500 text-white font-bold rounded-lg border shadow-lg p-3 mt-3">
                     {{ session('error') }}
                 </div>
             @endif

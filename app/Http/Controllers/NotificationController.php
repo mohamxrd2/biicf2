@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
@@ -11,10 +11,10 @@ class NotificationController extends Controller
     {
         try {
             // Récupérer l'utilisateur authentifié
-            $user = Auth::guard('web')->user();
+            $user = Auth::user();
             
             // Récupérer la notification
-            $notification = $user->notifications()->findOrFail($id);
+            $notification = DatabaseNotification::findOrFail($id);
 
             // Marquer la notification comme lue
             if ($notification->unread()) {
