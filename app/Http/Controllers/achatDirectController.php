@@ -98,7 +98,7 @@ class AchatDirectController extends Controller
         // Récupérer l'utilisateur connecté
         $userId = Auth::guard('web')->id();
 
-        // Vérifiez si l'utilisateur est authentifié
+        // Vérifier si l'utilisateur est authentifié
         if (!$userId) {
             return redirect()->back()->with('error', 'Utilisateur non authentifié.');
         }
@@ -111,35 +111,91 @@ class AchatDirectController extends Controller
             return redirect()->back()->with('error', 'Portefeuille introuvable.');
         }
 
-        // Valider les données
-        $validated = $request->validate([
+        // Valider les données de la requête
+        $validatedData = $request->validate([
             'montantTotal' => 'required|numeric|min:1',
             'userSender' => 'required|integer|exists:users,id',
         ]);
 
-        $userSender = $validated['userSender'];
-        $requiredAmount = $validated['montantTotal'];
+        // Récupérer les données validées
+        $userSender = $validatedData['userSender'];
+        $requiredAmount = $validatedData['montantTotal'];
 
-        // Incrémenter le solde du portefeuille
-        $userWallet->increment('balance', $requiredAmount);
+        $pourcentSomme  = $requiredAmount * 0.1;
 
-        // Enregistrer la transaction pour l'utilisateur connecté
-        $transaction = new Transaction();
-        $transaction->sender_user_id = $userSender;
-        $transaction->receiver_user_id = $userId;
-        $transaction->type = 'Reception';
-        $transaction->amount = $requiredAmount;
-        $transaction->save();
+        $totalSom = $requiredAmount - $pourcentSomme;
 
-        $transaction1 = new Transaction();
-        $transaction1->sender_user_id = $userSender;
-        $transaction1->receiver_user_id = $userId;
-        $transaction1->type = 'Envoie';
-        $transaction1->amount = $requiredAmount;
-        $transaction1->save();
+        $userTrader = User::find($userId);
+        $userSenders = User::find($userSender);
+
+       
+
+        if($userTrader->parrain){
+          $commTraderParrain = $pourcentSomme * 0.05;
+
+          $commTraderParrainWallet = Wallet::where('user_id', $userTrader->parrain)->first();
+
+          $commTraderParrainWallet->increment('balance', $commTraderParrain);
+
+        }
+
+        if($userSenders->parrain){
+            $commSenderParrain = $pourcentSomme * 0.05;
+
+            $commSenderParrainWallet = Wallet::where('user_id', $userSenders->parrain)->first();
+
+            $commSenderParrainWallet->increment('balance', $commSenderParrain);
+        }
+
+        
+
+
+
+
+
+        // Incrémenter le solde du portefeuille de l'utilisateur connecté
+        $userWallet->increment('balance', $totalSom);
+
+        // Enregistrer la transaction de réception pour l'utilisateur connecté
+        $this->createTransaction($userSender, $userId, 'Reception', $totalSom);
+
+        // Enregistrer la transaction d'envoi pour l'utilisateur expéditeur
+        $this->createTransaction($userSender, $userId, 'Envoie', $requiredAmount);
+
+        // Enregistrer la transaction de commission pour l'utilisateur connecté
+
+        if($userTrader->parrain){
+            $this->createTransaction($userId, $userTrader->parrain, 'Commission', $commTraderParrain);
+        }
+
+        if($userSenders->parrain){
+            $this->createTransaction($userSender, $userSenders->parrain, 'Commission', $commSenderParrain);
+        }
+
+     
 
         return redirect()->back()->with('success', 'Achat accepté.');
     }
+
+    /**
+     * Créer et enregistrer une transaction.
+     *
+     * @param int $senderId
+     * @param int $receiverId
+     * @param string $type
+     * @param float $amount
+     * @return void
+     */
+    protected function createTransaction(int $senderId, int $receiverId, string $type, float $amount): void
+    {
+        $transaction = new Transaction();
+        $transaction->sender_user_id = $senderId;
+        $transaction->receiver_user_id = $receiverId;
+        $transaction->type = $type;
+        $transaction->amount = $amount;
+        $transaction->save();
+    }
+
 
     public function refuser(Request $request)
     {
