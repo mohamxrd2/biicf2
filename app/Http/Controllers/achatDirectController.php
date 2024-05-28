@@ -131,6 +131,13 @@ class AchatDirectController extends Controller
         $transaction->amount = $requiredAmount;
         $transaction->save();
 
+        $transaction1 = new Transaction();
+        $transaction1->sender_user_id = $userSender;
+        $transaction1->receiver_user_id = $userId;
+        $transaction1->type = 'Envoie';
+        $transaction1->amount = $requiredAmount;
+        $transaction1->save();
+
         return redirect()->back()->with('success', 'Achat accepté.');
     }
 
@@ -162,29 +169,24 @@ class AchatDirectController extends Controller
             return redirect()->back()->with('error', 'Portefeuille introuvable.');
         }
 
-        // Vérifiez que le portefeuille de l'utilisateur a suffisamment de solde
-        if ($userWallet->balance >= $requiredAmount) {
 
-            // Décrémenter le solde du portefeuille
-            $userWallet->increment('balance', $requiredAmount);
+        // Décrémenter le solde du portefeuille
+        $userWallet->increment('balance', $requiredAmount);
 
-            // Enregistrer la transaction pour l'utilisateur connecté
-            $transaction = new Transaction();
-            $transaction->sender_user_id = $userId;
-            $transaction->receiver_user_id = $userSender;
-            $transaction->type = 'Reception';
-            $transaction->amount = $requiredAmount;
-            $transaction->save();
+        // Enregistrer la transaction pour l'utilisateur connecté
+        $transaction = new Transaction();
+        $transaction->sender_user_id = $userId;
+        $transaction->receiver_user_id = $userSender;
+        $transaction->type = 'Reception';
+        $transaction->amount = $requiredAmount;
+        $transaction->save();
 
-            // Récupérer l'utilisateur qui a envoyé l'achat
-            $userSender = User::find($validated['userSender']);
+        // Récupérer l'utilisateur qui a envoyé l'achat
+        $userSender = User::find($validated['userSender']);
 
-            // Envoyer la notification au propriétaire du produit
-            Notification::send($userSender, new refusAchat($validated['message']));
+        // Envoyer la notification au propriétaire du produit
+        Notification::send($userSender, new refusAchat($validated['message']));
 
-            return redirect()->back()->with('success', 'Achat refusé.');
-        } else {
-            return redirect()->back()->with('error', 'Solde insuffisant pour refuser cet achat.');
-        }
+        return redirect()->back()->with('success', 'Achat refusé.');
     }
 }

@@ -110,9 +110,9 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
 
 
 
-    Route::get('notif', function () {
-        return view('biicf.notif');
-    })->name('biicf.notif');
+    Route::get('notif', [NotificationController::class, 'index'])->name('biicf.notif');
+
+    Route::get('api/notifications', [NotificationController::class, 'getNotifications'])->name('api.notifications');
 
     //accepter ou refuser la cmmande
     Route::post('notification/accepter', [achatDirectController::class, 'accepter'])->name('achatD.accepter');

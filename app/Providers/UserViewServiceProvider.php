@@ -21,17 +21,19 @@ class UserViewServiceProvider extends ServiceProvider
     /**
      * Bootstrap services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
-
         // Définir un View Composer pour les vues sous le préfixe 'biicf'
         View::composer('biicf.*', function ($view) {
             // Récupérer l'utilisateur authentifié
             $user = Auth::guard('web')->user();
 
-            // Passer l'utilisateur aux vues
-            $view->with('user', $user);
+            // Récupérer le nombre de notifications non lues
+            $unreadCount = $user ? $user->unreadNotifications->count() : 0;
+
+            // Passer l'utilisateur et le nombre de notifications non lues aux vues
+            $view->with('user', $user)
+                 ->with('unreadCount', $unreadCount);
         });
     }
 }

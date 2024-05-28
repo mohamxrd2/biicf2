@@ -7,12 +7,25 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
+
+    public function index()
+    {
+        // Récupérer l'utilisateur authentifié
+        $user = Auth::user();
+
+        // Récupérer les notifications de l'utilisateur
+        $notifications = $user->notifications;
+
+        $unreadCount = $user->unreadNotifications->count();
+
+        return view('biicf.notif', compact('notifications', 'unreadCount'));
+    }
     public function show($id)
     {
         try {
             // Récupérer l'utilisateur authentifié
             $user = Auth::user();
-            
+
             // Récupérer la notification
             $notification = DatabaseNotification::findOrFail($id);
 
@@ -26,4 +39,6 @@ class NotificationController extends Controller
             return redirect()->back()->with('error', 'Erreur lors de la récupération de la notification: ' . $e->getMessage());
         }
     }
+
+   
 }
