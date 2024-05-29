@@ -244,85 +244,104 @@
                 </div>
             @endif
 
-            <form action="{{ route('achatD.store', ['id' => $id]) }}" id="formAchatDirect"
-                class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md" style="display: none;"
-                method="POST">
-                @csrf
-                @method('POST')
-                <h1 class="text-xl text-center mb-3">Achat direct</h1>
+            <!-- Formulaire pour l'achat direct -->
+<form action="{{ route('achatD.store', ['id' => $id]) }}" id="formAchatDirect"
+    class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md" style="display: none;" method="POST">
+  @csrf
+  @method('POST')
+  <h1 class="text-xl text-center mb-3">Achat direct</h1>
 
-                <div class="space-y-3 mb-3 w-full">
-                    <input type="number" id="quantityInput" name="quantité"
-                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        placeholder="Quantité" data-min="{{ $produit->qteProd_min }}"
-                        data-max="{{ $produit->qteProd_max }}" oninput="updatemontantTotal()" required>
-                </div>
+  <div class="space-y-3 mb-3 w-full">
+      <input type="number" id="quantityInput" name="quantité"
+             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+             placeholder="Quantité" data-min="{{ $produit->qteProd_min }}" data-max="{{ $produit->qteProd_max }}"
+             oninput="updateMontantTotalDirect()" required>
+  </div>
 
-                <div class="space-y-3 mb-3 w-full">
-                    <input type="text" id="specificite" name="specificite"
-                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        placeholder="Specificité" required>
-                </div>
+  <div class="space-y-3 mb-3 w-full">
+      <input type="text" id="locationInput" name="localite"
+             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+             placeholder="Lieu de livraison" required>
+  </div>
 
-                <div class="space-y-3 mb-3 w-full">
-                    <input type="text" id="locationInput" name="localite"
-                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        placeholder="Localité" required>
-                </div>
+  <div class="space-y-3 mb-3 w-full">
+      <input type="text" id="specificite" name="specificite"
+             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+             placeholder="Specificité (Facultatif)">
+  </div>
 
-                <input type="hidden" name="userTrader" value="{{ $produit->user->id }}">
-                <input type="hidden" name="nameProd" value="{{ $produit->name }}">
-                <input type="hidden" name="userSender" value="{{ $userId }}">
-                <input type="hidden" name="message" value="Un utilisateur veut acheter ce produit">
-                <input type="hidden" name="photoProd" value="{{ $produit->photoProd1 }}">
-                <input type="hidden" name="idProd" value="{{ $produit->id }}">
+  <input type="hidden" name="userTrader" value="{{ $produit->user->id }}">
+  <input type="hidden" name="nameProd" value="{{ $produit->name }}">
+  <input type="hidden" name="userSender" value="{{ $userId }}">
+  <input type="hidden" name="message" value="Un utilisateur veut acheter ce produit">
+  <input type="hidden" name="photoProd" value="{{ $produit->photoProd1 }}">
+  <input type="hidden" name="idProd" value="{{ $produit->id }}">
 
-                <div class="flex justify-between px-4 mb-3 w-full">
-                    <p class="font-semibold text-sm text-gray-500">Prix total:</p>
-                    <p class="text-sm text-purple-600" id="montantTotal">0 FCFA</p>
-                    <input type="text" name="montantTotal" id="montant_total_input" hidden>
-                </div>
+  <div class="flex justify-between px-4 mb-3 w-full">
+      <p class="font-semibold text-sm text-gray-500">Prix total:</p>
+      <p class="text-sm text-purple-600" id="montantTotal">0 FCFA</p>
+      <input type="text" name="montantTotal" id="montant_total_input" hidden>
+  </div>
 
-                <p id="errorMessage" class="text-sm text-center text-red-500 hidden">Erreur</p>
+  <p id="errorMessage" class="text-sm text-center text-red-500 hidden">Erreur</p>
 
-                <div class="w-full text-center mt-3">
-                    <button type="reset"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">Annulé</button>
-                    <button type="submit" id="submitButton"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none"
-                        disabled>Envoyé</button>
-                </div>
-            </form>
+  <div class="w-full text-center mt-3">
+      <button type="reset"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">Annulé</button>
+      <button type="submit" id="submitButton"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none"
+              disabled>Envoyé</button>
+  </div>
+</form>
 
+<!-- Formulaire pour l'achat groupé -->
+<form action="" class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md" id="formAchatGroup"
+    style="display: none;">
+  <h1 class="text-xl text-center mb-3">Achat groupé</h1>
 
-            <form action="" class="mt-4 flex flex-col p-4 bg-gray-50 border border-gray-200 rounded-md"
-                id="formAchatGroup" style="display: none;">
-                <h1 class="text-xl text-center mb-3">Achat groupé</h1>
-                <div class="max-w-sm space-y-3 mb-3">
-                    <input type="number"
-                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        placeholder="Quantité">
-                </div>
-                <div class="max-w-sm space-y-3 mb-3">
-                    <input type="text"
-                        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        placeholder="Localité">
-                </div>
+  <div class="space-y-3 mb-3 w-full">
+      <input type="number" id="quantityInput1" name="quantité"
+             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+             placeholder="Quantité" data-min="{{ $produit->qteProd_min }}" data-max="{{ $produit->qteProd_max }}"
+             oninput="updateMontantTotalGroup()" required>
+  </div>
 
-                <div class="w-full text-center mt-3">
-                    <button type="reset"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">
-                        Annulé
-                    </button>
+  <div class="space-y-3 mb-3 w-full">
+      <input type="text" id="locationInput1" name="localite"
+             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+             placeholder="Lieu de livraison" required>
+  </div>
 
-                    <button
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none"
-                        type="submit" disabled>
-                        Envoyé
-                    </button>
-                </div>
+  <div class="space-y-3 mb-3 w-full">
+      <input type="text" id="specificite1" name="specificite"
+             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-purple-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+             placeholder="Specificité (Facultatif)">
+  </div>
 
-            </form>
+  <input type="hidden" name="userTrader" value="{{ $produit->user->id }}">
+  <input type="hidden" name="nameProd" value="{{ $produit->name }}">
+  <input type="hidden" name="userSender" value="{{ $userId }}">
+  <input type="hidden" name="message" value="Un utilisateur veut acheter ce produit">
+  <input type="hidden" name="photoProd" value="{{ $produit->photoProd1 }}">
+  <input type="hidden" name="idProd" value="{{ $produit->id }}">
+
+  <div class="flex justify-between px-4 mb-3 w-full">
+      <p class="font-semibold text-sm text-gray-500">Prix total:</p>
+      <p class="text-sm text-purple-600" id="montantTotal1">0 FCFA</p>
+      <input type="text" name="montantTotal" id="montant_total_input1" hidden>
+  </div>
+
+  <p id="errorMessage1" class="text-sm text-center text-red-500 hidden">Erreur</p>
+
+  <div class="w-full text-center mt-3">
+      <button type="reset"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">Annulé</button>
+      <button type="submit" id="submitButton1"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none"
+              disabled>Envoyé</button>
+  </div>
+</form>
+
         </div>
     </div>
 
@@ -359,38 +378,72 @@
             contentDiv.classList.toggle('hidden');
         }
 
-        function updatemontantTotal() {
-            const quantityInput = document.getElementById('quantityInput');
-            const price = parseFloat(document.querySelector('[data-price]').getAttribute('data-price'));
-            const minQuantity = parseInt(quantityInput.getAttribute('data-min'));
-            const maxQuantity = parseInt(quantityInput.getAttribute('data-max'));
-            const quantity = parseInt(quantityInput.value);
-            const montantTotal = price * (isNaN(quantity) ? 0 : quantity);
-            const montantTotalElement = document.getElementById('montantTotal');
-            const errorMessageElement = document.getElementById('errorMessage');
-            const submitButton = document.getElementById('submitButton');
-            const montantTotalInput = document.getElementById('montant_total_input');
+        // Fonction pour mettre à jour le montant total pour l'achat direct
+function updateMontantTotalDirect() {
+    const quantityInput = document.getElementById('quantityInput');
+    const price = parseFloat(document.querySelector('[data-price]').getAttribute('data-price'));
+    const minQuantity = parseInt(quantityInput.getAttribute('data-min'));
+    const maxQuantity = parseInt(quantityInput.getAttribute('data-max'));
+    const quantity = parseInt(quantityInput.value);
+    const montantTotal = price * (isNaN(quantity) ? 0 : quantity);
+    const montantTotalElement = document.getElementById('montantTotal');
+    const errorMessageElement = document.getElementById('errorMessage');
+    const submitButton = document.getElementById('submitButton');
+    const montantTotalInput = document.getElementById('montant_total_input');
 
-            const userBalance = {{ $userWallet->balance }};
+    const userBalance = {{ $userWallet->balance }};
 
-            if (isNaN(quantity) || quantity === 0 || quantity < minQuantity || quantity > maxQuantity) {
-                errorMessageElement.innerText = `La quantité doit être comprise entre ${minQuantity} et ${maxQuantity}.`;
-                errorMessageElement.classList.remove('hidden');
-                montantTotalElement.innerText = '0 FCFA';
-                submitButton.disabled = true;
-            } else if (montantTotal > userBalance) {
-                errorMessageElement.innerText =
-                    `Le fond est insuffisant. Votre solde est de ${userBalance.toLocaleString()} FCFA.`;
-                errorMessageElement.classList.remove('hidden');
-                montantTotalElement.innerText = `${montantTotal.toLocaleString()} FCFA`;
-                submitButton.disabled = true;
-            } else {
-                errorMessageElement.classList.add('hidden');
-                montantTotalElement.innerText = `${montantTotal.toLocaleString()} FCFA`;
-                montantTotalInput.value = montantTotal; // Met à jour l'input montant_total_input
-                submitButton.disabled = false;
-            }
-        }
+    if (isNaN(quantity) || quantity === 0 || quantity < minQuantity || quantity > maxQuantity) {
+        errorMessageElement.innerText = `La quantité doit être comprise entre ${minQuantity} et ${maxQuantity}.`;
+        errorMessageElement.classList.remove('hidden');
+        montantTotalElement.innerText = '0 FCFA';
+        submitButton.disabled = true;
+    } else if (montantTotal > userBalance) {
+        errorMessageElement.innerText = `Le fond est insuffisant. Votre solde est de ${userBalance.toLocaleString()} FCFA.`;
+        errorMessageElement.classList.remove('hidden');
+        montantTotalElement.innerText = `${montantTotal.toLocaleString()} FCFA`;
+        submitButton.disabled = true;
+    } else {
+        errorMessageElement.classList.add('hidden');
+        montantTotalElement.innerText = `${montantTotal.toLocaleString()} FCFA`;
+        montantTotalInput.value = montantTotal; // Met à jour l'input montant_total_input
+        submitButton.disabled = false;
+    }
+}
+
+// Fonction pour mettre à jour le montant total pour l'achat groupé
+function updateMontantTotalGroup() {
+    const quantityInput = document.getElementById('quantityInput1');
+    const price = parseFloat(document.querySelector('[data-price]').getAttribute('data-price'));
+    const minQuantity = parseInt(quantityInput.getAttribute('data-min'));
+    const maxQuantity = parseInt(quantityInput.getAttribute('data-max'));
+    const quantity = parseInt(quantityInput.value);
+    const montantTotal = price * (isNaN(quantity) ? 0 : quantity);
+    const montantTotalElement = document.getElementById('montantTotal1');
+    const errorMessageElement = document.getElementById('errorMessage1');
+    const submitButton = document.getElementById('submitButton1');
+    const montantTotalInput = document.getElementById('montant_total_input1');
+
+    const userBalance = {{ $userWallet->balance }};
+
+    if (isNaN(quantity) || quantity === 0 || quantity < minQuantity || quantity > maxQuantity) {
+        errorMessageElement.innerText = `La quantité doit être comprise entre ${minQuantity} et ${maxQuantity}.`;
+        errorMessageElement.classList.remove('hidden');
+        montantTotalElement.innerText = '0 FCFA';
+        submitButton.disabled = true;
+    } else if (montantTotal > userBalance) {
+        errorMessageElement.innerText = `Le fond est insuffisant. Votre solde est de ${userBalance.toLocaleString()} FCFA.`;
+        errorMessageElement.classList.remove('hidden');
+        montantTotalElement.innerText = `${montantTotal.toLocaleString()} FCFA`;
+        submitButton.disabled = true;
+    } else {
+        errorMessageElement.classList.add('hidden');
+        montantTotalElement.innerText = `${montantTotal.toLocaleString()} FCFA`;
+        montantTotalInput.value = montantTotal; // Met à jour l'input montant_total_input
+        submitButton.disabled = false;
+    }
+}
+
     </script>
 
 
