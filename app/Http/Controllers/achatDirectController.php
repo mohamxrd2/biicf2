@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NotificationCreate;
 use App\Models\AchatDirect;
 use App\Models\Transaction;
 use App\Models\User;

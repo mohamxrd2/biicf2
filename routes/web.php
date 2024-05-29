@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\achatDirectController;
+use App\Http\Controllers\achatGroupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\consoController;
 use App\Http\Controllers\AdminsController;
@@ -127,6 +128,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('publication/{id}', [ProduitServiceController::class, 'pubDet'])->name('biicf.postdet');
     //pour passer ca commande
     Route::post('achatD/store/{id}', [achatDirectController::class, 'store'])->name('achatD.store');
+    Route::post('achatG/store/{id}', [achatGroupController::class, 'store'])->name('achatG.store');
 
     Route::get('consommation', [consoController::class, 'consoBiicf'])->name('biicf.conso');
     Route::post('consommation/ajouter', [userController::class, 'storeCons'])->name('biicf.storeCons');
