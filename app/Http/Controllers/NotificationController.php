@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AchatDirect;
+
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,11 +36,13 @@ class NotificationController extends Controller
                 $notification->markAsRead();
             }
 
-            return view('biicf.notifshow', compact('notification'));
+
+            $isAccepted = AchatDirect::where('reponse', true)->exists();
+
+
+            return view('biicf.notifshow', compact('notification', 'isAccepted'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Erreur lors de la récupération de la notification: ' . $e->getMessage());
         }
     }
-
-   
 }

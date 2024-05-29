@@ -7,6 +7,7 @@ use App\Models\AchatDirect;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Notifications\acceptAchat;
 use App\Notifications\AchatBiicf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,7 +86,7 @@ class AchatDirectController extends Controller
             // Envoyer la notification au propriétaire du produit
             Notification::send($owner, new AchatBiicf($achat));
 
-            event(new NotificationCreate($achat));
+
 
             return redirect()->back()->with('success', 'Achat passé avec succès.');
         } catch (\Exception $e) {
@@ -115,6 +116,7 @@ class AchatDirectController extends Controller
         $validatedData = $request->validate([
             'montantTotal' => 'required|numeric|min:1',
             'userSender' => 'required|integer|exists:users,id',
+            'message' => 'required|string',
         ]);
 
         // Récupérer les données validées
@@ -128,7 +130,7 @@ class AchatDirectController extends Controller
         $userTrader = User::find($userId);
         $userSenders = User::find($userSender);
 
-       
+
 
         if($userTrader->parrain){
           $commTraderParrain = $pourcentSomme * 0.05;
@@ -147,7 +149,7 @@ class AchatDirectController extends Controller
             $commSenderParrainWallet->increment('balance', $commSenderParrain);
         }
 
-        
+
 
 
 
@@ -172,7 +174,8 @@ class AchatDirectController extends Controller
             $this->createTransaction($userSender, $userSenders->parrain, 'Commission', $commSenderParrain);
         }
 
-     
+        Notification::send($userSenders, new acceptAchat($validatedData['message']));
+
 
         return redirect()->back()->with('success', 'Achat accepté.');
     }

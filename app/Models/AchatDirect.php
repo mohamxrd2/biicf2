@@ -17,6 +17,7 @@ class AchatDirect extends Model
         'montantTotal',
         'message',
         'localite',
+        'reponse',
         'userTrader',
         'userSender',
         'idProd',
