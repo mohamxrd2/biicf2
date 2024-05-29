@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NotificationCreate;
 use App\Models\AchatDirect;
+use App\Models\NotificationEd;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Wallet;
@@ -119,6 +120,20 @@ class AchatDirectController extends Controller
             'message' => 'required|string',
         ]);
 
+        $notifId = $request->input('notifId');
+
+        // Rechercher la notification par son identifiant
+        $notification = NotificationEd::find($notifId);
+
+        $notification->reponse = 'accepte';
+
+        // Enregistrer les modifications
+        $notification->save();
+
+   
+        
+      
+
         // Récupérer les données validées
         $userSender = $validatedData['userSender'];
         $requiredAmount = $validatedData['montantTotal'];
@@ -132,16 +147,15 @@ class AchatDirectController extends Controller
 
 
 
-        if($userTrader->parrain){
-          $commTraderParrain = $pourcentSomme * 0.05;
+        if ($userTrader->parrain) {
+            $commTraderParrain = $pourcentSomme * 0.05;
 
-          $commTraderParrainWallet = Wallet::where('user_id', $userTrader->parrain)->first();
+            $commTraderParrainWallet = Wallet::where('user_id', $userTrader->parrain)->first();
 
-          $commTraderParrainWallet->increment('balance', $commTraderParrain);
-
+            $commTraderParrainWallet->increment('balance', $commTraderParrain);
         }
 
-        if($userSenders->parrain){
+        if ($userSenders->parrain) {
             $commSenderParrain = $pourcentSomme * 0.05;
 
             $commSenderParrainWallet = Wallet::where('user_id', $userSenders->parrain)->first();
@@ -166,11 +180,11 @@ class AchatDirectController extends Controller
 
         // Enregistrer la transaction de commission pour l'utilisateur connecté
 
-        if($userTrader->parrain){
+        if ($userTrader->parrain) {
             $this->createTransaction($userId, $userTrader->parrain, 'Commission', $commTraderParrain);
         }
 
-        if($userSenders->parrain){
+        if ($userSenders->parrain) {
             $this->createTransaction($userSender, $userSenders->parrain, 'Commission', $commSenderParrain);
         }
 
@@ -216,6 +230,16 @@ class AchatDirectController extends Controller
             'userSender' => 'required|integer|exists:users,id',
             'message' => 'required|string',
         ]);
+
+        $notifId = $request->input('notifId');
+
+        // Rechercher la notification par son identifiant
+        $notification = NotificationEd::find($notifId);
+
+        $notification->reponse = 'refuser';
+
+        // Enregistrer les modifications
+        $notification->save();
 
         $userSender = $validated['userSender'];
         $requiredAmount = $validated['montantTotal'];

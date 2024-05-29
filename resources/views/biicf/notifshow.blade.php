@@ -46,33 +46,43 @@
 
             <p class="my-3 text-sm text-gray-500">Vous aurez debité 10% sur le prix de la marchandise</p>
             <div class="flex gap-2">
-                <form id="form-accepter" action="{{ route('achatD.accepter') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="userSender" value="{{ $notification->data['userSender'] }}">
-                    <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
-                    <input type="hidden" name="message" value="commande de produit en cours /Préparation a la livraison">
+                @if ($notification->reponse == 'accepte' || $notification->reponse == 'refuser')
+                   <div class="w-full bg-gray-300 border p-2 rounded-md">
+                     <p class="text-md font-medium text-center">Reponse envoyé</p>
+
+                   </div>
+                @else
+                    <form id="form-accepter" action="{{ route('achatD.accepter') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="userSender" value="{{ $notification->data['userSender'] }}">
+                        <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
+                        <input type="hidden" name="message"
+                            value="commande de produit en cours /Préparation a la livraison">
+
+                        <input type="hidden" name="notifId" value="{{ $notification->id }}">
 
 
-                    <!-- Bouton accepter -->
-                    @if ($isAccepted)
-                        <div class="w-full">
-                            <div class="px-4 py-2 text-white bg-gray-500 rounded">Accepter!</div>
-                        </div>
-                    @else
+
+                        <!-- Bouton accepter -->
+
                         <button id="btn-accepter" type="submit"
                             class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">Accepter</button>
-                    @endif
-                </form>
 
-                <form id="form-refuser" action="{{ route('achatD.refuser') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
-                    <input type="hidden" name="userSender" value="{{ $notification->data['userSender'] }}">
-                    <input type="hidden" name="message" value="refus de produit">
+                    </form>
 
-                    <button id="btn-refuser" type="submit"
-                        class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Refuser</button>
-                </form>
+                    <form id="form-refuser" action="{{ route('achatD.refuser') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
+                        <input type="hidden" name="userSender" value="{{ $notification->data['userSender'] }}">
+                        <input type="hidden" name="message" value="refus de produit">
+
+                        <input type="hidden" name="notifId" value="{{ $notification->id }}">
+
+                        <button id="btn-refuser" type="submit"
+                            class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Refuser</button>
+                    </form>
+                @endif
+
             </div>
         </div>
 

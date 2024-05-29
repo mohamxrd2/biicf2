@@ -312,12 +312,7 @@
                                     <div class="text-sm font-medium text-blue-600 text-end">
                                         {{ number_format($transaction->amount, 2, ',', ' ') }} FCFA
                                     </div>
-                                    @php 
-
-                                      $solde = $transaction->amount + $userWallet->balance;
-
-                                    @endphp
-                                    <p class="text-sm text-gray-500 text-end">Solde: {{ number_format($solde, 2, ',', ' ') }}</p>
+                                    
                                   </div>
                                    
                                 @elseif ($transaction->type == 'Envoie' && $transaction->sender_user_id == $userId)

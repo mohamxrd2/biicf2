@@ -37,10 +37,7 @@ class NotificationController extends Controller
             }
 
 
-            $isAccepted = AchatDirect::where('reponse', true)->exists();
-
-
-            return view('biicf.notifshow', compact('notification', 'isAccepted'));
+            return view('biicf.notifshow', compact('notification', ));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Erreur lors de la récupération de la notification: ' . $e->getMessage());
         }
