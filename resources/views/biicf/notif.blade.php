@@ -31,14 +31,17 @@
             </h1>
         </div>
         @foreach (auth()->user()->notifications as $notification)
-            <div class="w-full px-3 py-2 bg-white border-y border-gray-200 hover:bg-gray-50">
+            <div
+                class="w-full px-3 py-2 @if ($notification->read_at == null) bg-white @else bg-gray-50 @endif  border-y border-gray-200 hover:bg-gray-50">
                 @if (isset($notification->data['message']) && isset($notification->data['accept']))
                     <div class="flex w-full">
                         <div class="w-16 h-16 overflow-hidden mr-3">
-                            <svg class="w-full text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                              </svg>
-                              
+                            <svg class="w-full text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
                         </div>
 
                         <div class="flex flex-col justify-between w-full">
@@ -48,7 +51,8 @@
                                     {{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}
                                 </p>
                             </div>
-                            <p class="text-sm text-slate-500 l max-w-1/2  font-normal">{{ $notification->data['accept'] }}</p>
+                            <p class="text-sm text-slate-500 l max-w-1/2  font-normal">{{ $notification->data['accept'] }}
+                            </p>
                         </div>
                     </div>
                 @elseif (isset($notification->data['message']) && isset($notification->data['reason']))
@@ -68,7 +72,8 @@
                                     {{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}
                                 </p>
                             </div>
-                            <p class="text-sm text-slate-500 l max-w-1/2  font-normal">Raison: {{ $notification->data['reason'] }}</p>
+                            <p class="text-sm text-slate-500 l max-w-1/2  font-normal">Raison:
+                                {{ $notification->data['reason'] }}</p>
                         </div>
                     </div>
                 @else
@@ -106,8 +111,6 @@
                     </a>
                 @endif
             </div>
-
-            </a>
         @endforeach
 
     </div>

@@ -6,8 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
 use App\Http\Controllers\Controller;
+use App\Models\AchatGrouper;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon; // Import de la classe Carbon
 
 class ProduitServiceController extends Controller
 {
@@ -193,6 +195,22 @@ class ProduitServiceController extends Controller
 
         $userWallet = Wallet::where('user_id', $userId)->first();
 
-        return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id'));
+        // Récupérer le nbr d'achat grouper sur un seul produit
+        $nbreAchatGroup = AchatGrouper::where('idProd', $produit->id)->count();
+
+
+        // Récupérer la date la plus ancienne
+        $datePlusAncienne = AchatGrouper::where('idProd', $id)->min('created_at');
+
+        // Ajouter 5 jours à la date la plus ancienne
+        $tempEcoule = Carbon::parse($datePlusAncienne)->addDays(5);
+
+        // Récupérer tous les userSender liés à ce idProd dans AchatGrouper
+        $idSenders = AchatGrouper::where('idProd', $produit->id)->pluck('userSender');
+
+        // Récupérer les utilisateurs correspondant aux idSender
+        $users = User::whereIn('id', $idSenders)->get();
+
+        return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id', 'nbreAchatGroup', 'idSenders', 'users', 'datePlusAncienne', 'tempEcoule'));
     }
 }

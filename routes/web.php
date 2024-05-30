@@ -128,6 +128,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('publication/{id}', [ProduitServiceController::class, 'pubDet'])->name('biicf.postdet');
     //pour passer ca commande
     Route::post('achatD/store/{id}', [achatDirectController::class, 'store'])->name('achatD.store');
+    //pour passer ca commande grouper
     Route::post('achatG/store/{id}', [achatGroupController::class, 'store'])->name('achatG.store');
 
     Route::get('consommation', [consoController::class, 'consoBiicf'])->name('biicf.conso');
