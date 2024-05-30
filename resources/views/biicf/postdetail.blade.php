@@ -302,16 +302,15 @@
                 @csrf
                 @method('POST')
                 <h1 class="text-xl text-center mb-3">Achat groupé (nombre de participants: {{ $nbreAchatGroup }})</h1>
-                <div class="container">
-                    <h2>Liste des Expéditeurs dans cet Achat Grouper:</h2>
-                    @foreach ($users as $user)
-                        <p>La liste des noms dans ce achat grouper: {{ $user->name }}</p>
-                    @endforeach
-                </div>
+                {{-- <div class="container">
+                  <h2>Liste des Expéditeurs dans cet Achat Grouper:</h2>
+                  @foreach ($users as $user)
+                      <p>La liste des noms dans ce achat grouper: {{ $user->name }}</p>
+                  @endforeach
+              </div> --}}
                 <div>
-                    <h1>Post Detail</h1>
                     <!-- Afficher le décompte ici -->
-                    {{-- @if ($nombreGroup > 0 && isset($id_user) && isset($id_vendeur) && $id_user != $id_vendeur) --}}
+                    @if ($nbreAchatGroup > 0 && isset($userId) && isset($produit->user->id) && $userId != $produit->user->id)
                         <div id="countdown-container" class="flex flex-col justify-center items-center">
                             <span class="mb-2">Temps restant pour cet achat groupé</span>
                             <div id="countdown"
@@ -322,11 +321,11 @@
                                 <div>-</div>
                             </div>
                         </div>
-                    {{-- @endif --}}
+                    @endif
 
                     <script>
                         // Convertir la date de départ en objet Date JavaScript
-                        const startDate = new Date({{ $datePlusAncienne }});
+                        const startDate = new Date("{{ $datePlusAncienne }}");
 
                         // Ajouter 5 jours à la date de départ
                         startDate.setDate(startDate.getDate() + 5);
@@ -350,10 +349,10 @@
                             // Afficher le compte à rebours dans l'élément HTML avec l'id "countdown"
                             const countdownElement = document.getElementById('countdown');
                             countdownElement.innerHTML = `
-                                <div>${days}j</div>:
-                                <div>${hours}h</div>:
-                                <div>${minutes}m</div>:
-                                <div>${seconds}s</div>
+                              <div>${days}j</div>:
+                              <div>${hours}h</div>:
+                              <div>${minutes}m</div>:
+                              <div>${seconds}s</div>
                             `;
 
                             // Arrêter le compte à rebours lorsque la date cible est atteinte
@@ -363,10 +362,7 @@
                             }
                         }
                     </script>
-
                 </div>
-
-
 
                 <div class="space-y-3 mb-3 w-full">
                     <input type="number" id="quantityInput1" name="quantité"
@@ -404,12 +400,15 @@
 
                 <div class="w-full text-center mt-3">
                     <button type="reset"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">Annulé</button>
+                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none">Annulé
+                    </button>
                     <button type="submit" id="submitButton1"
                         class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:pointer-events-none"
-                        disabled>Envoyé</button>
+                        disabled>Envoyé
+                    </button>
                 </div>
             </form>
+
 
         </div>
     </div>
