@@ -196,7 +196,9 @@ class ProduitServiceController extends Controller
         $userWallet = Wallet::where('user_id', $userId)->first();
 
         // Récupérer le nbr d'achat grouper sur un seul produit
-        $nbreAchatGroup = AchatGrouper::where('idProd', $produit->id)->count();
+        $nbreAchatGroup = AchatGrouper::where('idProd', $produit->id)
+        ->distinct('userSender') // Sélectionner uniquement les utilisateurs distincts
+        ->count();
 
 
         // Récupérer la date la plus ancienne
@@ -210,6 +212,12 @@ class ProduitServiceController extends Controller
 
         // Récupérer les utilisateurs correspondant aux idSender
         $users = User::whereIn('id', $idSenders)->get();
+
+
+        if (Carbon::now()->greaterThan($tempEcoule)) {
+            // Insérer des données dans AchatGrouper
+            
+        }
 
         return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id', 'nbreAchatGroup', 'idSenders', 'users', 'datePlusAncienne', 'tempEcoule'));
     }

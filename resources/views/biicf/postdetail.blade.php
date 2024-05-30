@@ -301,67 +301,11 @@
                 style="display: none;" method="POST">
                 @csrf
                 @method('POST')
-                <h1 class="text-xl text-center mb-3">Achat groupé (nombre de participants: {{ $nbreAchatGroup }})</h1>
-                {{-- <div class="container">
-                  <h2>Liste des Expéditeurs dans cet Achat Grouper:</h2>
-                  @foreach ($users as $user)
-                      <p>La liste des noms dans ce achat grouper: {{ $user->name }}</p>
-                  @endforeach
-              </div> --}}
+                <h1 class="text-xl text-center mb-3">Achat groupé </h1>
+               
                 <div>
-                    <!-- Afficher le décompte ici -->
-                    @if ($nbreAchatGroup > 0 && isset($userId) && isset($produit->user->id) && $userId != $produit->user->id)
-                        <div id="countdown-container" class="flex flex-col justify-center items-center">
-                            <span class="mb-2">Temps restant pour cet achat groupé</span>
-                            <div id="countdown"
-                                class="flex items-center gap-2 text-3xl font-semibold text-red-500 bg-red-100 p-3 rounded-xl w-auto">
-                                <div>-</div>:
-                                <div>-</div>:
-                                <div>-</div>:
-                                <div>-</div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <script>
-                        // Convertir la date de départ en objet Date JavaScript
-                        const startDate = new Date("{{ $datePlusAncienne }}");
-
-                        // Ajouter 5 jours à la date de départ
-                        startDate.setDate(startDate.getDate() + 5);
-
-                        // Mettre à jour le compte à rebours à intervalles réguliers
-                        const countdownTimer = setInterval(updateCountdown, 1000);
-
-                        function updateCountdown() {
-                            // Obtenir la date et l'heure actuelles
-                            const currentDate = new Date();
-
-                            // Calculer la différence entre la date cible et la date de départ en millisecondes
-                            const difference = startDate.getTime() - currentDate.getTime();
-
-                            // Convertir la différence en jours, heures, minutes et secondes
-                            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                            // Afficher le compte à rebours dans l'élément HTML avec l'id "countdown"
-                            const countdownElement = document.getElementById('countdown');
-                            countdownElement.innerHTML = `
-                              <div>${days}j</div>:
-                              <div>${hours}h</div>:
-                              <div>${minutes}m</div>:
-                              <div>${seconds}s</div>
-                            `;
-
-                            // Arrêter le compte à rebours lorsque la date cible est atteinte
-                            if (difference <= 0) {
-                                clearInterval(countdownTimer);
-                                countdownElement.innerHTML = "Temps écoulé !";
-                            }
-                        }
-                    </script>
+                    <p class="text-center text-md font-medium text-gray-700 mb-3">Nombre de participants: <span class="text-md  text-purple-800">{{ $nbreAchatGroup }}</span></p>
+                  
                 </div>
 
                 <div class="space-y-3 mb-3 w-full">
@@ -407,6 +351,20 @@
                         disabled>Envoyé
                     </button>
                 </div>
+
+
+                @if ($nbreAchatGroup > 0 && isset($userId) && isset($produit->user->id) && $userId != $produit->user->id)
+                        <div id="countdown-container" class="flex flex-col justify-center items-center mt-4">
+                            <span class="mb-2">Temps restant pour cet achat groupé</span>
+                            <div id="countdown"
+                                class="flex items-center gap-2 text-3xl font-semibold text-red-500 bg-red-100 p-3 rounded-xl w-auto">
+                                <div>-</div>:
+                                <div>-</div>:
+                                <div>-</div>:
+                                <div>-</div>
+                            </div>
+                        </div>
+                    @endif
             </form>
 
 
@@ -511,6 +469,46 @@
                 montantTotalElement.innerText = `${montantTotal.toLocaleString()} FCFA`;
                 montantTotalInput.value = montantTotal; // Met à jour l'input montant_total_input
                 submitButton.disabled = false;
+            }
+        }
+
+
+
+        // Convertir la date de départ en objet Date JavaScript
+        const startDate = new Date("{{ $datePlusAncienne }}");
+
+        // Ajouter 5 jours à la date de départ
+        startDate.setDate(startDate.getDate() + 5);
+
+        // Mettre à jour le compte à rebours à intervalles réguliers
+        const countdownTimer = setInterval(updateCountdown, 1000);
+
+        function updateCountdown() {
+            // Obtenir la date et l'heure actuelles
+            const currentDate = new Date();
+
+            // Calculer la différence entre la date cible et la date de départ en millisecondes
+            const difference = startDate.getTime() - currentDate.getTime();
+
+            // Convertir la différence en jours, heures, minutes et secondes
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            // Afficher le compte à rebours dans l'élément HTML avec l'id "countdown"
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.innerHTML = `
+      <div>${days}j</div>:
+      <div>${hours}h</div>:
+      <div>${minutes}m</div>:
+      <div>${seconds}s</div>
+    `;
+
+            // Arrêter le compte à rebours lorsque la date cible est atteinte
+            if (difference <= 0) {
+                clearInterval(countdownTimer);
+                countdownElement.innerHTML = "Temps écoulé !";
             }
         }
     </script>

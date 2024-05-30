@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\AchatGrouper;
 use App\Models\Transaction;
-use App\Models\User;
 use App\Models\Wallet;
-use App\Notifications\AchatBiicf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 
 class achatGroupController extends Controller
 {
@@ -77,10 +74,9 @@ class achatGroupController extends Controller
             $transaction->save();
 
             // Récupérer l'utilisateur propriétaire du produit
-            $owner = User::find($validated['userTrader']);
-
+           
             // Envoyer la notification au propriétaire du produit
-            Notification::send($owner, new AchatBiicf($achat));
+           
 
 
 
