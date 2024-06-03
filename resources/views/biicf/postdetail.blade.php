@@ -301,7 +301,7 @@
                 style="display: none;" method="POST">
                 @csrf
                 @method('POST')
-                <h1 class="text-xl text-center mb-3">Achat groupé </h1>
+                <h1 class="text-xl text-center mb-3">Achat groupé</h1>
 
                 <div>
                     <p class="text-center text-md font-medium text-gray-700 mb-3">Nombre de participants: <span class="text-md  text-purple-800">{{ $nbreAchatGroup }}</span></p>
