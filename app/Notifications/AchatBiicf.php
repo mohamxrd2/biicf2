@@ -29,15 +29,15 @@ class AchatBiicf extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'nameProd' => $this->achat->nameProd,
-            'quantité' => $this->achat->quantité,
-            'montantTotal' => $this->achat->montantTotal,
-            'localite' => $this->achat->localite,
-            'specificite' => $this->achat->specificite,
-            'userTrader' => $this->achat->userTrader,
-            'userSender' => $this->achat->userSender,
-            'photoProd' => $this->achat->photoProd,
-            'idProd' => $this->achat->idProd,
+            'nameProd' => $this->achat['nameProd'],
+            'quantité' => $this->achat['quantité'],
+            'montantTotal' => $this->achat['montantTotal'],
+            'localite' => $this->achat['localite'] ?? null,
+            'specificite' => $this->achat['specificite'] ?? null,
+            'userTrader' => $this->achat['userTrader'],
+            'userSender' => $this->achat['userSender'] ?? null,
+            'photoProd' => $this->achat['photoProd'],
+            'idProd' => $this->achat['idProd'],
         ];
     }
 }
