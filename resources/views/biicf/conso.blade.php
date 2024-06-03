@@ -249,7 +249,7 @@
 
                                             <a href="{{ route('biicf.consoDet', $consommation->id) }}"
                                                 class="flex items-center">
-                                             
+
                                                 <div class="ps-3">
                                                     <div class="text-base font-semibold">{{ $consommation->name }}</div>
                                                 </div>
@@ -383,5 +383,5 @@
     </div>
 
     <script src="{{ asset('js/search2.js') }}"></script>
-    <script src="{{ asset('js/affichage_champs.js') }}"></script>
+    <script src="{{ asset('js/affichage_champsC.js') }}"></script>
 @endsection

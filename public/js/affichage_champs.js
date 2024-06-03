@@ -20,8 +20,8 @@ const champVille = document.getElementById("floating_ville");
 const champCommune = document.getElementById("floating_commune");
 
 // Initialement, masquer les champs
-champNomProduit.style.display = "none";
-champConditionnement.style.display = "none";
+champNomProduit.style.display ="none";
+champConditionnement.style.display ="none";
 champFormat.style.display = "none";
 champQteMin.style.display = "none";
 champQteMax.style.display = "none";
@@ -52,7 +52,7 @@ selectType.addEventListener("change", function () {
         champSpecialite.style.display = "block";
         champQteService.style.display = "block";
         champQualification.style.display = "block";
-      
+
         champVille.style.display = "block";
         champCommune.style.display = "block";
         champPrix.style.display = "block";
@@ -81,7 +81,7 @@ selectType.addEventListener("change", function () {
         champPhoto3.style.display = "block";
         champPhoto4.style.display = "block";
         champDescription.style.display = "block";
- 
+
         champVille.style.display = "block";
         champCommune.style.display = "block";
         // Masquer les autres champs
