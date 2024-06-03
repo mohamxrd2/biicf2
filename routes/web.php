@@ -100,8 +100,7 @@ Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 
-//////////// PLATEFORME ////////////////////
-
+//////   ////// PLATEFORME //////   ///////////
 
 
 
