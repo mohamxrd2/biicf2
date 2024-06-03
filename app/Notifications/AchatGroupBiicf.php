@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AchatBiicf extends Notification implements ShouldQueue
+class AchatGroupBiicf extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -32,10 +32,10 @@ class AchatBiicf extends Notification implements ShouldQueue
             'nameProd' => $this->achat['nameProd'],
             'quantité' => $this->achat['quantité'],
             'montantTotal' => $this->achat['montantTotal'],
-            'localite' => $this->achat['localite'],
-            'specificite' => $this->achat['specificite'],
+            'localite' => $this->achat['localite'] ?? null,
+            'specificite' => $this->achat['specificite'] ?? null,
             'userTrader' => $this->achat['userTrader'],
-            'userSender' => $this->achat['userSender'],
+            'userSender' => $this->achat['userSender'] ?? null,
             'photoProd' => $this->achat['photoProd'],
             'idProd' => $this->achat['idProd'],
         ];

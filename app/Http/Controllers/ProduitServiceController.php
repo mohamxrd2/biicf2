@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\AchatGrouper;
+use App\Notifications\AchatGroupBiicf;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
 use App\Notifications\AchatBiicf;
@@ -223,8 +224,8 @@ class ProduitServiceController extends Controller
 
             // Si la date limite est dépassée, préparer les données pour la notification
             if (Carbon::now()->greaterThan($tempEcoule)) {
-                
-               
+
+
                 // Préparer le tableau de données pour la notification
                 $notificationData = [
                     'nameProd' => $nameProd,
@@ -236,7 +237,7 @@ class ProduitServiceController extends Controller
                 ];
 
                 // Envoyer la notification
-                Notification::send($produit->user, new AchatBiicf($notificationData));
+                Notification::send($produit->user, new AchatGroupBiicf($notificationData));
             }
 
             // Retourner la vue avec les données récupérées
