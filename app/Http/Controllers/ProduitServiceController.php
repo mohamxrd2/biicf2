@@ -214,9 +214,9 @@ class ProduitServiceController extends Controller
 
 
 
-            // $tempEcoule = Carbon::now()->addDays(5);
+             $tempEcoule = Carbon::now()->addDays(5);
             // Vérifier si la date la plus ancienne + 5 jours est dépassée
-             $tempEcoule = Carbon::now()->subDays(1); // pour le test
+            // $tempEcoule = Carbon::now()->subDays(1); // pour le test
 
             // Initialiser les variables pour la vue
             $sommeQuantite = AchatGrouper::where('idProd', $produit->id)->sum('quantité');
