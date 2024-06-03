@@ -303,8 +303,12 @@
                 @method('POST')
                 <h1 class="text-xl text-center mb-3">Achat groupé</h1>
 
+
                 <div>
                     <p class="text-center text-md font-medium text-gray-700 mb-3">Nombre de participants: <span class="text-md  text-purple-800">{{ $nbreAchatGroup }}</span></p>
+
+                    <p class="text-center text-md font-medium text-gray-700 mb-3">Nombre de participants: <span
+                            class="text-md  text-purple-800">{{ $nbreAchatGroup }}</span></p>
 
                 </div>
 
@@ -354,21 +358,33 @@
 
 
                 @if ($nbreAchatGroup > 0 && isset($userId) && isset($produit->user->id) && $userId != $produit->user->id)
-                        <div id="countdown-container" class="flex flex-col justify-center items-center mt-4">
-                            <span class="mb-2">Temps restant pour cet achat groupé</span>
-                            <div id="countdown"
-                                class="flex items-center gap-2 text-3xl font-semibold text-red-500 bg-red-100 p-3 rounded-xl w-auto">
-                                <div>-</div>:
-                                <div>-</div>:
-                                <div>-</div>:
-                                <div>-</div>
-                            </div>
+                    <div id="countdown-container" class="flex flex-col justify-center items-center mt-4">
+                        <span class="mb-2">Temps restant pour cet achat groupé</span>
+                        <div id="countdown"
+                            class="flex items-center gap-2 text-3xl font-semibold text-red-500 bg-red-100 p-3 rounded-xl w-auto">
+                            <div>-</div>:
+                            <div>-</div>:
+                            <div>-</div>:
+                            <div>-</div>
                         </div>
-                    @endif
+                    </div>
+                @endif
             </form>
 
 
         </div>
+
+        <div class="bg-white border p-4">
+            @if (count($userSenders) > 0)
+                @foreach ($userSenders as $userSender)
+                    <p>{{ $userSender }}</p>
+                @endforeach
+            @else
+                <p>Aucun utilisateur</p>
+            @endif
+
+        </div>
+
 
 
 
