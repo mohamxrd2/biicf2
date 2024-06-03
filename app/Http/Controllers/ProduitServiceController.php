@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\AchatGrouper;
-use App\Notifications\AchatGroupBiicf;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
+use App\Models\NotificationLog;
 use App\Notifications\AchatBiicf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\AchatGroupBiicf;
 use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon; // Import de la classe Carbon
 
@@ -211,10 +212,11 @@ class ProduitServiceController extends Controller
             // Récupérer la date la plus ancienne parmi les achats groupés pour ce produit
             $datePlusAncienne = AchatGrouper::where('idProd', $produit->id)->min('created_at');
 
-            // Vérifier si la date la plus ancienne + 5 jours est dépassée
-            // $tempEcoule = Carbon::parse($datePlusAncienne)->addDays(5);
 
-             $tempEcoule = Carbon::now()->subDays(1);
+
+            // $tempEcoule = Carbon::now()->addDays(5);
+            // Vérifier si la date la plus ancienne + 5 jours est dépassée
+             $tempEcoule = Carbon::now()->subDays(1); // pour le test
 
             // Initialiser les variables pour la vue
             $sommeQuantite = AchatGrouper::where('idProd', $produit->id)->sum('quantité');
@@ -222,10 +224,10 @@ class ProduitServiceController extends Controller
             $nameProd = $produit->name;
             $photoProd = $produit->photoProd1;
 
-            // Si la date limite est dépassée, préparer les données pour la notification
-            if (Carbon::now()->greaterThan($tempEcoule)) {
+            // Vérifier si une notification a déjà été envoyée pour ce produit
+            $notificationExists = NotificationLog::where('idProd', $produit->id)->exists();
 
-
+            if (Carbon::now()->greaterThan($tempEcoule) && !$notificationExists) {
                 // Préparer le tableau de données pour la notification
                 $notificationData = [
                     'nameProd' => $nameProd,
@@ -238,6 +240,12 @@ class ProduitServiceController extends Controller
 
                 // Envoyer la notification
                 Notification::send($produit->user, new AchatGroupBiicf($notificationData));
+
+                // Enregistrer la notification dans la table NotificationLog
+                NotificationLog::create(['idProd' => $produit->id]);
+
+                // Supprimer toutes les lignes dans AchatGrouper pour ce produit
+                AchatGrouper::where('idProd', $produit->id)->delete();
             }
 
             // Retourner la vue avec les données récupérées

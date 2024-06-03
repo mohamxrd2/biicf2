@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            //
-
-            if(!Schema::hasColumn('notifications', 'reponse')){
-                $table->string('reponse')->nullable()->after('data');
-            }
-
-            
+        Schema::create('notification_logs', function (Blueprint $table) {
+            $table->id(); // Clé primaire générée automatiquement par Laravel
+            $table->unsignedBigInteger('idProd'); // Renommez cette colonne pour éviter le conflit
+            $table->timestamps();
         });
     }
 
@@ -27,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('notification_logs');
     }
 };

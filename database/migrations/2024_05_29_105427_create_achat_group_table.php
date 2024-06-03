@@ -12,22 +12,38 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('achat_group', function (Blueprint $table) {
-            $table->id();
-            $table->string('photoProd');
-            $table->string('nameProd');
-            $table->integer('quantité');
-            $table->decimal('montantTotal', 10, 2);
-            $table->string('localite');
-            $table->boolean('reponse');
-            $table->unsignedBigInteger('userTrader');
-            $table->unsignedBigInteger('userSender');
-            $table->unsignedBigInteger('idProd');
-            $table->timestamps();
-
-            // Foreign keys
-            $table->foreign('userTrader')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('userSender')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('idProd')->references('id')->on('produit_services')->onDelete('cascade');
+            // Vérifiez d'abord si les colonnes existent avant de les ajouter
+            if (!Schema::hasColumn('achat_group', 'photoProd')) {
+                $table->string('photoProd');
+            }
+            if (!Schema::hasColumn('achat_group', 'nameProd')) {
+                $table->string('nameProd');
+            }
+            if (!Schema::hasColumn('achat_group', 'quantité')) {
+                $table->integer('quantité');
+            }
+            if (!Schema::hasColumn('achat_group', 'montantTotal')) {
+                $table->decimal('montantTotal', 10, 2);
+            }
+            if (!Schema::hasColumn('achat_group', 'localite')) {
+                $table->string('localite');
+            }
+            if (!Schema::hasColumn('achat_group', 'reponse')) {
+                $table->boolean('reponse');
+            }
+            if (!Schema::hasColumn('achat_group', 'userTrader')) {
+                $table->unsignedBigInteger('userTrader');
+            }
+            if (!Schema::hasColumn('achat_group', 'userSender')) {
+                $table->unsignedBigInteger('userSender');
+            }
+            if (!Schema::hasColumn('achat_group', 'idProd')) {
+                $table->unsignedBigInteger('idProd');
+            }
+            // Les colonnes `created_at` et `updated_at` peuvent être ajoutées en utilisant timestamps() si elles n'existent pas
+            if (!Schema::hasColumns('achat_group', ['created_at', 'updated_at'])) {
+                $table->timestamps();
+            }
         });
     }
 
@@ -36,8 +52,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('achat_grouper', function (Blueprint $table) {
-            Schema::dropIfExists('achat_grouper');
+        Schema::table('achat_group', function (Blueprint $table) {
+            // Supprimer les colonnes si nécessaire
+            $table->dropColumn(['photoProd', 'nameProd', 'quantité', 'montantTotal', 'localite', 'reponse', 'userTrader', 'userSender', 'idProd']);
         });
     }
 };
+
+

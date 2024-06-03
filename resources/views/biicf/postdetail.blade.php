@@ -371,14 +371,7 @@
         </div>
 
 
-        <div class="bg-white border rounded-xl w-full ">
-
-            <p>{{ $sommeQuantite }}</p>
-            <p>{{ $montants }}</p>
-
-            <p>{{ $tempEcoule }}</p>
-
-        </div>
+        
     </div>
 
 
