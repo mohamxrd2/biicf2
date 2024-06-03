@@ -369,6 +369,16 @@
 
 
         </div>
+
+
+        <div class="bg-white border rounded-xl w-full ">
+
+            <p>{{ $sommeQuantite }}</p>
+            <p>{{ $montants }}</p>
+
+            <p>{{ $tempEcoule }}</p>
+
+        </div>
     </div>
 
 
@@ -499,11 +509,11 @@
             // Afficher le compte à rebours dans l'élément HTML avec l'id "countdown"
             const countdownElement = document.getElementById('countdown');
             countdownElement.innerHTML = `
-      <div>${days}j</div>:
-      <div>${hours}h</div>:
-      <div>${minutes}m</div>:
-      <div>${seconds}s</div>
-    `;
+             <div>${days}j</div>:
+             <div>${hours}h</div>:
+             <div>${minutes}m</div>:
+            <div>${seconds}s</div>
+              `;
 
             // Arrêter le compte à rebours lorsque la date cible est atteinte
             if (difference <= 0) {

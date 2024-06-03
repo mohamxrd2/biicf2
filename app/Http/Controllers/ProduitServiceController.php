@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Wallet;
+use App\Models\AchatGrouper;
 use Illuminate\Http\Request;
 use App\Models\ProduitService;
+use App\Notifications\AchatBiicf;
 use App\Http\Controllers\Controller;
-use App\Models\AchatGrouper;
-use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon; // Import de la classe Carbon
 
 class ProduitServiceController extends Controller
@@ -187,38 +189,61 @@ class ProduitServiceController extends Controller
 
         return view('biicf.search', compact('results', 'produits', 'resultCount', 'produitDims'));
     }
+
     public function pubDet($id)
     {
-        $produit = ProduitService::find($id);
+        try {
+            // Trouver le produit ou échouer
+            $produit = ProduitService::findOrFail($id);
 
-        $userId = Auth::guard('web')->id();
+            // Récupérer l'identifiant de l'utilisateur connecté
+            $userId = Auth::guard('web')->id();
 
-        $userWallet = Wallet::where('user_id', $userId)->first();
+            // Récupérer le portefeuille de l'utilisateur
+            $userWallet = Wallet::where('user_id', $userId)->first();
 
-        // Récupérer le nbr d'achat grouper sur un seul produit
-        $nbreAchatGroup = AchatGrouper::where('idProd', $produit->id)
-        ->distinct('userSender') // Sélectionner uniquement les utilisateurs distincts
-        ->count();
+            // Récupérer le nombre d'achats groupés distincts pour ce produit
+            $nbreAchatGroup = AchatGrouper::where('idProd', $produit->id)
+                ->distinct('userSender')
+                ->count('userSender');
 
+            // Récupérer la date la plus ancienne parmi les achats groupés pour ce produit
+            $datePlusAncienne = AchatGrouper::where('idProd', $produit->id)->min('created_at');
 
-        // Récupérer la date la plus ancienne
-        $datePlusAncienne = AchatGrouper::where('idProd', $id)->min('created_at');
+            // Vérifier si la date la plus ancienne + 5 jours est dépassée
+            // $tempEcoule = Carbon::parse($datePlusAncienne)->addDays(5);
 
-        // Ajouter 5 jours à la date la plus ancienne
-        $tempEcoule = Carbon::parse($datePlusAncienne)->addDays(5);
+             $tempEcoule = Carbon::now()->subDays(1);
 
-        // Récupérer tous les userSender liés à ce idProd dans AchatGrouper
-        $idSenders = AchatGrouper::where('idProd', $produit->id)->pluck('userSender');
+            // Initialiser les variables pour la vue
+            $sommeQuantite = AchatGrouper::where('idProd', $produit->id)->sum('quantité');
+            $montants = AchatGrouper::where('idProd', $produit->id)->sum('montantTotal');
+            $nameProd = $produit->name;
+            $photoProd = $produit->photoProd1;
 
-        // Récupérer les utilisateurs correspondant aux idSender
-        $users = User::whereIn('id', $idSenders)->get();
+            // Si la date limite est dépassée, préparer les données pour la notification
+            if (Carbon::now()->greaterThan($tempEcoule)) {
+                
+               
+                // Préparer le tableau de données pour la notification
+                $notificationData = [
+                    'nameProd' => $nameProd,
+                    'quantité' => $sommeQuantite,
+                    'montantTotal' => $montants,
+                    'userTrader' => $produit->user->id,
+                    'photoProd' => $photoProd,
+                    'idProd' => $produit->id,
+                ];
 
+                // Envoyer la notification
+                Notification::send($produit->user, new AchatBiicf($notificationData));
+            }
 
-        if (Carbon::now()->greaterThan($tempEcoule)) {
-            // Insérer des données dans AchatGrouper
-            
+            // Retourner la vue avec les données récupérées
+            return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id', 'nbreAchatGroup', 'datePlusAncienne', 'tempEcoule', 'sommeQuantite', 'montants'));
+        } catch (\Exception $e) {
+            // Gérer les exceptions et rediriger avec un message d'erreur
+            return redirect()->back()->with('error', 'Une erreur est survenue: ' . $e->getMessage());
         }
-
-        return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id', 'nbreAchatGroup', 'idSenders', 'users', 'datePlusAncienne', 'tempEcoule'));
     }
 }

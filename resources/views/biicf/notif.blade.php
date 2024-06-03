@@ -65,7 +65,7 @@
                             </svg>
                         </div>
 
-                        <div class="flex flex-col justify-between w-full">
+                        <div class="flex flex-col justify-between w-full ">
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-md font-semibold">{{ $notification->data['message'] }}</p>
                                 <p class="text-[12px] text-gray-400 text-right">
