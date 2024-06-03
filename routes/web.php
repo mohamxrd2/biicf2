@@ -122,7 +122,7 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
 
     Route::get('publication', [ProduitServiceController::class, 'postBiicf'])->name('biicf.post');
     Route::post('publication/ajouter', [userController::class, 'storePub'])->name('biicf.pubstore');
-    Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProduct'])->name('biicf.pubdelete');
+    Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProductBiicf'])->name('biicf.pubdeleteBiicf');
     //la vue du formulaire
     Route::get('publication/{id}', [ProduitServiceController::class, 'pubDet'])->name('biicf.postdet');
     //pour passer ca commande

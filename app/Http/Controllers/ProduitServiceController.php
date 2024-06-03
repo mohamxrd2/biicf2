@@ -68,6 +68,18 @@ class ProduitServiceController extends Controller
 
         return redirect()->back()->with('success', 'Produit supprimé avec succès.');
     }
+    public function destroyProductBiicf($id)
+    {
+        $produit = ProduitService::find($id);
+
+        if (!$produit) {
+            return redirect()->back()->with('error', 'Produit non trouvé.');
+        }
+
+        $produit->delete();
+
+        return redirect()->route('biicf.post')->with('success', 'Produit supprimé avec succès.');
+    }
     public function adminService()
     {
 
