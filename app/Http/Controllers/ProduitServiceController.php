@@ -226,7 +226,7 @@ class ProduitServiceController extends Controller
 
 
 
-             $tempEcoule = Carbon::now()->addDays(5);
+            $tempEcoule = Carbon::now()->addDays(5);
             // Vérifier si la date la plus ancienne + 5 jours est dépassée
             // $tempEcoule = Carbon::now()->subDays(1); // pour le test
 
@@ -235,6 +235,10 @@ class ProduitServiceController extends Controller
             $montants = AchatGrouper::where('idProd', $produit->id)->sum('montantTotal');
             $nameProd = $produit->name;
             $photoProd = $produit->photoProd1;
+            $userSenders = AchatGrouper::where('idProd', $produit->id)
+                ->distinct('userSender')
+                ->pluck('userSender')
+                ->toArray();
 
             // Vérifier si une notification a déjà été envoyée pour ce produit
             $notificationExists = NotificationLog::where('idProd', $produit->id)->exists();
@@ -261,7 +265,7 @@ class ProduitServiceController extends Controller
             }
 
             // Retourner la vue avec les données récupérées
-            return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id', 'nbreAchatGroup', 'datePlusAncienne', 'tempEcoule', 'sommeQuantite', 'montants'));
+            return view('biicf.postdetail', compact('produit', 'userWallet', 'userId', 'id', 'nbreAchatGroup', 'datePlusAncienne', 'tempEcoule', 'sommeQuantite', 'montants', 'userSenders'));
         } catch (\Exception $e) {
             // Gérer les exceptions et rediriger avec un message d'erreur
             return redirect()->back()->with('error', 'Une erreur est survenue: ' . $e->getMessage());
