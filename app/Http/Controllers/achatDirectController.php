@@ -99,10 +99,7 @@ class AchatDirectController extends Controller
         // Récupérer l'utilisateur connecté
         $userId = Auth::guard('web')->id();
 
-        // Vérifier si l'utilisateur est authentifié
-        if (!$userId) {
-            return redirect()->back()->with('error', 'Utilisateur non authentifié.');
-        }
+       
 
         // Récupérer le portefeuille de l'utilisateur connecté
         $userWallet = Wallet::where('user_id', $userId)->first();
@@ -128,10 +125,6 @@ class AchatDirectController extends Controller
 
         // Enregistrer les modifications
         $notification->save();
-
-   
-        
-      
 
         // Récupérer les données validées
         $userSender = $validatedData['userSender'];
@@ -161,12 +154,6 @@ class AchatDirectController extends Controller
 
             $commSenderParrainWallet->increment('balance', $commSenderParrain);
         }
-
-
-
-
-
-
 
         // Incrémenter le solde du portefeuille de l'utilisateur connecté
         $userWallet->increment('balance', $totalSom);

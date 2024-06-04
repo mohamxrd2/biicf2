@@ -25,11 +25,11 @@
 
             <div class="flex flex-col bg-white p-4 rounded-xl border justify-center">
 
-                
+
 
                 <h2 class="text-xl font-medium mb-4"><span class="font-semibold">Titre:
                     </span>{{ $notification->data['nameProd'] }}</h2>
-                    <p class="mb-3"><strong>Quantité:</strong> {{ $notification->data['quantité'] }}</p>
+                <p class="mb-3"><strong>Quantité:</strong> {{ $notification->data['quantité'] }}</p>
                 <p class="mb-3"><strong>Prix totale:</strong> {{ $notification->data['montantTotal'] ?? 'N/A' }} Fcfa</p>
                 @php
                     $prixArtiche = $notification->data['montantTotal'] ?? 0;
@@ -47,7 +47,7 @@
                     </svg>
                 </a>
                 <p class="my-3 text-sm text-gray-500">Vous aurez debité 10% sur le prix de la marchandise</p>
-                
+
 
                 <div class="flex gap-2">
                     @if ($notification->reponse == 'accepte' || $notification->reponse == 'refuser')
@@ -56,28 +56,29 @@
 
                         </div>
                     @else
-                        <form id="form-accepter" action="#" method="POST">
+                        <form id="form-accepter" action="{{ route('achatG.accepter') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="userSender" value="{{ $notification->data['userSender'] }}">
+                            @foreach ($notification->data['userSender'] as $userId)
+                                <input type="hidden" name="userSender[]" value="{{ $userId }}">
+                            @endforeach
+
                             <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
                             <input type="hidden" name="message"
                                 value="commande de produit en cours /Préparation a la livraison">
-
                             <input type="hidden" name="notifId" value="{{ $notification->id }}">
 
-
-
                             <!-- Bouton accepter -->
-
                             <button id="btn-accepter" type="submit"
                                 class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">Accepter</button>
-
                         </form>
 
-                        <form id="form-refuser" action="#" method="POST">
+
+                        <form id="form-refuser" action="{{ route('achatG.refuser') }}" method="POST">
                             @csrf
                             <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
-                            <input type="hidden" name="userSender" value="{{ $notification->data['userSender'] }}">
+                            @foreach ($notification->data['userSender'] as $userId)
+                                <input type="hidden" name="userSender[]" value="{{ $userId }}">
+                            @endforeach
                             <input type="hidden" name="message" value="refus de produit">
 
                             <input type="hidden" name="notifId" value="{{ $notification->id }}">
@@ -92,7 +93,7 @@
 
 
             </div>
-        @else
+        @elseif ($notification->type === 'App\Notifications\AchatBiicf')
             <div class="flex flex-col bg-white p-4 rounded-xl border justify-center">
                 <h2 class="text-xl font-medium mb-4"><span class="font-semibold">Titre:
                     </span>{{ $notification->data['nameProd'] }}</h2>

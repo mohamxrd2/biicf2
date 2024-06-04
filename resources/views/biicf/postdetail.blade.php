@@ -30,7 +30,7 @@
                 @endphp
                 @if ($photoCount > 0)
 
-                    <div class="hs-carousel relative overflow-hidden w-full min-h-screen  rounded-lg">
+                    <div class="hs-carousel relative overflow-hidden w-full h-screen  rounded-lg">
                         <div
                             class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                             @foreach ([$produit->photoProd1, $produit->photoProd2, $produit->photoProd3, $produit->photoProd4] as $photo)
@@ -307,8 +307,7 @@
                 <div>
                     <p class="text-center text-md font-medium text-gray-700 mb-3">Nombre de participants: <span class="text-md  text-purple-800">{{ $nbreAchatGroup }}</span></p>
 
-                    <p class="text-center text-md font-medium text-gray-700 mb-3">Nombre de participants: <span
-                            class="text-md  text-purple-800">{{ $nbreAchatGroup }}</span></p>
+                   
 
                 </div>
 
@@ -382,6 +381,9 @@
             @else
                 <p>Aucun utilisateur</p>
             @endif
+
+
+            <p>{{ $tempEcoule  }}</p>
 
         </div>
 

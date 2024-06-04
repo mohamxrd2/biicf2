@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AchatGrouper;
-use App\Models\Transaction;
+use App\Models\User;
 use App\Models\Wallet;
+use App\Models\Transaction;
+use App\Models\AchatGrouper;
 use Illuminate\Http\Request;
+use App\Models\NotificationEd;
+use App\Notifications\RefusAchat;
+use App\Notifications\acceptAchat;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class achatGroupController extends Controller
 {
@@ -73,16 +78,154 @@ class achatGroupController extends Controller
             $transaction->amount = $validated['montantTotal'];
             $transaction->save();
 
-            // Récupérer l'utilisateur propriétaire du produit
-           
-            // Envoyer la notification au propriétaire du produit
-           
-
-
 
             return redirect()->back()->with('success', 'Achat passé avec succès.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Une erreur est survenue: ' . $e->getMessage());
         }
+    }
+
+    public function accepter(Request $request)
+    {
+        $userId = Auth::guard('web')->id();
+        $userWallet = Wallet::where('user_id', $userId)->first();
+
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'userSender' => 'required|array',
+            'userSender.*' => 'integer|exists:users,id',
+            'montantTotal' => 'required|numeric',
+            'message' => 'required|string',
+            'notifId' => 'required|integer|exists:notifications,id',
+        ]);
+
+        // Récupérer les données validées
+        $userSenders = $validatedData['userSender'];
+        $montantTotal = $validatedData['montantTotal'];
+        $message = $validatedData['message'];
+        $notifId = $validatedData['notifId'];
+
+        // Trouver et mettre à jour la notification
+        $notification = NotificationEd::find($notifId);
+        if ($notification) {
+            $notification->reponse = 'accepte';
+            $notification->save();
+        } else {
+            return redirect()->back()->with('error', 'Notification non trouvée.');
+        }
+
+        // Calcul du pourcentage et du montant total
+        $pourcentSomme = $montantTotal * 0.1;
+        $totalSom = $montantTotal - $pourcentSomme;
+
+        // Incrémenter le solde du portefeuille de userTrader
+        $userWallet->increment('balance', $totalSom);
+
+        // Créer une transaction de réception
+        $this->createTransaction($userSenders[0], $userId, 'Reception', $totalSom);
+
+        // Traitement pour le parrain du trader
+        $userTrader = User::find($userId);
+        if ($userTrader->parrain) {
+            $commTraderParrain = $pourcentSomme * 0.05;
+            $commTraderParrainWallet = Wallet::where('user_id', $userTrader->parrain->id)->first();
+            $commTraderParrainWallet->increment('balance', $commTraderParrain);
+            $this->createTransaction($userId, $userTrader->parrain->id, 'Commission', $commTraderParrain);
+        }
+
+        // Traitement pour chaque utilisateur ayant envoyé la demande
+        foreach ($userSenders as $userSenderId) {
+            $senderWallet = Wallet::where('user_id', $userSenderId)->first();
+            $senderWallet->increment('balance', $montantTotal);
+            $this->createTransaction($userSenderId, $userId, 'Envoie', $montantTotal);
+
+            $userSender = User::find($userSenderId);
+            if ($userSender->parrain) {
+                $commSenderParrain = $pourcentSomme * 0.05;
+                $commSenderParrainWallet = Wallet::where('user_id', $userSender->parrain->id)->first();
+                $commSenderParrainWallet->increment('balance', $commSenderParrain);
+                $this->createTransaction($userSenderId, $userSender->parrain->id, 'Commission', $commSenderParrain);
+            }
+
+            Notification::send($userSender, new acceptAchat($message));
+        }
+
+        return redirect()->back()->with('success', 'Action acceptée avec succès');
+    }
+
+    /**
+     * Créer et enregistrer une transaction.
+     *
+     * @param int $senderId
+     * @param int $receiverId
+     * @param string $type
+     * @param float $amount
+     * @return void
+     */
+    protected function createTransaction(int $senderId, int $receiverId, string $type, float $amount): void
+    {
+        $transaction = new Transaction();
+        $transaction->sender_user_id = $senderId;
+        $transaction->receiver_user_id = $receiverId;
+        $transaction->type = $type;
+        $transaction->amount = $amount;
+        $transaction->save();
+    }
+
+
+    public function refuser(Request $request)
+    {
+        // Récupérer l'identifiant de l'utilisateur connecté
+        $userId = Auth::guard('web')->id();
+
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'userSender' => 'required|array',
+            'userSender.*' => 'integer|exists:users,id',
+            'montantTotal' => 'required|numeric',
+            'message' => 'required|string',
+            'notifId' => 'required|integer|exists:notifications,id',
+        ]);
+
+        // Récupérer les données validées
+        $userSenders = $validatedData['userSender'];
+        $montantTotal = $validatedData['montantTotal'];
+        $message = $validatedData['message'];
+        $notifId = $validatedData['notifId'];
+
+        // Trouver et mettre à jour la notification
+        $notification = NotificationEd::find($notifId);
+        if ($notification) {
+            $notification->reponse = 'refuser';
+            $notification->save();
+        } else {
+            return redirect()->back()->with('error', 'Notification non trouvée.');
+        }
+
+        // Traitement pour chaque utilisateur ayant envoyé la demande
+        foreach ($userSenders as $userSenderId) {
+            $userSenderWallet = Wallet::where('user_id', $userSenderId)->first();
+
+            // Ajouter le montant au portefeuille de l'utilisateur
+            if ($userSenderWallet) {
+                $userSenderWallet->increment('balance', $montantTotal);
+
+                // Créer une transaction
+                $transaction = new Transaction();
+                $transaction->sender_user_id = $userId;
+                $transaction->receiver_user_id = $userSenderId;
+                $transaction->type = 'Reception';
+                $transaction->amount = $montantTotal;
+                $transaction->save();
+
+                // Envoyer une notification de refus
+                $userSender = User::find($userSenderId);
+                if ($userSender) {
+                    Notification::send($userSender, new RefusAchat($message));
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Refus traité avec succès.');
     }
 }

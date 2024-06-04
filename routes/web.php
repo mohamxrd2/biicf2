@@ -120,6 +120,12 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('notification.show');
 
 
+// routes/web.php
+    Route::post('notification/acceptergroupe', [achatGroupController::class, 'accepter'])->name('achatG.accepter');
+
+    Route::post('notification/refusergroupe', [achatGroupController::class, 'refuser'])->name('achatG.refuser');
+
+
     Route::get('publication', [ProduitServiceController::class, 'postBiicf'])->name('biicf.post');
     Route::post('publication/ajouter', [userController::class, 'storePub'])->name('biicf.pubstore');
     Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProductBiicf'])->name('biicf.pubdeleteBiicf');
