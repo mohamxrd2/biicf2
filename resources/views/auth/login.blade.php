@@ -11,10 +11,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body  style="background-image: url({{ asset('img/bg.jpg') }}); background-position: center; background-size: cover;">
 
-    <div class="w-full h-[100vh] flex justify-center items-center"
-        style="background-image: url({{ asset('img/bg.jpg') }}); background-position: center; background-size: cover;">
+    <div class="w-full h-[100vh] flex justify-center items-center p-5">
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="w-[430px] bg-white border border-gray-200 rounded-xl shadow-sm" style="z-index: 1;">
             <div class="p-4 sm:p-7">
