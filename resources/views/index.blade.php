@@ -37,6 +37,7 @@
 
       <div class="mt-5 max-w-3xl text-center mx-auto">
         <p class="text-lg text-gray-600 dark:text-gray-400">Lien provisoire pour acceder au dashboard et a la plateforme</p>
+        <p>Yapi yapo yapa</p>
       </div>
 
       <!-- Buttons -->
