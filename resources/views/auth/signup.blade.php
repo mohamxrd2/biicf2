@@ -12,9 +12,9 @@
 </head>
 <body>
 
-    <div class="h-[100vh] flex justify-center items-center">
+    <div class="h-[100vh] flex justify-center items-center p-4">
 
-        <div class="p-4 bg-white w-[900px] ">
+        <div class="p-4 bg-white w-full ">
 
             <p class="text-center my-5 text-2xl">Creer un compte</p>
 
@@ -32,9 +32,9 @@
                 </div>
             @endif
             <!-- Stepper -->
-            <div data-hs-stepper="">
+            <div data-hs-stepper="" class="">
                 <!-- Stepper Nav -->
-                <ul class="relative flex flex-row gap-x-2">
+                <ul class="relative flex flex-row gap-x-2 overflow-x-auto">
                     <li class="flex items-center gap-x-2 shrink basis-0 flex-1 group"
                         data-hs-stepper-nav-item='{
               "index": 1
