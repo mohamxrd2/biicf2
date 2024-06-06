@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\achatDirectController;
-use App\Http\Controllers\achatGroupController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\consoController;
 use App\Http\Controllers\AdminsController;
+
 use App\Http\Controllers\AdminAgentController;
 use App\Http\Controllers\AdminChartController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\achatGroupController;
+use App\Http\Controllers\AchatDirectController;
 use App\Http\Controllers\AdminWalletController;
 use App\Http\Controllers\AdminSettingController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\BiicfAuthController;
 use App\Http\Controllers\ProduitServiceController;
-use App\Http\Controllers\NotificationController;
 
 
 Route::get('/', function () {
@@ -115,24 +116,21 @@ Route::middleware('user.auth')->prefix('biicf')->group(function () {
     Route::get('api/notifications', [NotificationController::class, 'getNotifications'])->name('api.notifications');
 
     //accepter ou refuser la cmmande
-    Route::post('notification/accepter', [achatDirectController::class, 'accepter'])->name('achatD.accepter');
-    Route::post('notification/refuser', [achatDirectController::class, 'refuser'])->name('achatD.refuser');
+    Route::post('notification/accepter', [AchatDirectController::class, 'accepter'])->name('achatD.accepter');
+    Route::post('notification/refuser', [AchatDirectController::class, 'refuser'])->name('achatD.refuser');
     Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('notification.show');
 
 
-// routes/web.php
+    // routes/web.php
     Route::post('notification/acceptergroupe', [achatGroupController::class, 'accepter'])->name('achatG.accepter');
-
     Route::post('notification/refusergroupe', [achatGroupController::class, 'refuser'])->name('achatG.refuser');
-
-
     Route::get('publication', [ProduitServiceController::class, 'postBiicf'])->name('biicf.post');
     Route::post('publication/ajouter', [userController::class, 'storePub'])->name('biicf.pubstore');
     Route::delete('publication/supprimer/{produit}', [ProduitServiceController::class, 'destroyProductBiicf'])->name('biicf.pubdeleteBiicf');
     //la vue du formulaire
     Route::get('publication/{id}', [ProduitServiceController::class, 'pubDet'])->name('biicf.postdet');
     //pour passer ca commande
-    Route::post('achatD/store/{id}', [achatDirectController::class, 'store'])->name('achatD.store');
+    Route::post('achatD/store/{id}', [AchatDirectController::class, 'store'])->name('achatD.store');
     //pour passer ca commande grouper
     Route::post('achatG/store/{id}', [achatGroupController::class, 'store'])->name('achatG.store');
 

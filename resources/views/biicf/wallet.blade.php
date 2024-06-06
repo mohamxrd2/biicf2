@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="max-w-5xl mx-auto p-4">
+    <div class="p-4">
         @if (session('success'))
             <div class="bg-green-200 text-green-800 px-4 py-2 rounded-md mb-4">
                 {{ session('success') }}
@@ -177,10 +177,10 @@
         </div>
 
         <!-- Transactions Section -->
-        <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="bg-white p-4 rounded-lg shadow-sm">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-semibold">Transactions</h2>
-                <div class="flex items-center space-x-2 hidden lg:block">
+                <div class="lg:flex items-center space-x-2  hidden">
 
                     <div class="relative">
                         <input type="text" placeholder="Rechercher..."

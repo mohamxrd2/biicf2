@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Transaction;
 use App\Models\AchatGrouper;
-use Illuminate\Http\Request;
 use App\Models\NotificationEd;
 use App\Notifications\RefusAchat;
-use App\Notifications\acceptAchat;
+use App\Notifications\acceptAchat; // Assurez-vous que le nom est correctement capitalisé ici
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
