@@ -22,7 +22,7 @@
         <!-- Balance Summary -->
         <div class="flex items-center justify-between mb-6">
             <div>
-                <h1 class="text-3xl font-semibold">{{ number_format($userWallet->balance, 2, ',', ' ') }} FCFA </h1>
+                <h1 class="lg:text-3xl text-xl font-semibold">{{ number_format($userWallet->balance, 2, ',', ' ') }} FCFA </h1>
                 <p class="text-gray-500">Revenus total</p>
             </div>
             <div class="space-x-2">

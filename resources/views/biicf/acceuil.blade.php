@@ -4,7 +4,7 @@
 
 @section('content')
 
-    
+
 
     <div class="grid grid-cols-3 gap-4">
 
@@ -24,7 +24,7 @@
                             </svg>
                         </div>
                         <input type="search" id="default-search"
-                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-purple-600 focus:border-purple-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block w-full p-4 ps-10 text-sm sm:text-[12px]  text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-purple-600 focus:border-purple-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Recherche de produit ou service..." required data-hs-combo-box-input=""
                             name="keyword" />
                         <button type="submit"
@@ -122,7 +122,9 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                             <p class="text-[12px]  inline-block align-middle">
-                                                {{ $produit->villeServ }},{{ $produit->comnServ }}</p>
+                                                {{ $produit->villeServ }},{{ $produit->comnServ }}
+                                            </p>
+
                                         </div>
                                     </div>
 
@@ -135,7 +137,7 @@
                                     @endif
                                 </div>
                                 <p class="text-sm text-slate-700">
-                                    {{ strlen($produit->desrip) > 100 ? substr($produit->desrip, 0, 100) . '...' : $produit->desrip }}
+                                    {{ strlen($produit->desrip) > 50 ? substr($produit->desrip, 0, 50) . '...' : $produit->desrip }}
                                 </p>
                                 <div class="w-full bottom-0">
                                     <p class="text-sm text-gray-600 text-right ">
