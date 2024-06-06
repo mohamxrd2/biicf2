@@ -373,19 +373,8 @@
 
         </div>
 
-        <div class="bg-white border p-4">
-            @if (count($userSenders) > 0)
-                @foreach ($userSenders as $userSender)
-                    <p>{{ $userSender }}</p>
-                @endforeach
-            @else
-                <p>Aucun utilisateur</p>
-            @endif
-
-
-            <p>{{ $tempEcoule  }}</p>
-
-        </div>
+    
+    
 
 
 

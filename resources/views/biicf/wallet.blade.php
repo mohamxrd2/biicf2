@@ -76,7 +76,6 @@
                                             <div class="relative z-50 w-full max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300"
                                                 style="display: none;" data-hs-combo-box-output="">
 
-                                                <!-- Utiliser la boucle foreach pour générer les éléments de la liste déroulante -->
                                                 @foreach ($users as $user)
                                                     <div class="cursor-pointer  py-2 px-4 w-full text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
                                                         tabindex="{{ $loop->index }}"
@@ -181,7 +180,7 @@
         <div class="bg-white p-6 rounded-lg shadow-sm">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-semibold">Transactions</h2>
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2 hidden lg:block">
 
                     <div class="relative">
                         <input type="text" placeholder="Rechercher..."
@@ -222,7 +221,7 @@
                                 <div class="flex items-center">
                                     @if ($transaction->type == 'Depot' || ($transaction->type == 'Commission' && $transaction->receiver_user_id == $userId))
                                         <div
-                                            class="bg-gray-200 flex justify-center items-center w-10 h-10 rounded-full mr-4">
+                                            class="bg-gray-200 flex justify-center items-center lg:w-10 lg:h-10 w-7 h-7 rounded-full mr-4">
                                             <svg class="w-4 h-4 text-black font-bold" xmlns="http://www.w3.org/2000/svg"
                                                 fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                                 stroke="currentColor">
