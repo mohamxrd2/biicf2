@@ -51,7 +51,7 @@
 
                 <div class="flex gap-2">
 
-                    
+
                     @if ($notification->reponse == 'accepte' || $notification->reponse == 'refuser')
                         <div class="w-full bg-gray-300 border p-2 rounded-md">
                             <p class="text-md font-medium text-center">Réponse envoyée</p>
@@ -64,6 +64,7 @@
                             @endforeach
 
                             <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
+                            <input type="hidden" name="idProd" value="{{ $notification->data['idProd'] }}">
                             <input type="hidden" name="message"
                                 value="commande de produit en cours /Préparation à la livraison">
                             <input type="hidden" name="notifId" value="{{ $notification->id }}">
@@ -82,12 +83,13 @@
                                 <input type="hidden" name="userSender[]" value="{{ $userId }}">
                             @endforeach
                             <input type="hidden" name="message" value="refus de produit">
-
+                            <input type="hidden" name="idProd" value="{{ $notification->data['idProd'] }}">
                             <input type="hidden" name="notifId" value="{{ $notification->id }}">
-
+                        
                             <button id="btn-refuser" type="submit"
-                                class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Refuser</button>
+                                    class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Refuser</button>
                         </form>
+                        
                     @endif
 
                 </div>

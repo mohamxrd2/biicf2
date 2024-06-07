@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Transaction;
 use App\Models\AchatGrouper;
+use Illuminate\Http\Request;
 use App\Models\NotificationEd;
+use App\Models\NotificationLog;
 use App\Notifications\RefusAchat;
-use App\Notifications\acceptAchat; // Assurez-vous que le nom est correctement capitalisé ici
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\acceptAchat; // Assurez-vous que le nom est correctement capitalisé ici
 
 class achatGroupController extends Controller
 {
@@ -88,7 +89,7 @@ class achatGroupController extends Controller
     public function accepter(Request $request)
     {
         // Déboguer les données reçues par la requête
-       //dd($request->all());
+        //dd($request->all());
 
         $userId = Auth::guard('web')->id();
         $userWallet = Wallet::where('user_id', $userId)->first();
@@ -107,6 +108,7 @@ class achatGroupController extends Controller
         $montantTotal = $validatedData['montantTotal'];
         $message = $validatedData['message'];
         $notifId = $validatedData['notifId'];
+        $idProd = $request->input('idProd');
 
         // Trouver et mettre à jour la notification
         $notification = NotificationEd::find($notifId);
@@ -156,7 +158,7 @@ class achatGroupController extends Controller
             if ($userSender->parrain) {
                 $commSenderParrain = $pourcentSomme * 0.05;
                 $commSenderParrainWallet = Wallet::where('user_id', $userSender->parrain->id)->first();
-                
+
                 if ($commSenderParrainWallet) {
                     $commSenderParrainWallet->increment('balance', $commSenderParrain);
                     $this->createTransaction($userSenderId, $userSender->parrain->id, 'Commission', $commSenderParrain);
@@ -167,6 +169,9 @@ class achatGroupController extends Controller
 
             Notification::send($userSender, new AcceptAchat($message));
         }
+
+        NotificationLog::where('idProd', $idProd)->delete();
+
 
         return redirect()->back()->with('success', 'Action acceptée avec succès');
     }
@@ -183,58 +188,74 @@ class achatGroupController extends Controller
 
 
     public function refuser(Request $request)
-    {
-        // Récupérer l'identifiant de l'utilisateur connecté
-        $userId = Auth::guard('web')->id();
+{
+    // Debug: afficher toutes les données de la requête
+    dd($request->all());
 
-        // Valider les données du formulaire
-        $validatedData = $request->validate([
-            'userSender' => 'required|array',
-            'userSender.*' => 'integer|exists:users,id',
-            'montantTotal' => 'required|numeric',
-            'message' => 'required|string',
-            'notifId' => 'required|integer|exists:notifications,id',
-        ]);
+    // Récupérer l'identifiant de l'utilisateur connecté
+    $userId = Auth::guard('web')->id();
 
-        // Récupérer les données validées
-        $userSenders = $validatedData['userSender'];
-        $montantTotal = $validatedData['montantTotal'];
-        $message = $validatedData['message'];
-        $notifId = $validatedData['notifId'];
+    // Valider les données du formulaire
+    $validatedData = $request->validate([
+        'userSender' => 'required|array',
+        'userSender.*' => 'integer|exists:users,id',
+        'montantTotal' => 'required|numeric',
+        'message' => 'required|string',
+        'notifId' => 'required|integer|exists:notifications,id',
+        'idProd' => 'required|integer|exists:produit_services,id',
+    ]);
 
-        // Trouver et mettre à jour la notification
-        $notification = NotificationEd::find($notifId);
-        if ($notification) {
-            $notification->reponse = 'refuser';
-            $notification->save();
-        } else {
-            return redirect()->back()->with('error', 'Notification non trouvée.');
-        }
+    // Récupérer les données validées
+    $userSenders = $validatedData['userSender'];
+    $montantTotal = $validatedData['montantTotal'];
+    $message = $validatedData['message'];
+    $notifId = $validatedData['notifId'];
+    $idProd = $validatedData['idProd'];
 
-        // Traitement pour chaque utilisateur ayant envoyé la demande
-        foreach ($userSenders as $userSenderId) {
-            $userSenderWallet = Wallet::where('user_id', $userSenderId)->first();
-
-            // Ajouter le montant au portefeuille de l'utilisateur
-            if ($userSenderWallet) {
-                $userSenderWallet->increment('balance', $montantTotal);
-
-                // Créer une transaction
-                $transaction = new Transaction();
-                $transaction->sender_user_id = $userId;
-                $transaction->receiver_user_id = $userSenderId;
-                $transaction->type = 'Reception';
-                $transaction->amount = $montantTotal;
-                $transaction->save();
-
-                // Envoyer une notification de refus
-                $userSender = User::find($userSenderId);
-                if ($userSender) {
-                    Notification::send($userSender, new RefusAchat($message));
-                }
-            }
-        }
-
-        return redirect()->back()->with('success', 'Refus traité avec succès.');
+    // Trouver et mettre à jour la notification
+    $notification = NotificationEd::find($notifId);
+    if (!$notification) {
+        return redirect()->back()->with('error', 'Notification non trouvée.');
     }
+
+    $notification->reponse = 'refuser';
+    $notification->save();
+
+    // Traitement pour chaque utilisateur ayant envoyé la demande
+    foreach ($userSenders as $userSenderId) {
+        $userSenderWallet = Wallet::where('user_id', $userSenderId)->first();
+
+        if (!$userSenderWallet) {
+            return redirect()->back()->with('error', 'Portefeuille pour l\'utilisateur ID ' . $userSenderId . ' introuvable.');
+        }
+
+        $userSenderWallet->increment('balance', $montantTotal);
+
+        // Créer une transaction
+        $transaction = new Transaction();
+        $transaction->sender_user_id = $userId;
+        $transaction->receiver_user_id = $userSenderId;
+        $transaction->type = 'Reception';
+        $transaction->amount = $montantTotal;
+        $transaction->save();
+
+        // Envoyer une notification de refus
+        $userSender = User::find($userSenderId);
+        if (!$userSender) {
+            return redirect()->back()->with('error', 'Utilisateur ID ' . $userSenderId . ' introuvable.');
+        }
+
+        try {
+            Notification::send($userSender, new RefusAchat($message));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erreur lors de l\'envoi de la notification : ' . $e->getMessage());
+        }
+    }
+
+    // Supprimer les logs de notification pour le produit spécifié
+    NotificationLog::where('idProd', $idProd)->delete();
+
+    return redirect()->back()->with('success', 'Refus traité avec succès.');
+}
+
 }
