@@ -157,11 +157,11 @@ class achatGroupController extends Controller
 
             if ($userSender->parrain) {
                 $commSenderParrain = $pourcentSomme * 0.05;
-                $commSenderParrainWallet = Wallet::where('user_id', $userSender->parrain->id)->first();
+                $commSenderParrainWallet = Wallet::where('user_id', $userSender->parrain)->first();
 
                 if ($commSenderParrainWallet) {
                     $commSenderParrainWallet->increment('balance', $commSenderParrain);
-                    $this->createTransaction($userSenderId, $userSender->parrain->id, 'Commission', $commSenderParrain);
+                    $this->createTransaction($userSenderId, $userSender->parrain, 'Commission', $commSenderParrain);
                 } else {
                     return redirect()->back()->with('error', 'Portefeuille du parrain pour l\'utilisateur ID ' . $userSender->parrain->id . ' introuvable.');
                 }
@@ -190,7 +190,7 @@ class achatGroupController extends Controller
     public function refuser(Request $request)
 {
     // Debug: afficher toutes les données de la requête
-    dd($request->all());
+   
 
     // Récupérer l'identifiant de l'utilisateur connecté
     $userId = Auth::guard('web')->id();
@@ -224,13 +224,14 @@ class achatGroupController extends Controller
     // Traitement pour chaque utilisateur ayant envoyé la demande
     foreach ($userSenders as $userSenderId) {
         $userSenderWallet = Wallet::where('user_id', $userSenderId)->first();
-
+    
         if (!$userSenderWallet) {
             return redirect()->back()->with('error', 'Portefeuille pour l\'utilisateur ID ' . $userSenderId . ' introuvable.');
         }
-
+    
+        // Ajouter le montant au portefeuille de l'utilisateur
         $userSenderWallet->increment('balance', $montantTotal);
-
+    
         // Créer une transaction
         $transaction = new Transaction();
         $transaction->sender_user_id = $userId;
@@ -238,19 +239,26 @@ class achatGroupController extends Controller
         $transaction->type = 'Reception';
         $transaction->amount = $montantTotal;
         $transaction->save();
-
-        // Envoyer une notification de refus
+    
+        // Récupérer l'utilisateur destinataire de la notification
         $userSender = User::find($userSenderId);
         if (!$userSender) {
             return redirect()->back()->with('error', 'Utilisateur ID ' . $userSenderId . ' introuvable.');
         }
-
+    
+        // Envoyer la notification de refus
         try {
-            Notification::send($userSender, new RefusAchat($message));
+            $notification = new RefusAchat($message);
+            if ($notification && $userSender) {
+                Notification::send($userSender, $notification);
+            } else {
+                return redirect()->back()->with('error', 'Erreur lors de l\'envoi de la notification : Utilisateur ou notification non disponibles.');
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Erreur lors de l\'envoi de la notification : ' . $e->getMessage());
         }
     }
+    
 
     // Supprimer les logs de notification pour le produit spécifié
     NotificationLog::where('idProd', $idProd)->delete();

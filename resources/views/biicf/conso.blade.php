@@ -59,7 +59,7 @@
 
 
                 {{-- consommation --}}
-                <form action="{{ route('admin.client.storeCons', ['username' => $user->username]) }}"
+                <form action="{{ route('biicf.storeCons', ['username' => $user->username]) }}"
                     method="POST">
                     @csrf
                     <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto">
