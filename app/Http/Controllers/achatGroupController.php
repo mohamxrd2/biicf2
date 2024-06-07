@@ -87,6 +87,9 @@ class achatGroupController extends Controller
 
     public function accepter(Request $request)
     {
+        // Déboguer les données reçues par la requête
+       //dd($request->all());
+
         $userId = Auth::guard('web')->id();
         $userWallet = Wallet::where('user_id', $userId)->first();
 
@@ -96,7 +99,7 @@ class achatGroupController extends Controller
             'userSender.*' => 'integer|exists:users,id',
             'montantTotal' => 'required|numeric',
             'message' => 'required|string',
-            'notifId' => 'required|integer|exists:notifications,id',
+            'notifId' => 'required|uuid|exists:notifications,id',
         ]);
 
         // Récupérer les données validées
@@ -128,40 +131,46 @@ class achatGroupController extends Controller
         $userTrader = User::find($userId);
         if ($userTrader->parrain) {
             $commTraderParrain = $pourcentSomme * 0.05;
-            $commTraderParrainWallet = Wallet::where('user_id', $userTrader->parrain->id)->first();
+            $commTraderParrainWallet = Wallet::where('user_id', $userTrader->parrain)->first();
             $commTraderParrainWallet->increment('balance', $commTraderParrain);
-            $this->createTransaction($userId, $userTrader->parrain->id, 'Commission', $commTraderParrain);
+            $this->createTransaction($userId, $userTrader->parrain, 'Commission', $commTraderParrain);
         }
 
         // Traitement pour chaque utilisateur ayant envoyé la demande
         foreach ($userSenders as $userSenderId) {
             $senderWallet = Wallet::where('user_id', $userSenderId)->first();
+
+            if (!$senderWallet) {
+                return redirect()->back()->with('error', 'Portefeuille pour l\'utilisateur ID ' . $userSenderId . ' introuvable.');
+            }
+
             $senderWallet->increment('balance', $montantTotal);
             $this->createTransaction($userSenderId, $userId, 'Envoie', $montantTotal);
 
             $userSender = User::find($userSenderId);
+
+            if (!$userSender) {
+                return redirect()->back()->with('error', 'Utilisateur ID ' . $userSenderId . ' introuvable.');
+            }
+
             if ($userSender->parrain) {
                 $commSenderParrain = $pourcentSomme * 0.05;
                 $commSenderParrainWallet = Wallet::where('user_id', $userSender->parrain->id)->first();
-                $commSenderParrainWallet->increment('balance', $commSenderParrain);
-                $this->createTransaction($userSenderId, $userSender->parrain->id, 'Commission', $commSenderParrain);
+                
+                if ($commSenderParrainWallet) {
+                    $commSenderParrainWallet->increment('balance', $commSenderParrain);
+                    $this->createTransaction($userSenderId, $userSender->parrain->id, 'Commission', $commSenderParrain);
+                } else {
+                    return redirect()->back()->with('error', 'Portefeuille du parrain pour l\'utilisateur ID ' . $userSender->parrain->id . ' introuvable.');
+                }
             }
 
-            Notification::send($userSender, new acceptAchat($message));
+            Notification::send($userSender, new AcceptAchat($message));
         }
 
         return redirect()->back()->with('success', 'Action acceptée avec succès');
     }
 
-    /**
-     * Créer et enregistrer une transaction.
-     *
-     * @param int $senderId
-     * @param int $receiverId
-     * @param string $type
-     * @param float $amount
-     * @return void
-     */
     protected function createTransaction(int $senderId, int $receiverId, string $type, float $amount): void
     {
         $transaction = new Transaction();

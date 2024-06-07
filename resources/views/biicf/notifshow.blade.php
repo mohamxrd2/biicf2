@@ -50,10 +50,11 @@
 
 
                 <div class="flex gap-2">
+
+                    
                     @if ($notification->reponse == 'accepte' || $notification->reponse == 'refuser')
                         <div class="w-full bg-gray-300 border p-2 rounded-md">
-                            <p class="text-md font-medium text-center">Reponse envoyé</p>
-
+                            <p class="text-md font-medium text-center">Réponse envoyée</p>
                         </div>
                     @else
                         <form id="form-accepter" action="{{ route('achatG.accepter') }}" method="POST">
@@ -64,14 +65,15 @@
 
                             <input type="hidden" name="montantTotal" value="{{ $notification->data['montantTotal'] }}">
                             <input type="hidden" name="message"
-                                value="commande de produit en cours /Préparation a la livraison">
+                                value="commande de produit en cours /Préparation à la livraison">
                             <input type="hidden" name="notifId" value="{{ $notification->id }}">
 
                             <!-- Bouton accepter -->
                             <button id="btn-accepter" type="submit"
-                                class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">Accepter</button>
+                                class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">
+                                Accepter
+                            </button>
                         </form>
-
 
                         <form id="form-refuser" action="{{ route('achatG.refuser') }}" method="POST">
                             @csrf
